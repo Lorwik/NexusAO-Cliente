@@ -1,0 +1,18 @@
+[History]
+1=#P0#=mb	#P1#=LeerLineaComandos	#P2#=ARGENTUM/Mod_General/LeerLineaComandos	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20230417020853	#P7#=0	#P8#=28	.
+2=#P0#=mb	#P1#=AoUpdate	#P2#=ARGENTUM/Mod_General/AoUpdate	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20230417020756	#P7#=0	#P8#=-5	.
+3=#P0#=mb	#P1#=checkText	#P2#=ARGENTUM/Mod_General/checkText	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20230417020726	#P7#=0	#P8#=6	.
+4=#P0#=mb	#P1#=imgSalir_Click	#P2#=ARGENTUM/frmConnect/imgSalir_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20230417020518	#P7#=0	#P8#=2	.
+5=#P0#=mb	#P1#=imgCrearPj_Click	#P2#=ARGENTUM/frmConnect/imgCrearPj_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20230417020244	#P7#=0	#P8#=22	.
+6=#P0#=mb	#P1#=imgRecuperar_Click	#P2#=ARGENTUM/frmConnect/imgRecuperar_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20230417020252	#P7#=0	#P8#=8	.
+7=#P0#=mb	#P1#=imgLeerMas_Click	#P2#=ARGENTUM/frmConnect/imgLeerMas_Click	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20230417020240	#P7#=0	#P8#=0	.
+8=#P0#=mb	#P1#=imgConectarse_Click	#P2#=ARGENTUM/frmConnect/imgConectarse_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20230417020227	#P7#=0	#P8#=-1	.
+9=#P0#=mb	#P1#=imgTeclas_Click	#P2#=ARGENTUM/frmConnect/imgTeclas_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20230417020429	#P7#=0	#P8#=0	.
+10=#P0#=mb	#P1#=txtPasswd_KeyPress	#P2#=ARGENTUM/frmConnect/txtPasswd_KeyPress	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20230417020518	#P7#=0	#P8#=-2	.
+11=#P0#=mb	#P1#=LoadButtons	#P2#=ARGENTUM/frmConnect/LoadButtons	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20230417020631	#P7#=0	#P8#=11	.
+12=#P0#=mb	#P1#=HandleIncomingData	#P2#=ARGENTUM/Protocol/HandleIncomingData	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20230417020007	#P7#=0	#P8#=349	.
+13=#P0#=mb	#P1#=HandleMultiMessage	#P2#=ARGENTUM/Protocol/HandleMultiMessage	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20230417015941	#P7#=0	#P8#=5	.
+14=#P0#=mb	#P1#=Main	#P2#=ARGENTUM/Mod_General/Main	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20230417015844	#P7#=0	#P8#=78	.
+15=#P0#=mb	#P1#=Form_KeyUp	#P2#=ARGENTUM/frmMain/Form_KeyUp	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20230417015838	#P7#=0	#P8#=153	.
+16=#P0#=mb	#P1#=Engine_Init_ParticleEngine	#P2#=ARGENTUM/mDx8_Particulas/Engine_Init_ParticleEngine	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20230417015811	#P7#=0	#P8#=20	.
+17=#P0#=mb	#P1#=Effect_FToDW	#P2#=ARGENTUM/mDx8_Particulas/Effect_FToDW	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20230417015810	#P7#=0	#P8#=-2	.
