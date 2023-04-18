@@ -1351,7 +1351,7 @@ Private Sub HandleBankInit()
     
     BankGold = incomingData.ReadLong
     Call InvBanco(0).Initialize(DirectD3D8, frmBancoObj.PicBancoInv, MAX_BANCOINVENTORY_SLOTS)
-    Call InvBanco(1).Initialize(DirectD3D8, frmBancoObj.PicInv, Inventario.MaxObjs)
+    Call InvBanco(1).Initialize(DirectD3D8, frmBancoObj.picInv, Inventario.MaxObjs)
     
     For i = 1 To Inventario.MaxObjs
 
@@ -1715,15 +1715,7 @@ Private Sub HandleUpdateSta()
     UserMinSTA = incomingData.ReadInteger()
     
     frmMain.lblEnergia = UserMinSTA & "/" & UserMaxSTA
-    
-    Dim bWidth As Byte
-    
-    bWidth = (((UserMinSTA / 100) / (UserMaxSTA / 100)) * 75)
-    
-    frmMain.shpEnergia.Width = 75 - bWidth
-    frmMain.shpEnergia.Left = 584 + (75 - frmMain.shpEnergia.Width)
-    
-    frmMain.shpEnergia.Visible = (bWidth <> 75)
+    frmMain.shpEnergia.Width = (((UserMinSTA / 100) / (UserMaxSTA / 100)) * 169)
     
 End Sub
 
@@ -1752,14 +1744,8 @@ Private Sub HandleUpdateMana()
     
     frmMain.lblMana = UserMinMAN & "/" & UserMaxMAN
     
-    Dim bWidth As Byte
-    
-    If UserMaxMAN > 0 Then bWidth = (((UserMinMAN / 100) / (UserMaxMAN / 100)) * 75)
-        
-    frmMain.shpMana.Width = 75 - bWidth
-    frmMain.shpMana.Left = 584 + (75 - frmMain.shpMana.Width)
-    
-    frmMain.shpMana.Visible = (bWidth <> 75)
+    If UserMaxMAN > 0 Then _
+        frmMain.shpMana.Width = (((UserMinMAN / 100) / (UserMaxMAN / 100)) * 169)
 
 End Sub
 
@@ -1788,14 +1774,7 @@ Private Sub HandleUpdateHP()
     
     frmMain.lblVida = UserMinHP & "/" & UserMaxHP
     
-    Dim bWidth As Byte
-    
-    bWidth = (((UserMinHP / 100) / (UserMaxHP / 100)) * 75)
-    
-    frmMain.shpVida.Width = 75 - bWidth
-    frmMain.shpVida.Left = 584 + (75 - frmMain.shpVida.Width)
-    
-    frmMain.shpVida.Visible = (bWidth <> 75)
+    frmMain.shpVida.Width = (((UserMinHP / 100) / (UserMaxHP / 100)) * 169)
     
     'Is the user alive??
     If UserMinHP = 0 Then
@@ -3260,31 +3239,13 @@ Private Sub HandleUpdateUserStats()
     frmMain.lblVida = UserMinHP & "/" & UserMaxHP
     frmMain.lblEnergia = UserMinSTA & "/" & UserMaxSTA
     
-    Dim bWidth As Byte
-    
     '***************************
-    If UserMaxMAN > 0 Then bWidth = (((UserMinMAN / 100) / (UserMaxMAN / 100)) * 75)
-        
-    frmMain.shpMana.Width = 75 - bWidth
-    frmMain.shpMana.Left = 584 + (75 - frmMain.shpMana.Width)
+    If UserMaxMAN > 0 Then _
+        frmMain.shpMana.Width = (((UserMinMAN / 100) / (UserMaxMAN / 100)) * 169)
     
-    frmMain.shpMana.Visible = (bWidth <> 75)
-    '***************************
+    frmMain.shpVida.Width = (((UserMinHP / 100) / (UserMaxHP / 100)) * 169)
     
-    bWidth = (((UserMinHP / 100) / (UserMaxHP / 100)) * 75)
-    
-    frmMain.shpVida.Width = 75 - bWidth
-    frmMain.shpVida.Left = 584 + (75 - frmMain.shpVida.Width)
-    
-    frmMain.shpVida.Visible = (bWidth <> 75)
-    '***************************
-    
-    bWidth = (((UserMinSTA / 100) / (UserMaxSTA / 100)) * 75)
-    
-    frmMain.shpEnergia.Width = 75 - bWidth
-    frmMain.shpEnergia.Left = 584 + (75 - frmMain.shpEnergia.Width)
-    
-    frmMain.shpEnergia.Visible = (bWidth <> 75)
+    frmMain.shpEnergia.Width = (((UserMinSTA / 100) / (UserMaxSTA / 100)) * 169)
     '***************************
     
     If UserMinHP = 0 Then
@@ -4274,22 +4235,8 @@ Private Sub HandleUpdateHungerAndThirst()
     frmMain.lblHambre = UserMinHAM & "/" & UserMaxHAM
     frmMain.lblSed = UserMinAGU & "/" & UserMaxAGU
 
-    Dim bWidth As Byte
-    
-    bWidth = (((UserMinHAM / 100) / (UserMaxHAM / 100)) * 75)
-    
-    frmMain.shpHambre.Width = 75 - bWidth
-    frmMain.shpHambre.Left = 584 + (75 - frmMain.shpHambre.Width)
-    
-    frmMain.shpHambre.Visible = (bWidth <> 75)
-    '*********************************
-    
-    bWidth = (((UserMinAGU / 100) / (UserMaxAGU / 100)) * 75)
-    
-    frmMain.shpSed.Width = 75 - bWidth
-    frmMain.shpSed.Left = 584 + (75 - frmMain.shpSed.Width)
-    
-    frmMain.shpSed.Visible = (bWidth <> 75)
+    frmMain.shpHambre.Width = (((UserMinHAM / 100) / (UserMaxHAM / 100)) * 77)
+    frmMain.shpSed.Width = (((UserMinAGU / 100) / (UserMaxAGU / 100)) * 77)
     
 End Sub
 
