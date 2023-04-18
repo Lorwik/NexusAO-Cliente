@@ -193,7 +193,7 @@ Private Sub Form_Load()
     Set clsFormulario = New clsFormMovementManager
     clsFormulario.Initialize Me
     
-    Me.Picture = LoadPicture(DirGraficos & "VentanaTutorial.jpg")
+    Me.Picture = LoadPicture(DirInterfaces & "VentanaTutorial.jpg")
     
     Call LoadButtons
     
@@ -208,7 +208,7 @@ Private Sub LoadButtons()
 
     Dim GrhPath As String
     
-    GrhPath = DirGraficos
+    GrhPath = DirInterfaces
 
     Set cBotonSiguiente = New clsGraphicalButton
     Set cBotonAnterior = New clsGraphicalButton

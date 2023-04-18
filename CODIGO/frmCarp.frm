@@ -533,7 +533,7 @@ Private Sub LoadButtons()
 
     Dim Index   As Long
     
-    GrhPath = DirGraficos
+    GrhPath = DirInterfaces
 
     Set Pestanias(ePestania.ieItems) = LoadPicture(GrhPath & "VentanaCarpinteriaItems.jpg")
     Set Pestanias(ePestania.ieMejorar) = LoadPicture(GrhPath & "VentanaCarpinteriaMejorar.jpg")
@@ -634,7 +634,6 @@ Private Sub Construir(ByVal Index As Integer)
             If UsarMacro Then
                 CantItemsCiclo = Val(cboItemsCiclo.Text)
                 MacroBltIndex = ObjCarpintero(ItemIndex).OBJIndex
-                frmMain.ActivarMacroTrabajo
             Else
                 ' Que cosntruya el maximo, total si sobra no importa, valida el server
                 CantItemsCiclo = Val(cboItemsCiclo.List(cboItemsCiclo.ListCount - 1))

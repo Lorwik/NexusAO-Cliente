@@ -1325,7 +1325,7 @@ Private currentGrh As Long
 Private Dir        As E_Heading
 
 Private Sub Form_Load()
-    Me.Picture = LoadPicture(DirGraficos & "VentanaCrearPersonaje.jpg")
+    Me.Picture = LoadPicture(DirInterfaces & "VentanaCrearPersonaje.jpg")
     
     Cargando = True
     Call LoadCharInfo
@@ -1370,7 +1370,7 @@ Private Sub IniciarGraficos()
 
     Dim GrhPath As String
 
-    GrhPath = DirGraficos
+    GrhPath = DirInterfaces
     
     Set cBotonPasswd = New clsGraphicalButton
     Set cBotonTirarDados = New clsGraphicalButton
@@ -2542,15 +2542,15 @@ Private Sub LoadCharInfo()
         With ModClase(i)
             SearchVar = ListaClases(i)
             
-            .Evasion = Val(GetVar(IniPath & "CharInfo.dat", "MODEVASION", SearchVar))
-            .AtaqueArmas = Val(GetVar(IniPath & "CharInfo.dat", "MODATAQUEARMAS", SearchVar))
-            .AtaqueProyectiles = Val(GetVar(IniPath & "CharInfo.dat", "MODATAQUEPROYECTILES", SearchVar))
-            .DañoArmas = Val(GetVar(IniPath & "CharInfo.dat", "MODDAÑOARMAS", SearchVar))
-            .DañoProyectiles = Val(GetVar(IniPath & "CharInfo.dat", "MODDAÑOPROYECTILES", SearchVar))
-            .Escudo = Val(GetVar(IniPath & "CharInfo.dat", "MODESCUDO", SearchVar))
-            .Hit = Val(GetVar(IniPath & "CharInfo.dat", "HIT", SearchVar))
-            .Magia = Val(GetVar(IniPath & "CharInfo.dat", "MODMAGIA", SearchVar))
-            .Vida = Val(GetVar(IniPath & "CharInfo.dat", "MODVIDA", SearchVar))
+            .Evasion = Val(GetVar(DirIni & "CharInfo.dat", "MODEVASION", SearchVar))
+            .AtaqueArmas = Val(GetVar(DirIni & "CharInfo.dat", "MODATAQUEARMAS", SearchVar))
+            .AtaqueProyectiles = Val(GetVar(DirIni & "CharInfo.dat", "MODATAQUEPROYECTILES", SearchVar))
+            .DañoArmas = Val(GetVar(DirIni & "CharInfo.dat", "MODDAÑOARMAS", SearchVar))
+            .DañoProyectiles = Val(GetVar(DirIni & "CharInfo.dat", "MODDAÑOPROYECTILES", SearchVar))
+            .Escudo = Val(GetVar(DirIni & "CharInfo.dat", "MODESCUDO", SearchVar))
+            .Hit = Val(GetVar(DirIni & "CharInfo.dat", "HIT", SearchVar))
+            .Magia = Val(GetVar(DirIni & "CharInfo.dat", "MODMAGIA", SearchVar))
+            .Vida = Val(GetVar(DirIni & "CharInfo.dat", "MODVIDA", SearchVar))
 
         End With
 
@@ -2562,11 +2562,11 @@ Private Sub LoadCharInfo()
         With ModRaza(i)
             SearchVar = Replace(ListaRazas(i), " ", "")
         
-            .Fuerza = Val(GetVar(IniPath & "CharInfo.dat", "MODRAZA", SearchVar + "Fuerza"))
-            .Agilidad = Val(GetVar(IniPath & "CharInfo.dat", "MODRAZA", SearchVar + "Agilidad"))
-            .Inteligencia = Val(GetVar(IniPath & "CharInfo.dat", "MODRAZA", SearchVar + "Inteligencia"))
-            .Carisma = Val(GetVar(IniPath & "CharInfo.dat", "MODRAZA", SearchVar + "Carisma"))
-            .Constitucion = Val(GetVar(IniPath & "CharInfo.dat", "MODRAZA", SearchVar + "Constitucion"))
+            .Fuerza = Val(GetVar(DirIni & "CharInfo.dat", "MODRAZA", SearchVar + "Fuerza"))
+            .Agilidad = Val(GetVar(DirIni & "CharInfo.dat", "MODRAZA", SearchVar + "Agilidad"))
+            .Inteligencia = Val(GetVar(DirIni & "CharInfo.dat", "MODRAZA", SearchVar + "Inteligencia"))
+            .Carisma = Val(GetVar(DirIni & "CharInfo.dat", "MODRAZA", SearchVar + "Carisma"))
+            .Constitucion = Val(GetVar(DirIni & "CharInfo.dat", "MODRAZA", SearchVar + "Constitucion"))
 
         End With
 

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmOpciones 
    BackColor       =   &H8000000A&
    BorderStyle     =   0  'None
@@ -524,7 +524,7 @@ Private Sub LoadButtons()
 
     Dim GrhPath As String
     
-    GrhPath = DirGraficos
+    GrhPath = DirInterfaces
 
     Set cBotonConfigTeclas = New clsGraphicalButton
     Set cBotonMsgPersonalizado = New clsGraphicalButton

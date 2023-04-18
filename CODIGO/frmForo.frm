@@ -342,7 +342,7 @@ Private Sub LoadButtons()
 
     Dim GrhPath As String
 
-    GrhPath = DirGraficos
+    GrhPath = DirInterfaces
     
     ' Load pictures
     Set FondosListaMsg(eForumType.ieGeneral) = LoadPicture(GrhPath & "ForoGeneral.jpg")

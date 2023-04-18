@@ -50,6 +50,7 @@ Public Type tGameIni
     Password As String
     name As String
     DirGraficos As String
+    DirInterfaces As String
     DirSonidos As String
     DirMusica As String
     DirMapas As String

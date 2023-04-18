@@ -186,44 +186,44 @@ Private Const OFFSET_BUTTONS     As Integer = 43 ' pixels
 
 Private Sub Form_Load()
 
-        ' Handles Form movement (drag and drop).
-        '<EhHeader>
-        On Error GoTo Form_Load_Err
+  ' Handles Form movement (drag and drop).
+  '<EhHeader>
+  On Error GoTo Form_Load_Err
 
-        '</EhHeader>
-100     Set clsFormulario = New clsFormMovementManager
-102     clsFormulario.Initialize Me
+  '</EhHeader>
+  Set clsFormulario = New clsFormMovementManager
+  clsFormulario.Initialize Me
     
-104     lstMembers.Clear
-        
-106     If EsPartyLeader Then
-108         Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaPartyLider.jpg")
-110         Me.Height = LEADER_FORM_HEIGHT
-        Else
-112         Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaPartyMiembro.jpg")
-114         Me.Height = NORMAL_FORM_HEIGHT
+  lstMembers.Clear
+  
+  If EsPartyLeader Then
+      Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaPartyLider.jpg")
+      Me.Height = LEADER_FORM_HEIGHT
+  Else
+      Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaPartyMiembro.jpg")
+      Me.Height = NORMAL_FORM_HEIGHT
 
-        End If
+  End If
     
-116     Call LoadButtons
+  Call LoadButtons
 
-118     MirandoParty = True
-        '<EhFooter>
-        Exit Sub
+  MirandoParty = True
+  '<EhFooter>
+  Exit Sub
 
 Form_Load_Err:
-        MsgBox Err.Description & vbCrLf & "in ARGENTUM.frmParty.Form_Load " & "at line " & Erl, vbExclamation + vbOKOnly, "Application Error"
+  MsgBox Err.Description & vbCrLf & "in ARGENTUM.frmParty.Form_Load " & "at line " & Erl, vbExclamation + vbOKOnly, "Application Error"
 
-        Resume Next
+  Resume Next
 
-        '</EhFooter>
+  '</EhFooter>
 End Sub
 
 Private Sub LoadButtons()
 
     Dim GrhPath As String
     
-    GrhPath = DirGraficos
+    GrhPath = DirInterfaces
 
     Set cBotonAgregar = New clsGraphicalButton
     Set cBotonCerrar = New clsGraphicalButton

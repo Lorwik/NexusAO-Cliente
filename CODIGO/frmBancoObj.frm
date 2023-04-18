@@ -353,7 +353,7 @@ Private Sub LoadButtons()
 
     Dim GrhPath As String
     
-    GrhPath = DirGraficos
+    GrhPath = DirInterfaces
     'CmdMoverBov(1).Picture = LoadPicture(App.path & "\Interfaces\FlechaSubirObjeto.jpg")
     'CmdMoverBov(0).Picture = LoadPicture(App.path & "\Interfaces\FlechaBajarObjeto.jpg")
     

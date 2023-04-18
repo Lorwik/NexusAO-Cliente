@@ -114,7 +114,7 @@ Private Sub LoadButtons()
 
     Dim GrhPath As String
     
-    GrhPath = DirGraficos
+    GrhPath = DirInterfaces
     
     Set cBotonTirar = New clsGraphicalButton
     Set cBotonTirarTodo = New clsGraphicalButton

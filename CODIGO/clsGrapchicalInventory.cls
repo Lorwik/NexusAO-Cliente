@@ -90,24 +90,6 @@ Private Sub Class_Terminate()
     '***************************************************
 End Sub
 
-Public Sub ScrollInventory(ByVal Up As Boolean)
-    '***************************************************
-    'Author: Juan Martín Sotuyo Dodero (Maraxus)
-    'Last Modify Date: 14/01/2010
-    'Scrolls the graphical inventory up / down
-    '14/01/2010: ZaMa - Now redraws inventory only if needed
-    '***************************************************
-
-    'Only move if there is something to show up /down
-    If CanScroll(Up) Then
-        InventoryOffset = InventoryOffset + IIf(Up, 1, -1)
-        
-        'Redraw the inventory if needed
-        'DrawInventory
-    End If
-
-End Sub
-
 Public Function CanScroll(ByVal Up As Boolean)
 
     '***************************************************
@@ -463,8 +445,8 @@ Private Sub DrawInventory()
     
     For LoopC = InventoryOffset * (InventoryWindow.ScaleWidth \ ownTilePixelWidth) + 1 To UBound(Inventory)
             
-        startdX = ((LoopC - 1) Mod (frmMain.PicInv.Width / 32)) * 32
-        startdY = ((LoopC - 1) \ (frmMain.PicInv.Width / 32)) * 32
+        startdX = ((LoopC - 1) Mod (frmMain.picInv.Width / 32)) * 32
+        startdY = ((LoopC - 1) \ (frmMain.picInv.Width / 32)) * 32
             
         Call Engine_Long_To_RGB_List(Inv_Color(), -1)
             

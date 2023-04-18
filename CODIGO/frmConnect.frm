@@ -35,13 +35,13 @@ Begin VB.Form frmConnect
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   435
+      Height          =   285
       IMEMode         =   3  'DISABLE
-      Left            =   2310
+      Left            =   5850
       PasswordChar    =   "*"
       TabIndex        =   1
-      Top             =   3420
-      Width           =   3030
+      Top             =   7680
+      Width           =   3750
    End
    Begin VB.TextBox txtNombre 
       BackColor       =   &H00000000&
@@ -56,11 +56,11 @@ Begin VB.Form frmConnect
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   495
-      Left            =   2310
+      Height          =   315
+      Left            =   5880
       TabIndex        =   0
-      Top             =   2310
-      Width           =   5460
+      Top             =   6210
+      Width           =   3600
    End
    Begin VB.TextBox PortTxt 
       Alignment       =   2  'Center
@@ -107,34 +107,28 @@ Begin VB.Form frmConnect
       Width           =   1575
    End
    Begin VB.Image imgConectarse 
-      Height          =   795
-      Left            =   5580
-      Top             =   3150
-      Width           =   2175
+      Height          =   465
+      Left            =   6180
+      Top             =   9090
+      Width           =   3045
    End
    Begin VB.Image imgSalir 
-      Height          =   375
-      Left            =   9960
-      Top             =   8400
-      Width           =   1335
-   End
-   Begin VB.Image imgBorrarPj 
-      Height          =   375
-      Left            =   8400
-      Top             =   8400
-      Width           =   1335
+      Height          =   435
+      Left            =   240
+      Top             =   10770
+      Width           =   3015
    End
    Begin VB.Image imgRecuperar 
-      Height          =   1035
-      Left            =   5070
-      Top             =   4230
-      Width           =   2685
+      Height          =   435
+      Left            =   300
+      Top             =   6900
+      Width           =   2985
    End
    Begin VB.Image imgCrearPj 
-      Height          =   1005
-      Left            =   2370
-      Top             =   4200
-      Width           =   2565
+      Height          =   375
+      Left            =   6180
+      Top             =   9600
+      Width           =   3045
    End
    Begin VB.Label version 
       AutoSize        =   -1  'True
@@ -205,25 +199,9 @@ Option Explicit
 
 Private cBotonCrearPj       As clsGraphicalButton
 
-Private cBotonRecuperarPass As clsGraphicalButton
-
-Private cBotonManual        As clsGraphicalButton
-
-Private cBotonReglamento    As clsGraphicalButton
-
-Private cBotonCodigoFuente  As clsGraphicalButton
-
-Private cBotonBorrarPj      As clsGraphicalButton
-
 Private cBotonSalir         As clsGraphicalButton
 
-Private cBotonLeerMas       As clsGraphicalButton
-
-Private cBotonForo          As clsGraphicalButton
-
 Private cBotonConectarse    As clsGraphicalButton
-
-Private cBotonTeclas        As clsGraphicalButton
 
 Public LastButtonPressed    As clsGraphicalButton
 
@@ -276,9 +254,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    '[CODE 002]:MatuX
     EngineRun = False
-    '[END]
 
     PortTxt.Text = Config_Inicio.Puerto
  
@@ -293,51 +269,21 @@ Private Sub Form_Load()
     Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaConectar.jpg")
     
     Call LoadButtons
-
-    Call CheckLicenseAgreement
         
-End Sub
-
-Private Sub CheckLicenseAgreement()
-
-    'Recordatorio para cumplir la licencia, por si borrás el Boton sin leer el code...
-    Dim i As Long
-    
-    For i = 0 To Me.Controls.Count - 1
-
-        If Me.Controls(i).name = "imgCodigoFuente" Then
-            Exit For
-
-        End If
-
-    Next i
-    
-    If i = Me.Controls.Count Then
-        MsgBox "No debe eliminarse la posibilidad de bajar el código de sus servidor. Caso contrario estarían violando la licencia Affero GPL y con ella derechos de autor, incurriendo de esta forma en un delito punible por ley." & vbCrLf & vbCrLf & vbCrLf & "Argentum Online es libre, es de todos. Mantengamoslo así. Si tanto te gusta el juego y querés los cambios que hacemos nosotros, compartí los tuyos. Es un cambio justo. Si no estás de acuerdo, no uses nuestro código, pues nadie te obliga o bien utiliza una versión anterior a la 0.12.0.", vbCritical Or vbApplicationModal
-
-    End If
-
 End Sub
 
 Private Sub LoadButtons()
     
     Dim GrhPath As String
     
-    GrhPath = DirGraficos
+    GrhPath = DirInterfaces
     
     Set cBotonCrearPj = New clsGraphicalButton
-    Set cBotonRecuperarPass = New clsGraphicalButton
-    Set cBotonBorrarPj = New clsGraphicalButton
     Set cBotonSalir = New clsGraphicalButton
-    Set cBotonLeerMas = New clsGraphicalButton
     Set cBotonConectarse = New clsGraphicalButton
     Set LastButtonPressed = New clsGraphicalButton
         
     Call cBotonCrearPj.Initialize(imgCrearPj, GrhPath & "BotonCrearPersonajeConectar.jpg", GrhPath & "BotonCrearPersonajeRolloverConectar.jpg", GrhPath & "BotonCrearPersonajeClickConectar.jpg", Me)
-                                    
-    Call cBotonRecuperarPass.Initialize(imgRecuperar, GrhPath & "BotonRecuperarPass.jpg", GrhPath & "BotonRecuperarPassRollover.jpg", GrhPath & "BotonRecuperarPassClick.jpg", Me)
-                                    
-    Call cBotonBorrarPj.Initialize(imgBorrarPj, GrhPath & "BotonBorrarPersonaje.jpg", GrhPath & "BotonBorrarPersonajeRollover.jpg", GrhPath & "BotonBorrarPersonajeClick.jpg", Me)
                                     
     Call cBotonSalir.Initialize(imgSalir, GrhPath & "BotonSalirConnect.jpg", GrhPath & "BotonBotonSalirRolloverConnect.jpg", GrhPath & "BotonSalirClickConnect.jpg", Me)
                                     
@@ -375,19 +321,6 @@ Private Sub CheckServers()
     CurServer = 0
     IPdelServidor = IPTxt
     PuertoDelServidor = PortTxt
-
-End Sub
-
-Private Sub imgBorrarPj_Click()
-
-    On Error GoTo errH
-
-    Call Shell(App.path & "\RECUPERAR.EXE", vbNormalFocus)
-
-    Exit Sub
-
-errH:
-    Call MsgBox("No se encuentra el programa recuperar.exe", vbCritical, "Argentum Online")
 
 End Sub
 
@@ -463,18 +396,6 @@ Private Sub imgCrearPj_Click()
 
         frmMain.Winsock1.Connect CurServerIp, CurServerPort
     #End If
-
-End Sub
-
-Private Sub imgRecuperar_Click()
-
-    On Error GoTo errH
-
-    Call Audio.PlayWave(SND_CLICK)
-    Call Shell(App.path & "\RECUPERAR.EXE", vbNormalFocus)
-    Exit Sub
-errH:
-    Call MsgBox("No se encuentra el programa recuperar.exe", vbCritical, "Argentum Online")
 
 End Sub
 

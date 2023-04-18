@@ -43,22 +43,32 @@ Public bLluvia()    As Byte ' Array para determinar si
 Private lFrameTimer As Long
 
 Public Function DirGraficos() As String
-    DirGraficos = App.path & "\" & Config_Inicio.DirGraficos & "\"
+    DirGraficos = App.path & "\Graficos\"
 
 End Function
 
+Public Function DirInterfaces() As String
+    DirInterfaces = App.path & "\Interfaces\"
+    
+End Function
+
+Public Function DirIni() As String
+    DirIni = App.path & "\Init\"
+    
+End Function
+
 Public Function DirSound() As String
-    DirSound = App.path & "\" & Config_Inicio.DirSonidos & "\"
+    DirSound = App.path & "\Wav\"
 
 End Function
 
 Public Function DirMidi() As String
-    DirMidi = App.path & "\" & Config_Inicio.DirMusica & "\"
+    DirMidi = App.path & "\Midi\"
 
 End Function
 
 Public Function DirMapas() As String
-    DirMapas = App.path & "\" & Config_Inicio.DirMapas & "\"
+    DirMapas = App.path & "\Mapas\"
 
 End Function
 
@@ -391,8 +401,6 @@ Sub SetConnected()
     'Load main form
     frmMain.Visible = True
     
-    Call frmMain.ControlSM(eSMType.mWork, False)
-    
     FPSFLAG = True
 
 End Sub
@@ -454,8 +462,6 @@ Sub MoveTo(ByVal Direccion As E_Heading)
         End If
 
     End If
-    
-    If frmMain.macrotrabajo.Enabled Then Call frmMain.DesactivarMacroTrabajo
     
     ' Update 3D sounds!
     Call Audio.MoveListener(UserPos.X, UserPos.Y)
@@ -944,16 +950,6 @@ Sub Main()
     ' Load constants, classes, flags, graphics..
     LoadInitialConfig
 
-    #If Testeo <> 1 Then
-
-        Dim PresPath As String
-
-        PresPath = DirGraficos & "Presentacion" & RandomNumber(1, 4) & ".jpg"
-    
-        frmPres.Picture = LoadPicture(PresPath)
-        frmPres.Show vbModal    'Es modal, así que se detiene la ejecución de Main hasta que se desaparece
-    #End If
-
     #If UsarWrench = 1 Then
         frmMain.Socket1.Startup
     #End If
@@ -1129,9 +1125,6 @@ Private Sub LoadTimerIntervals()
     Call MainTimer.SetInterval(TimersIndex.Arrows, INT_ARROWS)
     Call MainTimer.SetInterval(TimersIndex.CastAttack, INT_CAST_ATTACK)
     
-    frmMain.macrotrabajo.Interval = INT_MACRO_TRABAJO
-    frmMain.macrotrabajo.Enabled = False
-    
     'Init timers
     Call MainTimer.Start(TimersIndex.Attack)
     Call MainTimer.Start(TimersIndex.Work)
@@ -1232,16 +1225,6 @@ Public Sub ShowSendTxt()
     If Not frmCantidad.Visible Then
         frmMain.SendTxt.Visible = True
         frmMain.SendTxt.SetFocus
-
-    End If
-
-End Sub
-
-Public Sub ShowSendCMSGTxt()
-
-    If Not frmCantidad.Visible Then
-        frmMain.SendCMSTXT.Visible = True
-        frmMain.SendCMSTXT.SetFocus
 
     End If
 
@@ -1567,24 +1550,6 @@ Public Sub checkText(ByVal Text As String)
 
 End Sub
 
-Public Function getStrenghtColor() As Long
-
-    Dim m As Long
-
-    m = 255 / MAXATRIBUTOS
-    getStrenghtColor = RGB(255 - (m * UserFuerza), (m * UserFuerza), 0)
-
-End Function
-
-Public Function getDexterityColor() As Long
-
-    Dim m As Long
-
-    m = 255 / MAXATRIBUTOS
-    getDexterityColor = RGB(255, m * UserAgilidad, 0)
-
-End Function
-
 Public Function getCharIndexByName(ByVal name As String) As Integer
 
     Dim i As Long
@@ -1652,7 +1617,6 @@ Public Sub ResetAllInfo()
     
     ' Disable timers
     frmMain.Second.Enabled = False
-    frmMain.macrotrabajo.Enabled = False
     Connected = False
     
     'Unload all forms except frmMain, frmConnect and frmCrearPersonaje

@@ -1253,7 +1253,6 @@ Public Enum eSMType
 
     sResucitation
     sSafemode
-    mWork
 
 End Enum
 

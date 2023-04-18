@@ -150,7 +150,6 @@ Public Sub ParseUserCommand(ByVal RawCommand As String)
 
                 End If
 
-                If frmMain.macrotrabajo.Enabled Then Call frmMain.DesactivarMacroTrabajo
                 Call WriteQuit
                 
             Case "/SALIRCLAN"

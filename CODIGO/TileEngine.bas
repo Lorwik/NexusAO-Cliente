@@ -262,10 +262,6 @@ Public Type MapInfo
 
 End Type
 
-Public IniPath                 As String
-
-Public MapPath                 As String
-
 'Bordes del mapa
 Public MinXBorder              As Byte
 
@@ -1085,7 +1081,7 @@ Public Function LoadGrhData() As Boolean
 
     'Open files
     handle = FreeFile()
-    Open IniPath & "Graficos.ind" For Binary Access Read As handle
+    Open DirIni & "Graficos.ind" For Binary Access Read As handle
     Get handle, , fileVersion
     
     Get handle, , grhCount
@@ -1731,7 +1727,6 @@ Public Function InitTileEngine(ByVal setDisplayFormhWnd As Long, _
     WindowTileHeight = Round(frmMain.MainViewPic.Height / 32, 0)
     WindowTileWidth = Round(frmMain.MainViewPic.Width / 32, 0)
     
-    IniPath = App.path & "\Init\"
     HalfWindowTileHeight = WindowTileHeight \ 2
     HalfWindowTileWidth = WindowTileWidth \ 2
 

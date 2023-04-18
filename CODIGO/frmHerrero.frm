@@ -578,7 +578,6 @@ Private Sub ConstruirItem(ByVal Index As Integer)
             If UsarMacro Then
                 CantItemsCiclo = Val(cboItemsCiclo.Text)
                 MacroBltIndex = ArmasHerrero(ItemIndex).OBJIndex
-                frmMain.ActivarMacroTrabajo
             Else
                 ' Que cosntruya el maximo, total si sobra no importa, valida el server
                 CantItemsCiclo = Val(cboItemsCiclo.List(cboItemsCiclo.ListCount - 1))
@@ -593,7 +592,6 @@ Private Sub ConstruirItem(ByVal Index As Integer)
             If UsarMacro Then
                 CantItemsCiclo = Val(cboItemsCiclo.Text)
                 MacroBltIndex = ArmadurasHerrero(ItemIndex).OBJIndex
-                frmMain.ActivarMacroTrabajo
             Else
                 ' Que cosntruya el maximo, total si sobra no importa, valida el server
                 CantItemsCiclo = Val(cboItemsCiclo.List(cboItemsCiclo.ListCount - 1))

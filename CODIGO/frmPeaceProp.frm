@@ -145,7 +145,7 @@ Private Sub LoadButtons()
 
     Dim GrhPath As String
     
-    GrhPath = DirGraficos
+    GrhPath = DirInterfaces
 
     Set cBotonAceptar = New clsGraphicalButton
     Set cBotonCerrar = New clsGraphicalButton
@@ -167,9 +167,9 @@ End Sub
 Private Sub LoadBackGround()
 
     If TipoProp = TIPO_PROPUESTA.ALIANZA Then
-        Me.Picture = LoadPicture(DirGraficos & "VentanaOfertaAlianza.jpg")
+        Me.Picture = LoadPicture(DirInterfaces & "VentanaOfertaAlianza.jpg")
     Else
-        Me.Picture = LoadPicture(DirGraficos & "VentanaOfertaPaz.jpg")
+        Me.Picture = LoadPicture(DirInterfaces & "VentanaOfertaPaz.jpg")
 
     End If
 

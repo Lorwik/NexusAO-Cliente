@@ -171,8 +171,8 @@ Private Sub Form_Load()
     clsFormulario.Initialize Me
         
     'Cargamos las imagenes de los mapas
-    Set picMaps(eMaps.ieGeneral) = LoadPicture(DirGraficos & "mapa1.jpg")
-    Set picMaps(eMaps.ieDungeon) = LoadPicture(DirGraficos & "mapa2.jpg")
+    Set picMaps(eMaps.ieGeneral) = LoadPicture(DirInterfaces & "mapa1.jpg")
+    Set picMaps(eMaps.ieDungeon) = LoadPicture(DirInterfaces & "mapa2.jpg")
     
     ' Imagen de fondo
     CurrentMap = eMaps.ieGeneral

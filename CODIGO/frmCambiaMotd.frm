@@ -180,7 +180,7 @@ Private Sub Form_Load()
     Set clsFormulario = New clsFormMovementManager
     clsFormulario.Initialize Me
     
-    Me.Picture = LoadPicture(DirGraficos & "VentanaCambioMOTD.jpg")
+    Me.Picture = LoadPicture(DirInterfaces & "VentanaCambioMOTD.jpg")
     
     Call LoadButtons
 
@@ -190,7 +190,7 @@ Private Sub LoadButtons()
 
     Dim GrhPath As String
     
-    GrhPath = DirGraficos
+    GrhPath = DirInterfaces
 
     Set cBotonAzul = New clsGraphicalButton
     Set cBotonRojo = New clsGraphicalButton
@@ -222,8 +222,8 @@ Private Sub LoadButtons()
 
     Call cBotonAceptar.Initialize(imgAceptar, GrhPath & "BotonAceptarMotd.jpg", GrhPath & "BotonAceptarRolloverMotd.jpg", GrhPath & "BotonAceptarClickMotd.jpg", Me)
                                     
-    Set picNegrita = LoadPicture(DirGraficos & "OpcionPrendidaN.jpg")
-    Set picCursiva = LoadPicture(DirGraficos & "OpcionPrendidaC.jpg")
+    Set picNegrita = LoadPicture(DirInterfaces & "OpcionPrendidaN.jpg")
+    Set picCursiva = LoadPicture(DirInterfaces & "OpcionPrendidaC.jpg")
 
 End Sub
 

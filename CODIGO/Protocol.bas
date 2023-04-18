@@ -1495,13 +1495,8 @@ Private Sub HandleShowBlacksmithForm()
     'Remove packet ID
     Call incomingData.ReadByte
     
-    If frmMain.macrotrabajo.Enabled And (MacroBltIndex > 0) Then
-        Call WriteCraftBlacksmith(MacroBltIndex)
-    Else
-        frmHerrero.Show , frmMain
-        MirandoHerreria = True
-
-    End If
+    frmHerrero.Show , frmMain
+    MirandoHerreria = True
 
 End Sub
 
@@ -1517,13 +1512,8 @@ Private Sub HandleShowCarpenterForm()
     'Remove packet ID
     Call incomingData.ReadByte
     
-    If frmMain.macrotrabajo.Enabled And (MacroBltIndex > 0) Then
-        Call WriteCraftCarpenter(MacroBltIndex)
-    Else
-        frmCarp.Show , frmMain
-        MirandoCarpinteria = True
-
-    End If
+    frmCarp.Show , frmMain
+    MirandoCarpinteria = True
 
 End Sub
 
@@ -1810,8 +1800,7 @@ Private Sub HandleUpdateHP()
     'Is the user alive??
     If UserMinHP = 0 Then
         UserEstado = 1
-
-        If frmMain.macrotrabajo Then Call frmMain.DesactivarMacroTrabajo
+        
     Else
         UserEstado = 0
 
@@ -1932,8 +1921,6 @@ Private Sub HandleUpdateStrenghtAndDexterity()
     UserAgilidad = incomingData.ReadByte
     frmMain.lblStrg.Caption = UserFuerza
     frmMain.lblDext.Caption = UserAgilidad
-    frmMain.lblStrg.ForeColor = getStrenghtColor()
-    frmMain.lblDext.ForeColor = getDexterityColor()
 
 End Sub
 
@@ -1958,7 +1945,6 @@ Private Sub HandleUpdateStrenght()
     'Get data and update form
     UserFuerza = incomingData.ReadByte
     frmMain.lblStrg.Caption = UserFuerza
-    frmMain.lblStrg.ForeColor = getStrenghtColor()
 
 End Sub
 
@@ -1983,7 +1969,6 @@ Private Sub HandleUpdateDexterity()
     'Get data and update form
     UserAgilidad = incomingData.ReadByte
     frmMain.lblDext.Caption = UserAgilidad
-    frmMain.lblDext.ForeColor = getDexterityColor()
 
 End Sub
 
@@ -3313,8 +3298,7 @@ Private Sub HandleUpdateUserStats()
     
     If UserMinHP = 0 Then
         UserEstado = 1
-
-        If frmMain.macrotrabajo Then Call frmMain.DesactivarMacroTrabajo
+        
     Else
         UserEstado = 0
 
@@ -3444,52 +3428,6 @@ Private Sub HandleChangeInventorySlot()
     MinDef = Buffer.ReadInteger
     Value = Buffer.ReadSingle()
     
-    If Equipped Then
-
-        Select Case OBJType
-
-            Case eObjType.otWeapon
-                frmMain.lblWeapon = MinHit & "/" & MaxHit
-                UserWeaponEqpSlot = slot
-
-            Case eObjType.otArmadura
-                frmMain.lblArmor = MinDef & "/" & MaxDef
-                UserArmourEqpSlot = slot
-
-            Case eObjType.otescudo
-                frmMain.lblShielder = MinDef & "/" & MaxDef
-                UserHelmEqpSlot = slot
-
-            Case eObjType.otcasco
-                frmMain.lblHelm = MinDef & "/" & MaxDef
-                UserShieldEqpSlot = slot
-
-        End Select
-
-    Else
-
-        Select Case slot
-
-            Case UserWeaponEqpSlot
-                frmMain.lblWeapon = "0/0"
-                UserWeaponEqpSlot = 0
-
-            Case UserArmourEqpSlot
-                frmMain.lblArmor = "0/0"
-                UserArmourEqpSlot = 0
-
-            Case UserHelmEqpSlot
-                frmMain.lblShielder = "0/0"
-                UserHelmEqpSlot = 0
-
-            Case UserShieldEqpSlot
-                frmMain.lblHelm = "0/0"
-                UserShieldEqpSlot = 0
-
-        End Select
-
-    End If
-    
     Call Inventario.SetItem(slot, OBJIndex, Amount, Equipped, GrhIndex, OBJType, MaxHit, MinHit, MaxDef, MinDef, Value, name)
 
     'If we got here then packet is complete, copy data back to original queue
@@ -3538,8 +3476,6 @@ Private Sub HandleStopWorking()
         Call ShowConsoleMsg("¡Has terminado de trabajar!", .Red, .Green, .Blue, .bold, .italic)
 
     End With
-    
-    If frmMain.macrotrabajo.Enabled Then Call frmMain.DesactivarMacroTrabajo
 
 End Sub
 
@@ -4460,8 +4396,6 @@ Private Sub HandleLevelUp()
     Call incomingData.ReadByte
     
     SkillPoints = SkillPoints + incomingData.ReadInteger()
-    
-    Call frmMain.LightSkillStar(True)
 
 End Sub
 

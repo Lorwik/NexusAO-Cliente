@@ -151,11 +151,6 @@ Sub Map_MoveTo(ByVal Direccion As E_Heading)
         End If
                 
     End If
-    
-    If (frmMain.macrotrabajo.Enabled) Then
-        Call frmMain.DesactivarMacroTrabajo
-
-    End If
 
     ' Update 3D sounds!
     Call Audio.MoveListener(UserPos.X, UserPos.Y)
