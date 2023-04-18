@@ -33,6 +33,9 @@ Attribute VB_Name = "Mod_General"
 
 Option Explicit
 
+Private m_Jpeg      As clsJpeg
+Private m_FileName  As String
+
 Public iplst        As String
 
 Public bFogata      As Boolean
@@ -388,8 +391,6 @@ Sub SetConnected()
     frmMain.lblName.Caption = UserName
     'Load main form
     frmMain.Visible = True
-    
-    FPSFLAG = True
 
 End Sub
 
@@ -742,24 +743,6 @@ Function FileExist(ByVal File As String, ByVal FileType As VbFileAttribute) As B
 
 End Function
 
-Sub WriteClientVer()
-
-    Dim hFile As Integer
-        
-    hFile = FreeFile()
-    Open App.path & "\init\Ver.bin" For Binary Access Write Lock Read As #hFile
-    Put #hFile, , CLng(777)
-    Put #hFile, , CLng(777)
-    Put #hFile, , CLng(777)
-    
-    Put #hFile, , CInt(App.Major)
-    Put #hFile, , CInt(App.Minor)
-    Put #hFile, , CInt(App.Revision)
-    
-    Close #hFile
-
-End Sub
-
 Public Function IsIp(ByVal Ip As String) As Boolean
 
     Dim i As Long
@@ -786,22 +769,22 @@ Public Sub CargarServidores()
     '********************************
     On Error GoTo errorH
 
-    Dim f As String
+    Dim F As String
 
     Dim c As Integer
 
     Dim i As Long
     
-    f = App.path & "\init\sinfo.dat"
-    c = Val(GetVar(f, "INIT", "Cant"))
+    F = App.path & "\init\sinfo.dat"
+    c = Val(GetVar(F, "INIT", "Cant"))
     
     ReDim ServersLst(1 To c) As tServerInfo
 
     For i = 1 To c
-        ServersLst(i).Desc = GetVar(f, "S" & i, "Desc")
-        ServersLst(i).Ip = Trim$(GetVar(f, "S" & i, "Ip"))
-        ServersLst(i).PassRecPort = CInt(GetVar(f, "S" & i, "P2"))
-        ServersLst(i).Puerto = CInt(GetVar(f, "S" & i, "PJ"))
+        ServersLst(i).Desc = GetVar(F, "S" & i, "Desc")
+        ServersLst(i).Ip = Trim$(GetVar(F, "S" & i, "Ip"))
+        ServersLst(i).PassRecPort = CInt(GetVar(F, "S" & i, "P2"))
+        ServersLst(i).Puerto = CInt(GetVar(F, "S" & i, "PJ"))
     Next i
 
     CurServer = 1
@@ -882,7 +865,6 @@ Public Function CurServerPort() As Integer
 End Function
 
 Sub Main()
-    Call WriteClientVer
     
     Call modCarga.LeerConfiguracion
     
@@ -962,12 +944,8 @@ Sub Main()
         End If
 
         'FPS Counter - mostramos las FPS
-        If GetTickCount - lFrameTimer >= 1000 Then
-            'If FPSFLAG Then frmMain.lblFPS.Caption = Mod_TileEngine.FPS
-            
+        If GetTickCount - lFrameTimer >= 1000 Then _
             lFrameTimer = GetTickCount
-
-        End If
         
         ' If there is anything to be sent, we send it
         Call FlushBuffer
@@ -1111,11 +1089,11 @@ End Sub
 Sub WriteVar(ByVal File As String, _
              ByVal Main As String, _
              ByVal Var As String, _
-             ByVal Value As String)
+             ByVal value As String)
     '*****************************************************************
     'Writes a var to a text file
     '*****************************************************************
-    writeprivateprofilestring Main, Var, Value, File
+    writeprivateprofilestring Main, Var, value, File
 
 End Sub
 
@@ -1146,7 +1124,7 @@ Public Function CheckMailString(ByVal sString As String) As Boolean
 
     Dim lPos As Long
 
-    Dim lX   As Long
+    Dim Lx   As Long
 
     Dim iAsc As Integer
     
@@ -1159,16 +1137,16 @@ Public Function CheckMailString(ByVal sString As String) As Boolean
         If Not (InStr(lPos, sString, ".", vbBinaryCompare) > lPos + 1) Then Exit Function
         
         '3er test: Recorre todos los caracteres y los valída
-        For lX = 0 To Len(sString) - 1
+        For Lx = 0 To Len(sString) - 1
 
-            If Not (lX = (lPos - 1)) Then   'No chequeamos la '@'
-                iAsc = Asc(mid$(sString, (lX + 1), 1))
+            If Not (Lx = (lPos - 1)) Then   'No chequeamos la '@'
+                iAsc = Asc(mid$(sString, (Lx + 1), 1))
 
                 If Not CMSValidateChar_(iAsc) Then Exit Function
 
             End If
 
-        Next lX
+        Next Lx
         
         'Finale
         CheckMailString = True
@@ -1213,7 +1191,7 @@ Public Sub LeerLineaComandos()
     'Last modified: 25/11/2008 (BrianPr)
     '
     '*************************************************
-    Dim T()      As String
+    Dim t()      As String
 
     Dim i        As Long
     
@@ -1222,11 +1200,11 @@ Public Sub LeerLineaComandos()
     Dim Patch    As String
     
     'Parseo los comandos
-    T = Split(Command, " ")
+    t = Split(Command, " ")
 
-    For i = LBound(T) To UBound(T)
+    For i = LBound(t) To UBound(t)
 
-        Select Case UCase$(T(i))
+        Select Case UCase$(t(i))
 
             Case "/NORES" 'no cambiar la resolucion
                 NoRes = True
@@ -1652,40 +1630,89 @@ Public Sub CargarHechizos()
 
     Dim PathName As String
 
-    Dim J        As Long
+    Dim j        As Long
  
     PathName = App.path & "\init\Hechizos.dat"
     NumHechizos = Val(GetVar(PathName, "INIT", "NumHechizos"))
  
     ReDim Hechizos(1 To NumHechizos) As tHechizos
 
-    For J = 1 To NumHechizos
+    For j = 1 To NumHechizos
 
-        With Hechizos(J)
-            .Desc = GetVar(PathName, "HECHIZO" & J, "Desc")
-            .PalabrasMagicas = GetVar(PathName, "HECHIZO" & J, "PalabrasMagicas")
-            .Nombre = GetVar(PathName, "HECHIZO" & J, "Nombre")
-            .SkillRequerido = GetVar(PathName, "HECHIZO" & J, "MinSkill")
+        With Hechizos(j)
+            .Desc = GetVar(PathName, "HECHIZO" & j, "Desc")
+            .PalabrasMagicas = GetVar(PathName, "HECHIZO" & j, "PalabrasMagicas")
+            .Nombre = GetVar(PathName, "HECHIZO" & j, "Nombre")
+            .SkillRequerido = GetVar(PathName, "HECHIZO" & j, "MinSkill")
          
-            If J <> 38 And J <> 39 Then
-                .EnergiaRequerida = GetVar(PathName, "HECHIZO" & J, "StaRequerido")
+            If j <> 38 And j <> 39 Then
+                .EnergiaRequerida = GetVar(PathName, "HECHIZO" & j, "StaRequerido")
                  
-                .HechiceroMsg = GetVar(PathName, "HECHIZO" & J, "HechizeroMsg")
-                .ManaRequerida = GetVar(PathName, "HECHIZO" & J, "ManaRequerido")
+                .HechiceroMsg = GetVar(PathName, "HECHIZO" & j, "HechizeroMsg")
+                .ManaRequerida = GetVar(PathName, "HECHIZO" & j, "ManaRequerido")
              
-                .PropioMsg = GetVar(PathName, "HECHIZO" & J, "PropioMsg")
+                .PropioMsg = GetVar(PathName, "HECHIZO" & j, "PropioMsg")
              
-                .TargetMsg = GetVar(PathName, "HECHIZO" & J, "TargetMsg")
+                .TargetMsg = GetVar(PathName, "HECHIZO" & j, "TargetMsg")
 
             End If
 
         End With
 
-    Next J
+    Next j
  
     Exit Sub
  
 errorH:
     Call MsgBox("Error critico", vbCritical + vbOKOnly, "Nexus AO")
+
+End Sub
+
+Public Sub Client_Screenshot(ByVal hDC As Long, ByVal Width As Long, ByVal Height As Long)
+'*******************************
+'Autor: ???
+'Fecha: ???
+'*******************************
+
+On Error GoTo ErrorHandler
+
+    Dim i As Long
+    Dim Index As Long
+    i = 1
+    
+    Set m_Jpeg = New clsJpeg
+    
+    '80 Quality
+    m_Jpeg.Quality = 100
+    
+    'Sample the cImage by hDC
+    m_Jpeg.SampleHDC hDC, Width, Height
+    
+    m_FileName = App.path & "\Fotos\NexusAO_Foto"
+    
+    If Dir(App.path & "\Fotos", vbDirectory) = vbNullString Then
+        MkDir (App.path & "\Fotos")
+    End If
+    
+    Do While Dir(m_FileName & Trim(str(i)) & ".jpg") <> vbNullString
+        i = i + 1
+        DoEvents
+    Loop
+    
+    Index = i
+    
+    m_Jpeg.Comment = "Character: " & UserName & " - " & Format(Date, "dd/mm/yyyy") & " - " & Format(Time, "hh:mm AM/PM")
+    
+    'Save the JPG file
+    m_Jpeg.SaveFile m_FileName & Trim(str(Index)) & ".jpg"
+    
+    Call AddtoRichTextBox(frmMain.RecTxt, "¡Captura realizada con exito! Se guardo en " & m_FileName & Trim(str(Index)) & ".jpg", 204, 193, 155, 0, 1)
+    
+    Set m_Jpeg = Nothing
+    
+    Exit Sub
+
+ErrorHandler:
+    Call AddtoRichTextBox(frmMain.RecTxt, "¡Error en la captura!", 204, 193, 155, 0, 1)
 
 End Sub

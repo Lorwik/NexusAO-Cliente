@@ -40,6 +40,7 @@ Begin VB.Form frmConnect
       Left            =   5820
       PasswordChar    =   "*"
       TabIndex        =   1
+      Text            =   "123456"
       Top             =   7680
       Width           =   3750
    End
@@ -59,6 +60,7 @@ Begin VB.Form frmConnect
       Height          =   315
       Left            =   5880
       TabIndex        =   0
+      Text            =   "Lorwik"
       Top             =   6210
       Width           =   3600
    End

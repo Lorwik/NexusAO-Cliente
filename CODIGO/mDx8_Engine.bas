@@ -886,9 +886,7 @@ Public Sub Engine_Update_FPS()
 
     End If
 
-    'If Settings.MostrarFPS = True Then
-    'Fonts_Render_String FPS, 2, 2, -1, Settings.Engine_Font
-    'DrawText 2, 2, FPS, -1
-    ' End If
+    If FPSFLAG Then DrawText 685, 2, FPS, -1
+
 End Sub
 
