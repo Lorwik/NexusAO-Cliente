@@ -1331,7 +1331,7 @@ Public Sub DrawTransparentGrhtoHdc(ByVal dsthdc As Long, _
     Dim Y     As Long
     
     For X = SourceRect.Left To SourceRect.Right
-        For Y = SourceRect.Top To SourceRect.bottom
+        For Y = SourceRect.Top To SourceRect.Bottom
             Color = GetPixel(srchdc, X, Y)
             
             If Color <> TransparentColor Then
@@ -1722,6 +1722,7 @@ Public Function InitTileEngine(ByVal setDisplayFormhWnd As Long, _
     'Last modified by: Juan Martín Sotuyo Dodero (Maraxus)
     'Configures the engine to start running.
     '***************************************************
+    
     TilePixelWidth = setTilePixelWidth
     TilePixelHeight = setTilePixelHeight
     WindowTileHeight = Round(frmMain.MainViewPic.Height / 32, 0)
@@ -1841,7 +1842,7 @@ Sub ShowNextFrame(ByVal DisplayFormTop As Integer, _
     '//Banco
     If frmBancoObj.PicBancoInv.Visible Then Call InvBanco(0).DrawInv
          
-    If frmBancoObj.PicInv.Visible Then Call InvBanco(1).DrawInv
+    If frmBancoObj.picInv.Visible Then Call InvBanco(1).DrawInv
     
     '//Comercio
     If frmComerciar.picInvNpc.Visible Then Call InvComNpc.DrawInv
@@ -2299,7 +2300,7 @@ Public Sub Device_Textured_Render(ByVal X As Integer, _
     Dim srdesc        As D3DSURFACE_DESC
 
     With dest_rect
-        .bottom = Y + (src_rect.bottom - src_rect.Top)
+        .Bottom = Y + (src_rect.Bottom - src_rect.Top)
         .Left = X
         .Right = X + (src_rect.Right - src_rect.Left)
         .Top = Y
@@ -2327,7 +2328,7 @@ Public Sub Device_Textured_Render(ByVal X As Integer, _
     DirectDevice.SetTexture 0, Texture
 
     If Shadow Then
-        temp_verts(1).X = temp_verts(1).X + (src_rect.bottom - src_rect.Top) * 0.5
+        temp_verts(1).X = temp_verts(1).X + (src_rect.Bottom - src_rect.Top) * 0.5
         temp_verts(1).Y = temp_verts(1).Y - (src_rect.Right - src_rect.Left) * 0.5
        
         temp_verts(3).X = temp_verts(3).X + (src_rect.Right - src_rect.Left)
@@ -2373,7 +2374,7 @@ Public Sub Device_Textured_Render_Scale(ByVal X As Integer, _
     Dim srdesc        As D3DSURFACE_DESC
 
     With dest_rect
-        .bottom = Y + 2 '(src_rect.bottom - src_rect.Top)
+        .Bottom = Y + 2 '(src_rect.bottom - src_rect.Top)
         .Left = X
         .Right = X + 2 '(src_rect.Right - src_rect.Left)
         .Top = Y
@@ -2415,7 +2416,7 @@ Public Sub RenderItem(ByVal hWndDest As Long, ByVal GrhIndex As Long)
         .Left = 0
         .Top = 0
         .Right = 32
-        .bottom = 32
+        .Bottom = 32
 
     End With
     
@@ -2488,7 +2489,7 @@ Private Sub DDrawGrhtoSurface(ByRef Grh As Grh, _
         SourceRect.Left = .SX
         SourceRect.Top = .SY
         SourceRect.Right = SourceRect.Left + .pixelWidth
-        SourceRect.bottom = SourceRect.Top + .pixelHeight
+        SourceRect.Bottom = SourceRect.Top + .pixelHeight
         
         'Draw
         Call Device_Textured_Render(X, Y, SurfaceDB.Surface(.FileNum), SourceRect, MapData(posX, posY).Engine_Light(), False, 0, False)
@@ -2540,7 +2541,7 @@ Sub DDrawTransGrhIndextoSurface(ByVal GrhIndex As Integer, _
         SourceRect.Left = .SX
         SourceRect.Top = .SY
         SourceRect.Right = SourceRect.Left + .pixelWidth
-        SourceRect.bottom = SourceRect.Top + .pixelHeight
+        SourceRect.Bottom = SourceRect.Top + .pixelHeight
         
         'Draw
         Call Device_Textured_Render(X, Y, SurfaceDB.Surface(.FileNum), SourceRect, Color_List(), Alpha, Angle, False)
@@ -2610,7 +2611,7 @@ Public Sub DDrawGrhtoSurfaceScale(ByRef Grh As Grh, _
         SourceRect.Left = .SX
         SourceRect.Top = .SY
         SourceRect.Right = SourceRect.Left + .pixelWidth
-        SourceRect.bottom = SourceRect.Top + .pixelHeight
+        SourceRect.Bottom = SourceRect.Top + .pixelHeight
         
         'Draw
         Call Device_Textured_Render_Scale(X, Y, SurfaceDB.Surface(.FileNum), SourceRect, MapData(posX, posY).Engine_Light(), False, 0, False)
@@ -2662,7 +2663,7 @@ Sub DDrawTransGrhIndextoSurfaceScale(ByVal GrhIndex As Integer, _
         SourceRect.Left = .SX
         SourceRect.Top = .SY
         SourceRect.Right = SourceRect.Left + .pixelWidth
-        SourceRect.bottom = SourceRect.Top + .pixelHeight
+        SourceRect.Bottom = SourceRect.Top + .pixelHeight
         
         'Draw
         Call Device_Textured_Render_Scale(X, Y, SurfaceDB.Surface(.FileNum), SourceRect, Color_List(), Alpha, Angle, False)
@@ -2739,7 +2740,7 @@ Sub DDrawTransGrhtoSurface(ByRef Grh As Grh, _
         SourceRect.Left = .SX
         SourceRect.Top = .SY
         SourceRect.Right = SourceRect.Left + .pixelWidth
-        SourceRect.bottom = SourceRect.Top + .pixelHeight
+        SourceRect.Bottom = SourceRect.Top + .pixelHeight
         
         Call Device_Textured_Render(X, Y, SurfaceDB.Surface(.FileNum), SourceRect, Color_List(), Alpha, Angle, False)
 

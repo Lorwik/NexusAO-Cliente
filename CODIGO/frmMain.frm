@@ -76,7 +76,7 @@ Begin VB.Form frmMain
       MousePointer    =   99  'Custom
       ScaleHeight     =   450
       ScaleWidth      =   420
-      TabIndex        =   20
+      TabIndex        =   19
       Top             =   11010
       Width           =   420
    End
@@ -93,7 +93,7 @@ Begin VB.Form frmMain
       ScaleHeight     =   30
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   28
-      TabIndex        =   19
+      TabIndex        =   18
       Top             =   11010
       Width           =   420
    End
@@ -177,11 +177,12 @@ Begin VB.Form frmMain
       _ExtentY        =   3043
       _Version        =   393217
       BackColor       =   0
+      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       DisableNoScroll =   -1  'True
       Appearance      =   0
-      TextRTF         =   $"frmMain.frx":1767D
+      TextRTF         =   $"frmMain.frx":FE53
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Tahoma"
          Size            =   8.25
@@ -205,7 +206,7 @@ Begin VB.Form frmMain
       Width           =   2715
    End
    Begin VB.PictureBox MainViewPic 
-      BackColor       =   &H000000FF&
+      BackColor       =   &H80000007&
       BorderStyle     =   0  'None
       Height          =   9150
       Left            =   120
@@ -213,14 +214,221 @@ Begin VB.Form frmMain
       ScaleHeight     =   610
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   718
-      TabIndex        =   23
-      Top             =   2265
+      TabIndex        =   22
+      Top             =   2250
       Width           =   10770
+      Begin VB.Frame fMenu 
+         Appearance      =   0  'Flat
+         BackColor       =   &H00000000&
+         BorderStyle     =   0  'None
+         ForeColor       =   &H00000000&
+         Height          =   2865
+         Left            =   9150
+         TabIndex        =   23
+         Top             =   6240
+         Visible         =   0   'False
+         Width           =   1575
+         Begin ARGENTUM.uAOButton uAOMenu 
+            Height          =   255
+            Index           =   0
+            Left            =   90
+            TabIndex        =   24
+            Top             =   180
+            Width           =   1395
+            _ExtentX        =   2461
+            _ExtentY        =   450
+            TX              =   "Estadisticas"
+            ENAB            =   -1  'True
+            FCOL            =   16777215
+            OCOL            =   16777215
+            PICE            =   "frmMain.frx":FED0
+            PICF            =   "frmMain.frx":FEEC
+            PICH            =   "frmMain.frx":FF08
+            PICV            =   "frmMain.frx":FF24
+            BeginProperty FONT {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Arial"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+         End
+         Begin ARGENTUM.uAOButton uAOMenu 
+            Height          =   255
+            Index           =   1
+            Left            =   90
+            TabIndex        =   25
+            Top             =   540
+            Width           =   1395
+            _ExtentX        =   2461
+            _ExtentY        =   450
+            TX              =   "Clanes"
+            ENAB            =   -1  'True
+            FCOL            =   16777215
+            OCOL            =   16777215
+            PICE            =   "frmMain.frx":FF40
+            PICF            =   "frmMain.frx":FF5C
+            PICH            =   "frmMain.frx":FF78
+            PICV            =   "frmMain.frx":FF94
+            BeginProperty FONT {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Arial"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+         End
+         Begin ARGENTUM.uAOButton uAOMenu 
+            Height          =   255
+            Index           =   2
+            Left            =   90
+            TabIndex        =   26
+            Top             =   900
+            Width           =   1395
+            _ExtentX        =   2461
+            _ExtentY        =   450
+            TX              =   "Grupo"
+            ENAB            =   -1  'True
+            FCOL            =   16777215
+            OCOL            =   16777215
+            PICE            =   "frmMain.frx":FFB0
+            PICF            =   "frmMain.frx":FFCC
+            PICH            =   "frmMain.frx":FFE8
+            PICV            =   "frmMain.frx":10004
+            BeginProperty FONT {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Arial"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+         End
+         Begin ARGENTUM.uAOButton uAOMenu 
+            Height          =   255
+            Index           =   3
+            Left            =   90
+            TabIndex        =   27
+            Top             =   1260
+            Width           =   1395
+            _ExtentX        =   2461
+            _ExtentY        =   450
+            TX              =   "Mapa"
+            ENAB            =   -1  'True
+            FCOL            =   16777215
+            OCOL            =   16777215
+            PICE            =   "frmMain.frx":10020
+            PICF            =   "frmMain.frx":1003C
+            PICH            =   "frmMain.frx":10058
+            PICV            =   "frmMain.frx":10074
+            BeginProperty FONT {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Arial"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+         End
+         Begin ARGENTUM.uAOButton uAOMenu 
+            Height          =   255
+            Index           =   4
+            Left            =   90
+            TabIndex        =   28
+            Top             =   1620
+            Width           =   1395
+            _ExtentX        =   2461
+            _ExtentY        =   450
+            TX              =   "Opciones"
+            ENAB            =   -1  'True
+            FCOL            =   16777215
+            OCOL            =   16777215
+            PICE            =   "frmMain.frx":10090
+            PICF            =   "frmMain.frx":100AC
+            PICH            =   "frmMain.frx":100C8
+            PICV            =   "frmMain.frx":100E4
+            BeginProperty FONT {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Arial"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+         End
+         Begin ARGENTUM.uAOButton uAOMenu 
+            Height          =   255
+            Index           =   5
+            Left            =   90
+            TabIndex        =   29
+            Top             =   1980
+            Width           =   1395
+            _ExtentX        =   2461
+            _ExtentY        =   450
+            TX              =   "Desconectar"
+            ENAB            =   -1  'True
+            FCOL            =   16777215
+            OCOL            =   16777215
+            PICE            =   "frmMain.frx":10100
+            PICF            =   "frmMain.frx":1011C
+            PICH            =   "frmMain.frx":10138
+            PICV            =   "frmMain.frx":10154
+            BeginProperty FONT {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Arial"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+         End
+         Begin ARGENTUM.uAOButton uAOMenu 
+            Height          =   255
+            Index           =   6
+            Left            =   90
+            TabIndex        =   30
+            Top             =   2460
+            Width           =   1395
+            _ExtentX        =   2461
+            _ExtentY        =   450
+            TX              =   "Cerrar Menú"
+            ENAB            =   -1  'True
+            FCOL            =   16777215
+            OCOL            =   16777215
+            PICE            =   "frmMain.frx":10170
+            PICF            =   "frmMain.frx":1018C
+            PICH            =   "frmMain.frx":101A8
+            PICV            =   "frmMain.frx":101C4
+            BeginProperty FONT {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Arial"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+         End
+      End
+   End
+   Begin VB.Image imgMenu 
+      Height          =   480
+      Left            =   12180
+      Top             =   10860
+      Width           =   2175
    End
    Begin VB.Image cmdInfo 
       Height          =   465
       Left            =   13740
-      MouseIcon       =   "frmMain.frx":176FA
+      MouseIcon       =   "frmMain.frx":101E0
       MousePointer    =   99  'Custom
       Top             =   6510
       Visible         =   0   'False
@@ -238,42 +446,12 @@ Begin VB.Form frmMain
       Top             =   1800
       Width           =   1545
    End
-   Begin VB.Image imgMapa 
-      Height          =   300
-      Left            =   14730
-      Top             =   9195
-      Width           =   1395
-   End
-   Begin VB.Image imgClanes 
-      Height          =   390
-      Left            =   14745
-      Top             =   10500
-      Width           =   1380
-   End
-   Begin VB.Image imgEstadisticas 
-      Height          =   360
-      Left            =   14715
-      Top             =   10125
-      Width           =   1425
-   End
-   Begin VB.Image imgOpciones 
-      Height          =   330
-      Left            =   14715
-      Top             =   9795
-      Width           =   1425
-   End
-   Begin VB.Image imgGrupo 
-      Height          =   315
-      Left            =   14715
-      Top             =   9510
-      Width           =   1410
-   End
    Begin VB.Label lblDropGold 
       BackStyle       =   0  'Transparent
       Height          =   255
       Left            =   12240
       MousePointer    =   99  'Custom
-      TabIndex        =   22
+      TabIndex        =   21
       Top             =   6630
       Width           =   255
    End
@@ -282,19 +460,9 @@ Begin VB.Form frmMain
       Height          =   255
       Left            =   14400
       MousePointer    =   99  'Custom
-      TabIndex        =   21
+      TabIndex        =   20
       Top             =   10800
       Width           =   255
-   End
-   Begin VB.Label lblFPS 
-      BackStyle       =   0  'Transparent
-      Caption         =   "101"
-      ForeColor       =   &H00FFFFFF&
-      Height          =   180
-      Left            =   14730
-      TabIndex        =   18
-      Top             =   300
-      Width           =   555
    End
    Begin VB.Label lblMapName 
       Alignment       =   2  'Center
@@ -322,9 +490,9 @@ Begin VB.Form frmMain
       Height          =   315
       Index           =   0
       Left            =   14610
-      MouseIcon       =   "frmMain.frx":1784C
+      MouseIcon       =   "frmMain.frx":10332
       MousePointer    =   99  'Custom
-      Picture         =   "frmMain.frx":1799E
+      Picture         =   "frmMain.frx":10484
       Top             =   4200
       Visible         =   0   'False
       Width           =   345
@@ -333,9 +501,9 @@ Begin VB.Form frmMain
       Height          =   315
       Index           =   1
       Left            =   14610
-      MouseIcon       =   "frmMain.frx":17DEE
+      MouseIcon       =   "frmMain.frx":108D4
       MousePointer    =   99  'Custom
-      Picture         =   "frmMain.frx":17F40
+      Picture         =   "frmMain.frx":10A26
       Top             =   3855
       Visible         =   0   'False
       Width           =   345
@@ -399,46 +567,28 @@ Begin VB.Form frmMain
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "33.33%"
-      BeginProperty Font 
-         Name            =   "Arial"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFF00&
-      Height          =   225
+      ForeColor       =   &H8000000B&
+      Height          =   195
       Left            =   12930
       TabIndex        =   14
       Top             =   1140
-      Width           =   555
+      Width           =   660
    End
    Begin VB.Label lblExp 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "Exp: 999999999/99999999"
-      BeginProperty Font 
-         Name            =   "Arial"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   225
+      ForeColor       =   &H8000000B&
+      Height          =   195
       Left            =   12330
       TabIndex        =   13
       Top             =   690
-      Width           =   2010
+      Width           =   2265
    End
    Begin VB.Image CmdLanzar 
       Height          =   465
       Left            =   11730
-      MouseIcon       =   "frmMain.frx":18390
+      MouseIcon       =   "frmMain.frx":10E76
       MousePointer    =   99  'Custom
       Top             =   6510
       Visible         =   0   'False
@@ -739,18 +889,6 @@ Private cBotonDiamArriba        As clsGraphicalButton
 
 Private cBotonDiamAbajo         As clsGraphicalButton
 
-Private cBotonMapa              As clsGraphicalButton
-
-Private cBotonGrupo             As clsGraphicalButton
-
-Private cBotonOpciones          As clsGraphicalButton
-
-Private cBotonEstadisticas      As clsGraphicalButton
-
-Private cBotonClanes            As clsGraphicalButton
-
-Private cBotonAsignarSkill      As clsGraphicalButton
-
 Private cBotonLanzar            As clsGraphicalButton
 
 Private cBotonInfo              As clsGraphicalButton
@@ -758,6 +896,8 @@ Private cBotonInfo              As clsGraphicalButton
 Private cBotonInventario        As clsGraphicalButton
 
 Private cBotonHechizos          As clsGraphicalButton
+
+Private cBotonMenu              As clsGraphicalButton
 
 Public LastButtonPressed        As clsGraphicalButton
 
@@ -808,35 +948,23 @@ Private Sub LoadButtons()
 
     Set cBotonDiamArriba = New clsGraphicalButton
     Set cBotonDiamAbajo = New clsGraphicalButton
-    Set cBotonGrupo = New clsGraphicalButton
-    Set cBotonOpciones = New clsGraphicalButton
-    Set cBotonEstadisticas = New clsGraphicalButton
-    Set cBotonClanes = New clsGraphicalButton
-    Set cBotonMapa = New clsGraphicalButton
     Set cBotonLanzar = New clsGraphicalButton
     Set cBotonInfo = New clsGraphicalButton
     Set cBotonInventario = New clsGraphicalButton
     Set cBotonHechizos = New clsGraphicalButton
+    Set cBotonMenu = New clsGraphicalButton
     
     Set LastButtonPressed = New clsGraphicalButton
     
-    Call cBotonMapa.Initialize(imgMapa, "", GrhPath & "BotonMapaRollover.jpg", GrhPath & "BotonMapaClick.jpg", Me)
-                                    
-    Call cBotonGrupo.Initialize(imgGrupo, "", GrhPath & "BotonGrupoRollover.jpg", GrhPath & "BotonGrupoClick.jpg", Me)
-
-    Call cBotonOpciones.Initialize(imgOpciones, "", GrhPath & "BotonOpcionesRollover.jpg", GrhPath & "BotonOpcionesClick.jpg", Me)
-
-    Call cBotonEstadisticas.Initialize(imgEstadisticas, "", GrhPath & "BotonEstadisticasRollover.jpg", GrhPath & "BotonEstadisticasClick.jpg", Me)
-    
     Call cBotonLanzar.Initialize(CmdLanzar, GrhPath & "btnLanzar.jpg", GrhPath & "btnLanzar_Hov.jpg", GrhPath & "btnLanzar_press.jpg", Me)
     
-    Call cBotonLanzar.Initialize(cmdINFO, GrhPath & "btnInfo.jpg", GrhPath & "btnInfo_Hov.jpg", GrhPath & "btnInfo_press.jpg", Me)
-
-    Call cBotonClanes.Initialize(imgClanes, "", GrhPath & "BotonClanesRollover.jpg", GrhPath & "BotonClanesClick.jpg", Me)
+    Call cBotonLanzar.Initialize(cmdInfo, GrhPath & "btnInfo.jpg", GrhPath & "btnInfo_Hov.jpg", GrhPath & "btnInfo_press.jpg", Me)
     
     Call cBotonInventario.Initialize(btnInventario, GrhPath & "btnInventario.jpg", GrhPath & "btnInventario_Hov.jpg", GrhPath & "btnInventario_press.jpg", Me)
     
     Call cBotonHechizos.Initialize(btnHechizos, GrhPath & "btnHechizos.jpg", GrhPath & "btnHechizos_Hov.jpg", GrhPath & "btnHechizos_press.jpg", Me)
+    
+    Call cBotonMenu.Initialize(imgMenu, GrhPath & "btnMenu.jpg", GrhPath & "btnMenu_Hov.jpg", GrhPath & "btnMenu_press.jpg", Me)
     
     lblDropGold.MouseIcon = picMouseIcon
     lblCerrar.MouseIcon = picMouseIcon
@@ -902,12 +1030,12 @@ Public Sub ControlSM(ByVal Index As Byte, ByVal Mostrar As Boolean)
         SR.Left = .SX
         SR.Right = SR.Left + .pixelWidth
         SR.Top = .SY
-        SR.bottom = SR.Top + .pixelHeight
+        SR.Bottom = SR.Top + .pixelHeight
     
         DR.Left = 0
         DR.Right = .pixelWidth
         DR.Top = 0
-        DR.bottom = .pixelHeight
+        DR.Bottom = .pixelHeight
 
     End With
 
@@ -1229,47 +1357,10 @@ Private Sub Form_Unload(Cancel As Integer)
 
 End Sub
 
-Private Sub imgClanes_Click()
+Private Sub imgMenu_Click()
 
-    If frmGuildLeader.Visible Then Unload frmGuildLeader
-    Call WriteRequestGuildLeaderInfo
-
-End Sub
-
-Private Sub imgEstadisticas_Click()
-    LlegaronAtrib = False
-    LlegaronSkills = False
-    LlegoFama = False
-    Call WriteRequestAtributes
-    Call WriteRequestSkills
-    Call WriteRequestMiniStats
-    Call WriteRequestFame
-    Call FlushBuffer
-
-    Do While Not LlegaronSkills Or Not LlegaronAtrib Or Not LlegoFama
-        DoEvents 'esperamos a que lleguen y mantenemos la interfaz viva
-    Loop
-    frmEstadisticas.Iniciar_Labels
-    frmEstadisticas.Show , frmMain
-    LlegaronAtrib = False
-    LlegaronSkills = False
-    LlegoFama = False
-
-End Sub
-
-Private Sub imgGrupo_Click()
-    Call WriteRequestPartyForm
-
-End Sub
-
-Private Sub imgMapa_Click()
-    Call frmMapa.Show(vbModeless, frmMain)
-
-End Sub
-
-Private Sub imgOpciones_Click()
-    Call frmOpciones.Show(vbModeless, frmMain)
-
+    Call Audio.PlayWave(SND_CLICK)
+    fMenu.Visible = Not fMenu.Visible
 End Sub
 
 Private Sub InvEqu_MouseMove(Button As Integer, _
@@ -1820,7 +1911,7 @@ Private Sub btnInventario_Click()
 
     ' Desactivo controles de hechizo
     hlst.Visible = False
-    cmdINFO.Visible = False
+    cmdInfo.Visible = False
     CmdLanzar.Visible = False
     
     cmdMoverHechi(0).Visible = False
@@ -1838,7 +1929,7 @@ Private Sub btnHechizos_Click()
     
     ' Activo controles de hechizos
     hlst.Visible = True
-    cmdINFO.Visible = True
+    cmdInfo.Visible = True
     CmdLanzar.Visible = True
     
     cmdMoverHechi(0).Visible = True
@@ -2117,6 +2208,64 @@ End Sub
 
 Private Sub SonidosMapas_Timer()
     Sonidos.ReproducirSonidosDeMapas
+
+End Sub
+
+Private Sub uAOMenu_Click(Index As Integer)
+
+    On Error GoTo uAOMenu_Click_Error
+    
+    Call Audio.PlayWave(SND_CLICK)
+    
+    Select Case Index
+    
+        Case 0 'Estadisticas
+            LlegaronAtrib = False
+            LlegaronSkills = False
+            LlegoFama = False
+            Call WriteRequestAtributes
+            Call WriteRequestSkills
+            Call WriteRequestMiniStats
+            Call WriteRequestFame
+            Call FlushBuffer
+        
+            Do While Not LlegaronSkills Or Not LlegaronAtrib Or Not LlegoFama
+                DoEvents 'esperamos a que lleguen y mantenemos la interfaz viva
+            Loop
+            frmEstadisticas.Iniciar_Labels
+            frmEstadisticas.Show , frmMain
+            LlegaronAtrib = False
+            LlegaronSkills = False
+            LlegoFama = False
+            
+        Case 1 'Clanes
+            If frmGuildLeader.Visible Then Unload frmGuildLeader
+            Call WriteRequestGuildLeaderInfo
+            
+        Case 2 'Grupo
+            Call WriteRequestPartyForm
+            
+        Case 3 'Mapa
+            Call frmMapa.Show(vbModeless, frmMain)
+            
+        Case 4 'Opciones
+            Call frmOpciones.Show(vbModeless, frmMain)
+            
+        Case 5 'Desconectar
+            fMenu.Visible = Not fMenu.Visible
+            Call ParseUserCommand("/SALIR")
+            
+        Case 6 'Cerrar Menú
+            fMenu.Visible = Not fMenu.Visible
+    End Select
+    
+    
+    On Error GoTo 0
+    Exit Sub
+
+uAOMenu_Click_Error:
+
+    MsgBox "Error " & Err.number & " (" & Err.Description & ") in procedure uAOMenu_Click, line " & Erl & "."
 
 End Sub
 

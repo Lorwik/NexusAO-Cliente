@@ -1833,15 +1833,6 @@ Private Sub HandleUpdateGold()
     'Get data and update form
     UserGLD = incomingData.ReadLong()
     
-    If UserGLD >= CLng(UserLvl) * 10000 And UserLvl > 12 Then 'Si el nivel es mayor de 12, es decir, no es newbie.
-        'Changes color
-        frmMain.GldLbl.ForeColor = &HFF& 'Red
-    Else
-        'Changes color
-        frmMain.GldLbl.ForeColor = &HFFFF& 'Yellow
-
-    End If
-    
     frmMain.GldLbl.Caption = UserGLD
 
 End Sub
@@ -3301,15 +3292,6 @@ Private Sub HandleUpdateUserStats()
         
     Else
         UserEstado = 0
-
-    End If
-    
-    If UserGLD >= CLng(UserLvl) * 10000 Then
-        'Changes color
-        frmMain.GldLbl.ForeColor = &HFF& 'Red
-    Else
-        'Changes color
-        frmMain.GldLbl.ForeColor = &HFFFF& 'Yellow
 
     End If
 

@@ -26,7 +26,7 @@ Begin VB.Form frmConnect
       BackColor       =   &H00000000&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   700
@@ -37,7 +37,7 @@ Begin VB.Form frmConnect
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       IMEMode         =   3  'DISABLE
-      Left            =   5850
+      Left            =   5820
       PasswordChar    =   "*"
       TabIndex        =   1
       Top             =   7680
@@ -47,7 +47,7 @@ Begin VB.Form frmConnect
       BackColor       =   &H00000000&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   700

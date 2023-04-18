@@ -985,7 +985,7 @@ Sub Main()
 
         'FPS Counter - mostramos las FPS
         If GetTickCount - lFrameTimer >= 1000 Then
-            If FPSFLAG Then frmMain.lblFPS.Caption = Mod_TileEngine.FPS
+            'If FPSFLAG Then frmMain.lblFPS.Caption = Mod_TileEngine.FPS
             
             lFrameTimer = GetTickCount
 
@@ -1060,18 +1060,12 @@ Private Sub LoadInitialConfig()
     ' MOTOR GRÁFICO
     Call AddtoRichTextBox(frmCargando.status, "Iniciando motor gráfico... ", 255, 255, 255, True, False, True)
     
-    '     Iniciamos el Engine de DirectX 8
-    If Not Engine_DirectX8_Init Then
-        Call CloseClient
-
-    End If
+    ' Iniciamos el Engine de DirectX 8
+    If Not Engine_DirectX8_Init Then Call CloseClient
           
-    '     Tile Engine
-    If Not InitTileEngine(frmMain.hwnd, 32, 32, 8, 8) Then
-        Call CloseClient
-
-    End If
-    
+    ' Tile Engine
+    If Not InitTileEngine(frmMain.hwnd, 32, 32, 8, 8) Then Call CloseClient
+        
     Engine_DirectX8_Aditional_Init
     
     Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
@@ -1080,7 +1074,7 @@ Private Sub LoadInitialConfig()
     ' ANIMACIONES EXTRAS
     Call AddtoRichTextBox(frmCargando.status, "Creando animaciones extra... ", 255, 255, 255, True, False, True)
     Call CargarTips
-    'Call CargarArrayLluvia
+    ' Call CargarArrayLluvia
     Call CargarAnimArmas
     Call CargarAnimEscudos
     Call CargarColores
@@ -1089,14 +1083,14 @@ Private Sub LoadInitialConfig()
     '#############
     ' DIRECT SOUND
     Call AddtoRichTextBox(frmCargando.status, "Iniciando DirectSound... ", 255, 255, 255, True, False, True)
-    'Inicializamos el sonido
+    ' Inicializamos el sonido
     Call Audio.Initialize(DirectX, frmMain.hwnd, App.path & "\" & Config_Inicio.DirSonidos & "\", App.path & "\" & Config_Inicio.DirMusica & "\")
-    'Enable / Disable audio
+    ' Enable / Disable audio
     Audio.MusicActivated = Not ClientSetup.bNoMusic
     Audio.SoundActivated = Not ClientSetup.bNoSound
     Audio.SoundEffectsActivated = Not ClientSetup.bNoSoundEffects
-    'Inicializamos el inventario gráfico
-    Call Inventario.Initialize(DirectD3D8, frmMain.PicInv, MAX_INVENTORY_SLOTS)
+    ' Inicializamos el inventario gráfico
+    Call Inventario.Initialize(DirectD3D8, frmMain.picInv, MAX_INVENTORY_SLOTS)
     'Call Audio.MusicMP3Play(App.path & "\MP3\" & MP3_Inicio & ".mp3")
     Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
     

@@ -82,15 +82,8 @@ Public Function Engine_DirectX8_Init() As Boolean
     Engine_Init_FontTextures
     Engine_Init_FontSettings
     
-    DirectDevice.SetVertexShader D3DFVF_XYZRHW Or D3DFVF_TEX1 Or D3DFVF_DIFFUSE Or D3DFVF_SPECULAR
-    DirectDevice.SetRenderState D3DRS_LIGHTING, False
-    DirectDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA
-    DirectDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA
-    DirectDevice.SetRenderState D3DRS_ALPHABLENDENABLE, True
-    DirectDevice.SetRenderState D3DRS_POINTSIZE, Engine_FToDW(2)
-    DirectDevice.SetTextureStageState 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE
-    DirectDevice.SetRenderState D3DRS_POINTSPRITE_ENABLE, 1
-    DirectDevice.SetRenderState D3DRS_POINTSCALE_ENABLE, 0
+    ' Set rendering options
+    Call Engine_Init_RenderStates
     
     EndTime = GetTickCount
     
@@ -118,6 +111,25 @@ Public Function Engine_DirectX8_Init() As Boolean
     Engine_DirectX8_Init = True
 
 End Function
+
+Private Sub Engine_Init_RenderStates()
+
+    'Set the render states
+    With DirectDevice
+    
+        .SetVertexShader D3DFVF_XYZRHW Or D3DFVF_TEX1 Or D3DFVF_DIFFUSE Or D3DFVF_SPECULAR
+        .SetRenderState D3DRS_LIGHTING, False
+        .SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA
+        .SetRenderState D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA
+        .SetRenderState D3DRS_ALPHABLENDENABLE, True
+        .SetRenderState D3DRS_POINTSIZE, Engine_FToDW(2)
+        .SetTextureStageState 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE
+        .SetRenderState D3DRS_POINTSPRITE_ENABLE, 1
+        .SetRenderState D3DRS_POINTSCALE_ENABLE, 0
+        
+    End With
+    
+End Sub
 
 Public Sub Engine_DirectX8_End()
 
@@ -170,7 +182,7 @@ Public Sub Engine_DirectX8_Aditional_Init()
     Engine_Set_BaseSpeed 0.018
     
     With MainScreenRect
-        .bottom = frmMain.MainViewPic.ScaleHeight
+        .Bottom = frmMain.MainViewPic.ScaleHeight
         .Right = frmMain.MainViewPic.ScaleWidth
 
     End With
@@ -321,7 +333,7 @@ Public Sub Engine_Draw_Box(ByVal X As Integer, _
     Engine_Long_To_RGB_List b_Color(), Color
 
     With b_Rect
-        .bottom = Y + Height
+        .Bottom = Y + Height
         .Left = X
         .Right = X + Width
         .Top = Y
@@ -583,9 +595,9 @@ Public Sub Geometry_Create_Box(ByRef Verts() As TLVERTEX, _
     
     If Angle > 0 Then
         x_center = dest.Left + (dest.Right - dest.Left) / 2
-        y_center = dest.Top + (dest.bottom - dest.Top) / 2
+        y_center = dest.Top + (dest.Bottom - dest.Top) / 2
         
-        radius = Sqr((dest.Right - x_center) ^ 2 + (dest.bottom - y_center) ^ 2)
+        radius = Sqr((dest.Right - x_center) ^ 2 + (dest.Bottom - y_center) ^ 2)
         
         Temp = (dest.Right - x_center) / radius
         right_point = Atn(Temp / Sqr(-Temp * Temp + 1))
@@ -595,7 +607,7 @@ Public Sub Geometry_Create_Box(ByRef Verts() As TLVERTEX, _
     
     If Angle = 0 Then
         x_Cor = dest.Left
-        y_Cor = dest.bottom
+        y_Cor = dest.Bottom
     Else
         x_Cor = x_center + Cos(-left_point - Angle) * radius
         y_Cor = y_center - Sin(-left_point - Angle) * radius
@@ -603,7 +615,7 @@ Public Sub Geometry_Create_Box(ByRef Verts() As TLVERTEX, _
     End If
 
     If Textures_Width And Textures_Height Then
-        Verts(0) = Geometry_Create_TLVertex(x_Cor, y_Cor, 0, 1, RGB_List(0), 0, src.Left / Textures_Width, (src.bottom + 1) / Textures_Height)
+        Verts(0) = Geometry_Create_TLVertex(x_Cor, y_Cor, 0, 1, RGB_List(0), 0, src.Left / Textures_Width, (src.Bottom + 1) / Textures_Height)
     Else
         Verts(0) = Geometry_Create_TLVertex(x_Cor, y_Cor, 0, 1, RGB_List(0), 0, 0, 0)
 
@@ -627,7 +639,7 @@ Public Sub Geometry_Create_Box(ByRef Verts() As TLVERTEX, _
 
     If Angle = 0 Then
         x_Cor = dest.Right
-        y_Cor = dest.bottom
+        y_Cor = dest.Bottom
     Else
         x_Cor = x_center + Cos(-right_point - Angle) * radius
         y_Cor = y_center - Sin(-right_point - Angle) * radius
@@ -635,7 +647,7 @@ Public Sub Geometry_Create_Box(ByRef Verts() As TLVERTEX, _
     End If
 
     If Textures_Width And Textures_Height Then
-        Verts(2) = Geometry_Create_TLVertex(x_Cor, y_Cor, 0, 1, RGB_List(2), 0, (src.Right + 1) / Textures_Width, (src.bottom + 1) / Textures_Height)
+        Verts(2) = Geometry_Create_TLVertex(x_Cor, y_Cor, 0, 1, RGB_List(2), 0, (src.Right + 1) / Textures_Width, (src.Bottom + 1) / Textures_Height)
     Else
         Verts(2) = Geometry_Create_TLVertex(x_Cor, y_Cor, 0, 1, RGB_List(2), 0, 1, 0)
 
@@ -691,7 +703,7 @@ Public Sub Engine_ZoomIn()
     With MainScreenRect
         .Top = 0
         .Left = 0
-        .bottom = IIf(.bottom - 1 <= 367, .bottom, .bottom - 1)
+        .Bottom = IIf(.Bottom - 1 <= 367, .Bottom, .Bottom - 1)
         .Right = IIf(.Right - 1 <= 491, .Right, .Right - 1)
 
     End With
@@ -707,7 +719,7 @@ Public Sub Engine_ZoomOut()
     With MainScreenRect
         .Top = 0
         .Left = 0
-        .bottom = IIf(.bottom + 1 >= 459, .bottom, .bottom + 1)
+        .Bottom = IIf(.Bottom + 1 >= 459, .Bottom, .Bottom + 1)
         .Right = IIf(.Right + 1 >= 583, .Right, .Right + 1)
 
     End With
@@ -723,7 +735,7 @@ Public Sub Engine_ZoomNormal()
     With MainScreenRect
         .Top = 0
         .Left = 0
-        .bottom = ScreenHeight
+        .Bottom = ScreenHeight
         .Right = ScreenWidth
 
     End With
@@ -736,7 +748,7 @@ Public Function ZoomOffset(ByVal offset As Byte) As Single
     'Last Modify Date: 30/01/2011
     '**************************************************************
 
-    ZoomOffset = IIf((offset = 1), (ScreenHeight - MainScreenRect.bottom) / 2, (ScreenWidth - MainScreenRect.Right) / 2)
+    ZoomOffset = IIf((offset = 1), (ScreenHeight - MainScreenRect.Bottom) / 2, (ScreenWidth - MainScreenRect.Right) / 2)
     
 End Function
 
