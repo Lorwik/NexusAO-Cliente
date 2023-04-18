@@ -222,7 +222,6 @@ Public Type Char
     invisible As Boolean
     priv As Byte
     
-    Aura(1 To 4) As Aura
     ParticleIndex As Integer
 
 End Type

@@ -195,11 +195,10 @@ Private Sub Engine_Init_RenderStates()
     With DirectDevice
     
         .SetVertexShader D3DFVF_XYZRHW Or D3DFVF_TEX1 Or D3DFVF_DIFFUSE Or D3DFVF_SPECULAR
-        .SetRenderState D3DRS_LIGHTING, False
-        .SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA
-        .SetRenderState D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA
-        .SetRenderState D3DRS_ALPHABLENDENABLE, True
-        .SetRenderState D3DRS_POINTSIZE, Engine_FToDW(2)
+        Call .SetRenderState(D3DRS_LIGHTING, False)
+        Call .SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA)
+        Call .SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA)
+        Call .SetRenderState(D3DRS_ALPHABLENDENABLE, True)
         .SetTextureStageState 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE
         .SetRenderState D3DRS_POINTSPRITE_ENABLE, 1
         .SetRenderState D3DRS_POINTSCALE_ENABLE, 0
@@ -219,22 +218,18 @@ Public Sub Engine_DirectX8_End()
 
     Dim i As Byte
     
-    '   DeInit Lights
+    ' DeInit Lights
     Call DeInit_LightEngine
     
-    '   DeInit Auras
-    Call DeInit_Auras
-    
-    '   Clean Particles
+    ' Clean Particles
     For i = 1 To UBound(ParticleTexture)
-
         If Not ParticleTexture(i) Is Nothing Then Set ParticleTexture(i) = Nothing
     Next i
     
-    '   Clean Texture
+    ' Clean Texture
     DirectDevice.SetTexture 0, Nothing
 
-    '   Erase Data
+    ' Erase Data
     Erase MapData()
     Erase charlist()
     
@@ -266,7 +261,6 @@ Public Sub Engine_DirectX8_Aditional_Init()
 
     Call Engine_Long_To_RGB_List(Normal_RGBList(), -1)
 
-    Load_Auras
     Init_MeteoEngine
     Engine_Init_ParticleEngine
     
@@ -373,21 +367,6 @@ Public Function Engine_TPtoSPY(ByVal Y As Byte) As Long
 
     Engine_TPtoSPY = Engine_PixelPosY(Y - ((UserPos.Y - HalfWindowTileHeight) - Engine_Get_TileBuffer)) + OffsetCounterY - 272 + ((10 - TileBufferSize) * 32)
     
-End Function
-
-Private Function Engine_FToDW(f As Single) As Long
-
-    '*****************************************************************
-    'Converts a float to a D-Word, or in Visual Basic terms, a Single to a Long
-    'More info: http://www.vbgore.com/CommonCode.Particles.Effect_FToDW
-    '*****************************************************************
-    Dim buf As D3DXBuffer
-
-    'Converts a single into a long (Float to DWORD)
-    Set buf = DirectD3D8.CreateBuffer(4)
-    DirectD3D8.BufferSetData buf, 0, 4, 1, f
-    DirectD3D8.BufferGetData buf, 0, 4, 1, Effect_FToDW
-
 End Function
 
 Public Sub Engine_Draw_Box(ByVal X As Integer, _

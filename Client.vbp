@@ -84,7 +84,6 @@ Module=mDx8_Luces; CODIGO\mDx8_Luces.bas
 Module=mDx8_Engine; CODIGO\mDx8_Engine.bas
 Module=mDx8_Cuenta; CODIGO\mDx8_Cuenta.bas
 Module=mDx8_Clima; CODIGO\mDx8_Clima.bas
-Module=mDx8_Auras; CODIGO\mDx8_Auras.bas
 Module=mDx8_Ambiente; CODIGO\mDx8_Ambiente.bas
 Class=Particle; CODIGO\Particle.cls
 Class=ClsIniReader; CODIGO\ClsIniReader.cls

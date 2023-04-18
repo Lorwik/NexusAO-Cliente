@@ -952,7 +952,7 @@ Private Sub LoadButtons()
     
     Call cBotonLanzar.Initialize(CmdLanzar, GrhPath & "btnLanzar.jpg", GrhPath & "btnLanzar_Hov.jpg", GrhPath & "btnLanzar_press.jpg", Me)
     
-    Call cBotonLanzar.Initialize(cmdINFO, GrhPath & "btnInfo.jpg", GrhPath & "btnInfo_Hov.jpg", GrhPath & "btnInfo_press.jpg", Me)
+    Call cBotonLanzar.Initialize(cmdInfo, GrhPath & "btnInfo.jpg", GrhPath & "btnInfo_Hov.jpg", GrhPath & "btnInfo_press.jpg", Me)
     
     Call cBotonInventario.Initialize(btnInventario, GrhPath & "btnInventario.jpg", GrhPath & "btnInventario_Hov.jpg", GrhPath & "btnInventario_press.jpg", Me)
     
@@ -1878,7 +1878,7 @@ Private Sub btnInventario_Click()
 
     ' Desactivo controles de hechizo
     hlst.Visible = False
-    cmdINFO.Visible = False
+    cmdInfo.Visible = False
     CmdLanzar.Visible = False
     
     cmdMoverHechi(0).Visible = False
@@ -1896,7 +1896,7 @@ Private Sub btnHechizos_Click()
     
     ' Activo controles de hechizos
     hlst.Visible = True
-    cmdINFO.Visible = True
+    cmdInfo.Visible = True
     CmdLanzar.Visible = True
     
     cmdMoverHechi(0).Visible = True
