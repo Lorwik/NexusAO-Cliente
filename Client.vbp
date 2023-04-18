@@ -50,7 +50,6 @@ Form=CODIGO\frmCambiaMotd.frm
 Form=CODIGO\frmEligeAlineacion.frm
 Class=clsAudio; CODIGO\clsAudio.cls
 Class=clsGrapchicalInventory; CODIGO\clsGrapchicalInventory.cls
-Class=clsGuildDlg; CODIGO\clsGuildDlg.cls
 Module=ModAreas; CODIGO\ModAreas.bas
 Class=clsSurfaceManDyn; CODIGO\clsSurfaceManDyn.cls
 Class=clsSurfaceManager; CODIGO\clsSurfaceManager.cls

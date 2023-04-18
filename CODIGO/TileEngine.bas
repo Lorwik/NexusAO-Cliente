@@ -1827,8 +1827,6 @@ Sub ShowNextFrame(ByVal DisplayFormTop As Integer, _
         Call Dialogos.Render
         Call DibujarCartel
         
-        Call DialogosClanes.Draw
-        
         '     Calculamos los FPS y los mostramos
         Call Engine_Update_FPS
         

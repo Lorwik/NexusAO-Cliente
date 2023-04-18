@@ -27,28 +27,6 @@ Begin VB.Form frmOpciones
    ScaleWidth      =   322
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
-   Begin VB.TextBox txtCantMensajes 
-      Alignment       =   2  'Center
-      BackColor       =   &H00000000&
-      BorderStyle     =   0  'None
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Left            =   2340
-      MaxLength       =   1
-      TabIndex        =   2
-      Text            =   "5"
-      Top             =   2415
-      Width           =   255
-   End
    Begin MSComctlLib.Slider Slider1 
       Height          =   255
       Index           =   0
@@ -88,18 +66,6 @@ Begin VB.Form frmOpciones
       Height          =   225
       Left            =   435
       Top             =   3315
-      Width           =   210
-   End
-   Begin VB.Image imgChkPantalla 
-      Height          =   225
-      Left            =   1950
-      Top             =   2430
-      Width           =   210
-   End
-   Begin VB.Image imgChkConsola 
-      Height          =   225
-      Left            =   435
-      Top             =   2430
       Width           =   210
    End
    Begin VB.Image imgChkEfectosSonido 
@@ -241,26 +207,6 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
 
 End Sub
 
-Private Sub txtCantMensajes_Change()
-    txtCantMensajes.Text = Val(txtCantMensajes.Text)
-    
-    If txtCantMensajes.Text > 0 Then
-        DialogosClanes.CantidadDialogos = txtCantMensajes.Text
-    Else
-        txtCantMensajes.Text = 5
-
-    End If
-
-End Sub
-
-Private Sub imgChkConsola_Click()
-    DialogosClanes.Activo = False
-    
-    imgChkConsola.Picture = picCheckBox
-    Set imgChkPantalla.Picture = Nothing
-
-End Sub
-
 Private Sub imgChkEfectosSonido_Click()
 
     If loading Then Exit Sub
@@ -320,14 +266,6 @@ Private Sub imgChkNoMostrarNews_Click()
     
     imgChkNoMostrarNews.Picture = picCheckBox
     Set imgChkMostrarNews.Picture = Nothing
-
-End Sub
-
-Private Sub imgChkPantalla_Click()
-    DialogosClanes.Activo = True
-    
-    imgChkPantalla.Picture = picCheckBox
-    Set imgChkConsola.Picture = Nothing
 
 End Sub
 
@@ -484,15 +422,6 @@ Private Sub LoadUserConfig()
     bSoundEffectsActivated = Audio.SoundEffectsActivated
 
     If bSoundEffectsActivated Then imgChkEfectosSonido.Picture = picCheckBox
-    
-    txtCantMensajes.Text = CStr(DialogosClanes.CantidadDialogos)
-    
-    If DialogosClanes.Activo Then
-        imgChkPantalla.Picture = picCheckBox
-    Else
-        imgChkConsola.Picture = picCheckBox
-
-    End If
     
     If ClientSetup.bGuildNews Then
         imgChkMostrarNews.Picture = picCheckBox

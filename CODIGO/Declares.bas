@@ -38,8 +38,6 @@ Public Sonidos                                    As clsSoundMapas
 Public Movement_Speed                             As Single
 
 'Objetos públicos
-Public DialogosClanes                             As clsGuildDlg
-
 Public Dialogos                                   As clsDialogs
 
 Public Audio                                      As clsAudio

@@ -22,12 +22,10 @@ Public Type tSetupMods
     bSound      As Boolean
     MusicVolume As Byte
     SoundVolume As Byte
+    bSoundEffects As Boolean
     
     ' GUILD
-    bSoundEffects As Boolean
     bGuildNews  As Boolean ' 11/19/09
-    bGldMsgConsole As Boolean
-    bCantMsgs   As Byte
     
     ' OTROS
     MostrarTips As Boolean
@@ -91,15 +89,9 @@ Public Sub LeerConfiguracion()
 
             ' GUILD
             .bGuildNews = CBool(Lector.GetValue("GUILD", "News"))
-            .bGldMsgConsole = CBool(Lector.GetValue("GUILD", "Messages"))
-            .bCantMsgs = CByte(Lector.GetValue("GUILD", "MaxMessages"))
             
             ' OTROS
             .MostrarTips = CBool(Lector.GetValue("OTHER", "MOSTRAR_TIPS"))
-
-            Set DialogosClanes = New clsGuildDlg
-            DialogosClanes.Activo = Not .bGldMsgConsole
-            DialogosClanes.CantidadDialogos = .bCantMsgs
 
         End With
         

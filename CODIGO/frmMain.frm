@@ -126,12 +126,6 @@ Begin VB.Form frmMain
       _ExtentY        =   741
       _Version        =   393216
    End
-   Begin VB.Timer Second 
-      Enabled         =   0   'False
-      Interval        =   1050
-      Left            =   5820
-      Top             =   2490
-   End
    Begin VB.Timer SonidosMapas 
       Interval        =   20000
       Left            =   5340
@@ -149,7 +143,6 @@ Begin VB.Form frmMain
       _ExtentY        =   3043
       _Version        =   393217
       BackColor       =   0
-      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       DisableNoScroll =   -1  'True
@@ -1496,12 +1489,6 @@ Private Sub SendTxt_KeyUp(KeyCode As Integer, Shift As Integer)
 
 End Sub
 
-Private Sub Second_Timer()
-
-    If Not DialogosClanes Is Nothing Then DialogosClanes.PassTimer
-
-End Sub
-
 '[END]'
 
 ''''''''''''''''''''''''''''''''''''''
@@ -2024,8 +2011,6 @@ End Sub
         'Clean input and output buffers
         Call incomingData.ReadASCIIStringFixed(incomingData.length)
         Call outgoingData.ReadASCIIStringFixed(outgoingData.length)
-    
-        Second.Enabled = True
 
         Select Case EstadoLogin
 

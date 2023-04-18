@@ -945,7 +945,6 @@ Sub Main()
         
     'Set the dialog's font
     Dialogos.Font = frmMain.Font
-    DialogosClanes.Font = frmMain.Font
     
     lFrameTimer = GetTickCount
         
@@ -1376,8 +1375,6 @@ Public Sub CleanDialogs()
     'Clean console and dialogs
     frmMain.RecTxt.Text = vbNullString
     
-    Call DialogosClanes.RemoveDialogs
-    
     Call Dialogos.RemoveAllDialogs
 
 End Sub
@@ -1406,7 +1403,6 @@ Public Sub CloseClient()
     Set CustomKeys = Nothing
     Set SurfaceDB = Nothing
     Set Dialogos = Nothing
-    Set DialogosClanes = Nothing
     Set Audio = Nothing
     Set Inventario = Nothing
     Set MainTimer = Nothing
@@ -1529,8 +1525,7 @@ End Function
 
 Public Sub ResetAllInfo()
     
-    ' Disable timers
-    frmMain.Second.Enabled = False
+
     Connected = False
     
     'Unload all forms except frmMain, frmConnect and frmCrearPersonaje
@@ -1538,11 +1533,8 @@ Public Sub ResetAllInfo()
 
     For Each frm In Forms
 
-        If frm.name <> frmMain.name And frm.name <> frmConnect.name And frm.name <> frmCrearPersonaje.name Then
-            
+        If frm.name <> frmMain.name And frm.name <> frmConnect.name And frm.name <> frmCrearPersonaje.name Then _
             Unload frm
-
-        End If
 
     Next
     
