@@ -13,7 +13,7 @@ Public Type tSetupMods
     UsarSombras As Boolean
     ParticleEngine As Boolean
     vSync As Boolean
-    Aceleracion As Byte
+    OverrideVertexProcess As Byte
     LimiteFPS As Boolean
 
     
@@ -78,7 +78,7 @@ Public Sub LeerConfiguracion()
             .UsarSombras = CBool(Lector.GetValue("VIDEO", "Sombras"))
             .ParticleEngine = CBool(Lector.GetValue("VIDEO", "ParticleEngine"))
             .LimiteFPS = CBool(Lector.GetValue("VIDEO", "LimitarFPS"))
-            .Aceleracion = CByte(Lector.GetValue("VIDEO", "Aceleracion"))
+            .OverrideVertexProcess = CByte(Lector.GetValue("VIDEO", "VertexProcessingOverride"))
         
             ' AUDIO
             .bMusic = CBool(Lector.GetValue("AUDIO", "Music"))

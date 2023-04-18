@@ -42,9 +42,9 @@ Public vbQuadIdx             As DxVBLibA.Direct3DVertexBuffer8
 
 Dim temp_verts(3)            As TLVERTEX
 
-Private OffsetCounterX       As Single
+Public OffsetCounterX        As Single
 
-Private OffsetCounterY       As Single
+Public OffsetCounterY        As Single
     
 Public WeatherFogX1          As Single
 
@@ -301,9 +301,9 @@ Private WindowTileWidth        As Integer
 
 Private WindowTileHeight       As Integer
 
-Private HalfWindowTileWidth    As Integer
+Public HalfWindowTileWidth     As Integer
 
-Private HalfWindowTileHeight   As Integer
+Public HalfWindowTileHeight    As Integer
 
 'Offset del desde 0,0 del main view
 Private MainViewTop            As Integer

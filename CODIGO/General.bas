@@ -1032,12 +1032,12 @@ Private Sub LoadInitialConfig()
     Call AddtoRichTextBox(frmCargando.status, "Iniciando motor gráfico... ", 255, 255, 255, True, False, True)
     
     ' Iniciamos el Engine de DirectX 8
-    If Not Engine_DirectX8_Init Then Call CloseClient
+    Call Engine_DirectX8_Init
           
     ' Tile Engine
     If Not InitTileEngine(frmMain.hwnd, 32, 32, 8, 8) Then Call CloseClient
         
-    Engine_DirectX8_Aditional_Init
+    Call Engine_DirectX8_Aditional_Init
     
     Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
     
