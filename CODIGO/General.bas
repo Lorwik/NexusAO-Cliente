@@ -248,16 +248,6 @@ Public Sub RefreshAllChars()
 
 End Sub
 
-Sub SaveGameini()
-    'Grabamos los datos del usuario en el Game.ini
-    Config_Inicio.name = "BetaTester"
-    Config_Inicio.Password = "DammLamers"
-    Config_Inicio.Puerto = UserPort
-    
-    Call EscribirGameIni(Config_Inicio)
-
-End Sub
-
 Function AsciiValidos(ByVal cad As String) As Boolean
 
     Dim car As Byte
@@ -390,8 +380,6 @@ Sub SetConnected()
     '*****************************************************************
     'Set Connected
     Connected = True
-    
-    Call SaveGameini
     
     'Unload the connect form
     Unload frmCrearPersonaje
@@ -896,14 +884,7 @@ End Function
 Sub Main()
     Call WriteClientVer
     
-    'Load config file
-    If FileExist(App.path & "\init\Inicio.con", vbNormal) Then
-        Config_Inicio = LeerGameIni()
-
-    End If
-    
-    'Load ao.dat config file
-    Call LoadClientSetup
+    Call modCarga.LeerConfiguracion
     
     Call modCompression.GenerateContra(vbNullString, 0) ' 0 = Graficos.AO
     
@@ -942,10 +923,8 @@ Sub Main()
 
     MD5HushYo = "0123456789abcdef"  'We aren't using a real MD5
     
-    tipf = Config_Inicio.tip
-    
     'Set resolution BEFORE the loading form is displayed, therefore it will be centered.
-    Call Resolution.SetResolution
+    Call Resolution.SetResolution(1024, 768)
     
     ' Load constants, classes, flags, graphics..
     LoadInitialConfig
@@ -1030,13 +1009,6 @@ Private Sub LoadInitialConfig()
     ' Initialize FONTTYPES
     Call Protocol.InitFonts
     
-    With frmConnect
-        .txtNombre = Config_Inicio.name
-        .txtNombre.SelStart = 0
-        .txtNombre.SelLength = Len(.txtNombre)
-
-    End With
-    
     UserMap = 1
     
     ' Mouse Pointer (Loaded before opening any form with buttons in it)
@@ -1083,14 +1055,20 @@ Private Sub LoadInitialConfig()
     '#############
     ' DIRECT SOUND
     Call AddtoRichTextBox(frmCargando.status, "Iniciando DirectSound... ", 255, 255, 255, True, False, True)
+    
     ' Inicializamos el sonido
-    Call Audio.Initialize(DirectX, frmMain.hwnd, App.path & "\" & Config_Inicio.DirSonidos & "\", App.path & "\" & Config_Inicio.DirMusica & "\")
-    ' Enable / Disable audio
-    Audio.MusicActivated = Not ClientSetup.bNoMusic
-    Audio.SoundActivated = Not ClientSetup.bNoSound
-    Audio.SoundEffectsActivated = Not ClientSetup.bNoSoundEffects
+    Call Audio.Initialize(DirectX, frmMain.hwnd, App.path & "\Wav\", App.path & "\Midi\")
+    
+    'Enable / Disable audio
+    Audio.MusicActivated = ClientSetup.bMusic
+    Audio.SoundActivated = ClientSetup.bSound
+    Audio.SoundEffectsActivated = ClientSetup.bSoundEffects
+    Audio.MusicVolume = ClientSetup.MusicVolume
+    Audio.SoundVolume = ClientSetup.SoundVolume
+    
     ' Inicializamos el inventario gráfico
     Call Inventario.Initialize(DirectD3D8, frmMain.PicInv, MAX_INVENTORY_SLOTS)
+    
     'Call Audio.MusicMP3Play(App.path & "\MP3\" & MP3_Inicio & ".mp3")
     Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
     
@@ -1326,60 +1304,6 @@ error:
 
 End Sub
 
-Private Sub LoadClientSetup()
-
-    '**************************************************************
-    'Author: Juan Martín Sotuyo Dodero (Maraxus)
-    'Last Modify Date: 11/19/09
-    '11/19/09: Pato - Is optional show the frmGuildNews form
-    '**************************************************************
-    Dim fHandle As Integer
-    
-    If FileExist(App.path & "\init\ao.dat", vbArchive) Then
-        fHandle = FreeFile
-        
-        Open App.path & "\init\ao.dat" For Binary Access Read Lock Write As fHandle
-        Get fHandle, , ClientSetup
-        Close fHandle
-    Else
-        'Use dynamic by default
-        ClientSetup.bDinamic = True
-
-    End If
-    
-    NoRes = ClientSetup.bNoRes
-    
-    ClientSetup.bGuildNews = Not ClientSetup.bGuildNews
-    Set DialogosClanes = New clsGuildDlg
-    DialogosClanes.Activo = Not ClientSetup.bGldMsgConsole
-    DialogosClanes.CantidadDialogos = ClientSetup.bCantMsgs
-
-End Sub
-
-Private Sub SaveClientSetup()
-
-    '**************************************************************
-    'Author: Torres Patricio (Pato)
-    'Last Modify Date: 03/11/10
-    '
-    '**************************************************************
-    Dim fHandle As Integer
-    
-    fHandle = FreeFile
-    
-    ClientSetup.bNoMusic = Not Audio.MusicActivated
-    ClientSetup.bNoSound = Not Audio.SoundActivated
-    ClientSetup.bNoSoundEffects = Not Audio.SoundEffectsActivated
-    ClientSetup.bGuildNews = Not ClientSetup.bGuildNews
-    ClientSetup.bGldMsgConsole = Not DialogosClanes.Activo
-    ClientSetup.bCantMsgs = DialogosClanes.CantidadDialogos
-    
-    Open App.path & "\init\ao.dat" For Binary As fHandle
-    Put fHandle, , ClientSetup
-    Close fHandle
-
-End Sub
-
 Private Sub InicializarNombres()
     '**************************************************************
     'Author: Juan Martín Sotuyo Dodero (Maraxus)
@@ -1464,19 +1388,18 @@ Public Sub CloseClient()
     'Last Modify Date: 8/14/2007
     'Frees all used resources, cleans up and leaves
     '**************************************************************
+    
     ' Allow new instances of the client to be opened
     Call PrevInstance.ReleaseInstance
     
     EngineRun = False
-    frmCargando.Show
-    Call AddtoRichTextBox(frmCargando.status, "Liberando recursos...", 0, 0, 0, 0, 0, 0)
     
     Call Resolution.ResetResolution
     
     'Stop tile engine
     Call Engine_DirectX8_End
     
-    Call SaveClientSetup
+    'TODO// Guardar configuracion
     
     'Destruimos los objetos públicos creados
     Set CustomMessages = Nothing
@@ -1492,9 +1415,9 @@ Public Sub CloseClient()
     
     Call UnloadAllForms
     
-    'Actualizar tip
-    Config_Inicio.tip = tipf
-    Call EscribirGameIni(Config_Inicio)
+    'Si se cambio la resolucion, la reseteamos.
+    If ResolucionCambiada Then Resolution.ResetResolution
+    
     End
 
 End Sub
@@ -1605,9 +1528,6 @@ Public Function ForumAlignment(ByVal yForumType As Byte) As Byte
 End Function
 
 Public Sub ResetAllInfo()
-    
-    ' Save config.ini
-    SaveGameini
     
     ' Disable timers
     frmMain.Second.Enabled = False

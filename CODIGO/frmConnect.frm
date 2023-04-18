@@ -131,6 +131,7 @@ Begin VB.Form frmConnect
       Width           =   3045
    End
    Begin VB.Label version 
+      Alignment       =   1  'Right Justify
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "Label1"
@@ -143,11 +144,11 @@ Begin VB.Form frmConnect
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H000000FF&
+      ForeColor       =   &H00FFFFFF&
       Height          =   195
-      Left            =   240
+      Left            =   14610
       TabIndex        =   3
-      Top             =   240
+      Top             =   11130
       Width           =   555
    End
 End
@@ -255,8 +256,6 @@ End Sub
 
 Private Sub Form_Load()
     EngineRun = False
-
-    PortTxt.Text = Config_Inicio.Puerto
  
     '[CODE]:MatuX
     '

@@ -2,7 +2,7 @@ Attribute VB_Name = "Resolution"
 '**************************************************************
 ' Resolution.bas - Performs resolution changes.
 '
-' Designed and implemented by Juan Martín Sotuyo Dodero (Maraxus)
+' Designed and implemented by Juan MartÃ­n Sotuyo Dodero (Maraxus)
 ' (juansotuyo@gmail.com)
 '**************************************************************
 
@@ -22,41 +22,35 @@ Attribute VB_Name = "Resolution"
 
 ''
 'Handles all incoming / outgoing packets for client - server communications
-'The binary prtocol here used was designed by Juan Martín Sotuyo Dodero.
+'The binary prtocol here used was designed by Juan MartÃ­n Sotuyo Dodero.
 'This is the first time it's used in Alkon, though the second time it's coded.
 'This implementation has several enhacements from the first design.
 '
 ' @file     Resolution.bas
-' @author   Juan Martín Sotuyo Dodero (Maraxus) juansotuyo@gmail.com
+' @author   Juan MartÃ­n Sotuyo Dodero (Maraxus) juansotuyo@gmail.com
 ' @version  1.1.0
 ' @date     20080329
 
 '**************************************************************************
 ' - HISTORY
-'       v1.0.0  -   Initial release ( 2007/08/14 - Juan Martín Sotuyo Dodero )
-'       v1.1.0  -   Made it reset original depth and frequency at exit ( 2008/03/29 - Juan Martín Sotuyo Dodero )
+'       v1.0.0  -   Initial release ( 2007/08/14 - Juan MartÃ­n Sotuyo Dodero )
+'       v1.1.0  -   Made it reset original depth and frequency at exit ( 2008/03/29 - Juan MartÃ­n Sotuyo Dodero )
 '**************************************************************************
 
 Option Explicit
 
-Private Const CCDEVICENAME          As Long = 32
+Public ResolucionCambiada As Boolean        ' Se cambio la resolucion?
 
-Private Const CCFORMNAME            As Long = 32
-
-Private Const DM_BITSPERPEL         As Long = &H40000
-
-Private Const DM_PELSWIDTH          As Long = &H80000
-
-Private Const DM_PELSHEIGHT         As Long = &H100000
-
-Private Const DM_DISPLAYFREQUENCY   As Long = &H400000
-
-Private Const CDS_TEST              As Long = &H4
-
+Private Const CCDEVICENAME As Long = 32
+Private Const CCFORMNAME As Long = 32
+Private Const DM_BITSPERPEL As Long = &H40000
+Private Const DM_PELSWIDTH As Long = &H80000
+Private Const DM_PELSHEIGHT As Long = &H100000
+Private Const DM_DISPLAYFREQUENCY As Long = &H400000
+Private Const CDS_TEST As Long = &H4
 Private Const ENUM_CURRENT_SETTINGS As Long = -1
 
 Private Type typDevMODE
-
     dmDeviceName       As String * CCDEVICENAME
     dmSpecVersion      As Integer
     dmDriverVersion    As Integer
@@ -83,113 +77,109 @@ Private Type typDevMODE
     dmPelsHeight       As Long
     dmDisplayFlags     As Long
     dmDisplayFrequency As Long
-
 End Type
 
+Private MiDevM As typDevMODE
+
 Private oldResHeight As Long
-
-Private oldResWidth  As Long
-
-Private oldDepth     As Integer
-
+Private oldResWidth As Long
+Private oldDepth As Integer
 Private oldFrequency As Long
 
-Private bNoResChange As Boolean
+Private Declare Function EnumDisplaySettings Lib "user32" Alias "EnumDisplaySettingsA" (ByVal lpszDeviceName As Long, ByVal iModeNum As Long, lptypDevMode As Any) As Boolean
+Private Declare Function ChangeDisplaySettings Lib "user32" Alias "ChangeDisplaySettingsA" (lptypDevMode As Any, ByVal dwFlags As Long) As Long
 
-Private Declare Function EnumDisplaySettings _
-                Lib "user32" _
-                Alias "EnumDisplaySettingsA" (ByVal lpszDeviceName As Long, _
-                                              ByVal iModeNum As Long, _
-                                              lptypDevMode As Any) As Boolean
-
-Private Declare Function ChangeDisplaySettings _
-                Lib "user32" _
-                Alias "ChangeDisplaySettingsA" (lptypDevMode As Any, _
-                                                ByVal dwFlags As Long) As Long
-
-'TODO : Change this to not depend on any external public variable using args instead!
-
-Public Sub SetResolution()
-    '***************************************************
+Public Sub SetResolution(ByRef newWidth As Integer, ByRef newHeight As Integer)
+    '**********************************************************************************************************************
     'Autor: Unknown
-    'Last Modification: 03/29/08
+    'Last Modification: 22/04/2019
     'Changes the display resolution if needed.
-    'Last Modified By: Juan Martín Sotuyo Dodero (Maraxus)
+    'Last Modified By: Jopi
     ' 03/29/2008: Maraxus - Retrieves current settings storing display depth and frequency for proper restoration.
-    '***************************************************
-
-    Dim lRes              As Long
-
-    Dim MidevM            As typDevMODE
-
-    Dim CambiarResolucion As Boolean
-   
-    lRes = EnumDisplaySettings(0, ENUM_CURRENT_SETTINGS, MidevM)
-   
+    ' 22/04/2019: Jopi - Arreglado "cambio" de resolucion al elegir "NO".
+    ' 22/04/2019: Jopi - Nuevos parametros newWidth y newHeight para especificar la resolucion a cambiar, evitando el hardcodeo.
+    ' 21/04/2020: Recox - Arreglo el problema de que si solo tengo Width o Heigth en 1024 o 768 no me deja cambiar la resolucion a pantalla completa .
+    '**********************************************************************************************************************
+    
+    ' Obtenemos los parametros actuales de la resolucion
+    Dim lRes As Long: lRes = EnumDisplaySettings(0, ENUM_CURRENT_SETTINGS, MiDevM)
+    
+    'If ClientSetup.bNoRes Then Exit Sub
+    
+    ' Obtenemos la resolucion original.
     oldResWidth = Screen.Width \ Screen.TwipsPerPixelX
     oldResHeight = Screen.Height \ Screen.TwipsPerPixelY
-   
-    If oldResWidth <> 800 Or oldResHeight <> 600 Then
-        If MsgBox("¿Desea jugar en pantalla completa?", vbYesNo, "Cambio de Resolución") = vbYes Then
+    
+    ' Chequeo si la resolucion a cambiar es la misma que la original.
+    If oldResWidth <> newWidth Or oldResHeight <> newHeight Then
+
+        ' Si no es igual, pregunto si quiere cambiarla.
+        ' MsgBox(JsonLanguage.item("PANTALLA_COMPLETA").item("TEXTO"), vbYesNo, "Argentum Online Libre") = vbYes
+        If ClientSetup.bFullScreen Then
+                        
+            ' Establezco los parametros para realizar el cambio
+            With MiDevM
+                .dmBitsPerPel = 32
+                .dmFields = DM_PELSWIDTH Or DM_PELSHEIGHT Or DM_BITSPERPEL
+                .dmPelsWidth = newWidth
+                .dmPelsHeight = newHeight
+                oldDepth = .dmBitsPerPel
+                oldFrequency = .dmDisplayFrequency
+            End With
+            
+            ' Cambio la resolucion
+            lRes = ChangeDisplaySettings(MiDevM, CDS_TEST)
+
+            ' Se cambio la resolucion
+            ResolucionCambiada = True
+
+            ' Maximizo la vantana al final por que despues se va de la funcion. (Recox)
             frmMain.WindowState = vbMaximized
 
-            With MidevM
-                'oldDepth = .dmBitsPerPel
-                oldFrequency = .dmDisplayFrequency
-         
-                .dmFields = DM_PELSWIDTH Or DM_PELSHEIGHT Or DM_BITSPERPEL
-                .dmPelsWidth = 800
-                .dmPelsHeight = 600
-
-                '.dmBitsPerPel = 16
-            End With
-     
-            lRes = ChangeDisplaySettings(MidevM, CDS_TEST)
-                        
         Else
-            bNoResChange = True
-            MidevM.dmFields = DM_BITSPERPEL
-            'MidevM.dmBitsPerPel = 16
-            lRes = ChangeDisplaySettings(MidevM, CDS_TEST)
-            frmMain.WindowState = vbNormal
                         
-        End If
+            ' No se cambio la resolucion
+            ResolucionCambiada = False
 
+            ' Maximizo la vantana
+            frmMain.WindowState = vbNormal
+
+        End If
+        
     End If
   
-    CambiarResolucion = (oldResWidth < 800 Or oldResHeight < 600)
-
 End Sub
 
 Public Sub ResetResolution()
 
-    '***************************************************
+    '*************************************************************************************************************
     'Autor: Unknown
-    'Last Modification: 03/29/08
+    'Last Modification: 22/04/2019
     'Changes the display resolution if needed.
-    'Last Modified By: Juan Martín Sotuyo Dodero (Maraxus)
+    'Last Modified By: Jopi
     ' 03/29/2008: Maraxus - Properly restores display depth and frequency.
-    '***************************************************
-    Dim typDevM As typDevMODE
-
-    Dim lRes    As Long
+    ' 22/04/2019: Jopi - No se cambiaba la resolucion al llamar al Sub CloseClient estando en pantalla completa.
+    '*************************************************************************************************************
     
-    If Not bNoResChange Then
+    ' Obtenemos los parametros actuales de la resolucion
+    Dim lRes As Long: lRes = EnumDisplaySettings(0, ENUM_CURRENT_SETTINGS, MiDevM)
+ 
+    ' Establezco los parametros para realizar el cambio
+    With MiDevM
+        .dmFields = DM_PELSWIDTH And DM_PELSHEIGHT And DM_BITSPERPEL And DM_DISPLAYFREQUENCY
+        .dmPelsWidth = oldResWidth
+        .dmPelsHeight = oldResHeight
+        .dmBitsPerPel = oldDepth
+        .dmDisplayFrequency = oldFrequency
+
+    End With
+        
+    ' Cambio la resolucion
+    lRes = ChangeDisplaySettings(MiDevM, CDS_TEST)
     
-        lRes = EnumDisplaySettings(0, ENUM_CURRENT_SETTINGS, typDevM)
-        
-        With typDevM
-            .dmFields = DM_PELSWIDTH Or DM_PELSHEIGHT Or DM_BITSPERPEL Or DM_DISPLAYFREQUENCY
-            .dmPelsWidth = oldResWidth
-            .dmPelsHeight = oldResHeight
-            .dmBitsPerPel = oldDepth
-            .dmDisplayFrequency = oldFrequency
-
-        End With
-        
-        lRes = ChangeDisplaySettings(typDevM, CDS_TEST)
-
-    End If
-
+    ' Dejo la variable global en FALSE para evitar errores.
+    ResolucionCambiada = False
+    
 End Sub
+
 
