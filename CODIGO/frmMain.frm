@@ -3,6 +3,8 @@ Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "Richtx32.ocx"
 Object = "{33101C00-75C3-11CF-A8A0-444553540000}#1.0#0"; "CSWSK32.OCX"
 Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "MSWINSCK.OCX"
 Begin VB.Form frmMain 
+   Appearance      =   0  'Flat
+   BackColor       =   &H80000005&
    BorderStyle     =   0  'None
    ClientHeight    =   11505
    ClientLeft      =   360
@@ -10,6 +12,8 @@ Begin VB.Form frmMain
    ClientWidth     =   15360
    ClipControls    =   0   'False
    ControlBox      =   0   'False
+   DrawMode        =   1  'Blackness
+   DrawStyle       =   6  'Inside Solid
    BeginProperty Font 
       Name            =   "Tahoma"
       Size            =   8.25
@@ -19,6 +23,7 @@ Begin VB.Form frmMain
       Italic          =   0   'False
       Strikethrough   =   0   'False
    EndProperty
+   FontTransparent =   0   'False
    ForeColor       =   &H00000000&
    Icon            =   "frmMain.frx":0000
    KeyPreview      =   -1  'True
@@ -195,7 +200,7 @@ Begin VB.Form frmMain
          Top             =   6240
          Visible         =   0   'False
          Width           =   1575
-         Begin ARGENTUM.uAOButton uAOMenu 
+         Begin NexusAOClient.uAOButton uAOMenu 
             Height          =   255
             Index           =   0
             Left            =   90
@@ -222,7 +227,7 @@ Begin VB.Form frmMain
                Strikethrough   =   0   'False
             EndProperty
          End
-         Begin ARGENTUM.uAOButton uAOMenu 
+         Begin NexusAOClient.uAOButton uAOMenu 
             Height          =   255
             Index           =   1
             Left            =   90
@@ -249,7 +254,7 @@ Begin VB.Form frmMain
                Strikethrough   =   0   'False
             EndProperty
          End
-         Begin ARGENTUM.uAOButton uAOMenu 
+         Begin NexusAOClient.uAOButton uAOMenu 
             Height          =   255
             Index           =   2
             Left            =   90
@@ -276,7 +281,7 @@ Begin VB.Form frmMain
                Strikethrough   =   0   'False
             EndProperty
          End
-         Begin ARGENTUM.uAOButton uAOMenu 
+         Begin NexusAOClient.uAOButton uAOMenu 
             Height          =   255
             Index           =   3
             Left            =   90
@@ -303,7 +308,7 @@ Begin VB.Form frmMain
                Strikethrough   =   0   'False
             EndProperty
          End
-         Begin ARGENTUM.uAOButton uAOMenu 
+         Begin NexusAOClient.uAOButton uAOMenu 
             Height          =   255
             Index           =   4
             Left            =   90
@@ -330,7 +335,7 @@ Begin VB.Form frmMain
                Strikethrough   =   0   'False
             EndProperty
          End
-         Begin ARGENTUM.uAOButton uAOMenu 
+         Begin NexusAOClient.uAOButton uAOMenu 
             Height          =   255
             Index           =   5
             Left            =   90
@@ -357,7 +362,7 @@ Begin VB.Form frmMain
                Strikethrough   =   0   'False
             EndProperty
          End
-         Begin ARGENTUM.uAOButton uAOMenu 
+         Begin NexusAOClient.uAOButton uAOMenu 
             Height          =   255
             Index           =   6
             Left            =   90
@@ -366,7 +371,7 @@ Begin VB.Form frmMain
             Width           =   1395
             _ExtentX        =   2461
             _ExtentY        =   450
-            TX              =   "Cerrar Menú"
+            TX              =   "Cerrar MenÃº"
             ENAB            =   -1  'True
             FCOL            =   16777215
             OCOL            =   16777215
@@ -817,12 +822,12 @@ Attribute VB_Exposed = False
 '
 '    Modified   :
 '--------------------------------------------------------------------------------
-'Argentum Online 0.11.6
+'Nexus AO mod Argentum Online 0.13
 '
-'Copyright (C) 2002 Márquez Pablo Ignacio
+'Copyright (C) 2002 MÃ¡rquez Pablo Ignacio
 'Copyright (C) 2002 Otto Perez
 'Copyright (C) 2002 Aaron Perkins
-'Copyright (C) 2002 Matías Fernando Pequeño
+'Copyright (C) 2002 MatÃ­as Fernando PequeÃ±o
 '
 'This program is free software; you can redistribute it and/or modify
 'it under the terms of the Affero General Public License;
@@ -836,7 +841,7 @@ Attribute VB_Exposed = False
 'You should have received a copy of the Affero General Public License
 'along with this program; if not, you can find it at http://www.affero.org/oagpl.html
 '
-'Argentum Online is based on Baronsoft's VB6 Online RPG
+'Nexus AO mod Argentum Online is based on Baronsoft's VB6 Online RPG
 'You can contact the original creator of ORE at aaron@baronsoft.com
 'for more information about ORE please visit http://www.baronsoft.com/
 '
@@ -844,10 +849,10 @@ Attribute VB_Exposed = False
 'You can contact me at:
 'morgolock@speedy.com.ar
 'www.geocities.com/gmorgolock
-'Calle 3 número 983 piso 7 dto A
+'Calle 3 nÃºmero 983 piso 7 dto A
 'La Plata - Pcia, Buenos Aires - Republica Argentina
-'Código Postal 1900
-'Pablo Ignacio Márquez
+'CÃ³digo Postal 1900
+'Pablo Ignacio MÃ¡rquez
 
 Option Explicit
 
@@ -919,6 +924,16 @@ Private Sub Form_Load()
     
     ' Detect links in console
     EnableURLDetect RecTxt.hwnd, Me.hwnd
+    
+    ' Seteamos el caption
+    Me.Caption = "Nexus AO"
+    
+    ' Removemos la barra de titulo pero conservando el caption para la barra de tareas
+    Call Form_RemoveTitleBar(Me)
+    
+    ' Reseteamos el tamanio de la ventana para que no queden bordes blancos
+    Me.Width = 15360
+    Me.Height = 11520
     
     CtrlMaskOn = False
 
@@ -1044,33 +1059,33 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
     'Autor: Unknown
     'Last Modification: 18/11/2010
     '18/11/2009: ZaMa - Ahora se pueden poner comandos en los mensajes personalizados (execpto guildchat y privados)
-    '18/11/2010: Amraphen - Agregué el handle correspondiente para las nuevas configuraciones de teclas (CTRL+0..9).
+    '18/11/2010: Amraphen - AgreguÃ© el handle correspondiente para las nuevas configuraciones de teclas (CTRL+0..9).
     '***************************************************
     
     If (Not SendTxt.Visible) Then
     
-        'Verificamos si se está presionando la tecla CTRL.
+        'Verificamos si se estÃ¡ presionando la tecla CTRL.
         If Shift = 2 Then
             If KeyCode >= vbKey0 And KeyCode <= vbKey9 Then
                 If KeyCode = vbKey0 Then
-                    'Si es CTRL+0 muestro la ventana de configuración de teclas.
+                    'Si es CTRL+0 muestro la ventana de configuraciÃ³n de teclas.
                     Call frmCustomKeys.Show(vbModal, Me)
                     
                 ElseIf KeyCode >= vbKey1 And KeyCode <= vbKey9 Then
 
-                    'Si es CTRL+1..9 cambio la configuración.
+                    'Si es CTRL+1..9 cambio la configuraciÃ³n.
                     If KeyCode - vbKey0 = CustomKeys.CurrentConfig Then Exit Sub
                     
                     CustomKeys.CurrentConfig = KeyCode - vbKey0
                     
                     Dim sMsg As String
                     
-                    sMsg = "¡Se ha cargado la configuración "
+                    sMsg = "Â¡Se ha cargado la configuraciÃ³n "
 
                     If CustomKeys.CurrentConfig = 0 Then
                         sMsg = sMsg & "default"
                     Else
-                        sMsg = sMsg & "perzonalizada número " & CStr(CustomKeys.CurrentConfig)
+                        sMsg = sMsg & "perzonalizada nÃºmero " & CStr(CustomKeys.CurrentConfig)
 
                     End If
 
@@ -1126,7 +1141,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
                     If UserEstado = 1 Then
 
                         With FontTypes(FontTypeNames.FONTTYPE_INFO)
-                            Call ShowConsoleMsg("¡¡Estás muerto!!", .Red, .Green, .Blue, .bold, .italic)
+                            Call ShowConsoleMsg("Â¡Â¡EstÃ¡s muerto!!", .Red, .Green, .Blue, .bold, .italic)
 
                         End With
 
@@ -1140,7 +1155,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
                     If UserEstado = 1 Then
 
                         With FontTypes(FontTypeNames.FONTTYPE_INFO)
-                            Call ShowConsoleMsg("¡¡Estás muerto!!", .Red, .Green, .Blue, .bold, .italic)
+                            Call ShowConsoleMsg("Â¡Â¡EstÃ¡s muerto!!", .Red, .Green, .Blue, .bold, .italic)
 
                         End With
 
@@ -1154,7 +1169,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
                     If UserEstado = 1 Then
 
                         With FontTypes(FontTypeNames.FONTTYPE_INFO)
-                            Call ShowConsoleMsg("¡¡Estás muerto!!", .Red, .Green, .Blue, .bold, .italic)
+                            Call ShowConsoleMsg("Â¡Â¡EstÃ¡s muerto!!", .Red, .Green, .Blue, .bold, .italic)
 
                         End With
 
@@ -1191,7 +1206,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 
         Else
             
-            'Evito que se muestren los mensajes personalizados cuando se cambie una configuración de teclas.
+            'Evito que se muestren los mensajes personalizados cuando se cambie una configuraciÃ³n de teclas.
             If Shift = 2 Then Exit Sub
             
             Select Case KeyCode
@@ -1239,7 +1254,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
             If UserEstado = 1 Then
 
                 With FontTypes(FontTypeNames.FONTTYPE_INFO)
-                    Call ShowConsoleMsg("¡¡Estás muerto!!", .Red, .Green, .Blue, .bold, .italic)
+                    Call ShowConsoleMsg("Â¡Â¡EstÃ¡s muerto!!", .Red, .Green, .Blue, .bold, .italic)
 
                 End With
 
@@ -1256,7 +1271,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
             If UserEstado = 1 Then
 
                 With FontTypes(FontTypeNames.FONTTYPE_INFO)
-                    Call ShowConsoleMsg("¡¡Estás muerto!!", .Red, .Green, .Blue, .bold, .italic)
+                    Call ShowConsoleMsg("Â¡Â¡EstÃ¡s muerto!!", .Red, .Green, .Blue, .bold, .italic)
 
                 End With
 
@@ -1281,7 +1296,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 
             End If
             
-            If frmCustomKeys.Visible Then Exit Sub 'Chequeo si está visible la ventana de configuración de teclas.
+            If frmCustomKeys.Visible Then Exit Sub 'Chequeo si estÃ¡ visible la ventana de configuraciÃ³n de teclas.
             
             Call WriteAttack
             
@@ -1389,12 +1404,12 @@ Private Sub mnuUsar_Click()
 End Sub
 
 Private Sub PicMH_Click()
-    Call AddtoRichTextBox(frmMain.RecTxt, "Auto lanzar hechizos. Utiliza esta habilidad para entrenar únicamente. Para activarlo/desactivarlo utiliza F7.", 255, 255, 255, False, False, True)
+    Call AddtoRichTextBox(frmMain.RecTxt, "Auto lanzar hechizos. Utiliza esta habilidad para entrenar Ãºnicamente. Para activarlo/desactivarlo utiliza F7.", 255, 255, 255, False, False, True)
 
 End Sub
 
 Private Sub Coord_Click()
-    Call AddtoRichTextBox(frmMain.RecTxt, "Estas coordenadas son tu ubicación en el mapa. Utiliza la letra L para corregirla si esta no se corresponde con la del servidor por efecto del Lag.", 255, 255, 255, False, False, True)
+    Call AddtoRichTextBox(frmMain.RecTxt, "Estas coordenadas son tu ubicaciÃ³n en el mapa. Utiliza la letra L para corregirla si esta no se corresponde con la del servidor por efecto del Lag.", 255, 255, 255, False, False, True)
 
 End Sub
 
@@ -1435,7 +1450,7 @@ Private Sub SendTxt_KeyDown(KeyCode As Integer, Shift As Integer)
             CustomMessages.Message(NroMsg) = SendTxt.Text
             
             With FontTypes(FontTypeNames.FONTTYPE_INFO)
-                Call ShowConsoleMsg("¡¡""" & SendTxt.Text & """ fue guardado como mensaje personalizado " & NroMsg + 1 & "!!", .Red, .Green, .Blue, .bold, .italic)
+                Call ShowConsoleMsg("Â¡Â¡""" & SendTxt.Text & """ fue guardado como mensaje personalizado " & NroMsg + 1 & "!!", .Red, .Green, .Blue, .bold, .italic)
 
             End With
             
@@ -1451,7 +1466,7 @@ ErrHandler:
     If Err.number = CustomMessages.InvalidMessageErrCode Then
 
         With FontTypes(FontTypeNames.FONTTYPE_INFO)
-            Call ShowConsoleMsg("El Mensaje es inválido. Modifiquelo por favor.", .Red, .Green, .Blue, .bold, .italic)
+            Call ShowConsoleMsg("El Mensaje es invÃ¡lido. Modifiquelo por favor.", .Red, .Green, .Blue, .bold, .italic)
 
         End With
 
@@ -1498,7 +1513,7 @@ Private Sub TirarItem()
     If UserEstado = 1 Then
 
         With FontTypes(FontTypeNames.FONTTYPE_INFO)
-            Call ShowConsoleMsg("¡¡Estás muerto!!", .Red, .Green, .Blue, .bold, .italic)
+            Call ShowConsoleMsg("Â¡Â¡EstÃ¡s muerto!!", .Red, .Green, .Blue, .bold, .italic)
 
         End With
 
@@ -1527,7 +1542,7 @@ Private Sub AgarrarItem()
     If UserEstado = 1 Then
 
         With FontTypes(FontTypeNames.FONTTYPE_INFO)
-            Call ShowConsoleMsg("¡¡Estás muerto!!", .Red, .Green, .Blue, .bold, .italic)
+            Call ShowConsoleMsg("Â¡Â¡EstÃ¡s muerto!!", .Red, .Green, .Blue, .bold, .italic)
 
         End With
 
@@ -1553,7 +1568,7 @@ Private Sub EquiparItem()
     If UserEstado = 1 Then
 
         With FontTypes(FontTypeNames.FONTTYPE_INFO)
-            Call ShowConsoleMsg("¡¡Estás muerto!!", .Red, .Green, .Blue, .bold, .italic)
+            Call ShowConsoleMsg("Â¡Â¡EstÃ¡s muerto!!", .Red, .Green, .Blue, .bold, .italic)
 
         End With
 
@@ -1573,7 +1588,7 @@ Private Sub cmdLanzar_Click()
         If UserEstado = 1 Then
 
             With FontTypes(FontTypeNames.FONTTYPE_INFO)
-                Call ShowConsoleMsg("¡¡Estás muerto!!", .Red, .Green, .Blue, .bold, .italic)
+                Call ShowConsoleMsg("Â¡Â¡EstÃ¡s muerto!!", .Red, .Green, .Blue, .bold, .italic)
 
             End With
 
@@ -1607,7 +1622,7 @@ Private Sub cmdINFO_Click()
 
         Dim Msj As String
      
-        If Index <> 0 Then Msj = "%%%%%%%%%%%% INFO DEL HECHIZO %%%%%%%%%%%%" & vbCrLf & "Nombre:" & Hechizos(Index).Nombre & vbCrLf & "Descripción:" & Hechizos(Index).Desc & vbCrLf & "Skill requerido: " & Hechizos(Index).SkillRequerido & " de magia." & vbCrLf & "Maná necesario: " & Hechizos(Index).ManaRequerida & vbCrLf & "Energía necesaria: " & Hechizos(Index).EnergiaRequerida & vbCrLf & "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+        If Index <> 0 Then Msj = "%%%%%%%%%%%% INFO DEL HECHIZO %%%%%%%%%%%%" & vbCrLf & "Nombre:" & Hechizos(Index).nombre & vbCrLf & "DescripciÃ³n:" & Hechizos(Index).Desc & vbCrLf & "Skill requerido: " & Hechizos(Index).SkillRequerido & " de magia." & vbCrLf & "ManÃ¡ necesario: " & Hechizos(Index).ManaRequerida & vbCrLf & "EnergÃ­a necesaria: " & Hechizos(Index).EnergiaRequerida & vbCrLf & "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
                                              
         Call ShowConsoleMsg(Msj, 210, 220, 220)
         
@@ -1697,7 +1712,7 @@ Private Sub MainViewPic_Click()
                         UsingSkill = 0
 
                         With FontTypes(FontTypeNames.FONTTYPE_TALK)
-                            Call AddtoRichTextBox(frmMain.RecTxt, "No puedes lanzar proyectiles tan rápido.", .Red, .Green, .Blue, .bold, .italic)
+                            Call AddtoRichTextBox(frmMain.RecTxt, "No puedes lanzar proyectiles tan rÃ¡pido.", .Red, .Green, .Blue, .bold, .italic)
 
                         End With
 
@@ -1712,7 +1727,7 @@ Private Sub MainViewPic_Click()
                             UsingSkill = 0
 
                             With FontTypes(FontTypeNames.FONTTYPE_TALK)
-                                Call AddtoRichTextBox(frmMain.RecTxt, "No puedes lanzar proyectiles tan rápido.", .Red, .Green, .Blue, .bold, .italic)
+                                Call AddtoRichTextBox(frmMain.RecTxt, "No puedes lanzar proyectiles tan rÃ¡pido.", .Red, .Green, .Blue, .bold, .italic)
 
                             End With
 
@@ -1730,7 +1745,7 @@ Private Sub MainViewPic_Click()
                                 UsingSkill = 0
 
                                 With FontTypes(FontTypeNames.FONTTYPE_TALK)
-                                    Call AddtoRichTextBox(frmMain.RecTxt, "No puedes lanzar hechizos tan rápido.", .Red, .Green, .Blue, .bold, .italic)
+                                    Call AddtoRichTextBox(frmMain.RecTxt, "No puedes lanzar hechizos tan rÃ¡pido.", .Red, .Green, .Blue, .bold, .italic)
 
                                 End With
 
@@ -1805,10 +1820,8 @@ Private Sub Form_DblClick()
     'Last Modify Date: 12/27/2007
     '12/28/2007: ByVal - Chequea que la ventana de comercio y boveda no este abierta al hacer doble clic a un comerciante, sobrecarga la lista de items.
     '**************************************************************
-    If Not MirandoForo And Not Comerciando Then 'frmComerciar.Visible And Not frmBancoObj.Visible Then
+    If Not MirandoForo And Not Comerciando Then _
         Call WriteDoubleClick(tX, tY)
-
-    End If
 
 End Sub
 
@@ -1959,7 +1972,7 @@ Private Sub SendTxt_Change()
     '**************************************************************
     'Author: Unknown
     'Last Modify Date: 3/06/2006
-    '3/06/2006: Maraxus - impedí se inserten caractéres no imprimibles
+    '3/06/2006: Maraxus - impedÃ­ se inserten caractÃ©res no imprimibles
     '**************************************************************
     If Len(SendTxt.Text) > 160 Then
         stxtbuffer = "Soy un cheater, avisenle a un gm"
@@ -2107,8 +2120,8 @@ Private Sub AbrirMenuViewPort()
                     m.SetMenuId 1
                     m.ListaInit 2, False
             
-                    If charlist(MapData(tX, tY).CharIndex).Nombre <> "" Then
-                        m.ListaSetItem 0, charlist(MapData(tX, tY).CharIndex).Nombre, True
+                    If charlist(MapData(tX, tY).CharIndex).nombre <> "" Then
+                        m.ListaSetItem 0, charlist(MapData(tX, tY).CharIndex).nombre, True
                     Else
                         m.ListaSetItem 0, "<NPC>", True
 
@@ -2222,7 +2235,7 @@ Private Sub uAOMenu_Click(Index As Integer)
             fMenu.Visible = Not fMenu.Visible
             Call ParseUserCommand("/SALIR")
             
-        Case 6 'Cerrar Menú
+        Case 6 'Cerrar MenÃº
             fMenu.Visible = Not fMenu.Visible
     End Select
     

@@ -16,7 +16,7 @@ Attribute VB_Exposed = False
 ' surfaces at startup, and never deallocating them.
 ' This grants high performance can use a lot of RAM.
 '
-' Developed by Maraxus (Juan Martín Sotuyo Dodero - juansotuyo@hotmail.com)
+' Developed by Maraxus (Juan MartÃ­n Sotuyo Dodero - juansotuyo@hotmail.com)
 ' Last Modify Date: 3/06/2006
 '**************************************************************
 
@@ -35,7 +35,7 @@ Attribute VB_Exposed = False
 'along with this program; if not, write to the Free Software
 'Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 '
-'Argentum Online is based on Baronsoft's VB6 Online RPG
+'Nexus AO mod Argentum Online is based on Baronsoft's VB6 Online RPG
 'You can contact the original creator of ORE at aaron@baronsoft.com
 'for more information about ORE please visit http://www.baronsoft.com/
 '**************************************************************
@@ -87,7 +87,7 @@ Private Declare Function SetDIBitsToDevice _
 Private Sub Class_Initialize()
 
     '**************************************************************
-    'Author: Juan Martín Sotuyo Dodero
+    'Author: Juan MartÃ­n Sotuyo Dodero
     'Last Modify Date: 3/06/2006
     '
     '**************************************************************
@@ -96,7 +96,7 @@ End Sub
 Private Sub Class_Terminate()
 
     '**************************************************************
-    'Author: Juan Martín Sotuyo Dodero
+    'Author: Juan MartÃ­n Sotuyo Dodero
     'Last Modify Date: 3/06/2006
     'Clean up
     '**************************************************************
@@ -120,7 +120,7 @@ Private Sub clsSurfaceManager_Initialize(ByRef DD As D3DX8, _
                                          ByVal graphicPath As String, _
                                          Optional ByVal maxMemoryUsageInMb As Long = -1&)
     '**************************************************************
-    'Author: Juan Martín Sotuyo Dodero
+    'Author: Juan MartÃ­n Sotuyo Dodero
     'Last Modify Date: 29/07/2012 - ^[GS]^
     '**************************************************************
     Set DirectD3D = DD
@@ -132,7 +132,7 @@ End Sub
 Private Property Get clsSurfaceManager_Surface(ByVal fileIndex As Long) As Direct3DTexture8
 
     '**************************************************************
-    'Author: Juan Martín Sotuyo Dodero
+    'Author: Juan MartÃ­n Sotuyo Dodero
     'Last Modify Date: 3/06/2006
     'Retrieves the requested texture
     '**************************************************************
@@ -162,7 +162,7 @@ Private Property Get clsSurfaceManager_Surface(ByVal fileIndex As Long) As Direc
     Exit Property
 
 ErrHandler:
-    MsgBox "Un error inesperado ocurrió a intentar cargar el recurso " & CStr(fileIndex) & ". & vbcrlf" & "Error: " & CStr(Err.number), vbOKOnly Or vbCritical Or vbExclamation, "Error"
+    MsgBox "Un error inesperado ocurriÃ³ a intentar cargar el recurso " & CStr(fileIndex) & ". & vbcrlf" & "Error: " & CStr(Err.number), vbOKOnly Or vbCritical Or vbExclamation, "Error"
     
     End
 

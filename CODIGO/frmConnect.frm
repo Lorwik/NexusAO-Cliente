@@ -156,12 +156,12 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'Argentum Online 0.11.6
+'Nexus AO mod Argentum Online 0.13
 '
-'Copyright (C) 2002 Márquez Pablo Ignacio
+'Copyright (C) 2002 MÃ¡rquez Pablo Ignacio
 'Copyright (C) 2002 Otto Perez
 'Copyright (C) 2002 Aaron Perkins
-'Copyright (C) 2002 Matías Fernando Pequeño
+'Copyright (C) 2002 MatÃ­as Fernando PequeÃ±o
 '
 'This program is free software; you can redistribute it and/or modify
 'it under the terms of the Affero General Public License;
@@ -175,7 +175,7 @@ Attribute VB_Exposed = False
 'You should have received a copy of the Affero General Public License
 'along with this program; if not, you can find it at http://www.affero.org/oagpl.html
 '
-'Argentum Online is based on Baronsoft's VB6 Online RPG
+'Nexus AO mod Argentum Online is based on Baronsoft's VB6 Online RPG
 'You can contact the original creator of ORE at aaron@baronsoft.com
 'for more information about ORE please visit http://www.baronsoft.com/
 '
@@ -183,17 +183,17 @@ Attribute VB_Exposed = False
 'You can contact me at:
 'morgolock@speedy.com.ar
 'www.geocities.com/gmorgolock
-'Calle 3 número 983 piso 7 dto A
+'Calle 3 nÃºmero 983 piso 7 dto A
 'La Plata - Pcia, Buenos Aires - Republica Argentina
-'Código Postal 1900
-'Pablo Ignacio Márquez
+'CÃ³digo Postal 1900
+'Pablo Ignacio MÃ¡rquez
 '
-'Matías Fernando Pequeño
+'MatÃ­as Fernando PequeÃ±o
 'matux@fibertel.com.ar
 'www.noland-studios.com.ar
 'Acoyte 678 Piso 17 Dto B
 'Capital Federal, Buenos Aires - Republica Argentina
-'Código Postal 1405
+'CÃ³digo Postal 1405
 
 Option Explicit
 
@@ -260,7 +260,7 @@ Private Sub Form_Load()
  
     '[CODE]:MatuX
     '
-    '  El código para mostrar la versión se genera acá para
+    '  El cÃ³digo para mostrar la versiÃ³n se genera acÃ¡ para
     ' evitar que por X razones luego desaparezca, como suele
     ' pasar a veces :)
     version.Caption = "v" & App.Major & "." & App.Minor & " Build: " & App.Revision
@@ -300,7 +300,7 @@ Private Sub CheckServers()
 
     If ServersRecibidos Then
         If Not IsIp(IPTxt) And CurServer <> 0 Then
-            If MsgBox("Atencion, está intentando conectarse a un servidor no oficial, NoLand Studios no se hace responsable de los posibles problemas que estos servidores presenten. ¿Desea continuar?", vbYesNo) = vbNo Then
+            If MsgBox("Atencion, estÃ¡ intentando conectarse a un servidor no oficial, NoLand Studios no se hace responsable de los posibles problemas que estos servidores presenten. Â¿Desea continuar?", vbYesNo) = vbNo Then
                 If CurServer <> 0 Then
                     IPTxt = ServersLst(CurServer).Ip
                     PortTxt = ServersLst(CurServer).Puerto

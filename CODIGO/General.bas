@@ -1,10 +1,10 @@
 Attribute VB_Name = "Mod_General"
-'Argentum Online 0.11.6
+'Nexus AO mod Argentum Online 0.13
 '
-'Copyright (C) 2002 M·rquez Pablo Ignacio
+'Copyright (C) 2002 M√°rquez Pablo Ignacio
 'Copyright (C) 2002 Otto Perez
 'Copyright (C) 2002 Aaron Perkins
-'Copyright (C) 2002 MatÌas Fernando PequeÒo
+'Copyright (C) 2002 Mat√≠as Fernando Peque√±o
 '
 'This program is free software; you can redistribute it and/or modify
 'it under the terms of the Affero General Public License;
@@ -18,7 +18,7 @@ Attribute VB_Name = "Mod_General"
 'You should have received a copy of the Affero General Public License
 'along with this program; if not, you can find it at http://www.affero.org/oagpl.html
 '
-'Argentum Online is based on Baronsoft's VB6 Online RPG
+'Nexus AO mod Argentum Online is based on Baronsoft's VB6 Online RPG
 'You can contact the original creator of ORE at aaron@baronsoft.com
 'for more information about ORE please visit http://www.baronsoft.com/
 '
@@ -26,10 +26,10 @@ Attribute VB_Name = "Mod_General"
 'You can contact me at:
 'morgolock@speedy.com.ar
 'www.geocities.com/gmorgolock
-'Calle 3 n˙mero 983 piso 7 dto A
+'Calle 3 n√∫mero 983 piso 7 dto A
 'La Plata - Pcia, Buenos Aires - Republica Argentina
-'CÛdigo Postal 1900
-'Pablo Ignacio M·rquez
+'C√≥digo Postal 1900
+'Pablo Ignacio M√°rquez
 
 Option Explicit
 
@@ -199,7 +199,7 @@ Sub AddtoRichTextBox(ByRef RichTextBox As RichTextBox, _
     'Text box MUST be multiline and have a 3D
     'apperance!
     'Pablo (ToxicWaste) 01/26/2007 : Now the list refeshes properly.
-    'Juan MartÌn Sotuyo Dodero (Maraxus) 03/29/2007 : Replaced ToxicWaste's code for extra performance.
+    'Juan Mart√≠n Sotuyo Dodero (Maraxus) 03/29/2007 : Replaced ToxicWaste's code for extra performance.
     '******************************************r
     With RichTextBox
 
@@ -269,7 +269,7 @@ Function AsciiValidos(ByVal cad As String) As Boolean
     For i = 1 To Len(cad)
         car = Asc(mid$(cad, i, 1))
         
-        If ((car < 97 Or car > 122) Or car = Asc("∫")) And (car <> 255) And (car <> 32) Then
+        If ((car < 97 Or car > 122) Or car = Asc("¬∫")) And (car <> 255) And (car <> 32) Then
             Exit Function
 
         End If
@@ -288,7 +288,7 @@ Function CheckUserData(ByVal checkemail As Boolean) As Boolean
     Dim CharAscii As Integer
     
     If checkemail And UserEmail = "" Then
-        MsgBox ("DirecciÛn de email invalida")
+        MsgBox ("Direcci√≥n de email invalida")
         Exit Function
 
     End If
@@ -303,7 +303,7 @@ Function CheckUserData(ByVal checkemail As Boolean) As Boolean
         CharAscii = Asc(mid$(UserPassword, LoopC, 1))
 
         If Not LegalCharacter(CharAscii) Then
-            MsgBox ("Password inv·lido. El caractÈr " & Chr$(CharAscii) & " no est· permitido.")
+            MsgBox ("Password inv√°lido. El caract√©r " & Chr$(CharAscii) & " no est√° permitido.")
             Exit Function
 
         End If
@@ -326,7 +326,7 @@ Function CheckUserData(ByVal checkemail As Boolean) As Boolean
         CharAscii = Asc(mid$(UserName, LoopC, 1))
 
         If Not LegalCharacter(CharAscii) Then
-            MsgBox ("Nombre inv·lido. El caractÈr " & Chr$(CharAscii) & " no est· permitido.")
+            MsgBox ("Nombre inv√°lido. El caract√©r " & Chr$(CharAscii) & " no est√° permitido.")
             Exit Function
 
         End If
@@ -423,7 +423,7 @@ Sub MoveTo(ByVal Direccion As E_Heading)
     'Last Modified By: Lucas Tavolaro Ortiz (Tavo)
     ' 06/03/2006: AlejoLp - Elimine las funciones Move[NSWE] y las converti a esta
     ' 12/08/2007: Tavo    - Si el usuario esta paralizado no se puede mover.
-    ' 06/28/2008: NicoNZ - SaquÈ lo que impedÌa que si el usuario estaba paralizado se ejecute el sub.
+    ' 06/28/2008: NicoNZ - Saqu√© lo que imped√≠a que si el usuario estaba paralizado se ejecute el sub.
     '***************************************************
     Dim LegalOk As Boolean
     
@@ -497,7 +497,7 @@ Private Sub CheckKeys()
     'If game is paused, abort movement.
     If pausa Then Exit Sub
     
-    'TODO: DeberÌa informarle por consola?
+    'TODO: Deber√≠a informarle por consola?
     If Traveling Then Exit Sub
 
     'Control movement interval (this enforces the 1 step loss when meditating / resting client-side)
@@ -569,12 +569,12 @@ Private Sub CheckKeys()
 
 End Sub
 
-'TODO : Si bien nunca estuvo allÌ, el mapa es algo independiente o a lo sumo dependiente del engine, no va ac·!!!
+'TODO : Si bien nunca estuvo all√≠, el mapa es algo independiente o a lo sumo dependiente del engine, no va ac√°!!!
 Sub SwitchMap(ByVal Map As Integer)
 
     '**************************************************************
     'Formato de mapas optimizado para reducir el espacio que ocupan.
-    'DiseÒado y creado por Juan MartÌn Sotuyo Dodero (Maraxus) (juansotuyo@hotmail.com)
+    'Dise√±ado y creado por Juan Mart√≠n Sotuyo Dodero (Maraxus) (juansotuyo@hotmail.com)
     '**************************************************************
     Dim Y         As Long
 
@@ -694,7 +694,7 @@ Function ReadField(ByVal Pos As Integer, _
 
     '*****************************************************************
     'Gets a field from a delimited string
-    'Author: Juan MartÌn Sotuyo Dodero (Maraxus)
+    'Author: Juan Mart√≠n Sotuyo Dodero (Maraxus)
     'Last Modify Date: 11/15/2004
     '*****************************************************************
     Dim i          As Long
@@ -725,7 +725,7 @@ Function FieldCount(ByRef Text As String, ByVal SepASCII As Byte) As Long
 
     '*****************************************************************
     'Gets the number of fields in a delimited string
-    'Author: Juan MartÌn Sotuyo Dodero (Maraxus)
+    'Author: Juan Mart√≠n Sotuyo Dodero (Maraxus)
     'Last Modify Date: 07/29/2007
     '*****************************************************************
     Dim Count     As Long
@@ -820,7 +820,7 @@ Public Sub CargarServidores()
     Exit Sub
 
 errorH:
-    Call MsgBox("Error cargando los servidores, actualicelos de la web", vbCritical + vbOKOnly, "Argentum Online")
+    Call MsgBox("Error cargando los servidores, actualicelos de la web", vbCritical + vbOKOnly, "Nexus AO")
     
     Call CloseClient
 
@@ -923,7 +923,7 @@ Sub Main()
     #If Testeo = 0 Then
 
         If FindPreviousInstance Then
-            Call MsgBox("Argentum Online ya esta corriendo! No es posible correr otra instancia del juego. Haga click en Aceptar para salir.", vbApplicationModal + vbInformation + vbOKOnly, "Error al ejecutar")
+            Call MsgBox("Nexus AO ya esta corriendo! No es posible correr otra instancia del juego. Haga click en Aceptar para salir.", vbApplicationModal + vbInformation + vbOKOnly, "Error al ejecutar")
             End
 
         End If
@@ -956,7 +956,7 @@ Sub Main()
 
     frmConnect.Visible = True
     
-    'InicializaciÛn de variables globales
+    'Inicializaci√≥n de variables globales
     PrimeraVez = True
     prgRun = True
     pausa = False
@@ -972,7 +972,7 @@ Sub Main()
         
     Do While prgRun
 
-        'SÛlo dibujamos si la ventana no est· minimizada
+        'S√≥lo dibujamos si la ventana no est√° minimizada
         If frmMain.WindowState <> 1 And frmMain.Visible Then
             Call ShowNextFrame(frmMain.Top, frmMain.Left, frmMain.MouseX, frmMain.MouseY)
             
@@ -1017,15 +1017,15 @@ Private Sub LoadInitialConfig()
     
     '###########
     ' SERVIDORES
-    'TODO : esto de ServerRecibidos no se podrÌa sacar???
-    Call AddtoRichTextBox(frmCargando.status, "Buscando servidores... ", 255, 255, 255, True, False, True)
+    'TODO : esto de ServerRecibidos no se podr√≠a sacar???
+    Call AddtoRichTextBox(frmCargando.Status, "Buscando servidores... ", 255, 255, 255, True, False, True)
     Call CargarServidores
     ServersRecibidos = True
-    Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
+    Call AddtoRichTextBox(frmCargando.Status, "Hecho", 255, 0, 0, True, False, False)
     
     '###########
     ' CONSTANTES
-    Call AddtoRichTextBox(frmCargando.status, "Iniciando constantes... ", 255, 255, 255, True, False, True)
+    Call AddtoRichTextBox(frmCargando.Status, "Iniciando constantes... ", 255, 255, 255, True, False, True)
     Call InicializarNombres
     ' Initialize FONTTYPES
     Call Protocol.InitFonts
@@ -1041,11 +1041,11 @@ Private Sub LoadInitialConfig()
     
     ' Mouse Pointer (Loaded before opening any form with buttons in it)
     If FileExist(DirExtras & "Hand.ico", vbArchive) Then Set picMouseIcon = LoadPicture(DirExtras & "Hand.ico")
-    Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
+    Call AddtoRichTextBox(frmCargando.Status, "Hecho", 255, 0, 0, True, False, False)
     
     '#######
     ' CLASES
-    Call AddtoRichTextBox(frmCargando.status, "Instanciando clases... ", 255, 255, 255, True, False, True)
+    Call AddtoRichTextBox(frmCargando.Status, "Instanciando clases... ", 255, 255, 255, True, False, True)
     Set Dialogos = New clsDialogs
     Set Audio = New clsAudio
     Set Inventario = New clsGrapchicalInventory
@@ -1057,8 +1057,8 @@ Private Sub LoadInitialConfig()
     Set clsForos = New clsForum
     
     '##############
-    ' MOTOR GR¡FICO
-    Call AddtoRichTextBox(frmCargando.status, "Iniciando motor gr·fico... ", 255, 255, 255, True, False, True)
+    ' MOTOR GR√ÅFICO
+    Call AddtoRichTextBox(frmCargando.Status, "Iniciando motor gr√°fico... ", 255, 255, 255, True, False, True)
     
     ' Iniciamos el Engine de DirectX 8
     If Not Engine_DirectX8_Init Then Call CloseClient
@@ -1068,33 +1068,33 @@ Private Sub LoadInitialConfig()
         
     Engine_DirectX8_Aditional_Init
     
-    Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
+    Call AddtoRichTextBox(frmCargando.Status, "Hecho", 255, 0, 0, True, False, False)
     
     '###################
     ' ANIMACIONES EXTRAS
-    Call AddtoRichTextBox(frmCargando.status, "Creando animaciones extra... ", 255, 255, 255, True, False, True)
+    Call AddtoRichTextBox(frmCargando.Status, "Creando animaciones extra... ", 255, 255, 255, True, False, True)
     Call CargarTips
     ' Call CargarArrayLluvia
     Call CargarAnimArmas
     Call CargarAnimEscudos
     Call CargarColores
-    Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
+    Call AddtoRichTextBox(frmCargando.Status, "Hecho", 255, 0, 0, True, False, False)
     
     '#############
     ' DIRECT SOUND
-    Call AddtoRichTextBox(frmCargando.status, "Iniciando DirectSound... ", 255, 255, 255, True, False, True)
+    Call AddtoRichTextBox(frmCargando.Status, "Iniciando DirectSound... ", 255, 255, 255, True, False, True)
     ' Inicializamos el sonido
     Call Audio.Initialize(DirectX, frmMain.hwnd, App.path & "\" & Config_Inicio.DirSonidos & "\", App.path & "\" & Config_Inicio.DirMusica & "\")
     ' Enable / Disable audio
     Audio.MusicActivated = Not ClientSetup.bNoMusic
     Audio.SoundActivated = Not ClientSetup.bNoSound
     Audio.SoundEffectsActivated = Not ClientSetup.bNoSoundEffects
-    ' Inicializamos el inventario gr·fico
-    Call Inventario.Initialize(DirectD3D8, frmMain.picInv, MAX_INVENTORY_SLOTS)
+    ' Inicializamos el inventario gr√°fico
+    Call Inventario.Initialize(DirectD3D8, frmMain.PicInv, MAX_INVENTORY_SLOTS)
     'Call Audio.MusicMP3Play(App.path & "\MP3\" & MP3_Inicio & ".mp3")
-    Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
+    Call AddtoRichTextBox(frmCargando.Status, "Hecho", 255, 0, 0, True, False, False)
     
-    Call AddtoRichTextBox(frmCargando.status, "                    °Bienvenido a Argentum Online!", 255, 255, 255, True, False, True)
+    Call AddtoRichTextBox(frmCargando.Status, "                    ¬°Bienvenido a Nexus AO!", 255, 255, 255, True, False, True)
 
     'Give the user enough time to read the welcome text
     Call Sleep(500)
@@ -1160,9 +1160,9 @@ End Function
 
 '[CODE 002]:MatuX
 '
-'  FunciÛn para chequear el email
+'  Funci√≥n para chequear el email
 '
-'  Corregida por Maraxus para que reconozca como v·lidas casillas con puntos antes de la arroba y evitar un chequeo innecesario
+'  Corregida por Maraxus para que reconozca como v√°lidas casillas con puntos antes de la arroba y evitar un chequeo innecesario
 Public Function CheckMailString(ByVal sString As String) As Boolean
 
     On Error GoTo errHnd
@@ -1178,10 +1178,10 @@ Public Function CheckMailString(ByVal sString As String) As Boolean
 
     If (lPos <> 0) Then
 
-        '2do test: Busca un simbolo . despuÈs de @ + 1
+        '2do test: Busca un simbolo . despu√©s de @ + 1
         If Not (InStr(lPos, sString, ".", vbBinaryCompare) > lPos + 1) Then Exit Function
         
-        '3er test: Recorre todos los caracteres y los valÌda
+        '3er test: Recorre todos los caracteres y los val√≠da
         For lX = 0 To Len(sString) - 1
 
             If Not (lX = (lPos - 1)) Then   'No chequeamos la '@'
@@ -1202,13 +1202,13 @@ errHnd:
 
 End Function
 
-'  Corregida por Maraxus para que reconozca como v·lidas casillas con puntos antes de la arroba
+'  Corregida por Maraxus para que reconozca como v√°lidas casillas con puntos antes de la arroba
 Private Function CMSValidateChar_(ByVal iAsc As Integer) As Boolean
     CMSValidateChar_ = (iAsc >= 48 And iAsc <= 57) Or (iAsc >= 65 And iAsc <= 90) Or (iAsc >= 97 And iAsc <= 122) Or (iAsc = 95) Or (iAsc = 45) Or (iAsc = 46)
 
 End Function
 
-'TODO : como todo lo relativo a mapas, no tiene nada que hacer ac·....
+'TODO : como todo lo relativo a mapas, no tiene nada que hacer ac√°....
 Function HayAgua(ByVal X As Integer, ByVal Y As Integer) As Boolean
     HayAgua = ((MapData(X, Y).Graphic(1).GrhIndex >= 1505 And MapData(X, Y).Graphic(1).GrhIndex <= 1520) Or (MapData(X, Y).Graphic(1).GrhIndex >= 5665 And MapData(X, Y).Graphic(1).GrhIndex <= 5680) Or (MapData(X, Y).Graphic(1).GrhIndex >= 13547 And MapData(X, Y).Graphic(1).GrhIndex <= 13562)) And MapData(X, Y).Graphic(2).GrhIndex = 0
                 
@@ -1290,7 +1290,7 @@ Private Sub AoUpdate(ByVal UpToDate As Boolean, ByVal NoRes As Boolean)
         'No recibe update, ejecutar AU
         'Ejecuto el AoUpdate, sino me voy
         If Dir(App.path & "\AoUpdate.exe", vbArchive) = vbNullString Then
-            MsgBox "No se encuentra el archivo de actualizaciÛn AoUpdate.exe por favor descarguelo y vuelva a intentar", vbCritical
+            MsgBox "No se encuentra el archivo de actualizaci√≥n AoUpdate.exe por favor descarguelo y vuelva a intentar", vbCritical
             End
         Else
             FileCopy App.path & "\AoUpdate.exe", App.path & "\AoUpdateTMP.exe"
@@ -1315,7 +1315,7 @@ Private Sub AoUpdate(ByVal UpToDate As Boolean, ByVal NoRes As Boolean)
 
 error:
 
-    If Err.number = 75 Then 'Si el archivo AoUpdateTMP.exe est· en uso, entonces esperamos 5 ms y volvemos a intentarlo hasta que nos deje.
+    If Err.number = 75 Then 'Si el archivo AoUpdateTMP.exe est√° en uso, entonces esperamos 5 ms y volvemos a intentarlo hasta que nos deje.
         Sleep 5
         Resume
     Else
@@ -1329,7 +1329,7 @@ End Sub
 Private Sub LoadClientSetup()
 
     '**************************************************************
-    'Author: Juan MartÌn Sotuyo Dodero (Maraxus)
+    'Author: Juan Mart√≠n Sotuyo Dodero (Maraxus)
     'Last Modify Date: 11/19/09
     '11/19/09: Pato - Is optional show the frmGuildNews form
     '**************************************************************
@@ -1382,7 +1382,7 @@ End Sub
 
 Private Sub InicializarNombres()
     '**************************************************************
-    'Author: Juan MartÌn Sotuyo Dodero (Maraxus)
+    'Author: Juan Mart√≠n Sotuyo Dodero (Maraxus)
     'Last Modify Date: 11/27/2005
     'Inicializa los nombres de razas, ciudades, clases, skills, atributos, etc.
     '**************************************************************
@@ -1390,7 +1390,7 @@ Private Sub InicializarNombres()
     Ciudades(eCiudad.cNix) = "Nix"
     Ciudades(eCiudad.cBanderbill) = "Banderbill"
     Ciudades(eCiudad.cLindos) = "Lindos"
-    Ciudades(eCiudad.cArghal) = "Argh‚l"
+    Ciudades(eCiudad.cArghal) = "Argh√¢l"
     
     ListaRazas(eRaza.Humano) = "Humano"
     ListaRazas(eRaza.Elfo) = "Elfo"
@@ -1413,13 +1413,13 @@ Private Sub InicializarNombres()
     
     SkillsNames(eSkill.Magia) = "Magia"
     SkillsNames(eSkill.Robar) = "Robar"
-    SkillsNames(eSkill.Tacticas) = "EvasiÛn en combate"
+    SkillsNames(eSkill.Tacticas) = "Evasi√≥n en combate"
     SkillsNames(eSkill.Armas) = "Combate cuerpo a cuerpo"
     SkillsNames(eSkill.Meditar) = "Meditar"
-    SkillsNames(eSkill.ApuÒalar) = "ApuÒalar"
+    SkillsNames(eSkill.Apu√±alar) = "Apu√±alar"
     SkillsNames(eSkill.Ocultarse) = "Ocultarse"
     SkillsNames(eSkill.Supervivencia) = "Supervivencia"
-    SkillsNames(eSkill.Talar) = "Talar ·rboles"
+    SkillsNames(eSkill.Talar) = "Talar √°rboles"
     SkillsNames(eSkill.Comerciar) = "Comercio"
     SkillsNames(eSkill.Defensa) = "Defensa con escudos"
     SkillsNames(eSkill.Pesca) = "Pesca"
@@ -1445,7 +1445,7 @@ End Sub
 
 Public Sub CleanDialogs()
     '**************************************************************
-    'Author: Juan MartÌn Sotuyo Dodero (Maraxus)
+    'Author: Juan Mart√≠n Sotuyo Dodero (Maraxus)
     'Last Modify Date: 11/27/2005
     'Removes all text from the console and dialogs
     '**************************************************************
@@ -1460,7 +1460,7 @@ End Sub
 
 Public Sub CloseClient()
     '**************************************************************
-    'Author: Juan MartÌn Sotuyo Dodero (Maraxus)
+    'Author: Juan Mart√≠n Sotuyo Dodero (Maraxus)
     'Last Modify Date: 8/14/2007
     'Frees all used resources, cleans up and leaves
     '**************************************************************
@@ -1469,7 +1469,7 @@ Public Sub CloseClient()
     
     EngineRun = False
     frmCargando.Show
-    Call AddtoRichTextBox(frmCargando.status, "Liberando recursos...", 0, 0, 0, 0, 0, 0)
+    Call AddtoRichTextBox(frmCargando.Status, "Liberando recursos...", 0, 0, 0, 0, 0, 0)
     
     Call Resolution.ResetResolution
     
@@ -1478,7 +1478,7 @@ Public Sub CloseClient()
     
     Call SaveClientSetup
     
-    'Destruimos los objetos p˙blicos creados
+    'Destruimos los objetos p√∫blicos creados
     Set CustomMessages = Nothing
     Set CustomKeys = Nothing
     Set SurfaceDB = Nothing
@@ -1550,7 +1550,7 @@ Public Function getCharIndexByName(ByVal name As String) As Integer
 
     For i = 1 To LastChar
 
-        If charlist(i).Nombre = name Then
+        If charlist(i).nombre = name Then
             getCharIndexByName = i
             Exit Function
 
@@ -1704,7 +1704,7 @@ Public Function DevolverNombreHechizo(ByVal Index As Byte) As String
     For i = 1 To NumHechizos
 
         If i = Index Then
-            DevolverNombreHechizo = Hechizos(i).Nombre
+            DevolverNombreHechizo = Hechizos(i).nombre
             Exit Function
 
         End If
@@ -1713,13 +1713,13 @@ Public Function DevolverNombreHechizo(ByVal Index As Byte) As String
 
 End Function
 
-Public Function DevolverIndexHechizo(ByVal Nombre As String) As Byte
+Public Function DevolverIndexHechizo(ByVal nombre As String) As Byte
 
     Dim i As Long
  
     For i = 1 To NumHechizos
 
-        If Hechizos(i).Nombre = Nombre Then
+        If Hechizos(i).nombre = nombre Then
             DevolverIndexHechizo = i
             Exit Function
 
@@ -1752,7 +1752,7 @@ Public Sub CargarHechizos()
         With Hechizos(J)
             .Desc = GetVar(PathName, "HECHIZO" & J, "Desc")
             .PalabrasMagicas = GetVar(PathName, "HECHIZO" & J, "PalabrasMagicas")
-            .Nombre = GetVar(PathName, "HECHIZO" & J, "Nombre")
+            .nombre = GetVar(PathName, "HECHIZO" & J, "Nombre")
             .SkillRequerido = GetVar(PathName, "HECHIZO" & J, "MinSkill")
          
             If J <> 38 And J <> 39 Then
@@ -1774,6 +1774,6 @@ Public Sub CargarHechizos()
     Exit Sub
  
 errorH:
-    Call MsgBox("Error critico", vbCritical + vbOKOnly, "Argentum Online")
+    Call MsgBox("Error critico", vbCritical + vbOKOnly, "Nexus AO")
 
 End Sub

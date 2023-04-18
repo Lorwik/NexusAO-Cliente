@@ -439,12 +439,12 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'Argentum Online 0.11.6
+'Nexus AO mod Argentum Online 0.13
 '
-'Copyright (C) 2002 Márquez Pablo Ignacio
+'Copyright (C) 2002 MÃ¡rquez Pablo Ignacio
 'Copyright (C) 2002 Otto Perez
 'Copyright (C) 2002 Aaron Perkins
-'Copyright (C) 2002 Matías Fernando Pequeño
+'Copyright (C) 2002 MatÃ­as Fernando PequeÃ±o
 '
 'This program is free software; you can redistribute it and/or modify
 'it under the terms of the Affero General Public License;
@@ -458,7 +458,7 @@ Attribute VB_Exposed = False
 'You should have received a copy of the Affero General Public License
 'along with this program; if not, you can find it at http://www.affero.org/oagpl.html
 '
-'Argentum Online is based on Baronsoft's VB6 Online RPG
+'Nexus AO mod Argentum Online is based on Baronsoft's VB6 Online RPG
 'You can contact the original creator of ORE at aaron@baronsoft.com
 'for more information about ORE please visit http://www.baronsoft.com/
 '
@@ -466,10 +466,10 @@ Attribute VB_Exposed = False
 'You can contact me at:
 'morgolock@speedy.com.ar
 'www.geocities.com/gmorgolock
-'Calle 3 número 983 piso 7 dto A
+'Calle 3 nÃºmero 983 piso 7 dto A
 'La Plata - Pcia, Buenos Aires - Republica Argentina
-'Código Postal 1900
-'Pablo Ignacio Márquez
+'CÃ³digo Postal 1900
+'Pablo Ignacio MÃ¡rquez
 
 Option Explicit
 
@@ -704,14 +704,14 @@ Private Sub RenderItem(ByRef Pic As PictureBox, ByVal GrhIndex As Long)
         SR.Left = .SX
         SR.Top = .SY
         SR.Right = SR.Left + .pixelWidth
-        SR.bottom = SR.Top + .pixelHeight
+        SR.Bottom = SR.Top + .pixelHeight
 
     End With
     
     DR.Left = 0
     DR.Top = 0
     DR.Right = 32
-    DR.bottom = 32
+    DR.Bottom = 32
     
     Call DrawGrhtoHdc(Pic.hdc, GrhIndex, SR, DR)
     Pic.Refresh

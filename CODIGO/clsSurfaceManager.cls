@@ -15,7 +15,7 @@ Attribute VB_Exposed = False
 ' clsSurfaceManager.cls - Interface for surface managfers regardless of wether
 ' they use dinamic loading or not.
 '
-' Developed by Maraxus (Juan Martín Sotuyo Dodero - juansotuyo@hotmail.com)
+' Developed by Maraxus (Juan MartÃ­n Sotuyo Dodero - juansotuyo@hotmail.com)
 ' Last Modify Date: 3/06/2006
 '**************************************************************
 
@@ -34,7 +34,7 @@ Attribute VB_Exposed = False
 'along with this program; if not, write to the Free Software
 'Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 '
-'Argentum Online is based on Baronsoft's VB6 Online RPG
+'Nexus AO mod Argentum Online is based on Baronsoft's VB6 Online RPG
 'You can contact the original creator of ORE at aaron@baronsoft.com
 'for more information about ORE please visit http://www.baronsoft.com/
 '**************************************************************
@@ -48,7 +48,7 @@ Option Explicit
 Public Property Get Surface(ByVal fileIndex As Long) As Direct3DTexture8
 
     '**************************************************************
-    'Author: Juan Martín Sotuyo Dodero
+    'Author: Juan MartÃ­n Sotuyo Dodero
     'Last Modify Date: 3/06/2006
     'Used to return a texture
     '**************************************************************
@@ -59,7 +59,7 @@ Public Sub Initialize(ByRef DD As D3DX8, _
                       Optional ByVal maxMemoryUsageInMb As Long = -1)
 
     '**************************************************************
-    'Author: Juan Martín Sotuyo Dodero
+    'Author: Juan MartÃ­n Sotuyo Dodero
     'Last Modify Date: 29/07/2012 - ^[GS]^
     'Initializes the object (the DD object is needed to load surfaces)
     '**************************************************************
