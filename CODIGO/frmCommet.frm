@@ -107,7 +107,7 @@ Private cBotonCerrar              As clsGraphicalButton
 
 Public LastButtonPressed          As clsGraphicalButton
 
-Public nombre                     As String
+Public Nombre                     As String
 
 Public T                          As TIPO
 
@@ -160,9 +160,9 @@ Private Sub imgEnviar_Click()
 
     If Text1 = "" Then
         If T = PAZ Or T = ALIANZA Then
-            MsgBox "Debes redactar un mensaje solicitando la paz o alianza al líder de " & nombre
+            MsgBox "Debes redactar un mensaje solicitando la paz o alianza al líder de " & Nombre
         Else
-            MsgBox "Debes indicar el motivo por el cual rechazas la membresía de " & nombre
+            MsgBox "Debes indicar el motivo por el cual rechazas la membresía de " & Nombre
 
         End If
         
@@ -171,20 +171,20 @@ Private Sub imgEnviar_Click()
     End If
     
     If T = PAZ Then
-        Call WriteGuildOfferPeace(nombre, Replace(Text1, vbCrLf, "º"))
+        Call WriteGuildOfferPeace(Nombre, Replace(Text1, vbCrLf, "º"))
         
     ElseIf T = ALIANZA Then
-        Call WriteGuildOfferAlliance(nombre, Replace(Text1, vbCrLf, "º"))
+        Call WriteGuildOfferAlliance(Nombre, Replace(Text1, vbCrLf, "º"))
         
     ElseIf T = RECHAZOPJ Then
-        Call WriteGuildRejectNewMember(nombre, Replace(Replace(Text1.Text, ",", " "), vbCrLf, " "))
+        Call WriteGuildRejectNewMember(Nombre, Replace(Replace(Text1.Text, ",", " "), vbCrLf, " "))
 
         'Sacamos el char de la lista de aspirantes
         Dim i As Long
         
         For i = 0 To frmGuildLeader.solicitudes.ListCount - 1
 
-            If frmGuildLeader.solicitudes.List(i) = nombre Then
+            If frmGuildLeader.solicitudes.List(i) = Nombre Then
                 frmGuildLeader.solicitudes.RemoveItem i
                 Exit For
 

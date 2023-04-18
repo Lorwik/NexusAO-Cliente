@@ -1622,7 +1622,7 @@ Private Sub cmdINFO_Click()
 
         Dim Msj As String
      
-        If Index <> 0 Then Msj = "%%%%%%%%%%%% INFO DEL HECHIZO %%%%%%%%%%%%" & vbCrLf & "Nombre:" & Hechizos(Index).nombre & vbCrLf & "Descripción:" & Hechizos(Index).Desc & vbCrLf & "Skill requerido: " & Hechizos(Index).SkillRequerido & " de magia." & vbCrLf & "Maná necesario: " & Hechizos(Index).ManaRequerida & vbCrLf & "Energía necesaria: " & Hechizos(Index).EnergiaRequerida & vbCrLf & "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+        If Index <> 0 Then Msj = "%%%%%%%%%%%% INFO DEL HECHIZO %%%%%%%%%%%%" & vbCrLf & "Nombre:" & Hechizos(Index).Nombre & vbCrLf & "Descripción:" & Hechizos(Index).Desc & vbCrLf & "Skill requerido: " & Hechizos(Index).SkillRequerido & " de magia." & vbCrLf & "Maná necesario: " & Hechizos(Index).ManaRequerida & vbCrLf & "Energía necesaria: " & Hechizos(Index).EnergiaRequerida & vbCrLf & "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
                                              
         Call ShowConsoleMsg(Msj, 210, 220, 220)
         
@@ -2120,8 +2120,8 @@ Private Sub AbrirMenuViewPort()
                     m.SetMenuId 1
                     m.ListaInit 2, False
             
-                    If charlist(MapData(tX, tY).CharIndex).nombre <> "" Then
-                        m.ListaSetItem 0, charlist(MapData(tX, tY).CharIndex).nombre, True
+                    If charlist(MapData(tX, tY).CharIndex).Nombre <> "" Then
+                        m.ListaSetItem 0, charlist(MapData(tX, tY).CharIndex).Nombre, True
                     Else
                         m.ListaSetItem 0, "<NPC>", True
 

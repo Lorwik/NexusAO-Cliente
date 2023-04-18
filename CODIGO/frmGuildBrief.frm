@@ -547,27 +547,27 @@ Private Sub imgCerrar_Click()
 End Sub
 
 Private Sub imgDeclararGuerra_Click()
-    Call WriteGuildDeclareWar(nombre.Caption)
+    Call WriteGuildDeclareWar(Nombre.Caption)
     Unload Me
 
 End Sub
 
 Private Sub imgOfrecerAlianza_Click()
-    frmCommet.nombre = nombre.Caption
+    frmCommet.Nombre = Nombre.Caption
     frmCommet.T = TIPO.ALIANZA
     Call frmCommet.Show(vbModal, frmGuildBrief)
 
 End Sub
 
 Private Sub imgOfrecerPaz_Click()
-    frmCommet.nombre = nombre.Caption
+    frmCommet.Nombre = Nombre.Caption
     frmCommet.T = TIPO.PAZ
     Call frmCommet.Show(vbModal, frmGuildBrief)
 
 End Sub
 
 Private Sub imgSolicitarIngreso_Click()
-    Call frmGuildSol.RecieveSolicitud(nombre.Caption)
+    Call frmGuildSol.RecieveSolicitud(Nombre.Caption)
     Call frmGuildSol.Show(vbModal, frmGuildBrief)
 
 End Sub

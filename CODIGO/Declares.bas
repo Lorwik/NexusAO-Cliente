@@ -1304,7 +1304,7 @@ Public Hechizos()              As tHechizos
  
 Public Type tHechizos
 
-    nombre As String
+    Nombre As String
     Desc As String
     PalabrasMagicas As String
     ManaRequerida As Integer
@@ -1324,7 +1324,7 @@ Public Npcs()  As tNpcs
  
 Public Type tNpcs
 
-    nombre As String
+    Nombre As String
     Desc As String
     NroExpresiones As Byte
     Expresiones() As String

@@ -208,7 +208,7 @@ Public Type Char
     Criminal As Byte
     Atacable As Byte
     
-    nombre As String
+    Nombre As String
     
     scrollDirectionX As Integer
     scrollDirectionY As Integer
@@ -2054,7 +2054,7 @@ Private Sub CharRender(ByVal CharIndex As Long, _
         
         If Not .muerto Then
             If Abs(MouseTileX - .Pos.X) < 1 And (Abs(MouseTileY - .Pos.Y)) < 1 And CharIndex <> UserCharIndex And ClientSetup.TonalidadPJ Then
-                If .nombre <> "" Then
+                If .Nombre <> "" Then
                     Call Engine_Long_To_RGB_List(ColorFinal(), D3DColorXRGB(0, 255, 0))
                 Else
                     ColorFinal(0) = MapData(.Pos.X, .Pos.Y).Engine_Light(0)
@@ -2116,7 +2116,7 @@ Private Sub CharRender(ByVal CharIndex As Long, _
                 End If
             
                 'Draw name over head
-                If LenB(.nombre) > 0 Then
+                If LenB(.Nombre) > 0 Then
                     If Nombres Then
                         Call RenderName(CharIndex, PixelOffsetX, PixelOffsetY)
 
@@ -2126,7 +2126,7 @@ Private Sub CharRender(ByVal CharIndex As Long, _
             
             Else 'Usuario invisible
         
-                If CharIndex = UserCharIndex Or mid$(charlist(CharIndex).nombre, getTagPosition(.nombre)) = mid$(charlist(UserCharIndex).nombre, getTagPosition(charlist(UserCharIndex).nombre)) And Len(mid$(charlist(CharIndex).nombre, getTagPosition(.nombre))) > 0 Then
+                If CharIndex = UserCharIndex Or mid$(charlist(CharIndex).Nombre, getTagPosition(.Nombre)) = mid$(charlist(UserCharIndex).Nombre, getTagPosition(charlist(UserCharIndex).Nombre)) And Len(mid$(charlist(CharIndex).Nombre, getTagPosition(.Nombre))) > 0 Then
                 
                     Movement_Speed = 0.5
                 
@@ -2147,7 +2147,7 @@ Private Sub CharRender(ByVal CharIndex As Long, _
                         If .Escudo.ShieldWalk(.Heading).GrhIndex Then Call DDrawTransGrhtoSurface(.Escudo.ShieldWalk(.Heading), PixelOffsetX, PixelOffsetY, 1, ColorFinal(), 1, .Pos.X, .Pos.Y, True)
                 
                         'Draw name over head
-                        If LenB(.nombre) > 0 Then
+                        If LenB(.Nombre) > 0 Then
                             If Nombres Then
                                 Call RenderName(CharIndex, PixelOffsetX, PixelOffsetY, True)
 
@@ -2195,7 +2195,7 @@ Private Sub RenderName(ByVal CharIndex As Long, _
     Dim Color As Long
    
     With charlist(CharIndex)
-        Pos = getTagPosition(.nombre)
+        Pos = getTagPosition(.Nombre)
     
         If .priv = 0 Then
             If .muerto Then
@@ -2222,12 +2222,12 @@ Private Sub RenderName(ByVal CharIndex As Long, _
         End If
             
         'Nick
-        line = Left$(.nombre, Pos - 2)
+        line = Left$(.Nombre, Pos - 2)
         'Fonts_Render_String line, (X + 16) - Fonts_Render_String_Width(line, Settings.Engine_Name_Font) / 2, Y + 30, color, Settings.Engine_Name_Font
         Call DrawText(X - (Len(line) * 6 / 2) + 14, Y + 30, line, Color)
             
         'Clan
-        line = mid$(.nombre, Pos)
+        line = mid$(.Nombre, Pos)
         'Fonts_Render_String line, (X + 16) - Fonts_Render_String_Width(line, Settings.Engine_Name_Font) / 2, Y + 30 + Fuentes(Settings.Engine_Font).CharactersHeight, D3DColorXRGB(255, 230, 130), Settings.Engine_Name_Font
         Call DrawText(X - (Len(line) * 6 / 2) + 14, Y + 45, line, Color)
 

@@ -444,7 +444,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
 End Sub
 
 Private Sub imgAceptar_Click()
-    Call WriteGuildAcceptNewMember(nombre)
+    Call WriteGuildAcceptNewMember(Nombre)
     Unload frmGuildLeader
     Call WriteRequestGuildLeaderInfo
     Unload Me
@@ -457,7 +457,7 @@ Private Sub imgCerrar_Click()
 End Sub
 
 Private Sub imgEchar_Click()
-    Call WriteGuildKickMember(nombre)
+    Call WriteGuildKickMember(Nombre)
     Unload frmGuildLeader
     Call WriteRequestGuildLeaderInfo
     Unload Me
@@ -465,13 +465,13 @@ Private Sub imgEchar_Click()
 End Sub
 
 Private Sub imgPeticion_Click()
-    Call WriteGuildRequestJoinerInfo(nombre)
+    Call WriteGuildRequestJoinerInfo(Nombre)
 
 End Sub
 
 Private Sub imgRechazar_Click()
     frmCommet.T = RECHAZOPJ
-    frmCommet.nombre = nombre.Caption
+    frmCommet.Nombre = Nombre.Caption
     frmCommet.Show vbModeless, frmCharInfo
 
 End Sub

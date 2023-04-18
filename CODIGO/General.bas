@@ -1018,14 +1018,14 @@ Private Sub LoadInitialConfig()
     '###########
     ' SERVIDORES
     'TODO : esto de ServerRecibidos no se podría sacar???
-    Call AddtoRichTextBox(frmCargando.Status, "Buscando servidores... ", 255, 255, 255, True, False, True)
+    Call AddtoRichTextBox(frmCargando.status, "Buscando servidores... ", 255, 255, 255, True, False, True)
     Call CargarServidores
     ServersRecibidos = True
-    Call AddtoRichTextBox(frmCargando.Status, "Hecho", 255, 0, 0, True, False, False)
+    Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
     
     '###########
     ' CONSTANTES
-    Call AddtoRichTextBox(frmCargando.Status, "Iniciando constantes... ", 255, 255, 255, True, False, True)
+    Call AddtoRichTextBox(frmCargando.status, "Iniciando constantes... ", 255, 255, 255, True, False, True)
     Call InicializarNombres
     ' Initialize FONTTYPES
     Call Protocol.InitFonts
@@ -1041,11 +1041,11 @@ Private Sub LoadInitialConfig()
     
     ' Mouse Pointer (Loaded before opening any form with buttons in it)
     If FileExist(DirExtras & "Hand.ico", vbArchive) Then Set picMouseIcon = LoadPicture(DirExtras & "Hand.ico")
-    Call AddtoRichTextBox(frmCargando.Status, "Hecho", 255, 0, 0, True, False, False)
+    Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
     
     '#######
     ' CLASES
-    Call AddtoRichTextBox(frmCargando.Status, "Instanciando clases... ", 255, 255, 255, True, False, True)
+    Call AddtoRichTextBox(frmCargando.status, "Instanciando clases... ", 255, 255, 255, True, False, True)
     Set Dialogos = New clsDialogs
     Set Audio = New clsAudio
     Set Inventario = New clsGrapchicalInventory
@@ -1058,7 +1058,7 @@ Private Sub LoadInitialConfig()
     
     '##############
     ' MOTOR GRÁFICO
-    Call AddtoRichTextBox(frmCargando.Status, "Iniciando motor gráfico... ", 255, 255, 255, True, False, True)
+    Call AddtoRichTextBox(frmCargando.status, "Iniciando motor gráfico... ", 255, 255, 255, True, False, True)
     
     ' Iniciamos el Engine de DirectX 8
     If Not Engine_DirectX8_Init Then Call CloseClient
@@ -1068,21 +1068,21 @@ Private Sub LoadInitialConfig()
         
     Engine_DirectX8_Aditional_Init
     
-    Call AddtoRichTextBox(frmCargando.Status, "Hecho", 255, 0, 0, True, False, False)
+    Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
     
     '###################
     ' ANIMACIONES EXTRAS
-    Call AddtoRichTextBox(frmCargando.Status, "Creando animaciones extra... ", 255, 255, 255, True, False, True)
+    Call AddtoRichTextBox(frmCargando.status, "Creando animaciones extra... ", 255, 255, 255, True, False, True)
     Call CargarTips
     ' Call CargarArrayLluvia
     Call CargarAnimArmas
     Call CargarAnimEscudos
     Call CargarColores
-    Call AddtoRichTextBox(frmCargando.Status, "Hecho", 255, 0, 0, True, False, False)
+    Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
     
     '#############
     ' DIRECT SOUND
-    Call AddtoRichTextBox(frmCargando.Status, "Iniciando DirectSound... ", 255, 255, 255, True, False, True)
+    Call AddtoRichTextBox(frmCargando.status, "Iniciando DirectSound... ", 255, 255, 255, True, False, True)
     ' Inicializamos el sonido
     Call Audio.Initialize(DirectX, frmMain.hwnd, App.path & "\" & Config_Inicio.DirSonidos & "\", App.path & "\" & Config_Inicio.DirMusica & "\")
     ' Enable / Disable audio
@@ -1092,9 +1092,9 @@ Private Sub LoadInitialConfig()
     ' Inicializamos el inventario gráfico
     Call Inventario.Initialize(DirectD3D8, frmMain.PicInv, MAX_INVENTORY_SLOTS)
     'Call Audio.MusicMP3Play(App.path & "\MP3\" & MP3_Inicio & ".mp3")
-    Call AddtoRichTextBox(frmCargando.Status, "Hecho", 255, 0, 0, True, False, False)
+    Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
     
-    Call AddtoRichTextBox(frmCargando.Status, "                    ¡Bienvenido a Nexus AO!", 255, 255, 255, True, False, True)
+    Call AddtoRichTextBox(frmCargando.status, "                    ¡Bienvenido a Nexus AO!", 255, 255, 255, True, False, True)
 
     'Give the user enough time to read the welcome text
     Call Sleep(500)
@@ -1469,7 +1469,7 @@ Public Sub CloseClient()
     
     EngineRun = False
     frmCargando.Show
-    Call AddtoRichTextBox(frmCargando.Status, "Liberando recursos...", 0, 0, 0, 0, 0, 0)
+    Call AddtoRichTextBox(frmCargando.status, "Liberando recursos...", 0, 0, 0, 0, 0, 0)
     
     Call Resolution.ResetResolution
     
@@ -1550,7 +1550,7 @@ Public Function getCharIndexByName(ByVal name As String) As Integer
 
     For i = 1 To LastChar
 
-        If charlist(i).nombre = name Then
+        If charlist(i).Nombre = name Then
             getCharIndexByName = i
             Exit Function
 
@@ -1704,7 +1704,7 @@ Public Function DevolverNombreHechizo(ByVal Index As Byte) As String
     For i = 1 To NumHechizos
 
         If i = Index Then
-            DevolverNombreHechizo = Hechizos(i).nombre
+            DevolverNombreHechizo = Hechizos(i).Nombre
             Exit Function
 
         End If
@@ -1713,13 +1713,13 @@ Public Function DevolverNombreHechizo(ByVal Index As Byte) As String
 
 End Function
 
-Public Function DevolverIndexHechizo(ByVal nombre As String) As Byte
+Public Function DevolverIndexHechizo(ByVal Nombre As String) As Byte
 
     Dim i As Long
  
     For i = 1 To NumHechizos
 
-        If Hechizos(i).nombre = nombre Then
+        If Hechizos(i).Nombre = Nombre Then
             DevolverIndexHechizo = i
             Exit Function
 
@@ -1752,7 +1752,7 @@ Public Sub CargarHechizos()
         With Hechizos(J)
             .Desc = GetVar(PathName, "HECHIZO" & J, "Desc")
             .PalabrasMagicas = GetVar(PathName, "HECHIZO" & J, "PalabrasMagicas")
-            .nombre = GetVar(PathName, "HECHIZO" & J, "Nombre")
+            .Nombre = GetVar(PathName, "HECHIZO" & J, "Nombre")
             .SkillRequerido = GetVar(PathName, "HECHIZO" & J, "MinSkill")
          
             If J <> 38 And J <> 39 Then

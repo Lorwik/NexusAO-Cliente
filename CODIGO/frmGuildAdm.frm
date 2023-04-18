@@ -178,7 +178,7 @@ End Sub
 Private Sub imgDetalles_Click()
     frmGuildBrief.EsLeader = False
 
-    Call WriteGuildRequestDetails(GuildsList.List(GuildsList.ListIndex))
+    Call WriteGuildRequestDetails(guildslist.List(guildslist.ListIndex))
 
 End Sub
 
@@ -203,7 +203,7 @@ Public Sub FiltrarListaClanes(ByRef sCompare As String)
     
     If UBound(GuildNames) <> 0 Then
 
-        With GuildsList
+        With guildslist
             'Limpio la lista
             .Clear
             
