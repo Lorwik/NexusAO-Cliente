@@ -1818,6 +1818,7 @@ Sub ShowNextFrame(ByVal DisplayFormTop As Integer, _
         '****** Update screen ******
         If UserCiego Then
             DirectDevice.Clear 0, ByVal 0, D3DCLEAR_TARGET, 0, 1#, 0
+            
         Else
             Call RenderScreen(UserPos.X - AddtoUserPos.X, UserPos.Y - AddtoUserPos.Y, OffsetCounterX - ZoomOffset(1), OffsetCounterY - ZoomOffset(0))
 
@@ -1842,7 +1843,7 @@ Sub ShowNextFrame(ByVal DisplayFormTop As Integer, _
     '//Banco
     If frmBancoObj.PicBancoInv.Visible Then Call InvBanco(0).DrawInv
          
-    If frmBancoObj.picInv.Visible Then Call InvBanco(1).DrawInv
+    If frmBancoObj.PicInv.Visible Then Call InvBanco(1).DrawInv
     
     '//Comercio
     If frmComerciar.picInvNpc.Visible Then Call InvComNpc.DrawInv
@@ -1916,31 +1917,6 @@ Public Sub RenderText(ByVal lngXPos As Integer, _
         
         'Call BackBufferSurface.SetForeColor(lngColor)
         'Call BackBufferSurface.DrawText(lngXPos, lngYPos, strText, False)
-    End If
-
-End Sub
-
-Public Sub RenderTextCentered(ByVal lngXPos As Integer, _
-                              ByVal lngYPos As Integer, _
-                              ByRef strText As String, _
-                              ByVal lngColor As Long, _
-                              ByRef Font As StdFont)
-
-    Dim hdc As Long
-
-    Dim ret As Size
-    
-    If strText <> "" Then
-        
-        'Call BackBufferSurface.SetFont(Font)
-        
-        'Get width of text once rendered
-        'TexthDC = BackBufferSurface.GetDC
-        'Call GetTextExtentPoint32(TexthDC, strText, Len(strText), ret)
-        ' lngXPos = lngXPos - ret.cx \ 2
-        'DrawText1 TexthDC, lngXPos, lngYPos, strText, lngColor
-        ' BackBufferSurface.ReleaseDC TexthDC
-        
     End If
 
 End Sub

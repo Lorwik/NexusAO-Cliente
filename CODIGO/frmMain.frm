@@ -64,39 +64,6 @@ Begin VB.Form frmMain
       Type            =   1
       Urgent          =   0   'False
    End
-   Begin VB.PictureBox picSM 
-      Appearance      =   0  'Flat
-      AutoRedraw      =   -1  'True
-      BackColor       =   &H80000005&
-      BorderStyle     =   0  'None
-      ForeColor       =   &H80000008&
-      Height          =   450
-      Index           =   1
-      Left            =   11400
-      MousePointer    =   99  'Custom
-      ScaleHeight     =   450
-      ScaleWidth      =   420
-      TabIndex        =   19
-      Top             =   11010
-      Width           =   420
-   End
-   Begin VB.PictureBox picSM 
-      Appearance      =   0  'Flat
-      AutoRedraw      =   -1  'True
-      BackColor       =   &H80000005&
-      BorderStyle     =   0  'None
-      ForeColor       =   &H80000008&
-      Height          =   450
-      Index           =   0
-      Left            =   10950
-      MousePointer    =   99  'Custom
-      ScaleHeight     =   30
-      ScaleMode       =   3  'Pixel
-      ScaleWidth      =   28
-      TabIndex        =   18
-      Top             =   11010
-      Width           =   420
-   End
    Begin VB.PictureBox picInv 
       Appearance      =   0  'Flat
       AutoRedraw      =   -1  'True
@@ -214,7 +181,7 @@ Begin VB.Form frmMain
       ScaleHeight     =   610
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   718
-      TabIndex        =   22
+      TabIndex        =   20
       Top             =   2250
       Width           =   10770
       Begin VB.Frame fMenu 
@@ -224,7 +191,7 @@ Begin VB.Form frmMain
          ForeColor       =   &H00000000&
          Height          =   2865
          Left            =   9150
-         TabIndex        =   23
+         TabIndex        =   21
          Top             =   6240
          Visible         =   0   'False
          Width           =   1575
@@ -232,7 +199,7 @@ Begin VB.Form frmMain
             Height          =   255
             Index           =   0
             Left            =   90
-            TabIndex        =   24
+            TabIndex        =   22
             Top             =   180
             Width           =   1395
             _ExtentX        =   2461
@@ -259,7 +226,7 @@ Begin VB.Form frmMain
             Height          =   255
             Index           =   1
             Left            =   90
-            TabIndex        =   25
+            TabIndex        =   23
             Top             =   540
             Width           =   1395
             _ExtentX        =   2461
@@ -286,7 +253,7 @@ Begin VB.Form frmMain
             Height          =   255
             Index           =   2
             Left            =   90
-            TabIndex        =   26
+            TabIndex        =   24
             Top             =   900
             Width           =   1395
             _ExtentX        =   2461
@@ -313,7 +280,7 @@ Begin VB.Form frmMain
             Height          =   255
             Index           =   3
             Left            =   90
-            TabIndex        =   27
+            TabIndex        =   25
             Top             =   1260
             Width           =   1395
             _ExtentX        =   2461
@@ -340,7 +307,7 @@ Begin VB.Form frmMain
             Height          =   255
             Index           =   4
             Left            =   90
-            TabIndex        =   28
+            TabIndex        =   26
             Top             =   1620
             Width           =   1395
             _ExtentX        =   2461
@@ -367,7 +334,7 @@ Begin VB.Form frmMain
             Height          =   255
             Index           =   5
             Left            =   90
-            TabIndex        =   29
+            TabIndex        =   27
             Top             =   1980
             Width           =   1395
             _ExtentX        =   2461
@@ -394,7 +361,7 @@ Begin VB.Form frmMain
             Height          =   255
             Index           =   6
             Left            =   90
-            TabIndex        =   30
+            TabIndex        =   28
             Top             =   2460
             Width           =   1395
             _ExtentX        =   2461
@@ -418,6 +385,20 @@ Begin VB.Form frmMain
             EndProperty
          End
       End
+   End
+   Begin VB.Image imgSafe 
+      Height          =   375
+      Index           =   1
+      Left            =   12570
+      Top             =   10125
+      Width           =   375
+   End
+   Begin VB.Image imgSafe 
+      Height          =   375
+      Index           =   0
+      Left            =   12015
+      Top             =   10110
+      Width           =   375
    End
    Begin VB.Image imgMenu 
       Height          =   480
@@ -451,7 +432,7 @@ Begin VB.Form frmMain
       Height          =   255
       Left            =   12240
       MousePointer    =   99  'Custom
-      TabIndex        =   21
+      TabIndex        =   19
       Top             =   6630
       Width           =   255
    End
@@ -460,7 +441,7 @@ Begin VB.Form frmMain
       Height          =   255
       Left            =   14400
       MousePointer    =   99  'Custom
-      TabIndex        =   20
+      TabIndex        =   18
       Top             =   10800
       Width           =   255
    End
@@ -963,7 +944,7 @@ Private Sub LoadButtons()
     
     Call cBotonLanzar.Initialize(CmdLanzar, GrhPath & "btnLanzar.jpg", GrhPath & "btnLanzar_Hov.jpg", GrhPath & "btnLanzar_press.jpg", Me)
     
-    Call cBotonLanzar.Initialize(cmdInfo, GrhPath & "btnInfo.jpg", GrhPath & "btnInfo_Hov.jpg", GrhPath & "btnInfo_press.jpg", Me)
+    Call cBotonLanzar.Initialize(cmdINFO, GrhPath & "btnInfo.jpg", GrhPath & "btnInfo_Hov.jpg", GrhPath & "btnInfo_press.jpg", Me)
     
     Call cBotonInventario.Initialize(btnInventario, GrhPath & "btnInventario.jpg", GrhPath & "btnInventario_Hov.jpg", GrhPath & "btnInventario_press.jpg", Me)
     
@@ -975,9 +956,8 @@ Private Sub LoadButtons()
     lblCerrar.MouseIcon = picMouseIcon
     
     For i = 0 To 1
-        picSM(i).MouseIcon = picMouseIcon
+        imgSafe(i).MouseIcon = picMouseIcon
     Next i
-
 End Sub
 
 Private Sub cmdMoverHechi_Click(Index As Integer)
@@ -1023,51 +1003,33 @@ End Sub
 
 Public Sub ControlSM(ByVal Index As Byte, ByVal Mostrar As Boolean)
 
-    Dim GrhIndex As Long
-
-    Dim SR       As RECT
-
-    Dim DR       As RECT
-
-    GrhIndex = GRH_INI_SM + Index + SM_CANT * (CInt(Mostrar) + 1)
-
-    With GrhData(GrhIndex)
-        SR.Left = .SX
-        SR.Right = SR.Left + .pixelWidth
-        SR.Top = .SY
-        SR.Bottom = SR.Top + .pixelHeight
-    
-        DR.Left = 0
-        DR.Right = .pixelWidth
-        DR.Top = 0
-        DR.Bottom = .pixelHeight
-
-    End With
-
-    Call DrawGrhtoHdc(picSM(Index).hdc, GrhIndex, SR, DR)
-    picSM(Index).Refresh
-
     Select Case Index
-
-        Case eSMType.sResucitation
-
-            If Mostrar Then
-                Call AddtoRichTextBox(frmMain.RecTxt, MENSAJE_SEGURO_RESU_ON, 0, 255, 0, True, False, True)
-                picSM(Index).ToolTipText = "Seguro de resucitación activado."
-            Else
-                Call AddtoRichTextBox(frmMain.RecTxt, MENSAJE_SEGURO_RESU_OFF, 255, 0, 0, True, False, True)
-                picSM(Index).ToolTipText = "Seguro de resucitación desactivado."
-
-            End If
         
         Case eSMType.sSafemode
 
             If Mostrar Then
                 Call AddtoRichTextBox(frmMain.RecTxt, MENSAJE_SEGURO_ACTIVADO, 0, 255, 0, True, False, True)
-                picSM(Index).ToolTipText = "Seguro activado."
+                imgSafe(Index).ToolTipText = "Seguro activado."
+                imgSafe(Index).Picture = LoadPicture(DirInterfaces & "segurooff.bmp")
+                
             Else
                 Call AddtoRichTextBox(frmMain.RecTxt, MENSAJE_SEGURO_DESACTIVADO, 255, 0, 0, True, False, True)
-                picSM(Index).ToolTipText = "Seguro desactivado."
+                imgSafe(Index).ToolTipText = "Seguro desactivado."
+                imgSafe(Index).Picture = LoadPicture(DirInterfaces & "seguroon.bmp")
+
+            End If
+            
+        Case eSMType.sCombatmode
+
+            If Mostrar Then
+                Call AddtoRichTextBox(frmMain.RecTxt, MENSAJE_SEGURO_ACTIVADO, 0, 255, 0, True, False, True)
+                imgSafe(Index).ToolTipText = "Modo Combate activado."
+                imgSafe(Index).Picture = LoadPicture(DirInterfaces & "combatofmp")
+                
+            Else
+                Call AddtoRichTextBox(frmMain.RecTxt, MENSAJE_SEGURO_DESACTIVADO, 255, 0, 0, True, False, True)
+                imgSafe(Index).ToolTipText = "Modo Combate desactivado."
+                imgSafe(Index).Picture = LoadPicture(DirInterfaces & "combaton.bmp")
 
             End If
 
@@ -1222,8 +1184,8 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
                 Case CustomKeys.BindedKey(eKeyType.mKeyToggleSafeMode)
                     Call WriteSafeToggle
 
-                Case CustomKeys.BindedKey(eKeyType.mKeyToggleResuscitationSafe)
-                    Call WriteResuscitationToggle
+                Case CustomKeys.BindedKey(eKeyType.mKeyToggleCombatSafe)
+                    Call WriteCombatToggle
 
             End Select
 
@@ -1368,6 +1330,20 @@ Private Sub imgMenu_Click()
     fMenu.Visible = Not fMenu.Visible
 End Sub
 
+Private Sub imgsafe_Click(Index As Integer)
+
+    Select Case Index
+
+        Case eSMType.sSafemode
+            Call WriteSafeToggle
+            
+        Case eSMType.sCombatmode
+            Call WriteCombatToggle
+            
+    End Select
+    
+End Sub
+
 Private Sub InvEqu_MouseMove(Button As Integer, _
                              Shift As Integer, _
                              X As Single, _
@@ -1419,20 +1395,6 @@ End Sub
 
 Private Sub Coord_Click()
     Call AddtoRichTextBox(frmMain.RecTxt, "Estas coordenadas son tu ubicación en el mapa. Utiliza la letra L para corregirla si esta no se corresponde con la del servidor por efecto del Lag.", 255, 255, 255, False, False, True)
-
-End Sub
-
-Private Sub picSM_DblClick(Index As Integer)
-
-    Select Case Index
-
-        Case eSMType.sResucitation
-            Call WriteResuscitationToggle
-        
-        Case eSMType.sSafemode
-            Call WriteSafeToggle
-
-    End Select
 
 End Sub
 
@@ -1508,8 +1470,8 @@ Private Sub SendTxt_KeyUp(KeyCode As Integer, Shift As Integer)
         KeyCode = 0
         SendTxt.Visible = False
         
-        If picInv.Visible Then
-            picInv.SetFocus
+        If PicInv.Visible Then
+            PicInv.SetFocus
         Else
             hlst.SetFocus
 
@@ -1907,16 +1869,16 @@ Private Sub btnInventario_Click()
 
     Call Audio.PlayWave(SND_CLICK)
     
-    If picInv.Visible Then Exit Sub
+    If PicInv.Visible Then Exit Sub
 
     InvEqu.Picture = LoadPicture(App.path & "\Interfaces\Centroinventario.jpg")
 
     ' Activo controles de inventario
-    picInv.Visible = True
+    PicInv.Visible = True
 
     ' Desactivo controles de hechizo
     hlst.Visible = False
-    cmdInfo.Visible = False
+    cmdINFO.Visible = False
     CmdLanzar.Visible = False
     
     cmdMoverHechi(0).Visible = False
@@ -1934,14 +1896,14 @@ Private Sub btnHechizos_Click()
     
     ' Activo controles de hechizos
     hlst.Visible = True
-    cmdInfo.Visible = True
+    cmdINFO.Visible = True
     CmdLanzar.Visible = True
     
     cmdMoverHechi(0).Visible = True
     cmdMoverHechi(1).Visible = True
     
     ' Desactivo controles de inventario
-    picInv.Visible = False
+    PicInv.Visible = False
 
 End Sub
 
@@ -1970,8 +1932,8 @@ Private Sub RecTxt_Change()
         SendTxt.SetFocus
     ElseIf (Not Comerciando) And (Not MirandoAsignarSkills) And (Not frmMSG.Visible) And (Not MirandoForo) And (Not frmEstadisticas.Visible) And (Not frmCantidad.Visible) And (Not MirandoParty) Then
          
-        If picInv.Visible Then
-            picInv.SetFocus
+        If PicInv.Visible Then
+            PicInv.SetFocus
         ElseIf hlst.Visible Then
             hlst.SetFocus
 
@@ -1983,8 +1945,8 @@ End Sub
 
 Private Sub RecTxt_KeyDown(KeyCode As Integer, Shift As Integer)
 
-    If picInv.Visible Then
-        picInv.SetFocus
+    If PicInv.Visible Then
+        PicInv.SetFocus
     Else
         hlst.SetFocus
 

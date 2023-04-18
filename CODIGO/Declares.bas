@@ -750,6 +750,8 @@ Public Enum eMessages
     UserSwing
     SafeModeOn
     SafeModeOff
+    CombatModeOn
+    CombatModeOff
     ResuscitationSafeOff
     ResuscitationSafeOn
     NobilityLost
@@ -1251,8 +1253,8 @@ Public Const OFFSET_HEAD         As Integer = -34
 
 Public Enum eSMType
 
-    sResucitation
     sSafemode
+    sCombatmode
 
 End Enum
 

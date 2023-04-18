@@ -181,7 +181,7 @@ Private Enum ClientPacketID
     Attack = 9                  'AT
     PickUp = 10                   'AG
     SafeToggle = 11              '/SEG & SEG  (SEG's behaviour has to be coded in the client)
-    ResuscitationSafeToggle = 12
+    CombatToggle = 12
     RequestGuildLeaderInfo = 13   'GLINFO
     RequestAtributes = 14         'ATR
     RequestFame = 15              'FAMA
@@ -886,12 +886,12 @@ Public Sub HandleMultiMessage()
         
             Case eMessages.SafeModeOff
                 Call frmMain.ControlSM(eSMType.sSafemode, False)
+                
+            Case eMessages.CombatModeOn
+                Call frmMain.ControlSM(eSMType.sCombatmode, True)
         
-            Case eMessages.ResuscitationSafeOff
-                Call frmMain.ControlSM(eSMType.sResucitation, False)
-         
-            Case eMessages.ResuscitationSafeOn
-                Call frmMain.ControlSM(eSMType.sResucitation, True)
+            Case eMessages.CombatModeOff
+                Call frmMain.ControlSM(eSMType.sCombatmode, False)
         
             Case eMessages.NobilityLost
                 Call AddtoRichTextBox(frmMain.RecTxt, MENSAJE_PIERDE_NOBLEZA, 255, 0, 0, False, False, True)
@@ -1351,7 +1351,7 @@ Private Sub HandleBankInit()
     
     BankGold = incomingData.ReadLong
     Call InvBanco(0).Initialize(DirectD3D8, frmBancoObj.PicBancoInv, MAX_BANCOINVENTORY_SLOTS)
-    Call InvBanco(1).Initialize(DirectD3D8, frmBancoObj.picInv, Inventario.MaxObjs)
+    Call InvBanco(1).Initialize(DirectD3D8, frmBancoObj.PicInv, Inventario.MaxObjs)
     
     For i = 1 To Inventario.MaxObjs
 
@@ -1626,36 +1626,6 @@ Private Sub HandleSafeModeOff()
     Call incomingData.ReadByte
     
     Call frmMain.ControlSM(eSMType.sSafemode, False)
-
-End Sub
-
-''
-' Handles the ResuscitationSafeOff message.
-
-Private Sub HandleResuscitationSafeOff()
-    '***************************************************
-    'Author: Rapsodius
-    'Creation date: 10/10/07
-    '***************************************************
-    'Remove packet ID
-    Call incomingData.ReadByte
-    
-    Call frmMain.ControlSM(eSMType.sResucitation, False)
-
-End Sub
-
-''
-' Handles the ResuscitationSafeOn message.
-
-Private Sub HandleResuscitationSafeOn()
-    '***************************************************
-    'Author: Rapsodius
-    'Creation date: 10/10/07
-    '***************************************************
-    'Remove packet ID
-    Call incomingData.ReadByte
-    
-    Call frmMain.ControlSM(eSMType.sResucitation, True)
 
 End Sub
 
@@ -6165,17 +6135,17 @@ Public Sub WriteSafeToggle()
 End Sub
 
 ''
-' Writes the "ResuscitationSafeToggle" message to the outgoing data buffer.
+' Writes the "CombatToggle" message to the outgoing data buffer.
 '
 ' @remarks  The data is not actually sent until the buffer is properly flushed.
 
-Public Sub WriteResuscitationToggle()
+Public Sub WriteCombatToggle()
     '**************************************************************
-    'Author: Rapsodius
-    'Creation Date: 10/10/07
-    'Writes the Resuscitation safe toggle packet to the outgoing data buffer.
+    'Author: Lorwik
+    'Creation Date: 18/04/2023
+    'Writes the Combat safe toggle packet to the outgoing data buffer.
     '**************************************************************
-    Call outgoingData.WriteByte(ClientPacketID.ResuscitationSafeToggle)
+    Call outgoingData.WriteByte(ClientPacketID.CombatToggle)
 
 End Sub
 

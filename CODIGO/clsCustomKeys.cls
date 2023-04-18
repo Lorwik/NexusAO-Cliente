@@ -88,7 +88,7 @@ Private ActiveConfig                                              As Byte
 '@param mKeyTamAnimal Key for taming animals
 '@param mKeySteal Key for Stealing other users' gold or objects
 '@param mKeyToggleSafeMode Key for toggling Safe Mode
-'@param mKeyToggleResuscitationSafe Key for toggling Resuscitation Safe
+'@param mKeyToggleCombatSafe Key for toggling Resuscitation Safe
 '@param mKeyHide Key for hiding the character
 '@param mKeyDropObject Key for dropping inventory objects
 '@param mKeyUseObject Key for using inventory objects
@@ -117,7 +117,7 @@ Public Enum eKeyType
     mKeyTamAnimal
     mKeySteal
     mKeyToggleSafeMode
-    mKeyToggleResuscitationSafe
+    mKeyToggleCombatSafe
     mKeyHide
     mKeyDropObject
     mKeyUseObject
@@ -419,7 +419,7 @@ Public Sub LoadDefaults(ByVal KeyConfig As Byte)
     mappedKeys(KeyConfig, eKeyType.mKeyLeft) = KeyCodeConstants.vbKeyLeft
     mappedKeys(KeyConfig, eKeyType.mKeyRight) = KeyCodeConstants.vbKeyRight
     mappedKeys(KeyConfig, eKeyType.mKeyToggleMusic) = KeyCodeConstants.vbKeyM
-    mappedKeys(KeyConfig, eKeyType.mKeyToggleSound) = KeyCodeConstants.vbKeyS
+    mappedKeys(KeyConfig, eKeyType.mKeyToggleSound) = KeyCodeConstants.vbKeyW
     mappedKeys(KeyConfig, eKeyType.mKeyToggleFxs) = KeyCodeConstants.vbKeyF
     mappedKeys(KeyConfig, eKeyType.mKeyRequestRefresh) = KeyCodeConstants.vbKeyL
     mappedKeys(KeyConfig, eKeyType.mKeyToggleNames) = KeyCodeConstants.vbKeyN
@@ -427,8 +427,8 @@ Public Sub LoadDefaults(ByVal KeyConfig As Byte)
     mappedKeys(KeyConfig, eKeyType.mKeyEquipObject) = KeyCodeConstants.vbKeyE
     mappedKeys(KeyConfig, eKeyType.mKeyTamAnimal) = KeyCodeConstants.vbKeyD
     mappedKeys(KeyConfig, eKeyType.mKeySteal) = KeyCodeConstants.vbKeyR
-    mappedKeys(KeyConfig, eKeyType.mKeyToggleSafeMode) = KeyCodeConstants.vbKeyMultiply
-    mappedKeys(KeyConfig, eKeyType.mKeyToggleResuscitationSafe) = KeyCodeConstants.vbKeyEnd
+    mappedKeys(KeyConfig, eKeyType.mKeyToggleSafeMode) = KeyCodeConstants.vbKeyS
+    mappedKeys(KeyConfig, eKeyType.mKeyToggleCombatSafe) = KeyCodeConstants.vbKeyC
     mappedKeys(KeyConfig, eKeyType.mKeyHide) = KeyCodeConstants.vbKeyO
     mappedKeys(KeyConfig, eKeyType.mKeyDropObject) = KeyCodeConstants.vbKeyT
     mappedKeys(KeyConfig, eKeyType.mKeyUseObject) = KeyCodeConstants.vbKeyU
