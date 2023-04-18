@@ -634,9 +634,13 @@ Public Const MENSAJE_USUARIO_RECHAZO_ATAQUE_ESCUDO     As String = "¡¡¡El usuari
 
 Public Const MENSAJE_FALLADO_GOLPE                     As String = "¡¡¡Has fallado el golpe!!!"
 
-Public Const MENSAJE_SEGURO_ACTIVADO                   As String = ">>SEGURO ACTIVADO<<"
+Public Const MENSAJE_SEGURO_ACTIVADO                   As String = "Seguro Activado"
 
-Public Const MENSAJE_SEGURO_DESACTIVADO                As String = ">>SEGURO DESACTIVADO<<"
+Public Const MENSAJE_SEGURO_DESACTIVADO                As String = "Seguro Desactivado"
+
+Public Const MENSAJE_COMBATE_ACTIVADO                   As String = "Modo Combate Activado"
+
+Public Const MENSAJE_COMBATE_DESACTIVADO                As String = "Modo Combate Desactivado"
 
 Public Const MENSAJE_PIERDE_NOBLEZA                    As String = "¡¡Has perdido puntaje de nobleza y ganado puntaje de criminalidad!! Si sigues ayudando a criminales te convertirás en uno de ellos y serás perseguido por las tropas de las ciudades."
 
@@ -746,14 +750,12 @@ Public Enum eMessages
     NPCSwing
     NPCKillUser
     BlockedWithShieldUser
-    BlockedWithShieldOther
+    BlockedWithShieldother
     UserSwing
     SafeModeOn
     SafeModeOff
     CombatModeOn
     CombatModeOff
-    ResuscitationSafeOff
-    ResuscitationSafeOn
     NobilityLost
     CantUseWhileMeditating
     NPCHitUser
@@ -765,14 +767,13 @@ Public Enum eMessages
     HaveKilledUser
     UserKill
     EarnExp
-    GoHome
-    CancelGoHome
+    Home
+    CancelHome
     FinishHome
     
-    '//Nuevos mensajes
+    '//Mensajes nuevos
     UserMuerto
     NpcInmune
-    
     Hechizo_HechiceroMSG_NOMBRE
     Hechizo_HechiceroMSG_ALGUIEN
     Hechizo_HechiceroMSG_CRIATURA

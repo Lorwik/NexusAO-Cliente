@@ -875,7 +875,7 @@ Public Sub HandleMultiMessage()
             Case eMessages.BlockedWithShieldUser
                 Call AddtoRichTextBox(frmMain.RecTxt, MENSAJE_RECHAZO_ATAQUE_ESCUDO, 255, 0, 0, True, False, True)
         
-            Case eMessages.BlockedWithShieldOther
+            Case eMessages.BlockedWithShieldother
                 Call AddtoRichTextBox(frmMain.RecTxt, MENSAJE_USUARIO_RECHAZO_ATAQUE_ESCUDO, 255, 0, 0, True, False, True)
         
             Case eMessages.UserSwing
@@ -1042,7 +1042,7 @@ Public Sub HandleMultiMessage()
             Case eMessages.EarnExp
                 'Call ShowConsoleMsg(MENSAJE_HAS_GANADO_EXPE_1 & .ReadLong & MENSAJE_HAS_GANADO_EXPE_2, 255, 0, 0, True, False)
         
-            Case eMessages.GoHome
+            Case eMessages.Home
 
                 Dim Distance As Byte
 
@@ -1072,7 +1072,7 @@ Public Sub HandleMultiMessage()
                 Call ShowConsoleMsg("Te encuentras a " & Distance & " mapas de la " & Hogar & ", este viaje durará " & msg, 255, 0, 0, True)
                 Traveling = True
 
-            Case eMessages.CancelGoHome
+            Case eMessages.CancelHome
                 Call ShowConsoleMsg(MENSAJE_HOGAR_CANCEL, 255, 0, 0, True)
                 Traveling = False
                    
@@ -1626,6 +1626,38 @@ Private Sub HandleSafeModeOff()
     Call incomingData.ReadByte
     
     Call frmMain.ControlSM(eSMType.sSafemode, False)
+
+End Sub
+
+''
+' Handles the CombatModeOn message.
+
+Private Sub HandleCombatModeOn()
+    '***************************************************
+    'Author: Lorwik
+    'Last Modification: 18/04/2023
+    '
+    '***************************************************
+    'Remove packet ID
+    Call incomingData.ReadByte
+    
+    Call frmMain.ControlSM(eSMType.sCombatmode, True)
+
+End Sub
+
+''
+' Handles the CombatModeOff message.
+
+Private Sub HandleCombatModeOff()
+    '***************************************************
+    'Author: Lorwik
+    'Last Modification: 18/04/2023
+    '
+    '***************************************************
+    'Remove packet ID
+    Call incomingData.ReadByte
+    
+    Call frmMain.ControlSM(eSMType.sCombatmode, False)
 
 End Sub
 

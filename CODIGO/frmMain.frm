@@ -1022,14 +1022,14 @@ Public Sub ControlSM(ByVal Index As Byte, ByVal Mostrar As Boolean)
         Case eSMType.sCombatmode
 
             If Mostrar Then
-                Call AddtoRichTextBox(frmMain.RecTxt, MENSAJE_SEGURO_ACTIVADO, 0, 255, 0, True, False, True)
+                Call AddtoRichTextBox(frmMain.RecTxt, MENSAJE_COMBATE_ACTIVADO, 0, 255, 0, True, False, True)
                 imgSafe(Index).ToolTipText = "Modo Combate activado."
-                imgSafe(Index).Picture = LoadPicture(DirInterfaces & "combatofmp")
+                imgSafe(Index).Picture = LoadPicture(DirInterfaces & "combateoff.bmp")
                 
             Else
-                Call AddtoRichTextBox(frmMain.RecTxt, MENSAJE_SEGURO_DESACTIVADO, 255, 0, 0, True, False, True)
+                Call AddtoRichTextBox(frmMain.RecTxt, MENSAJE_COMBATE_DESACTIVADO, 255, 0, 0, True, False, True)
                 imgSafe(Index).ToolTipText = "Modo Combate desactivado."
-                imgSafe(Index).Picture = LoadPicture(DirInterfaces & "combaton.bmp")
+                imgSafe(Index).Picture = LoadPicture(DirInterfaces & "combateon.bmp")
 
             End If
 
