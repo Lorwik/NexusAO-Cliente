@@ -23,11 +23,12 @@ Begin VB.Form frmConnect
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
    Begin VB.TextBox txtPasswd 
+      Alignment       =   2  'Center
       BackColor       =   &H00000000&
       BorderStyle     =   0  'None
       BeginProperty Font 
          Name            =   "Tahoma"
-         Size            =   8.25
+         Size            =   12
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -37,19 +38,20 @@ Begin VB.Form frmConnect
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       IMEMode         =   3  'DISABLE
-      Left            =   5820
+      Left            =   6450
       PasswordChar    =   "*"
       TabIndex        =   1
       Text            =   "123456"
       Top             =   7680
-      Width           =   3750
+      Width           =   2490
    End
    Begin VB.TextBox txtNombre 
+      Alignment       =   2  'Center
       BackColor       =   &H00000000&
       BorderStyle     =   0  'None
       BeginProperty Font 
          Name            =   "Tahoma"
-         Size            =   8.25
+         Size            =   12
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -58,11 +60,11 @@ Begin VB.Form frmConnect
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   315
-      Left            =   5880
+      Left            =   6450
       TabIndex        =   0
       Text            =   "Lorwik"
       Top             =   6210
-      Width           =   3600
+      Width           =   2460
    End
    Begin VB.TextBox PortTxt 
       Alignment       =   2  'Center
@@ -80,10 +82,11 @@ Begin VB.Form frmConnect
       EndProperty
       ForeColor       =   &H0000FF00&
       Height          =   195
-      Left            =   8340
+      Left            =   5700
       TabIndex        =   2
       Text            =   "7666"
-      Top             =   2460
+      Top             =   1050
+      Visible         =   0   'False
       Width           =   825
    End
    Begin VB.TextBox IPTxt 
@@ -102,10 +105,11 @@ Begin VB.Form frmConnect
       EndProperty
       ForeColor       =   &H0000FF00&
       Height          =   195
-      Left            =   9390
+      Left            =   7350
       TabIndex        =   4
       Text            =   "localhost"
-      Top             =   2460
+      Top             =   1050
+      Visible         =   0   'False
       Width           =   1575
    End
    Begin VB.Image imgConectarse 
@@ -122,21 +126,21 @@ Begin VB.Form frmConnect
    End
    Begin VB.Image imgRecuperar 
       Height          =   435
-      Left            =   300
-      Top             =   6900
+      Left            =   240
+      Top             =   7710
       Width           =   2985
    End
    Begin VB.Image imgCrearPj 
       Height          =   375
-      Left            =   6180
-      Top             =   9600
+      Left            =   240
+      Top             =   6930
       Width           =   3045
    End
    Begin VB.Label version 
       Alignment       =   1  'Right Justify
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
-      Caption         =   "Label1"
+      Caption         =   "Version"
       BeginProperty Font 
          Name            =   "Tahoma"
          Size            =   8.25
@@ -148,10 +152,10 @@ Begin VB.Form frmConnect
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   195
-      Left            =   14610
+      Left            =   14535
       TabIndex        =   3
       Top             =   11130
-      Width           =   555
+      Width           =   630
    End
 End
 Attribute VB_Name = "frmConnect"
@@ -267,7 +271,7 @@ Private Sub Form_Load()
     version.Caption = "v" & App.Major & "." & App.Minor & " Build: " & App.Revision
     '[END]'
     
-    Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaConectar.jpg")
+    Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaConectar.bmp")
     
     Call LoadButtons
         
