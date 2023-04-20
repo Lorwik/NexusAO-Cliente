@@ -497,7 +497,7 @@ Private Sub Form_Load()
     Set clsFormulario = New clsFormMovementManager
     clsFormulario.Initialize Me
     
-    Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaDetallesClan.jpg")
+    Me.Picture = LoadPicture(DirInterfaces & "VentanaDetallesClan.jpg")
     
     Call LoadButtons
     
@@ -554,14 +554,14 @@ End Sub
 
 Private Sub imgOfrecerAlianza_Click()
     frmCommet.Nombre = Nombre.Caption
-    frmCommet.T = TIPO.ALIANZA
+    frmCommet.t = TIPO.ALIANZA
     Call frmCommet.Show(vbModal, frmGuildBrief)
 
 End Sub
 
 Private Sub imgOfrecerPaz_Click()
     frmCommet.Nombre = Nombre.Caption
-    frmCommet.T = TIPO.PAZ
+    frmCommet.t = TIPO.PAZ
     Call frmCommet.Show(vbModal, frmGuildBrief)
 
 End Sub

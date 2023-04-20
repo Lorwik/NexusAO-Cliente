@@ -1908,7 +1908,7 @@ Private Sub lstProfesion_Click()
 
     On Error Resume Next
 
-    '    Image1.Picture = LoadPicture(App.path & "\Interfaces\" & lstProfesion.Text & ".jpg")
+    '    Image1.Picture = LoadPicture(DirInterfaces & "" & lstProfesion.Text & ".jpg")
     '
     UserClase = lstProfesion.ListIndex + 1
     
@@ -1997,8 +1997,8 @@ Private Sub tAnimacion_Timer()
         
         picTemp.BackColor = picTemp.BackColor
         
-        Call DrawGrhtoHdc(picTemp.hdc, Grh, SR, DR)
-        Call DrawTransparentGrhtoHdc(picPJ.hdc, picTemp.hdc, DR, DR, vbBlack)
+        Call DrawGrhtoHdc(picTemp.hDC, Grh, SR, DR)
+        Call DrawTransparentGrhtoHdc(picPJ.hDC, picTemp.hDC, DR, DR, vbBlack)
 
     End With
     
@@ -2017,8 +2017,8 @@ Private Sub tAnimacion_Timer()
         
         picTemp.BackColor = picTemp.BackColor
         
-        Call DrawGrhtoHdc(picTemp.hdc, Grh, SR, DR)
-        Call DrawTransparentGrhtoHdc(picPJ.hdc, picTemp.hdc, DR, DR, vbBlack)
+        Call DrawGrhtoHdc(picTemp.hDC, Grh, SR, DR)
+        Call DrawTransparentGrhtoHdc(picPJ.hDC, picTemp.hDC, DR, DR, vbBlack)
 
     End With
 
@@ -2049,8 +2049,8 @@ Private Sub DrawHead(ByVal Head As Integer, ByVal PicIndex As Integer)
         
         picTemp.BackColor = picTemp.BackColor
         
-        Call DrawGrhtoHdc(picTemp.hdc, Grh, SR, DR)
-        Call DrawTransparentGrhtoHdc(picHead(PicIndex).hdc, picTemp.hdc, DR, DR, vbBlack)
+        Call DrawGrhtoHdc(picTemp.hDC, Grh, SR, DR)
+        Call DrawTransparentGrhtoHdc(picHead(PicIndex).hDC, picTemp.hDC, DR, DR, vbBlack)
 
     End With
     

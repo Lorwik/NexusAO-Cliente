@@ -406,7 +406,7 @@ Private Sub Form_Load()
     Set clsFormulario = New clsFormMovementManager
     clsFormulario.Initialize Me
     
-    Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaInfoPj.jpg")
+    Me.Picture = LoadPicture(DirInterfaces & "VentanaInfoPj.jpg")
     
     Call LoadButtons
     
@@ -470,7 +470,7 @@ Private Sub imgPeticion_Click()
 End Sub
 
 Private Sub imgRechazar_Click()
-    frmCommet.T = RECHAZOPJ
+    frmCommet.t = RECHAZOPJ
     frmCommet.Nombre = Nombre.Caption
     frmCommet.Show vbModeless, frmCharInfo
 

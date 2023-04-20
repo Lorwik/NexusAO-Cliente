@@ -143,7 +143,6 @@ Begin VB.Form frmMain
       _ExtentY        =   3043
       _Version        =   393217
       BackColor       =   0
-      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       DisableNoScroll =   -1  'True
@@ -953,7 +952,7 @@ Private Sub LoadButtons()
     
     Call cBotonLanzar.Initialize(CmdLanzar, GrhPath & "btnLanzar.jpg", GrhPath & "btnLanzar_Hov.jpg", GrhPath & "btnLanzar_press.jpg", Me)
     
-    Call cBotonLanzar.Initialize(cmdINFO, GrhPath & "btnInfo.jpg", GrhPath & "btnInfo_Hov.jpg", GrhPath & "btnInfo_press.jpg", Me)
+    Call cBotonLanzar.Initialize(cmdInfo, GrhPath & "btnInfo.jpg", GrhPath & "btnInfo_Hov.jpg", GrhPath & "btnInfo_press.jpg", Me)
     
     Call cBotonInventario.Initialize(btnInventario, GrhPath & "btnInventario.jpg", GrhPath & "btnInventario_Hov.jpg", GrhPath & "btnInventario_press.jpg", Me)
     
@@ -1236,7 +1235,7 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
             If SendTxt.Visible Then Exit Sub
         
         Case CustomKeys.BindedKey(eKeyType.mKeyTakeScreenShot)
-            Call Mod_General.Client_Screenshot(frmMain.hdc, 1024, 768)
+            Call Mod_General.Client_Screenshot(frmMain.hDC, 1024, 768)
                 
         Case CustomKeys.BindedKey(eKeyType.mKeyShowOptions)
             Call frmOpciones.Show(vbModeless, frmMain)
@@ -1858,14 +1857,14 @@ Private Sub btnInventario_Click()
     
     If PicInv.Visible Then Exit Sub
 
-    InvEqu.Picture = LoadPicture(App.path & "\Interfaces\Centroinventario.jpg")
+    InvEqu.Picture = LoadPicture(DirInterfaces & "Centroinventario.jpg")
 
     ' Activo controles de inventario
     PicInv.Visible = True
 
     ' Desactivo controles de hechizo
     hlst.Visible = False
-    cmdINFO.Visible = False
+    cmdInfo.Visible = False
     CmdLanzar.Visible = False
     
     cmdMoverHechi(0).Visible = False
@@ -1879,11 +1878,11 @@ Private Sub btnHechizos_Click()
     
     If hlst.Visible Then Exit Sub
 
-    InvEqu.Picture = LoadPicture(App.path & "\Interfaces\Centrohechizos.jpg")
+    InvEqu.Picture = LoadPicture(DirInterfaces & "Centrohechizos.jpg")
     
     ' Activo controles de hechizos
     hlst.Visible = True
-    cmdINFO.Visible = True
+    cmdInfo.Visible = True
     CmdLanzar.Visible = True
     
     cmdMoverHechi(0).Visible = True
@@ -2056,15 +2055,15 @@ Private Sub Socket1_Read(dataLength As Integer, IsUrgent As Integer)
 
     Dim RD     As String
 
-    Dim data() As Byte
+    Dim Data() As Byte
     
     Call Socket1.Read(RD, dataLength)
-    data = StrConv(RD, vbFromUnicode)
+    Data = StrConv(RD, vbFromUnicode)
     
     If RD = vbNullString Then Exit Sub
     
     'Put data in the buffer
-    Call incomingData.WriteBlock(data)
+    Call incomingData.WriteBlock(Data)
     
     'Send buffer to Handle data
     Call HandleIncomingData
@@ -2304,15 +2303,15 @@ End Sub
 
 Private Sub Winsock1_DataArrival(ByVal bytesTotal As Long)
     Dim RD As String
-    Dim data() As Byte
+    Dim Data() As Byte
     
     'Socket1.Read RD, DataLength
     Winsock1.GetData RD
     
-    data = StrConv(RD, vbFromUnicode)
+    Data = StrConv(RD, vbFromUnicode)
     
     'Set data in the buffer
-    Call incomingData.WriteBlock(data)
+    Call incomingData.WriteBlock(Data)
     
     'Send buffer to Handle data
     Call HandleIncomingData

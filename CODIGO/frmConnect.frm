@@ -271,7 +271,7 @@ Private Sub Form_Load()
     version.Caption = "v" & App.Major & "." & App.Minor & " Build: " & App.Revision
     '[END]'
     
-    Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaConectar.bmp")
+    Me.Picture = LoadPicture(DirInterfaces & "VentanaConectar.bmp")
     
     Call LoadButtons
         

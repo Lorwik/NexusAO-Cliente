@@ -46,37 +46,37 @@ Public bLluvia()    As Byte ' Array para determinar si
 Private lFrameTimer As Long
 
 Public Function DirGraficos() As String
-    DirGraficos = App.path & "\Graficos\"
+    DirGraficos = App.path & "\Recursos\Graficos\"
 
 End Function
 
 Public Function DirInterfaces() As String
-    DirInterfaces = App.path & "\Interfaces\"
+    DirInterfaces = App.path & "\Recursos\Interfaces\"
     
 End Function
 
 Public Function DirIni() As String
-    DirIni = App.path & "\Init\"
+    DirIni = App.path & "\Recursos\Init\"
     
 End Function
 
 Public Function DirSound() As String
-    DirSound = App.path & "\Wav\"
+    DirSound = App.path & "\Recursos\Wav\"
 
 End Function
 
 Public Function DirMidi() As String
-    DirMidi = App.path & "\Midi\"
+    DirMidi = App.path & "\Recursos\Midi\"
 
 End Function
 
 Public Function DirMapas() As String
-    DirMapas = App.path & "\Mapas\"
+    DirMapas = App.path & "\Recursos\Mapas\"
 
 End Function
 
 Public Function DirExtras() As String
-    DirExtras = App.path & "\EXTRAS\"
+    DirExtras = App.path & "\Recursos\EXTRAS\"
 
 End Function
 
@@ -109,83 +109,6 @@ Public Function GetRawName(ByRef sName As String) As String
     End If
 
 End Function
-
-Sub CargarAnimArmas()
-
-    On Error Resume Next
-
-    Dim LoopC As Long
-
-    Dim arch  As String
-    
-    arch = App.path & "\init\" & "armas.dat"
-    
-    NumWeaponAnims = Val(GetVar(arch, "INIT", "NumArmas"))
-    
-    ReDim WeaponAnimData(1 To NumWeaponAnims) As WeaponAnimData
-    
-    For LoopC = 1 To NumWeaponAnims
-        InitGrh WeaponAnimData(LoopC).WeaponWalk(1), Val(GetVar(arch, "ARMA" & LoopC, "Dir1")), 0
-        InitGrh WeaponAnimData(LoopC).WeaponWalk(2), Val(GetVar(arch, "ARMA" & LoopC, "Dir2")), 0
-        InitGrh WeaponAnimData(LoopC).WeaponWalk(3), Val(GetVar(arch, "ARMA" & LoopC, "Dir3")), 0
-        InitGrh WeaponAnimData(LoopC).WeaponWalk(4), Val(GetVar(arch, "ARMA" & LoopC, "Dir4")), 0
-    Next LoopC
-
-End Sub
-
-Public Sub CargarColores()
-
-    On Error Resume Next
-
-    Dim archivoC As String
-
-    archivoC = App.path & "\init\colores.dat"
-    
-    If Not FileExist(archivoC, vbArchive) Then
-        Call MsgBox("ERROR: no se ha podido cargar los colores. Falta el archivo colores.dat, reinstale el juego", vbCritical + vbOKOnly)
-        Exit Sub
-
-    End If
-    
-    Dim i As Long
-    
-    For i = 0 To 48 '49 y 50 reservados para ciudadano y criminal
-        ColoresPJ(i) = D3DColorXRGB(GetVar(archivoC, CStr(i), "R"), GetVar(archivoC, CStr(i), "G"), GetVar(archivoC, CStr(i), "B"))
-    Next i
-    
-    '   Crimi
-    ColoresPJ(50) = D3DColorXRGB(GetVar(archivoC, "CR", "R"), GetVar(archivoC, "CR", "G"), GetVar(archivoC, "CR", "B"))
-
-    '   Ciuda
-    ColoresPJ(49) = D3DColorXRGB(GetVar(archivoC, "CI", "R"), GetVar(archivoC, "CI", "G"), GetVar(archivoC, "CI", "B"))
-    
-    '   Atacable
-    ColoresPJ(50) = D3DColorXRGB(GetVar(archivoC, "AT", "R"), GetVar(archivoC, "AT", "G"), GetVar(archivoC, "AT", "B"))
-
-End Sub
-
-Sub CargarAnimEscudos()
-
-    On Error Resume Next
-
-    Dim LoopC As Long
-
-    Dim arch  As String
-    
-    arch = App.path & "\init\" & "escudos.dat"
-    
-    NumEscudosAnims = Val(GetVar(arch, "INIT", "NumEscudos"))
-    
-    ReDim ShieldAnimData(1 To NumEscudosAnims) As ShieldAnimData
-    
-    For LoopC = 1 To NumEscudosAnims
-        InitGrh ShieldAnimData(LoopC).ShieldWalk(1), Val(GetVar(arch, "ESC" & LoopC, "Dir1")), 0
-        InitGrh ShieldAnimData(LoopC).ShieldWalk(2), Val(GetVar(arch, "ESC" & LoopC, "Dir2")), 0
-        InitGrh ShieldAnimData(LoopC).ShieldWalk(3), Val(GetVar(arch, "ESC" & LoopC, "Dir3")), 0
-        InitGrh ShieldAnimData(LoopC).ShieldWalk(4), Val(GetVar(arch, "ESC" & LoopC, "Dir4")), 0
-    Next LoopC
-
-End Sub
 
 Sub AddtoRichTextBox(ByRef RichTextBox As RichTextBox, _
                      ByVal Text As String, _
@@ -558,125 +481,6 @@ Private Sub CheckKeys()
 
 End Sub
 
-'TODO : Si bien nunca estuvo allí, el mapa es algo independiente o a lo sumo dependiente del engine, no va acá!!!
-Sub SwitchMap(ByVal Map As Integer)
-
-    '**************************************************************
-    'Formato de mapas optimizado para reducir el espacio que ocupan.
-    'Diseñado y creado por Juan Martín Sotuyo Dodero (Maraxus) (juansotuyo@hotmail.com)
-    '**************************************************************
-    Dim Y         As Long
-
-    Dim X         As Long
-
-    Dim tempint   As Integer
-
-    Dim ByFlags   As Byte
-
-    Dim handle    As Integer
-
-    Dim CharIndex As Integer
-
-    Dim Obj       As Integer
-    
-    handle = FreeFile()
-    
-    Call Char_CleanAll
-    
-    Open DirMapas & "Mapa" & Map & ".map" For Binary As handle
-    Seek handle, 1
-            
-    'map Header
-    Get handle, , MapInfo.MapVersion
-    Get handle, , MiCabecera
-    Get handle, , tempint
-    Get handle, , tempint
-    Get handle, , tempint
-    Get handle, , tempint
-    
-    'Load arrays
-    For Y = YMinMapSize To YMaxMapSize
-        For X = XMinMapSize To XMaxMapSize
-            Get handle, , ByFlags
-            
-            MapData(X, Y).Blocked = (ByFlags And 1)
-            
-            Get handle, , MapData(X, Y).Graphic(1).GrhIndex
-            InitGrh MapData(X, Y).Graphic(1), MapData(X, Y).Graphic(1).GrhIndex
-            
-            'Layer 2 used?
-            If ByFlags And 2 Then
-                Get handle, , MapData(X, Y).Graphic(2).GrhIndex
-                InitGrh MapData(X, Y).Graphic(2), MapData(X, Y).Graphic(2).GrhIndex
-            Else
-                MapData(X, Y).Graphic(2).GrhIndex = 0
-
-            End If
-                
-            'Layer 3 used?
-            If ByFlags And 4 Then
-                Get handle, , MapData(X, Y).Graphic(3).GrhIndex
-                InitGrh MapData(X, Y).Graphic(3), MapData(X, Y).Graphic(3).GrhIndex
-            Else
-                MapData(X, Y).Graphic(3).GrhIndex = 0
-
-            End If
-                
-            'Layer 4 used?
-            If ByFlags And 8 Then
-                Get handle, , MapData(X, Y).Graphic(4).GrhIndex
-                InitGrh MapData(X, Y).Graphic(4), MapData(X, Y).Graphic(4).GrhIndex
-            Else
-                MapData(X, Y).Graphic(4).GrhIndex = 0
-
-            End If
-            
-            'Trigger used?
-            If ByFlags And 16 Then
-                Get handle, , MapData(X, Y).Trigger
-            Else
-                MapData(X, Y).Trigger = 0
-
-            End If
-            
-            'Erase NPCs
-            CharIndex = Char_MapPosExits(X, Y)
- 
-            If (CharIndex > 0) Then
-                Call Char_Erase(CharIndex)
-
-            End If
-
-            'Erase OBJs
-            Obj = Map_PosExitsObject(X, Y)
-
-            If (Obj > 0) Then
-                Call Map_DestroyObject(X, Y)
-
-            End If
-            
-            'Erase Lights
-            Call Engine_D3DColor_To_RGB_List(MapData(X, Y).Engine_Light(), Estado_Actual) 'Standelf, Light & Meteo Engine
-        Next X
-    Next Y
-    
-    Close handle
-    
-    Call LightRemoveAll
-    
-    '   Erase particle effects
-    ReDim Effect(1 To NumEffects)
-    
-    MapInfo.name = ""
-    MapInfo.Music = ""
-    
-    CurMap = Map
-    
-    Init_Ambient Map
-    
-    'If UserMap = 120 Then Effect_Waterfall_Begin Engine_TPtoSPX(8), Engine_TPtoSPY(3), 1, 800
-End Sub
-
 Function ReadField(ByVal Pos As Integer, _
                    ByRef Text As String, _
                    ByVal SepASCII As Byte) As String
@@ -758,44 +562,6 @@ Public Function IsIp(ByVal Ip As String) As Boolean
     Next i
 
 End Function
-
-Public Sub CargarServidores()
-
-    '********************************
-    'Author: Unknown
-    'Last Modification: 07/26/07
-    'Last Modified by: Rapsodius
-    'Added Instruction "CloseClient" before End so the mutex is cleared
-    '********************************
-    On Error GoTo errorH
-
-    Dim F As String
-
-    Dim c As Integer
-
-    Dim i As Long
-    
-    F = App.path & "\init\sinfo.dat"
-    c = Val(GetVar(F, "INIT", "Cant"))
-    
-    ReDim ServersLst(1 To c) As tServerInfo
-
-    For i = 1 To c
-        ServersLst(i).Desc = GetVar(F, "S" & i, "Desc")
-        ServersLst(i).Ip = Trim$(GetVar(F, "S" & i, "Ip"))
-        ServersLst(i).PassRecPort = CInt(GetVar(F, "S" & i, "P2"))
-        ServersLst(i).Puerto = CInt(GetVar(F, "S" & i, "PJ"))
-    Next i
-
-    CurServer = 1
-    Exit Sub
-
-errorH:
-    Call MsgBox("Error cargando los servidores, actualicelos de la web", vbCritical + vbOKOnly, "Nexus AO")
-    
-    Call CloseClient
-
-End Sub
 
 Public Sub InitServersList()
 
@@ -1632,7 +1398,7 @@ Public Sub CargarHechizos()
 
     Dim j        As Long
  
-    PathName = App.path & "\init\Hechizos.dat"
+    PathName = DirIni & "Hechizos.dat"
     NumHechizos = Val(GetVar(PathName, "INIT", "NumHechizos"))
  
     ReDim Hechizos(1 To NumHechizos) As tHechizos

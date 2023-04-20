@@ -61,7 +61,7 @@ Private Const ERROR_NO_KEY_FILE                                   As Long = vbOb
 
 ''
 'The relative path from the application's location where the key config file is.
-Private Const KEY_CONFIG_FILE                                     As String = "\init\BindKeys.bin"
+Private Const KEY_CONFIG_FILE                                     As String = "BindKeys.bin"
 
 ''
 'Array of mapped keys
@@ -265,7 +265,7 @@ Public Sub LoadCustomKeys()
     '***************************************************
     Dim i       As Long
 
-    Dim J       As Long
+    Dim j       As Long
 
     Dim FileNum As Integer
 
@@ -293,9 +293,9 @@ Public Sub LoadCustomKeys()
                 Call LoadDefaults(i)
             Next i
             
-            For J = 1 To NUM_CUSTOM_KEYS
-                Get FileNum, , mappedKeys(ActiveConfig, J)
-            Next J
+            For j = 1 To NUM_CUSTOM_KEYS
+                Get FileNum, , mappedKeys(ActiveConfig, j)
+            Next j
 
         Else
             'Formato nuevo
@@ -304,9 +304,9 @@ Public Sub LoadCustomKeys()
             Get FileNum, , ActiveConfig
             
             For i = 0 To NUM_CUSTOM_CONFIGS
-                For J = 1 To NUM_CUSTOM_KEYS
-                    Get FileNum, , mappedKeys(i, J)
-                Next J
+                For j = 1 To NUM_CUSTOM_KEYS
+                    Get FileNum, , mappedKeys(i, j)
+                Next j
             Next i
 
         End If
@@ -332,22 +332,22 @@ Public Sub SaveCustomKeys()
     '***************************************************
     Dim i       As Long
 
-    Dim J       As Long
+    Dim j       As Long
 
     Dim FileNum As Integer
 
     FileNum = FreeFile()
     
-    Open App.path & KEY_CONFIG_FILE For Binary Access Write As FileNum
+    Open DirIni & KEY_CONFIG_FILE For Binary Access Write As FileNum
     
     'Guardo la configuración activa:
     Put FileNum, , ActiveConfig
     
     'Guardo las distintas configuraciones:
     For i = 0 To NUM_CUSTOM_CONFIGS
-        For J = 1 To NUM_CUSTOM_KEYS
-            Put FileNum, , mappedKeys(i, J)
-        Next J
+        For j = 1 To NUM_CUSTOM_KEYS
+            Put FileNum, , mappedKeys(i, j)
+        Next j
     Next i
     
     Close FileNum

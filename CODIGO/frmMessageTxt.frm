@@ -259,7 +259,7 @@ Private Sub Form_Load()
         messageTxt(i) = CustomMessages.Message(i)
     Next i
 
-    Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaMensajesPersonalizados.jpg")
+    Me.Picture = LoadPicture(DirInterfaces & "VentanaMensajesPersonalizados.jpg")
     
     LoadButtons
     
@@ -308,7 +308,7 @@ ErrHandler:
 
     'Did detected an invalid message??
     If Err.number = CustomMessages.InvalidMessageErrCode Then
-        Call MsgBox("El Mensaje " & CStr(i + 1) & " es inv·lido. Modifiquelo por favor.")
+        Call MsgBox("El Mensaje " & CStr(i + 1) & " es inv√°lido. Modifiquelo por favor.")
 
     End If
 

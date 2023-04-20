@@ -149,7 +149,7 @@ Private Sub Engine_Render_Text(ByRef UseFont As CustomFont, _
 
     Dim i              As Long
 
-    Dim J              As Long
+    Dim j              As Long
 
     Dim KeyPhrase      As Byte
 
@@ -159,9 +159,9 @@ Private Sub Engine_Render_Text(ByRef UseFont As CustomFont, _
 
     Dim SrcRect        As RECT
 
-    Dim v2             As D3DVECTOR2
+    Dim V2             As D3DVECTOR2
 
-    Dim v3             As D3DVECTOR2
+    Dim V3             As D3DVECTOR2
 
     Dim YOffset        As Single
     
@@ -226,10 +226,10 @@ Private Sub Engine_Render_Text(ByRef UseFont As CustomFont, _
             ascii() = StrConv(tempstr(i), vbFromUnicode)
         
             'Loop through the characters
-            For J = 1 To Len(tempstr(i))
+            For j = 1 To Len(tempstr(i))
 
                 'Copy from the cached vertex array to the temp vertex array
-                CopyMemory TempVA(0), UseFont.HeaderInfo.CharVA(ascii(J - 1)).Vertex(0), 32 * 4
+                CopyMemory TempVA(0), UseFont.HeaderInfo.CharVA(ascii(j - 1)).Vertex(0), 32 * 4
                 
                 'Set up the verticies
                 TempVA(0).X = X + Count
@@ -245,13 +245,13 @@ Private Sub Engine_Render_Text(ByRef UseFont As CustomFont, _
                 TempVA(3).Y = TempVA(2).Y
                 
                 'Set the colors
-                If Es_Emoticon(ascii(J - 1)) Then ' GSZAO los colores no afectan a los emoticones!
+                If Es_Emoticon(ascii(j - 1)) Then ' GSZAO los colores no afectan a los emoticones!
                     TempVA(0).Color = -1
                     TempVA(1).Color = -1
                     TempVA(2).Color = -1
                     TempVA(3).Color = -1
 
-                    If (ascii(J - 1) <> 157) Then Count = Count + 5   ' Los emoticones tienen tamaño propio (despues hay que cargarlos "correctamente" para evitar hacer esto)
+                    If (ascii(j - 1) <> 157) Then Count = Count + 5   ' Los emoticones tienen tamaÃ±o propio (despues hay que cargarlos "correctamente" para evitar hacer esto)
                 Else
                     TempVA(0).Color = TempColor
                     TempVA(1).Color = TempColor
@@ -264,7 +264,7 @@ Private Sub Engine_Render_Text(ByRef UseFont As CustomFont, _
                 DirectDevice.DrawPrimitiveUP D3DPT_TRIANGLESTRIP, 2, TempVA(0), Len(TempVA(0))
                 
                 'Shift over the the position to render the next character
-                Count = Count + UseFont.HeaderInfo.CharWidth(ascii(J - 1))
+                Count = Count + UseFont.HeaderInfo.CharWidth(ascii(j - 1))
     
                 'Check to reset the color
                 If ResetColor Then
@@ -273,7 +273,7 @@ Private Sub Engine_Render_Text(ByRef UseFont As CustomFont, _
 
                 End If
                 
-            Next J
+            Next j
             
         End If
 
@@ -395,7 +395,7 @@ Sub Engine_Init_FontSettings()
 
     'Load the header information
     FileNum = FreeFile
-    Open App.path & "\Extras\" & "Font.dat" For Binary As #FileNum
+    Open DirExtras & "Font.dat" For Binary As #FileNum
     Get #FileNum, , cfonts(1).HeaderInfo
     Close #FileNum
     

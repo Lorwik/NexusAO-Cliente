@@ -433,229 +433,21 @@ Private Declare Function QueryPerformanceCounter _
 'Text width computation. Needed to center text.
 Private Declare Function GetTextExtentPoint32 _
                 Lib "gdi32" _
-                Alias "GetTextExtentPoint32A" (ByVal hdc As Long, _
+                Alias "GetTextExtentPoint32A" (ByVal hDC As Long, _
                                                ByVal lpsz As String, _
                                                ByVal cbString As Long, _
                                                lpSize As Size) As Long
 
 Private Declare Function SetPixel _
-                Lib "gdi32" (ByVal hdc As Long, _
+                Lib "gdi32" (ByVal hDC As Long, _
                              ByVal X As Long, _
                              ByVal Y As Long, _
                              ByVal crColor As Long) As Long
 
 Private Declare Function GetPixel _
-                Lib "gdi32" (ByVal hdc As Long, _
+                Lib "gdi32" (ByVal hDC As Long, _
                              ByVal X As Long, _
                              ByVal Y As Long) As Long
-
-Sub CargarCabezas()
-
-    Dim N            As Integer
-
-    Dim i            As Long
-
-    Dim Numheads     As Integer
-
-    Dim Miscabezas() As tIndiceCabeza
-    
-    N = FreeFile()
-    Open App.path & "\init\Cabezas.ind" For Binary Access Read As #N
-    
-    'cabecera
-    Get #N, , MiCabecera
-    
-    'num de cabezas
-    Get #N, , Numheads
-    
-    'Resize array
-    ReDim HeadData(0 To Numheads) As HeadData
-    ReDim Miscabezas(0 To Numheads) As tIndiceCabeza
-    
-    For i = 1 To Numheads
-        Get #N, , Miscabezas(i)
-        
-        If Miscabezas(i).Head(1) Then
-            Call InitGrh(HeadData(i).Head(1), Miscabezas(i).Head(1), 0)
-            Call InitGrh(HeadData(i).Head(2), Miscabezas(i).Head(2), 0)
-            Call InitGrh(HeadData(i).Head(3), Miscabezas(i).Head(3), 0)
-            Call InitGrh(HeadData(i).Head(4), Miscabezas(i).Head(4), 0)
-
-        End If
-
-    Next i
-    
-    Close #N
-
-End Sub
-
-Sub CargarCascos()
-
-    Dim N            As Integer
-
-    Dim i            As Long
-
-    Dim NumCascos    As Integer
-
-    Dim Miscabezas() As tIndiceCabeza
-    
-    N = FreeFile()
-    Open App.path & "\init\Cascos.ind" For Binary Access Read As #N
-    
-    'cabecera
-    Get #N, , MiCabecera
-    
-    'num de cabezas
-    Get #N, , NumCascos
-    
-    'Resize array
-    ReDim CascoAnimData(0 To NumCascos) As HeadData
-    ReDim Miscabezas(0 To NumCascos) As tIndiceCabeza
-    
-    For i = 1 To NumCascos
-        Get #N, , Miscabezas(i)
-        
-        If Miscabezas(i).Head(1) Then
-            Call InitGrh(CascoAnimData(i).Head(1), Miscabezas(i).Head(1), 0)
-            Call InitGrh(CascoAnimData(i).Head(2), Miscabezas(i).Head(2), 0)
-            Call InitGrh(CascoAnimData(i).Head(3), Miscabezas(i).Head(3), 0)
-            Call InitGrh(CascoAnimData(i).Head(4), Miscabezas(i).Head(4), 0)
-
-        End If
-
-    Next i
-    
-    Close #N
-
-End Sub
-
-Sub CargarCuerpos()
-
-    Dim N            As Integer
-
-    Dim i            As Long
-
-    Dim NumCuerpos   As Integer
-
-    Dim MisCuerpos() As tIndiceCuerpo
-    
-    N = FreeFile()
-    Open App.path & "\init\Personajes.ind" For Binary Access Read As #N
-    
-    'cabecera
-    Get #N, , MiCabecera
-    
-    'num de cabezas
-    Get #N, , NumCuerpos
-    
-    'Resize array
-    ReDim BodyData(0 To NumCuerpos) As BodyData
-    ReDim MisCuerpos(0 To NumCuerpos) As tIndiceCuerpo
-    
-    For i = 1 To NumCuerpos
-        Get #N, , MisCuerpos(i)
-        
-        If MisCuerpos(i).Body(1) Then
-            InitGrh BodyData(i).Walk(1), MisCuerpos(i).Body(1), 0
-            InitGrh BodyData(i).Walk(2), MisCuerpos(i).Body(2), 0
-            InitGrh BodyData(i).Walk(3), MisCuerpos(i).Body(3), 0
-            InitGrh BodyData(i).Walk(4), MisCuerpos(i).Body(4), 0
-            
-            BodyData(i).HeadOffset.X = MisCuerpos(i).HeadOffsetX
-            BodyData(i).HeadOffset.Y = MisCuerpos(i).HeadOffsetY
-
-        End If
-
-    Next i
-    
-    Close #N
-
-End Sub
-
-Sub CargarFxs()
-
-    Dim N      As Integer
-
-    Dim i      As Long
-
-    Dim NumFxs As Integer
-    
-    N = FreeFile()
-    Open App.path & "\init\Fxs.ind" For Binary Access Read As #N
-    
-    'cabecera
-    Get #N, , MiCabecera
-    
-    'num de cabezas
-    Get #N, , NumFxs
-    
-    'Resize array
-    ReDim FxData(0 To NumFxs) As tIndiceFx
-    
-    For i = 1 To NumFxs
-        Get #N, , FxData(i)
-        'MsgBox FxData(i).Animacion & FxData(i).OffsetX
-    Next i
-    
-    Close #N
-
-End Sub
-
-Sub CargarTips()
-
-    Dim N       As Integer
-
-    Dim i       As Long
-
-    Dim NumTips As Integer
-    
-    N = FreeFile
-    Open App.path & "\init\Tips.ayu" For Binary Access Read As #N
-    
-    'cabecera
-    Get #N, , MiCabecera
-    
-    'num de cabezas
-    Get #N, , NumTips
-    
-    'Resize array
-    ReDim Tips(1 To NumTips) As String * 255
-    
-    For i = 1 To NumTips
-        Get #N, , Tips(i)
-    Next i
-    
-    Close #N
-
-End Sub
-
-Sub CargarArrayLluvia()
-
-    Dim N  As Integer
-
-    Dim i  As Long
-
-    Dim Nu As Integer
-    
-    N = FreeFile()
-    Open App.path & "\init\fk.ind" For Binary Access Read As #N
-    
-    'cabecera
-    Get #N, , MiCabecera
-    
-    'num de cabezas
-    Get #N, , Nu
-    
-    'Resize array
-    ReDim bLluvia(1 To Nu) As Byte
-    
-    For i = 1 To Nu
-        Get #N, , bLluvia(i)
-    Next i
-    
-    Close #N
-
-End Sub
 
 Sub ConvertCPtoTP(ByVal viewPortX As Integer, _
                   ByVal viewPortY As Integer, _
@@ -1015,16 +807,16 @@ End Sub
 
 Private Function HayFogata(ByRef Location As Position) As Boolean
 
-    Dim J As Long
+    Dim j As Long
 
     Dim k As Long
     
-    For J = UserPos.X - 8 To UserPos.X + 8
+    For j = UserPos.X - 8 To UserPos.X + 8
         For k = UserPos.Y - 6 To UserPos.Y + 6
 
-            If InMapBounds(J, k) Then
-                If MapData(J, k).ObjGrh.GrhIndex = GrhFogata Then
-                    Location.X = J
+            If InMapBounds(j, k) Then
+                If MapData(j, k).ObjGrh.GrhIndex = GrhFogata Then
+                    Location.X = j
                     Location.Y = k
                     
                     HayFogata = True
@@ -1035,7 +827,7 @@ Private Function HayFogata(ByRef Location As Position) As Boolean
             End If
 
         Next k
-    Next J
+    Next j
 
 End Function
 
@@ -1056,120 +848,6 @@ Function NextOpenChar() As Integer
     Loop
     
     NextOpenChar = LoopC
-
-End Function
-
-''
-' Loads grh data using the new file format.
-'
-' @return   True if the load was successfull, False otherwise.
-
-Public Function LoadGrhData() As Boolean
-
-    On Error Resume Next
-
-    Dim Grh         As Long
-
-    Dim Frame       As Long
-
-    Dim grhCount    As Long
-
-    Dim handle      As Integer
-
-    Dim fileVersion As Long
-
-    'Open files
-    handle = FreeFile()
-    Open DirIni & "Graficos.ind" For Binary Access Read As handle
-    Get handle, , fileVersion
-    
-    Get handle, , grhCount
-    
-    ReDim GrhData(0 To grhCount) As GrhData
-    
-    While Not EOF(handle)
-
-        Get handle, , Grh
-        
-        With GrhData(Grh)
-            ' GrhData(Grh).active = True
-            Get handle, , .NumFrames
-
-            If .NumFrames <= 0 Then Resume Next
-            
-            ReDim .Frames(1 To GrhData(Grh).NumFrames)
-            
-            If .NumFrames > 1 Then
-
-                For Frame = 1 To .NumFrames
-                    Get handle, , .Frames(Frame)
-
-                    If .Frames(Frame) <= 0 Or .Frames(Frame) > grhCount Then
-
-                        Resume Next
-
-                    End If
-
-                Next Frame
-                
-                Get handle, , .Speed
-                
-                If .Speed <= 0 Then Resume Next
-                
-                .pixelHeight = GrhData(.Frames(1)).pixelHeight
-
-                If .pixelHeight <= 0 Then Resume Next
-                
-                .pixelWidth = GrhData(.Frames(1)).pixelWidth
-
-                If .pixelWidth <= 0 Then Resume Next
-                
-                .TileWidth = GrhData(.Frames(1)).TileWidth
-
-                If .TileWidth <= 0 Then Resume Next
-                
-                .TileHeight = GrhData(.Frames(1)).TileHeight
-
-                If .TileHeight <= 0 Then Resume Next
-            Else
-                Get handle, , .FileNum
-
-                If .FileNum <= 0 Then Resume Next
-                
-                Get handle, , GrhData(Grh).SX
-
-                If .SX < 0 Then Resume Next
-                
-                Get handle, , .SY
-
-                If .SY < 0 Then Resume Next
-                
-                Get handle, , .pixelWidth
-
-                If .pixelWidth <= 0 Then Resume Next
-                
-                Get handle, , .pixelHeight
-
-                If .pixelHeight <= 0 Then Resume Next
-                
-                .TileWidth = .pixelWidth / TilePixelHeight
-                .TileHeight = .pixelHeight / TilePixelWidth
-                
-                .Frames(1) = Grh
-
-            End If
-
-        End With
-
-    Wend
-    
-    Close handle
-    
-    LoadGrhData = True
-    Exit Function
-
-ErrorHandler:
-    LoadGrhData = False
 
 End Function
 
@@ -1588,43 +1266,43 @@ Sub RenderScreen(ByVal tilex As Integer, _
     
     If ClientSetup.ProyectileEngine = True Then
 
-        Dim J As Integer
+        Dim j As Integer
         
         If LastProjectile > 0 Then
 
-            For J = 1 To LastProjectile
+            For j = 1 To LastProjectile
 
-                If ProjectileList(J).Grh.GrhIndex Then
+                If ProjectileList(j).Grh.GrhIndex Then
 
                     Dim Angle As Single
 
                     'Update the position
-                    Angle = DegreeToRadian * Engine_GetAngle(ProjectileList(J).X, ProjectileList(J).Y, ProjectileList(J).tX, ProjectileList(J).tY)
-                    ProjectileList(J).X = ProjectileList(J).X + (Sin(Angle) * ElapsedTime * 0.63)
-                    ProjectileList(J).Y = ProjectileList(J).Y - (Cos(Angle) * ElapsedTime * 0.63)
+                    Angle = DegreeToRadian * Engine_GetAngle(ProjectileList(j).X, ProjectileList(j).Y, ProjectileList(j).tX, ProjectileList(j).tY)
+                    ProjectileList(j).X = ProjectileList(j).X + (Sin(Angle) * ElapsedTime * 0.63)
+                    ProjectileList(j).Y = ProjectileList(j).Y - (Cos(Angle) * ElapsedTime * 0.63)
                     
                     'Update the rotation
-                    If ProjectileList(J).RotateSpeed > 0 Then
-                        ProjectileList(J).Rotate = ProjectileList(J).Rotate + (ProjectileList(J).RotateSpeed * ElapsedTime * 0.01)
+                    If ProjectileList(j).RotateSpeed > 0 Then
+                        ProjectileList(j).Rotate = ProjectileList(j).Rotate + (ProjectileList(j).RotateSpeed * ElapsedTime * 0.01)
 
-                        Do While ProjectileList(J).Rotate > 360
-                            ProjectileList(J).Rotate = ProjectileList(J).Rotate - 360
+                        Do While ProjectileList(j).Rotate > 360
+                            ProjectileList(j).Rotate = ProjectileList(j).Rotate - 360
                         Loop
 
                     End If
     
                     'Draw if within range
-                    X = ((-minX - 1) * 32) + ProjectileList(J).X + PixelOffsetX + ((10 - TileBufferSize) * 32) - 288 + ProjectileList(J).OffsetX
-                    Y = ((-minY - 1) * 32) + ProjectileList(J).Y + PixelOffsetY + ((10 - TileBufferSize) * 32) - 288 + ProjectileList(J).OffsetY
+                    X = ((-minX - 1) * 32) + ProjectileList(j).X + PixelOffsetX + ((10 - TileBufferSize) * 32) - 288 + ProjectileList(j).OffsetX
+                    Y = ((-minY - 1) * 32) + ProjectileList(j).Y + PixelOffsetY + ((10 - TileBufferSize) * 32) - 288 + ProjectileList(j).OffsetY
 
                     If Y >= -32 Then
                         If Y <= (ScreenHeight + 32) Then
                             If X >= -32 Then
                                 If X <= (ScreenWidth + 32) Then
-                                    If ProjectileList(J).Rotate = 0 Then
-                                        DDrawTransGrhtoSurface ProjectileList(J).Grh, X, Y, 0, MapData(50, 50).Engine_Light(), 0, 50, 50, True, 0
+                                    If ProjectileList(j).Rotate = 0 Then
+                                        DDrawTransGrhtoSurface ProjectileList(j).Grh, X, Y, 0, MapData(50, 50).Engine_Light(), 0, 50, 50, True, 0
                                     Else
-                                        DDrawTransGrhtoSurface ProjectileList(J).Grh, X, Y, 0, MapData(50, 50).Engine_Light(), 0, 50, 50, True, ProjectileList(J).Rotate
+                                        DDrawTransGrhtoSurface ProjectileList(j).Grh, X, Y, 0, MapData(50, 50).Engine_Light(), 0, 50, 50, True, ProjectileList(j).Rotate
 
                                     End If
 
@@ -1638,15 +1316,15 @@ Sub RenderScreen(ByVal tilex As Integer, _
                     
                 End If
 
-            Next J
+            Next j
             
             'Check if it is close enough to the target to remove
-            For J = 1 To LastProjectile
+            For j = 1 To LastProjectile
 
-                If ProjectileList(J).Grh.GrhIndex Then
-                    If Abs(ProjectileList(J).X - ProjectileList(J).tX) < 20 Then
-                        If Abs(ProjectileList(J).Y - ProjectileList(J).tY) < 20 Then
-                            Engine_Projectile_Erase J
+                If ProjectileList(j).Grh.GrhIndex Then
+                    If Abs(ProjectileList(j).X - ProjectileList(j).tX) < 20 Then
+                        If Abs(ProjectileList(j).Y - ProjectileList(j).tY) < 20 Then
+                            Engine_Projectile_Erase j
 
                         End If
 
@@ -1654,7 +1332,7 @@ Sub RenderScreen(ByVal tilex As Integer, _
 
                 End If
 
-            Next J
+            Next j
             
         End If
 
@@ -1769,7 +1447,7 @@ Public Function InitTileEngine(ByVal setDisplayFormhWnd As Long, _
 End Function
 
 Public Sub LoadGraphics()
-    Call SurfaceDB.Initialize(DirectD3D8, App.path & "\graficos\", ClientSetup.byMemory)
+    Call SurfaceDB.Initialize(DirectD3D8, DirGraficos, ClientSetup.byMemory)
 
 End Sub
 

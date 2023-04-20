@@ -15,7 +15,7 @@ Attribute VB_Exposed = False
 ' clsCustomMessages.cls - User-defined messages with shortcut.
 ' Allows the creation and serialization of user defined messages to be used with shortcuts.
 '
-' Designed and implemented by Juan MartÌn Sotuyo Dodero (Maraxus)
+' Designed and implemented by Juan Mart√≠n Sotuyo Dodero (Maraxus)
 ' (juansotuyo@gmail.com)
 '**************************************************************
 
@@ -50,7 +50,7 @@ Private Const INVALID_MESSAGE             As Long = vbObjectError + 123
 
 ''
 ' Relative path from the application in which custom message are stored.
-Private Const MESSAGE_FILE_PATH           As String = "/init/messages.txt"
+Private Const MESSAGE_FILE_PATH           As String = "messages.txt"
 
 ''
 'Array of defined messages.
@@ -62,7 +62,7 @@ Private CustomMessages(MESSAGE_COUNT - 1) As String
 Private Sub Class_Initialize()
 
     '***************************************************
-    'Author: Juan MartÌn Sotuyo Dodero (Maraxus)
+    'Author: Juan Mart√≠n Sotuyo Dodero (Maraxus)
     'Last Modification: 07/26/07
     'Initializes the messages by loading them from the config file
     '***************************************************
@@ -75,7 +75,7 @@ Private Sub Class_Initialize()
     'Load custom messages
     handle = FreeFile()
     
-    Open App.path & MESSAGE_FILE_PATH For Input As handle
+    Open DirIni & MESSAGE_FILE_PATH For Input As handle
     
     Do While (i < MESSAGE_COUNT) And (Not EOF(handle))
         Line Input #handle, CustomMessages(i)
@@ -103,7 +103,7 @@ End Sub
 Private Sub Class_Terminate()
 
     '***************************************************
-    'Author: Juan MartÌn Sotuyo Dodero (Maraxus)
+    'Author: Juan Mart√≠n Sotuyo Dodero (Maraxus)
     'Last Modification: 07/26/07
     'Stores all messages back into config file for later use.
     '***************************************************
@@ -151,7 +151,7 @@ End Sub
 Public Property Get Message(ByVal Index As Integer) As String
 
     '***************************************************
-    'Author: Juan MartÌn Sotuyo Dodero (Maraxus)
+    'Author: Juan Mart√≠n Sotuyo Dodero (Maraxus)
     'Last Modification: 07/26/07
     'Retrieves the requested message.
     '***************************************************
@@ -173,7 +173,7 @@ End Property
 Public Property Let Message(ByVal Index As Integer, ByVal nValue As String)
 
     '***************************************************
-    'Author: Juan MartÌn Sotuyo Dodero (Maraxus)
+    'Author: Juan Mart√≠n Sotuyo Dodero (Maraxus)
     'Last Modification: 07/26/07
     'Sets the given message index with the requested message.
     '***************************************************
@@ -199,7 +199,7 @@ End Property
 
 Public Property Get InvalidMessageErrCode() As Long
     '***************************************************
-    'Author: Juan MartÌn Sotuyo Dodero (Maraxus)
+    'Author: Juan Mart√≠n Sotuyo Dodero (Maraxus)
     'Last Modification: 07/26/07
     'Retrieves the INVALID_MESSAGE error code.
     '***************************************************
@@ -216,7 +216,7 @@ End Property
 Private Function MessageIsValid(ByRef msg As String) As Boolean
 
     '***************************************************
-    'Author: Juan MartÌn Sotuyo Dodero (Maraxus)
+    'Author: Juan Mart√≠n Sotuyo Dodero (Maraxus)
     'Last Modification: 08/07/07
     'Last Modified by: Rapsodius
     '
@@ -247,7 +247,7 @@ Private Function MessageIsValid(ByRef msg As String) As Boolean
         'check for invalid chars...
         If ascii < 31 Then Exit Function
         
-        If ascii > 126 And Char <> "·" And Char <> "¡" And Char <> "‰" And Char <> "ƒ" And Char <> "‚" And Char <> "¬" And Char <> "‡" And Char <> "¿" And Char <> "È" And Char <> "…" And Char <> "Î" And Char <> "À" And Char <> "Í" And Char <> " " And Char <> "Ë" And Char <> "»" And Char <> "Ì" And Char <> "Õ" And Char <> "Ô" And Char <> "œ" And Char <> "Ó" And Char <> "Œ" And Char <> "Ï" And Char <> "Ã" And Char <> "Û" And Char <> "”" And Char <> "ˆ" And Char <> "÷" And Char <> "Ù" And Char <> "‘" And Char <> "Ú" And Char <> "“" And Char <> "˙" And Char <> "⁄" And Char <> "¸" And Char <> "‹" And Char <> "˚" And Char <> "€" And Char <> "˘" And Char <> "Ÿ" And Char <> "Ò" And Char <> "—" And Char <> "°" And Char <> "ø" Then
+        If ascii > 126 And Char <> "√°" And Char <> "√Å" And Char <> "√§" And Char <> "√Ñ" And Char <> "√¢" And Char <> "√Ç" And Char <> "√†" And Char <> "√Ä" And Char <> "√©" And Char <> "√â" And Char <> "√´" And Char <> "√ã" And Char <> "√™" And Char <> "√ä" And Char <> "√®" And Char <> "√à" And Char <> "√≠" And Char <> "√ç" And Char <> "√Ø" And Char <> "√è" And Char <> "√Æ" And Char <> "√é" And Char <> "√¨" And Char <> "√å" And Char <> "√≥" And Char <> "√ì" And Char <> "√∂" And Char <> "√ñ" And Char <> "√¥" And Char <> "√î" And Char <> "√≤" And Char <> "√í" And Char <> "√∫" And Char <> "√ö" And Char <> "√º" And Char <> "√ú" And Char <> "√ª" And Char <> "√õ" And Char <> "√π" And Char <> "√ô" And Char <> "√±" And Char <> "√ë" And Char <> "¬°" And Char <> "¬ø" Then
             Exit Function
 
         End If
