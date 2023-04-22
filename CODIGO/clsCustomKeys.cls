@@ -42,7 +42,7 @@ Attribute VB_Exposed = False
 '03/08/2007 - Rapsodius
 '   - First Release
 '
-'13/04/2008 - Juan Martín Sotuyo Dodero (Maraxus) - (juansotuyo@gmail.com)
+'13/04/2008 - Juan MartÃ­n Sotuyo Dodero (Maraxus) - (juansotuyo@gmail.com)
 '   - Removed lots of unwanted buggy features keeping it clean. Revised documentation and coding standards.
 
 Option Explicit
@@ -61,7 +61,7 @@ Private Const ERROR_NO_KEY_FILE                                   As Long = vbOb
 
 ''
 'The relative path from the application's location where the key config file is.
-Private Const KEY_CONFIG_FILE                                     As String = "\init\BindKeys.bin"
+Private Const KEY_CONFIG_FILE                                     As String = "BindKeys.bin"
 
 ''
 'Array of mapped keys
@@ -97,7 +97,7 @@ Private ActiveConfig                                              As Byte
 '@param mKeyTalkWithGuild Key for talking (only to guild members)
 '@param mKeyTakeScreenShot Key for taking a snapshot of the screen
 '@param mKeyShowOptions Key for showing the "Options" form
-'@param mKeyMeditate Key for start/stop meditation
+'@param mKeyVerFPS Key for start/stop meditation
 '@param mKeyCastSpellMacro Key for start/stop the Cast Spell Macro
 '@param mKeyWorkMacro Key for start/stop the Work Macro
 '@param mKeyExitGame Key for close the game
@@ -126,7 +126,7 @@ Public Enum eKeyType
     mKeyTalkWithGuild
     mKeyTakeScreenShot
     mKeyShowOptions
-    mKeyMeditate
+    mKeyVerFPS
     mKeyCastSpellMacro
     mKeyWorkMacro
     mKeyExitGame
@@ -153,7 +153,7 @@ Public Function ReadableName(ByVal KeyCode As Integer) As String
             ReadableName = Chr$(KeyCode)
         
         Case KeyCodeConstants.vbKeyNumpad0 To KeyCodeConstants.vbKeyNumpad9
-            ReadableName = KeyCode - KeyCodeConstants.vbKeyNumpad0 & " (teclado numérico)"
+            ReadableName = KeyCode - KeyCodeConstants.vbKeyNumpad0 & " (teclado numÃ©rico)"
         
         Case KeyCodeConstants.vbKeyF1 To KeyCodeConstants.vbKeyF16
             ReadableName = "F" & (KeyCode - KeyCodeConstants.vbKeyF1 + 1)
@@ -168,7 +168,7 @@ Public Function ReadableName(ByVal KeyCode As Integer) As String
             'Note: Separator appears in MSDN as the Enter key for
             'the numpad, but MS recognizes it as the normal
             'Enter key
-            ReadableName = "Enter (teclado numérico)"
+            ReadableName = "Enter (teclado numÃ©rico)"
         
         Case KeyCodeConstants.vbKeySubtract
             ReadableName = "- (teclado numerico)"
@@ -260,12 +260,12 @@ Public Sub LoadCustomKeys()
     '***************************************************
     'Author: Rapsodius
     'Last Modification: 18/11/2010
-    '16/11/2010: Amraphen - Adapté el procedimiento para cargar todas las configuraciones de teclas.
-    '18/11/2010: Amraphen - Modifiqué la forma en que se cargan los bindings y ahora carga los del formato viejo.
+    '16/11/2010: Amraphen - AdaptÃ© el procedimiento para cargar todas las configuraciones de teclas.
+    '18/11/2010: Amraphen - ModifiquÃ© la forma en que se cargan los bindings y ahora carga los del formato viejo.
     '***************************************************
     Dim i       As Long
 
-    Dim J       As Long
+    Dim j       As Long
 
     Dim FileNum As Integer
 
@@ -279,7 +279,7 @@ Public Sub LoadCustomKeys()
         ActiveConfig = 1
         
         Call SaveCustomKeys
-    Else 'Existe el archivo, verificamos qué formato tiene:
+    Else 'Existe el archivo, verificamos quÃ© formato tiene:
         
         FileNum = FreeFile
     
@@ -293,9 +293,9 @@ Public Sub LoadCustomKeys()
                 Call LoadDefaults(i)
             Next i
             
-            For J = 1 To NUM_CUSTOM_KEYS
-                Get FileNum, , mappedKeys(ActiveConfig, J)
-            Next J
+            For j = 1 To NUM_CUSTOM_KEYS
+                Get FileNum, , mappedKeys(ActiveConfig, j)
+            Next j
 
         Else
             'Formato nuevo
@@ -304,9 +304,9 @@ Public Sub LoadCustomKeys()
             Get FileNum, , ActiveConfig
             
             For i = 0 To NUM_CUSTOM_CONFIGS
-                For J = 1 To NUM_CUSTOM_KEYS
-                    Get FileNum, , mappedKeys(i, J)
-                Next J
+                For j = 1 To NUM_CUSTOM_KEYS
+                    Get FileNum, , mappedKeys(i, j)
+                Next j
             Next i
 
         End If
@@ -327,27 +327,27 @@ Public Sub SaveCustomKeys()
     '***************************************************
     'Author: Rapsodius
     'Last Modification: 18/11/10
-    '16/11/2010: Amraphen - Adapté el procedimiento para guardar todas las configuraciones de teclas.
-    '18/11/2010: Amraphen - Ahora se guarda la configuración activa.
+    '16/11/2010: Amraphen - AdaptÃ© el procedimiento para guardar todas las configuraciones de teclas.
+    '18/11/2010: Amraphen - Ahora se guarda la configuraciÃ³n activa.
     '***************************************************
     Dim i       As Long
 
-    Dim J       As Long
+    Dim j       As Long
 
     Dim FileNum As Integer
 
     FileNum = FreeFile()
     
-    Open App.path & KEY_CONFIG_FILE For Binary Access Write As FileNum
+    Open DirIni & KEY_CONFIG_FILE For Binary Access Write As FileNum
     
-    'Guardo la configuración activa:
+    'Guardo la configuraciÃ³n activa:
     Put FileNum, , ActiveConfig
     
     'Guardo las distintas configuraciones:
     For i = 0 To NUM_CUSTOM_CONFIGS
-        For J = 1 To NUM_CUSTOM_KEYS
-            Put FileNum, , mappedKeys(i, J)
-        Next J
+        For j = 1 To NUM_CUSTOM_KEYS
+            Put FileNum, , mappedKeys(i, j)
+        Next j
     Next i
     
     Close FileNum
@@ -365,7 +365,7 @@ Public Property Get BindedKey(ByVal Index As eKeyType) As Integer
     '***************************************************
     'Author: Rapsodius
     'Last Modification: 16/11/2010
-    '16/11/2010: Amraphen - Adapté la propiedad para que cargue el bind de la tecla en la configuración activa.
+    '16/11/2010: Amraphen - AdaptÃ© la propiedad para que cargue el bind de la tecla en la configuraciÃ³n activa.
     '***************************************************
     If Index < 1 Or Index > NUM_CUSTOM_KEYS Then Exit Property
     
@@ -384,7 +384,7 @@ Public Property Let BindedKey(ByVal Index As eKeyType, ByVal NewVal As Integer)
     '***************************************************
     'Author: Rapsodius
     'Last Modification: 16/11/2010
-    '16/11/2010: Amraphen - Adapté la propiedad para que guarde el bind de la tecla en la configuración activa.
+    '16/11/2010: Amraphen - AdaptÃ© la propiedad para que guarde el bind de la tecla en la configuraciÃ³n activa.
     '***************************************************
     If Index < 1 Or Index > NUM_CUSTOM_KEYS Then Exit Property
     
@@ -412,7 +412,7 @@ Public Sub LoadDefaults(ByVal KeyConfig As Byte)
     '***************************************************
     'Author: Rapsodius
     'Last Modification: 16/11/2010
-    '16/11/2010: Amraphen - Adapté el procedimiento para que cargue los bindings por default en una sola configuración.
+    '16/11/2010: Amraphen - AdaptÃ© el procedimiento para que cargue los bindings por default en una sola configuraciÃ³n.
     '***************************************************
     mappedKeys(KeyConfig, eKeyType.mKeyUp) = KeyCodeConstants.vbKeyUp
     mappedKeys(KeyConfig, eKeyType.mKeyDown) = KeyCodeConstants.vbKeyDown
@@ -437,7 +437,7 @@ Public Sub LoadDefaults(ByVal KeyConfig As Byte)
     mappedKeys(KeyConfig, eKeyType.mKeyTalkWithGuild) = KeyCodeConstants.vbKeyDelete
     mappedKeys(KeyConfig, eKeyType.mKeyTakeScreenShot) = KeyCodeConstants.vbKeyF2
     mappedKeys(KeyConfig, eKeyType.mKeyShowOptions) = KeyCodeConstants.vbKeyF5
-    mappedKeys(KeyConfig, eKeyType.mKeyMeditate) = KeyCodeConstants.vbKeyF6
+    mappedKeys(KeyConfig, eKeyType.mKeyVerFPS) = KeyCodeConstants.vbKeyMultiply
     mappedKeys(KeyConfig, eKeyType.mKeyCastSpellMacro) = KeyCodeConstants.vbKeyF7
     mappedKeys(KeyConfig, eKeyType.mKeyWorkMacro) = KeyCodeConstants.vbKeyF8
     mappedKeys(KeyConfig, eKeyType.mKeyExitGame) = KeyCodeConstants.vbKeyF12
@@ -455,7 +455,7 @@ Public Function KeyAssigned(ByVal KeyCode As Integer) As Boolean
     '***************************************************
     'Author: Rapsodius
     'Last Modification: 16/11/2010
-    '16/11/2010: Amraphen - Adapté la función para que trabaje sobre la configuración activa.
+    '16/11/2010: Amraphen - AdaptÃ© la funciÃ³n para que trabaje sobre la configuraciÃ³n activa.
     '***************************************************
     Dim Counter As Long
     
@@ -482,7 +482,7 @@ Public Property Get KeyCount() As Byte
     '***************************************************
     'Author: Rapsodius
     'Last Modification: 16/11/2010
-    '16/11/2010: Amraphen - Cambié el nombre para evitar confusiones.
+    '16/11/2010: Amraphen - CambiÃ© el nombre para evitar confusiones.
     '***************************************************
     KeyCount = NUM_CUSTOM_KEYS
 
@@ -541,7 +541,7 @@ Private Sub Class_Initialize()
     '***************************************************
     'Author: Rapsodius
     'Last Modification: 18/11/2010
-    '16/11/2010: Amraphen - Adapté el procedimiento para que trabaje sobre las distintas configuraciones de teclas.
+    '16/11/2010: Amraphen - AdaptÃ© el procedimiento para que trabaje sobre las distintas configuraciones de teclas.
     '18/11/2010: Amraphen - Ahora el manejo de errores se hace desde el sub LoadCustomKeys
     '***************************************************
 

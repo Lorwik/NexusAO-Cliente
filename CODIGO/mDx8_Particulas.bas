@@ -98,12 +98,12 @@ Sub Engine_Init_ParticleEngine(Optional ByVal SkipToTextures As Boolean = False)
     For i = 1 To UBound(ParticleTexture())
 
         If ParticleTexture(i) Is Nothing Then Set ParticleTexture(i) = Nothing
-        Set ParticleTexture(i) = DirectD3D8.CreateTextureFromFileEx(DirectDevice, App.path & "\graficos\p" & i & ".png", D3DX_DEFAULT, D3DX_DEFAULT, D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, D3DX_FILTER_POINT, &HFF000000, ByVal 0, ByVal 0)
+        Set ParticleTexture(i) = DirectD3D8.CreateTextureFromFileEx(DirectDevice, DirGraficos & "p" & i & ".png", D3DX_DEFAULT, D3DX_DEFAULT, D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, D3DX_FILTER_POINT, &HFF000000, ByVal 0, ByVal 0)
     Next i
 
 End Sub
 
-Private Function Effect_FToDW(f As Single) As Long
+Private Function Effect_FToDW(F As Single) As Long
 
     '*****************************************************************
     'Converts a float to a D-Word, or in Visual Basic terms, a Single to a Long
@@ -113,7 +113,7 @@ Private Function Effect_FToDW(f As Single) As Long
 
     'Converts a single into a long (Float to DWORD)
     Set buf = DirectD3D8.CreateBuffer(4)
-    DirectD3D8.BufferSetData buf, 0, 4, 1, f
+    DirectD3D8.BufferSetData buf, 0, 4, 1, F
     DirectD3D8.BufferGetData buf, 0, 4, 1, Effect_FToDW
 
 End Function
@@ -572,7 +572,7 @@ Private Sub Effect_EquationTemplate_Reset(ByVal EffectIndex As Integer, _
     Dim r As Single
  
     Effect(EffectIndex).Progression = Effect(EffectIndex).Progression + 0.1
-    r = (Index / 20) * Exp(Index / Effect(EffectIndex).Progression Mod 3)
+    r = (Index / 20) * EXP(Index / Effect(EffectIndex).Progression Mod 3)
     X = r * Cos(Index)
     Y = r * Sin(Index)
  
@@ -1102,7 +1102,7 @@ Private Sub Effect_Summon_Reset(ByVal EffectIndex As Integer, ByVal Index As Lon
 
     End If
 
-    r = (Index / 30) * Exp(Index / Effect(EffectIndex).Progression)
+    r = (Index / 30) * EXP(Index / Effect(EffectIndex).Progression)
     X = r * Cos(Index)
     Y = r * Sin(Index)
     
@@ -1599,7 +1599,7 @@ Public Sub SetSpellCast()
     ElseIf frmMain.hlst.List(frmMain.hlst.ListIndex) = "Paralizar" Or frmMain.hlst.List(frmMain.hlst.ListIndex) = "Inmovilizar" Then
         SpellGrhIndex = 24669
         Exit Sub
-    ElseIf frmMain.hlst.List(frmMain.hlst.ListIndex) = "Antídoto Mágico" Or frmMain.hlst.List(frmMain.hlst.ListIndex) = "Curar Heridas Leves" Or frmMain.hlst.List(frmMain.hlst.ListIndex) = "Curar Heridas Graves" Then
+    ElseIf frmMain.hlst.List(frmMain.hlst.ListIndex) = "AntÃ­doto MÃ¡gico" Or frmMain.hlst.List(frmMain.hlst.ListIndex) = "Curar Heridas Leves" Or frmMain.hlst.List(frmMain.hlst.ListIndex) = "Curar Heridas Graves" Then
         SpellGrhIndex = 24673
         Exit Sub
     Else

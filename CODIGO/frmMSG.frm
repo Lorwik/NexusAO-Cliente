@@ -140,7 +140,7 @@ Private Sub Form_Load()
     
     List1.Clear
     
-    Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaShowSos.jpg")
+    Me.Picture = LoadPicture(DirInterfaces & "VentanaShowSos.jpg")
     
     Call LoadButtons
 

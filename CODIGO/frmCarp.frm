@@ -522,7 +522,7 @@ Private Sub Form_Load()
     
     Call LoadDefaultValues
     
-    Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaCarpinteriaItems.jpg")
+    Me.Picture = LoadPicture(DirInterfaces & "VentanaCarpinteriaItems.jpg")
     LoadButtons
 
 End Sub
@@ -608,7 +608,7 @@ Private Sub LoadDefaultValues()
     
     cboItemsCiclo.ListIndex = 0
     
-    Scroll.Value = 0
+    Scroll.value = 0
     
     UsarMacro = True
     
@@ -624,7 +624,7 @@ Private Sub Construir(ByVal Index As Integer)
 
     Dim CantItemsCiclo As Integer
     
-    If Scroll.Visible = True Then ItemIndex = Scroll.Value
+    If Scroll.Visible = True Then ItemIndex = Scroll.value
     ItemIndex = ItemIndex + Index
     
     Select Case UltimaPestania
@@ -685,7 +685,7 @@ Public Sub HideExtraControls(ByVal NumItems As Integer, _
     If NumItems > MAX_LIST_ITEMS Then
         Scroll.Visible = True
         Cargando = True
-        Scroll.Max = NumItems - MAX_LIST_ITEMS
+        Scroll.max = NumItems - MAX_LIST_ITEMS
         Cargando = False
     Else
         Scroll.Visible = False
@@ -720,7 +720,7 @@ Private Sub RenderItem(ByRef Pic As PictureBox, ByVal GrhIndex As Long)
     DR.Right = 32
     DR.Bottom = 32
     
-    Call DrawGrhtoHdc(Pic.hdc, GrhIndex, SR, DR)
+    Call DrawGrhtoHdc(Pic.hDC, GrhIndex, SR, DR)
     Pic.Refresh
 
 End Sub
@@ -876,7 +876,7 @@ Private Sub imgPestania_Click(Index As Integer)
     If Cargando Then Exit Sub
     If UltimaPestania = Index Then Exit Sub
     
-    Scroll.Value = 0
+    Scroll.value = 0
     
     Select Case Index
 
@@ -913,7 +913,7 @@ Private Sub Scroll_Change()
     
     If Cargando Then Exit Sub
     
-    i = Scroll.Value
+    i = Scroll.value
     ' Cargo inventarios e imagenes
     
     Select Case UltimaPestania

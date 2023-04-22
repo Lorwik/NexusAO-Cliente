@@ -66,7 +66,6 @@ Private Sub Char_ResetInfo(ByVal CharIndex As Integer)
     '*****************************************************************
 
     With charlist(CharIndex)
-        Delete_All_Auras CharIndex
             
         .active = 0
         .Criminal = 0
@@ -210,7 +209,7 @@ End Sub
 Public Function Char_Check(ByVal CharIndex As Integer) As Boolean
        
     '**************************************************************
-    'Author: Aaron Perkins - Modified by Juan Martín Sotuyo Dodero
+    'Author: Aaron Perkins - Modified by Juan MartÃ­n Sotuyo Dodero
     'Last Modify by Miqueas150 Date: 24/02/2013
     'Chequeamos el Char
     '**************************************************************
@@ -231,7 +230,7 @@ End Function
 Public Sub Char_SetInvisible(ByVal CharIndex As Integer, ByVal Value As Boolean)
        
     '**************************************************************
-    'Author: Aaron Perkins - Modified by Juan Martín Sotuyo Dodero
+    'Author: Aaron Perkins - Modified by Juan MartÃ­n Sotuyo Dodero
     'Last Modify by Miqueas150 Date: 24/02/2013
  
     '**************************************************************
@@ -454,7 +453,7 @@ Public Sub Char_SetFx(ByVal CharIndex As Integer, _
                       ByVal Loops As Integer)
  
     '***************************************************
-    'Author: Juan Martín Sotuyo Dodero (Maraxus)
+    'Author: Juan MartÃ­n Sotuyo Dodero (Maraxus)
     'Last Modify Date: 12/03/04
     'Sets an FX to the character.
     '***************************************************

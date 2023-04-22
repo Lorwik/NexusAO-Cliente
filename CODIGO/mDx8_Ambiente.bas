@@ -1,6 +1,6 @@
 Attribute VB_Name = "mDx8_Ambiente"
 '***************************************************
-'Author: Ezequiel Ju·rez (Standelf)
+'Author: Ezequiel Ju√°rez (Standelf)
 'Last Modification: ??/??/10
 'Blisse-AO | Sistema de Ambientes
 '***************************************************
@@ -111,28 +111,7 @@ Public Sub Init_Ambient(ByVal Map As Integer)
         Next Xx
             
         Call LightRenderAll
-            
-        If .UseDayAmbient = True Then
-            frmAmbientEditor.Option1(0).Value = True
-        Else
-            frmAmbientEditor.Option1(1).Value = True
-            frmAmbientEditor.Text1(0).Text = .OwnAmbientLight.r
-            frmAmbientEditor.Text1(1).Text = .OwnAmbientLight.g
-            frmAmbientEditor.Text1(2).Text = .OwnAmbientLight.b
-
-        End If
-                                        
-        If .Fog <> -1 Then
-            frmAmbientEditor.Check1.Value = Checked
-            frmAmbientEditor.HScroll1.Value = .Fog
-        Else
-            frmAmbientEditor.Check1.Value = Unchecked
-
-        End If
-            
-        If .Rain = True Then frmAmbientEditor.Check3.Value = Checked
-        If .Snow = True Then frmAmbientEditor.Check2.Value = Checked
-            
+                                         
     End With
 
 End Sub

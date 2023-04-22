@@ -509,20 +509,16 @@ Private clsFormulario         As clsFormMovementManager
 
 Private Sub CargarImagenes()
 
-    Dim ImgPath As String
-
     Dim Index   As Integer
-    
-    ImgPath = App.path & "\Interfaces\"
 
-    Set Pestanias(ePestania.ieArmas) = LoadPicture(ImgPath & "VentanaHerreriaArmas.jpg")
-    Set Pestanias(ePestania.ieArmaduras) = LoadPicture(ImgPath & "VentanaHerreriaArmaduras.jpg")
-    Set Pestanias(ePestania.ieMejorar) = LoadPicture(ImgPath & "VentanaHerreriaMejorar.jpg")
+    Set Pestanias(ePestania.ieArmas) = LoadPicture(DirInterfaces & "VentanaHerreriaArmas.jpg")
+    Set Pestanias(ePestania.ieArmaduras) = LoadPicture(DirInterfaces & "VentanaHerreriaArmaduras.jpg")
+    Set Pestanias(ePestania.ieMejorar) = LoadPicture(DirInterfaces & "VentanaHerreriaMejorar.jpg")
     
-    Set picCheck = LoadPicture(ImgPath & "CheckBoxHerreria.jpg")
+    Set picCheck = LoadPicture(DirInterfaces & "CheckBoxHerreria.jpg")
     
-    Set picRecuadroItem = LoadPicture(ImgPath & "RecuadroItemsHerreria.jpg")
-    Set picRecuadroLingotes = LoadPicture(ImgPath & "RecuadroLingotes.jpg")
+    Set picRecuadroItem = LoadPicture(DirInterfaces & "RecuadroItemsHerreria.jpg")
+    Set picRecuadroLingotes = LoadPicture(DirInterfaces & "RecuadroLingotes.jpg")
     
     For Index = 1 To MAX_LIST_ITEMS
         imgMarcoItem(Index).Picture = picRecuadroItem
@@ -542,17 +538,17 @@ Private Sub CargarImagenes()
 
     Set LastButtonPressed = New clsGraphicalButton
     
-    Call cPicCerrar.Initialize(imgCerrar, ImgPath & "BotonCerrarHerreria.jpg", ImgPath & "BotonCerrarRolloverHerreria.jpg", ImgPath & "BotonCerrarClickHerreria.jpg", Me)
-    Call cPicConstruir(0).Initialize(picConstruir0, ImgPath & "BotonConstruirHerreria.jpg", ImgPath & "BotonConstruirRolloverHerreria.jpg", ImgPath & "BotonConstruirClickHerreria.jpg", Me)
-    Call cPicConstruir(1).Initialize(picConstruir1, ImgPath & "BotonConstruirHerreria.jpg", ImgPath & "BotonConstruirRolloverHerreria.jpg", ImgPath & "BotonConstruirClickHerreria.jpg", Me)
-    Call cPicConstruir(2).Initialize(picConstruir2, ImgPath & "BotonConstruirHerreria.jpg", ImgPath & "BotonConstruirRolloverHerreria.jpg", ImgPath & "BotonConstruirClickHerreria.jpg", Me)
-    Call cPicConstruir(3).Initialize(picConstruir3, ImgPath & "BotonConstruirHerreria.jpg", ImgPath & "BotonConstruirRolloverHerreria.jpg", ImgPath & "BotonConstruirClickHerreria.jpg", Me)
-    Call cPicMejorar(0).Initialize(picMejorar0, ImgPath & "BotonMejorarHerreria.jpg", ImgPath & "BotonMejorarRolloverHerreria.jpg", ImgPath & "BotonMejorarClickHerreria.jpg", Me)
-    Call cPicMejorar(1).Initialize(picMejorar1, ImgPath & "BotonMejorarHerreria.jpg", ImgPath & "BotonMejorarRolloverHerreria.jpg", ImgPath & "BotonMejorarClickHerreria.jpg", Me)
-    Call cPicMejorar(2).Initialize(picMejorar2, ImgPath & "BotonMejorarHerreria.jpg", ImgPath & "BotonMejorarRolloverHerreria.jpg", ImgPath & "BotonMejorarClickHerreria.jpg", Me)
-    Call cPicMejorar(3).Initialize(picMejorar3, ImgPath & "BotonMejorarHerreria.jpg", ImgPath & "BotonMejorarRolloverHerreria.jpg", ImgPath & "BotonMejorarClickHerreria.jpg", Me)
+    Call cPicCerrar.Initialize(imgCerrar, DirInterfaces & "BotonCerrarHerreria.jpg", DirInterfaces & "BotonCerrarRolloverHerreria.jpg", DirInterfaces & "BotonCerrarClickHerreria.jpg", Me)
+    Call cPicConstruir(0).Initialize(picConstruir0, DirInterfaces & "BotonConstruirHerreria.jpg", DirInterfaces & "BotonConstruirRolloverHerreria.jpg", DirInterfaces & "BotonConstruirClickHerreria.jpg", Me)
+    Call cPicConstruir(1).Initialize(picConstruir1, DirInterfaces & "BotonConstruirHerreria.jpg", DirInterfaces & "BotonConstruirRolloverHerreria.jpg", DirInterfaces & "BotonConstruirClickHerreria.jpg", Me)
+    Call cPicConstruir(2).Initialize(picConstruir2, DirInterfaces & "BotonConstruirHerreria.jpg", DirInterfaces & "BotonConstruirRolloverHerreria.jpg", DirInterfaces & "BotonConstruirClickHerreria.jpg", Me)
+    Call cPicConstruir(3).Initialize(picConstruir3, DirInterfaces & "BotonConstruirHerreria.jpg", DirInterfaces & "BotonConstruirRolloverHerreria.jpg", DirInterfaces & "BotonConstruirClickHerreria.jpg", Me)
+    Call cPicMejorar(0).Initialize(picMejorar0, DirInterfaces & "BotonMejorarHerreria.jpg", DirInterfaces & "BotonMejorarRolloverHerreria.jpg", DirInterfaces & "BotonMejorarClickHerreria.jpg", Me)
+    Call cPicMejorar(1).Initialize(picMejorar1, DirInterfaces & "BotonMejorarHerreria.jpg", DirInterfaces & "BotonMejorarRolloverHerreria.jpg", DirInterfaces & "BotonMejorarClickHerreria.jpg", Me)
+    Call cPicMejorar(2).Initialize(picMejorar2, DirInterfaces & "BotonMejorarHerreria.jpg", DirInterfaces & "BotonMejorarRolloverHerreria.jpg", DirInterfaces & "BotonMejorarClickHerreria.jpg", Me)
+    Call cPicMejorar(3).Initialize(picMejorar3, DirInterfaces & "BotonMejorarHerreria.jpg", DirInterfaces & "BotonMejorarRolloverHerreria.jpg", DirInterfaces & "BotonMejorarClickHerreria.jpg", Me)
 
-    imgCantidadCiclo.Picture = LoadPicture(ImgPath & "ConstruirPorCiclo.jpg")
+    imgCantidadCiclo.Picture = LoadPicture(DirInterfaces & "ConstruirPorCiclo.jpg")
     
     picPestania(ePestania.ieArmas).MouseIcon = picMouseIcon
     picPestania(ePestania.ieArmaduras).MouseIcon = picMouseIcon
@@ -568,7 +564,7 @@ Private Sub ConstruirItem(ByVal Index As Integer)
 
     Dim CantItemsCiclo As Integer
     
-    If Scroll.Visible = True Then ItemIndex = Scroll.Value
+    If Scroll.Visible = True Then ItemIndex = Scroll.value
     ItemIndex = ItemIndex + Index
     
     Select Case UltimaPestania
@@ -683,7 +679,7 @@ Public Sub HideExtraControls(ByVal NumItems As Integer, _
     If NumItems > MAX_LIST_ITEMS Then
         Scroll.Visible = True
         Cargando = True
-        Scroll.Max = NumItems - MAX_LIST_ITEMS
+        Scroll.max = NumItems - MAX_LIST_ITEMS
         Cargando = False
     Else
         Scroll.Visible = False
@@ -713,7 +709,7 @@ Private Sub RenderItem(ByRef Pic As PictureBox, ByVal GrhIndex As Long)
     DR.Right = 32
     DR.Bottom = 32
     
-    Call DrawGrhtoHdc(Pic.hdc, GrhIndex, SR, DR)
+    Call DrawGrhtoHdc(Pic.hDC, GrhIndex, SR, DR)
     Pic.Refresh
 
 End Sub
@@ -916,7 +912,7 @@ Private Sub picPestania_Click(Index As Integer)
     If Cargando Then Exit Sub
     If UltimaPestania = Index Then Exit Sub
     
-    Scroll.Value = 0
+    Scroll.value = 0
     
     Select Case Index
 
@@ -968,7 +964,7 @@ Private Sub Scroll_Change()
     
     If Cargando Then Exit Sub
     
-    i = Scroll.Value
+    i = Scroll.value
     ' Cargo inventarios e imagenes
     
     Select Case UltimaPestania

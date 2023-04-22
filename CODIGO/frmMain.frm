@@ -126,12 +126,6 @@ Begin VB.Form frmMain
       _ExtentY        =   741
       _Version        =   393216
    End
-   Begin VB.Timer Second 
-      Enabled         =   0   'False
-      Interval        =   1050
-      Left            =   5820
-      Top             =   2490
-   End
    Begin VB.Timer SonidosMapas 
       Interval        =   20000
       Left            =   5340
@@ -149,7 +143,6 @@ Begin VB.Form frmMain
       _ExtentY        =   3043
       _Version        =   393217
       BackColor       =   0
-      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       DisableNoScroll =   -1  'True
@@ -959,7 +952,7 @@ Private Sub LoadButtons()
     
     Call cBotonLanzar.Initialize(CmdLanzar, GrhPath & "btnLanzar.jpg", GrhPath & "btnLanzar_Hov.jpg", GrhPath & "btnLanzar_press.jpg", Me)
     
-    Call cBotonLanzar.Initialize(cmdINFO, GrhPath & "btnInfo.jpg", GrhPath & "btnInfo_Hov.jpg", GrhPath & "btnInfo_press.jpg", Me)
+    Call cBotonLanzar.Initialize(cmdInfo, GrhPath & "btnInfo.jpg", GrhPath & "btnInfo_Hov.jpg", GrhPath & "btnInfo_press.jpg", Me)
     
     Call cBotonInventario.Initialize(btnInventario, GrhPath & "btnInventario.jpg", GrhPath & "btnInventario_Hov.jpg", GrhPath & "btnInventario_press.jpg", Me)
     
@@ -1242,27 +1235,13 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
             If SendTxt.Visible Then Exit Sub
         
         Case CustomKeys.BindedKey(eKeyType.mKeyTakeScreenShot)
-            'Foto
+            Call Mod_General.Client_Screenshot(frmMain.hDC, 1024, 768)
                 
         Case CustomKeys.BindedKey(eKeyType.mKeyShowOptions)
             Call frmOpciones.Show(vbModeless, frmMain)
         
-        Case CustomKeys.BindedKey(eKeyType.mKeyMeditate)
-
-            If UserMinMAN = UserMaxMAN Then Exit Sub
-            
-            If UserEstado = 1 Then
-
-                With FontTypes(FontTypeNames.FONTTYPE_INFO)
-                    Call ShowConsoleMsg("¡¡Estás muerto!!", .Red, .Green, .Blue, .bold, .italic)
-
-                End With
-
-                Exit Sub
-
-            End If
-            
-            Call WriteMeditate
+        Case CustomKeys.BindedKey(eKeyType.mKeyVerFPS)
+            FPSFLAG = Not FPSFLAG
         
         Case CustomKeys.BindedKey(eKeyType.mKeyCastSpellMacro)
         
@@ -1493,12 +1472,6 @@ Private Sub SendTxt_KeyUp(KeyCode As Integer, Shift As Integer)
         End If
 
     End If
-
-End Sub
-
-Private Sub Second_Timer()
-
-    If Not DialogosClanes Is Nothing Then DialogosClanes.PassTimer
 
 End Sub
 
@@ -1884,14 +1857,14 @@ Private Sub btnInventario_Click()
     
     If PicInv.Visible Then Exit Sub
 
-    InvEqu.Picture = LoadPicture(App.path & "\Interfaces\Centroinventario.jpg")
+    InvEqu.Picture = LoadPicture(DirInterfaces & "Centroinventario.jpg")
 
     ' Activo controles de inventario
     PicInv.Visible = True
 
     ' Desactivo controles de hechizo
     hlst.Visible = False
-    cmdINFO.Visible = False
+    cmdInfo.Visible = False
     CmdLanzar.Visible = False
     
     cmdMoverHechi(0).Visible = False
@@ -1905,11 +1878,11 @@ Private Sub btnHechizos_Click()
     
     If hlst.Visible Then Exit Sub
 
-    InvEqu.Picture = LoadPicture(App.path & "\Interfaces\Centrohechizos.jpg")
+    InvEqu.Picture = LoadPicture(DirInterfaces & "Centrohechizos.jpg")
     
     ' Activo controles de hechizos
     hlst.Visible = True
-    cmdINFO.Visible = True
+    cmdInfo.Visible = True
     CmdLanzar.Visible = True
     
     cmdMoverHechi(0).Visible = True
@@ -2024,8 +1997,6 @@ End Sub
         'Clean input and output buffers
         Call incomingData.ReadASCIIStringFixed(incomingData.length)
         Call outgoingData.ReadASCIIStringFixed(outgoingData.length)
-    
-        Second.Enabled = True
 
         Select Case EstadoLogin
 
@@ -2084,15 +2055,15 @@ Private Sub Socket1_Read(dataLength As Integer, IsUrgent As Integer)
 
     Dim RD     As String
 
-    Dim data() As Byte
+    Dim Data() As Byte
     
     Call Socket1.Read(RD, dataLength)
-    data = StrConv(RD, vbFromUnicode)
+    Data = StrConv(RD, vbFromUnicode)
     
     If RD = vbNullString Then Exit Sub
     
     'Put data in the buffer
-    Call incomingData.WriteBlock(data)
+    Call incomingData.WriteBlock(Data)
     
     'Send buffer to Handle data
     Call HandleIncomingData
@@ -2332,15 +2303,15 @@ End Sub
 
 Private Sub Winsock1_DataArrival(ByVal bytesTotal As Long)
     Dim RD As String
-    Dim data() As Byte
+    Dim Data() As Byte
     
     'Socket1.Read RD, DataLength
     Winsock1.GetData RD
     
-    data = StrConv(RD, vbFromUnicode)
+    Data = StrConv(RD, vbFromUnicode)
     
     'Set data in the buffer
-    Call incomingData.WriteBlock(data)
+    Call incomingData.WriteBlock(Data)
     
     'Send buffer to Handle data
     Call HandleIncomingData

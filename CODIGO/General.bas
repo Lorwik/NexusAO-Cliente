@@ -33,6 +33,9 @@ Attribute VB_Name = "Mod_General"
 
 Option Explicit
 
+Private m_Jpeg      As clsJpeg
+Private m_FileName  As String
+
 Public iplst        As String
 
 Public bFogata      As Boolean
@@ -43,37 +46,37 @@ Public bLluvia()    As Byte ' Array para determinar si
 Private lFrameTimer As Long
 
 Public Function DirGraficos() As String
-    DirGraficos = App.path & "\Graficos\"
+    DirGraficos = App.path & "\Recursos\Graficos\"
 
 End Function
 
 Public Function DirInterfaces() As String
-    DirInterfaces = App.path & "\Interfaces\"
+    DirInterfaces = App.path & "\Recursos\Interfaces\"
     
 End Function
 
 Public Function DirIni() As String
-    DirIni = App.path & "\Init\"
+    DirIni = App.path & "\Recursos\Init\"
     
 End Function
 
 Public Function DirSound() As String
-    DirSound = App.path & "\Wav\"
+    DirSound = App.path & "\Recursos\Wav\"
 
 End Function
 
 Public Function DirMidi() As String
-    DirMidi = App.path & "\Midi\"
+    DirMidi = App.path & "\Recursos\Midi\"
 
 End Function
 
 Public Function DirMapas() As String
-    DirMapas = App.path & "\Mapas\"
+    DirMapas = App.path & "\Recursos\Mapas\"
 
 End Function
 
 Public Function DirExtras() As String
-    DirExtras = App.path & "\EXTRAS\"
+    DirExtras = App.path & "\Recursos\EXTRAS\"
 
 End Function
 
@@ -106,83 +109,6 @@ Public Function GetRawName(ByRef sName As String) As String
     End If
 
 End Function
-
-Sub CargarAnimArmas()
-
-    On Error Resume Next
-
-    Dim LoopC As Long
-
-    Dim arch  As String
-    
-    arch = App.path & "\init\" & "armas.dat"
-    
-    NumWeaponAnims = Val(GetVar(arch, "INIT", "NumArmas"))
-    
-    ReDim WeaponAnimData(1 To NumWeaponAnims) As WeaponAnimData
-    
-    For LoopC = 1 To NumWeaponAnims
-        InitGrh WeaponAnimData(LoopC).WeaponWalk(1), Val(GetVar(arch, "ARMA" & LoopC, "Dir1")), 0
-        InitGrh WeaponAnimData(LoopC).WeaponWalk(2), Val(GetVar(arch, "ARMA" & LoopC, "Dir2")), 0
-        InitGrh WeaponAnimData(LoopC).WeaponWalk(3), Val(GetVar(arch, "ARMA" & LoopC, "Dir3")), 0
-        InitGrh WeaponAnimData(LoopC).WeaponWalk(4), Val(GetVar(arch, "ARMA" & LoopC, "Dir4")), 0
-    Next LoopC
-
-End Sub
-
-Public Sub CargarColores()
-
-    On Error Resume Next
-
-    Dim archivoC As String
-
-    archivoC = App.path & "\init\colores.dat"
-    
-    If Not FileExist(archivoC, vbArchive) Then
-        Call MsgBox("ERROR: no se ha podido cargar los colores. Falta el archivo colores.dat, reinstale el juego", vbCritical + vbOKOnly)
-        Exit Sub
-
-    End If
-    
-    Dim i As Long
-    
-    For i = 0 To 48 '49 y 50 reservados para ciudadano y criminal
-        ColoresPJ(i) = D3DColorXRGB(GetVar(archivoC, CStr(i), "R"), GetVar(archivoC, CStr(i), "G"), GetVar(archivoC, CStr(i), "B"))
-    Next i
-    
-    '   Crimi
-    ColoresPJ(50) = D3DColorXRGB(GetVar(archivoC, "CR", "R"), GetVar(archivoC, "CR", "G"), GetVar(archivoC, "CR", "B"))
-
-    '   Ciuda
-    ColoresPJ(49) = D3DColorXRGB(GetVar(archivoC, "CI", "R"), GetVar(archivoC, "CI", "G"), GetVar(archivoC, "CI", "B"))
-    
-    '   Atacable
-    ColoresPJ(50) = D3DColorXRGB(GetVar(archivoC, "AT", "R"), GetVar(archivoC, "AT", "G"), GetVar(archivoC, "AT", "B"))
-
-End Sub
-
-Sub CargarAnimEscudos()
-
-    On Error Resume Next
-
-    Dim LoopC As Long
-
-    Dim arch  As String
-    
-    arch = App.path & "\init\" & "escudos.dat"
-    
-    NumEscudosAnims = Val(GetVar(arch, "INIT", "NumEscudos"))
-    
-    ReDim ShieldAnimData(1 To NumEscudosAnims) As ShieldAnimData
-    
-    For LoopC = 1 To NumEscudosAnims
-        InitGrh ShieldAnimData(LoopC).ShieldWalk(1), Val(GetVar(arch, "ESC" & LoopC, "Dir1")), 0
-        InitGrh ShieldAnimData(LoopC).ShieldWalk(2), Val(GetVar(arch, "ESC" & LoopC, "Dir2")), 0
-        InitGrh ShieldAnimData(LoopC).ShieldWalk(3), Val(GetVar(arch, "ESC" & LoopC, "Dir3")), 0
-        InitGrh ShieldAnimData(LoopC).ShieldWalk(4), Val(GetVar(arch, "ESC" & LoopC, "Dir4")), 0
-    Next LoopC
-
-End Sub
 
 Sub AddtoRichTextBox(ByRef RichTextBox As RichTextBox, _
                      ByVal Text As String, _
@@ -245,16 +171,6 @@ Public Sub RefreshAllChars()
         End If
 
     Next LoopC
-
-End Sub
-
-Sub SaveGameini()
-    'Grabamos los datos del usuario en el Game.ini
-    Config_Inicio.name = "BetaTester"
-    Config_Inicio.Password = "DammLamers"
-    Config_Inicio.Puerto = UserPort
-    
-    Call EscribirGameIni(Config_Inicio)
 
 End Sub
 
@@ -391,8 +307,6 @@ Sub SetConnected()
     'Set Connected
     Connected = True
     
-    Call SaveGameini
-    
     'Unload the connect form
     Unload frmCrearPersonaje
     Unload frmConnect
@@ -400,8 +314,6 @@ Sub SetConnected()
     frmMain.lblName.Caption = UserName
     'Load main form
     frmMain.Visible = True
-    
-    FPSFLAG = True
 
 End Sub
 
@@ -569,125 +481,6 @@ Private Sub CheckKeys()
 
 End Sub
 
-'TODO : Si bien nunca estuvo allí, el mapa es algo independiente o a lo sumo dependiente del engine, no va acá!!!
-Sub SwitchMap(ByVal Map As Integer)
-
-    '**************************************************************
-    'Formato de mapas optimizado para reducir el espacio que ocupan.
-    'Diseñado y creado por Juan Martín Sotuyo Dodero (Maraxus) (juansotuyo@hotmail.com)
-    '**************************************************************
-    Dim Y         As Long
-
-    Dim X         As Long
-
-    Dim tempint   As Integer
-
-    Dim ByFlags   As Byte
-
-    Dim handle    As Integer
-
-    Dim CharIndex As Integer
-
-    Dim Obj       As Integer
-    
-    handle = FreeFile()
-    
-    Call Char_CleanAll
-    
-    Open DirMapas & "Mapa" & Map & ".map" For Binary As handle
-    Seek handle, 1
-            
-    'map Header
-    Get handle, , MapInfo.MapVersion
-    Get handle, , MiCabecera
-    Get handle, , tempint
-    Get handle, , tempint
-    Get handle, , tempint
-    Get handle, , tempint
-    
-    'Load arrays
-    For Y = YMinMapSize To YMaxMapSize
-        For X = XMinMapSize To XMaxMapSize
-            Get handle, , ByFlags
-            
-            MapData(X, Y).Blocked = (ByFlags And 1)
-            
-            Get handle, , MapData(X, Y).Graphic(1).GrhIndex
-            InitGrh MapData(X, Y).Graphic(1), MapData(X, Y).Graphic(1).GrhIndex
-            
-            'Layer 2 used?
-            If ByFlags And 2 Then
-                Get handle, , MapData(X, Y).Graphic(2).GrhIndex
-                InitGrh MapData(X, Y).Graphic(2), MapData(X, Y).Graphic(2).GrhIndex
-            Else
-                MapData(X, Y).Graphic(2).GrhIndex = 0
-
-            End If
-                
-            'Layer 3 used?
-            If ByFlags And 4 Then
-                Get handle, , MapData(X, Y).Graphic(3).GrhIndex
-                InitGrh MapData(X, Y).Graphic(3), MapData(X, Y).Graphic(3).GrhIndex
-            Else
-                MapData(X, Y).Graphic(3).GrhIndex = 0
-
-            End If
-                
-            'Layer 4 used?
-            If ByFlags And 8 Then
-                Get handle, , MapData(X, Y).Graphic(4).GrhIndex
-                InitGrh MapData(X, Y).Graphic(4), MapData(X, Y).Graphic(4).GrhIndex
-            Else
-                MapData(X, Y).Graphic(4).GrhIndex = 0
-
-            End If
-            
-            'Trigger used?
-            If ByFlags And 16 Then
-                Get handle, , MapData(X, Y).Trigger
-            Else
-                MapData(X, Y).Trigger = 0
-
-            End If
-            
-            'Erase NPCs
-            CharIndex = Char_MapPosExits(X, Y)
- 
-            If (CharIndex > 0) Then
-                Call Char_Erase(CharIndex)
-
-            End If
-
-            'Erase OBJs
-            Obj = Map_PosExitsObject(X, Y)
-
-            If (Obj > 0) Then
-                Call Map_DestroyObject(X, Y)
-
-            End If
-            
-            'Erase Lights
-            Call Engine_D3DColor_To_RGB_List(MapData(X, Y).Engine_Light(), Estado_Actual) 'Standelf, Light & Meteo Engine
-        Next X
-    Next Y
-    
-    Close handle
-    
-    Call LightRemoveAll
-    
-    '   Erase particle effects
-    ReDim Effect(1 To NumEffects)
-    
-    MapInfo.name = ""
-    MapInfo.Music = ""
-    
-    CurMap = Map
-    
-    Init_Ambient Map
-    
-    'If UserMap = 120 Then Effect_Waterfall_Begin Engine_TPtoSPX(8), Engine_TPtoSPY(3), 1, 800
-End Sub
-
 Function ReadField(ByVal Pos As Integer, _
                    ByRef Text As String, _
                    ByVal SepASCII As Byte) As String
@@ -754,24 +547,6 @@ Function FileExist(ByVal File As String, ByVal FileType As VbFileAttribute) As B
 
 End Function
 
-Sub WriteClientVer()
-
-    Dim hFile As Integer
-        
-    hFile = FreeFile()
-    Open App.path & "\init\Ver.bin" For Binary Access Write Lock Read As #hFile
-    Put #hFile, , CLng(777)
-    Put #hFile, , CLng(777)
-    Put #hFile, , CLng(777)
-    
-    Put #hFile, , CInt(App.Major)
-    Put #hFile, , CInt(App.Minor)
-    Put #hFile, , CInt(App.Revision)
-    
-    Close #hFile
-
-End Sub
-
 Public Function IsIp(ByVal Ip As String) As Boolean
 
     Dim i As Long
@@ -787,44 +562,6 @@ Public Function IsIp(ByVal Ip As String) As Boolean
     Next i
 
 End Function
-
-Public Sub CargarServidores()
-
-    '********************************
-    'Author: Unknown
-    'Last Modification: 07/26/07
-    'Last Modified by: Rapsodius
-    'Added Instruction "CloseClient" before End so the mutex is cleared
-    '********************************
-    On Error GoTo errorH
-
-    Dim f As String
-
-    Dim c As Integer
-
-    Dim i As Long
-    
-    f = App.path & "\init\sinfo.dat"
-    c = Val(GetVar(f, "INIT", "Cant"))
-    
-    ReDim ServersLst(1 To c) As tServerInfo
-
-    For i = 1 To c
-        ServersLst(i).Desc = GetVar(f, "S" & i, "Desc")
-        ServersLst(i).Ip = Trim$(GetVar(f, "S" & i, "Ip"))
-        ServersLst(i).PassRecPort = CInt(GetVar(f, "S" & i, "P2"))
-        ServersLst(i).Puerto = CInt(GetVar(f, "S" & i, "PJ"))
-    Next i
-
-    CurServer = 1
-    Exit Sub
-
-errorH:
-    Call MsgBox("Error cargando los servidores, actualicelos de la web", vbCritical + vbOKOnly, "Nexus AO")
-    
-    Call CloseClient
-
-End Sub
 
 Public Sub InitServersList()
 
@@ -894,16 +631,8 @@ Public Function CurServerPort() As Integer
 End Function
 
 Sub Main()
-    Call WriteClientVer
     
-    'Load config file
-    If FileExist(App.path & "\init\Inicio.con", vbNormal) Then
-        Config_Inicio = LeerGameIni()
-
-    End If
-    
-    'Load ao.dat config file
-    Call LoadClientSetup
+    Call modCarga.LeerConfiguracion
     
     Call modCompression.GenerateContra(vbNullString, 0) ' 0 = Graficos.AO
     
@@ -942,10 +671,8 @@ Sub Main()
 
     MD5HushYo = "0123456789abcdef"  'We aren't using a real MD5
     
-    tipf = Config_Inicio.tip
-    
     'Set resolution BEFORE the loading form is displayed, therefore it will be centered.
-    Call Resolution.SetResolution
+    Call Resolution.SetResolution(1024, 768)
     
     ' Load constants, classes, flags, graphics..
     LoadInitialConfig
@@ -966,7 +693,6 @@ Sub Main()
         
     'Set the dialog's font
     Dialogos.Font = frmMain.Font
-    DialogosClanes.Font = frmMain.Font
     
     lFrameTimer = GetTickCount
         
@@ -984,12 +710,8 @@ Sub Main()
         End If
 
         'FPS Counter - mostramos las FPS
-        If GetTickCount - lFrameTimer >= 1000 Then
-            'If FPSFLAG Then frmMain.lblFPS.Caption = Mod_TileEngine.FPS
-            
+        If GetTickCount - lFrameTimer >= 1000 Then _
             lFrameTimer = GetTickCount
-
-        End If
         
         ' If there is anything to be sent, we send it
         Call FlushBuffer
@@ -1030,13 +752,6 @@ Private Sub LoadInitialConfig()
     ' Initialize FONTTYPES
     Call Protocol.InitFonts
     
-    With frmConnect
-        .txtNombre = Config_Inicio.name
-        .txtNombre.SelStart = 0
-        .txtNombre.SelLength = Len(.txtNombre)
-
-    End With
-    
     UserMap = 1
     
     ' Mouse Pointer (Loaded before opening any form with buttons in it)
@@ -1061,12 +776,12 @@ Private Sub LoadInitialConfig()
     Call AddtoRichTextBox(frmCargando.status, "Iniciando motor gráfico... ", 255, 255, 255, True, False, True)
     
     ' Iniciamos el Engine de DirectX 8
-    If Not Engine_DirectX8_Init Then Call CloseClient
+    Call Engine_DirectX8_Init
           
     ' Tile Engine
     If Not InitTileEngine(frmMain.hwnd, 32, 32, 8, 8) Then Call CloseClient
         
-    Engine_DirectX8_Aditional_Init
+    Call Engine_DirectX8_Aditional_Init
     
     Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
     
@@ -1083,14 +798,20 @@ Private Sub LoadInitialConfig()
     '#############
     ' DIRECT SOUND
     Call AddtoRichTextBox(frmCargando.status, "Iniciando DirectSound... ", 255, 255, 255, True, False, True)
+    
     ' Inicializamos el sonido
-    Call Audio.Initialize(DirectX, frmMain.hwnd, App.path & "\" & Config_Inicio.DirSonidos & "\", App.path & "\" & Config_Inicio.DirMusica & "\")
-    ' Enable / Disable audio
-    Audio.MusicActivated = Not ClientSetup.bNoMusic
-    Audio.SoundActivated = Not ClientSetup.bNoSound
-    Audio.SoundEffectsActivated = Not ClientSetup.bNoSoundEffects
+    Call Audio.Initialize(DirectX, frmMain.hwnd, App.path & "\Wav\", App.path & "\Midi\")
+    
+    'Enable / Disable audio
+    Audio.MusicActivated = ClientSetup.bMusic
+    Audio.SoundActivated = ClientSetup.bSound
+    Audio.SoundEffectsActivated = ClientSetup.bSoundEffects
+    Audio.MusicVolume = ClientSetup.MusicVolume
+    Audio.SoundVolume = ClientSetup.SoundVolume
+    
     ' Inicializamos el inventario gráfico
     Call Inventario.Initialize(DirectD3D8, frmMain.PicInv, MAX_INVENTORY_SLOTS)
+    
     'Call Audio.MusicMP3Play(App.path & "\MP3\" & MP3_Inicio & ".mp3")
     Call AddtoRichTextBox(frmCargando.status, "Hecho", 255, 0, 0, True, False, False)
     
@@ -1134,11 +855,11 @@ End Sub
 Sub WriteVar(ByVal File As String, _
              ByVal Main As String, _
              ByVal Var As String, _
-             ByVal Value As String)
+             ByVal value As String)
     '*****************************************************************
     'Writes a var to a text file
     '*****************************************************************
-    writeprivateprofilestring Main, Var, Value, File
+    writeprivateprofilestring Main, Var, value, File
 
 End Sub
 
@@ -1169,7 +890,7 @@ Public Function CheckMailString(ByVal sString As String) As Boolean
 
     Dim lPos As Long
 
-    Dim lX   As Long
+    Dim Lx   As Long
 
     Dim iAsc As Integer
     
@@ -1182,16 +903,16 @@ Public Function CheckMailString(ByVal sString As String) As Boolean
         If Not (InStr(lPos, sString, ".", vbBinaryCompare) > lPos + 1) Then Exit Function
         
         '3er test: Recorre todos los caracteres y los valída
-        For lX = 0 To Len(sString) - 1
+        For Lx = 0 To Len(sString) - 1
 
-            If Not (lX = (lPos - 1)) Then   'No chequeamos la '@'
-                iAsc = Asc(mid$(sString, (lX + 1), 1))
+            If Not (Lx = (lPos - 1)) Then   'No chequeamos la '@'
+                iAsc = Asc(mid$(sString, (Lx + 1), 1))
 
                 If Not CMSValidateChar_(iAsc) Then Exit Function
 
             End If
 
-        Next lX
+        Next Lx
         
         'Finale
         CheckMailString = True
@@ -1236,7 +957,7 @@ Public Sub LeerLineaComandos()
     'Last modified: 25/11/2008 (BrianPr)
     '
     '*************************************************
-    Dim T()      As String
+    Dim t()      As String
 
     Dim i        As Long
     
@@ -1245,11 +966,11 @@ Public Sub LeerLineaComandos()
     Dim Patch    As String
     
     'Parseo los comandos
-    T = Split(Command, " ")
+    t = Split(Command, " ")
 
-    For i = LBound(T) To UBound(T)
+    For i = LBound(t) To UBound(t)
 
-        Select Case UCase$(T(i))
+        Select Case UCase$(t(i))
 
             Case "/NORES" 'no cambiar la resolucion
                 NoRes = True
@@ -1326,60 +1047,6 @@ error:
 
 End Sub
 
-Private Sub LoadClientSetup()
-
-    '**************************************************************
-    'Author: Juan Martín Sotuyo Dodero (Maraxus)
-    'Last Modify Date: 11/19/09
-    '11/19/09: Pato - Is optional show the frmGuildNews form
-    '**************************************************************
-    Dim fHandle As Integer
-    
-    If FileExist(App.path & "\init\ao.dat", vbArchive) Then
-        fHandle = FreeFile
-        
-        Open App.path & "\init\ao.dat" For Binary Access Read Lock Write As fHandle
-        Get fHandle, , ClientSetup
-        Close fHandle
-    Else
-        'Use dynamic by default
-        ClientSetup.bDinamic = True
-
-    End If
-    
-    NoRes = ClientSetup.bNoRes
-    
-    ClientSetup.bGuildNews = Not ClientSetup.bGuildNews
-    Set DialogosClanes = New clsGuildDlg
-    DialogosClanes.Activo = Not ClientSetup.bGldMsgConsole
-    DialogosClanes.CantidadDialogos = ClientSetup.bCantMsgs
-
-End Sub
-
-Private Sub SaveClientSetup()
-
-    '**************************************************************
-    'Author: Torres Patricio (Pato)
-    'Last Modify Date: 03/11/10
-    '
-    '**************************************************************
-    Dim fHandle As Integer
-    
-    fHandle = FreeFile
-    
-    ClientSetup.bNoMusic = Not Audio.MusicActivated
-    ClientSetup.bNoSound = Not Audio.SoundActivated
-    ClientSetup.bNoSoundEffects = Not Audio.SoundEffectsActivated
-    ClientSetup.bGuildNews = Not ClientSetup.bGuildNews
-    ClientSetup.bGldMsgConsole = Not DialogosClanes.Activo
-    ClientSetup.bCantMsgs = DialogosClanes.CantidadDialogos
-    
-    Open App.path & "\init\ao.dat" For Binary As fHandle
-    Put fHandle, , ClientSetup
-    Close fHandle
-
-End Sub
-
 Private Sub InicializarNombres()
     '**************************************************************
     'Author: Juan Martín Sotuyo Dodero (Maraxus)
@@ -1452,8 +1119,6 @@ Public Sub CleanDialogs()
     'Clean console and dialogs
     frmMain.RecTxt.Text = vbNullString
     
-    Call DialogosClanes.RemoveDialogs
-    
     Call Dialogos.RemoveAllDialogs
 
 End Sub
@@ -1464,26 +1129,24 @@ Public Sub CloseClient()
     'Last Modify Date: 8/14/2007
     'Frees all used resources, cleans up and leaves
     '**************************************************************
+    
     ' Allow new instances of the client to be opened
     Call PrevInstance.ReleaseInstance
     
     EngineRun = False
-    frmCargando.Show
-    Call AddtoRichTextBox(frmCargando.status, "Liberando recursos...", 0, 0, 0, 0, 0, 0)
     
     Call Resolution.ResetResolution
     
     'Stop tile engine
     Call Engine_DirectX8_End
     
-    Call SaveClientSetup
+    'TODO// Guardar configuracion
     
     'Destruimos los objetos públicos creados
     Set CustomMessages = Nothing
     Set CustomKeys = Nothing
     Set SurfaceDB = Nothing
     Set Dialogos = Nothing
-    Set DialogosClanes = Nothing
     Set Audio = Nothing
     Set Inventario = Nothing
     Set MainTimer = Nothing
@@ -1492,9 +1155,9 @@ Public Sub CloseClient()
     
     Call UnloadAllForms
     
-    'Actualizar tip
-    Config_Inicio.tip = tipf
-    Call EscribirGameIni(Config_Inicio)
+    'Si se cambio la resolucion, la reseteamos.
+    If ResolucionCambiada Then Resolution.ResetResolution
+    
     End
 
 End Sub
@@ -1606,11 +1269,7 @@ End Function
 
 Public Sub ResetAllInfo()
     
-    ' Save config.ini
-    SaveGameini
-    
-    ' Disable timers
-    frmMain.Second.Enabled = False
+
     Connected = False
     
     'Unload all forms except frmMain, frmConnect and frmCrearPersonaje
@@ -1618,11 +1277,8 @@ Public Sub ResetAllInfo()
 
     For Each frm In Forms
 
-        If frm.name <> frmMain.name And frm.name <> frmConnect.name And frm.name <> frmCrearPersonaje.name Then
-            
+        If frm.name <> frmMain.name And frm.name <> frmConnect.name And frm.name <> frmCrearPersonaje.name Then _
             Unload frm
-
-        End If
 
     Next
     
@@ -1740,40 +1396,89 @@ Public Sub CargarHechizos()
 
     Dim PathName As String
 
-    Dim J        As Long
+    Dim j        As Long
  
-    PathName = App.path & "\init\Hechizos.dat"
+    PathName = DirIni & "Hechizos.dat"
     NumHechizos = Val(GetVar(PathName, "INIT", "NumHechizos"))
  
     ReDim Hechizos(1 To NumHechizos) As tHechizos
 
-    For J = 1 To NumHechizos
+    For j = 1 To NumHechizos
 
-        With Hechizos(J)
-            .Desc = GetVar(PathName, "HECHIZO" & J, "Desc")
-            .PalabrasMagicas = GetVar(PathName, "HECHIZO" & J, "PalabrasMagicas")
-            .Nombre = GetVar(PathName, "HECHIZO" & J, "Nombre")
-            .SkillRequerido = GetVar(PathName, "HECHIZO" & J, "MinSkill")
+        With Hechizos(j)
+            .Desc = GetVar(PathName, "HECHIZO" & j, "Desc")
+            .PalabrasMagicas = GetVar(PathName, "HECHIZO" & j, "PalabrasMagicas")
+            .Nombre = GetVar(PathName, "HECHIZO" & j, "Nombre")
+            .SkillRequerido = GetVar(PathName, "HECHIZO" & j, "MinSkill")
          
-            If J <> 38 And J <> 39 Then
-                .EnergiaRequerida = GetVar(PathName, "HECHIZO" & J, "StaRequerido")
+            If j <> 38 And j <> 39 Then
+                .EnergiaRequerida = GetVar(PathName, "HECHIZO" & j, "StaRequerido")
                  
-                .HechiceroMsg = GetVar(PathName, "HECHIZO" & J, "HechizeroMsg")
-                .ManaRequerida = GetVar(PathName, "HECHIZO" & J, "ManaRequerido")
+                .HechiceroMsg = GetVar(PathName, "HECHIZO" & j, "HechizeroMsg")
+                .ManaRequerida = GetVar(PathName, "HECHIZO" & j, "ManaRequerido")
              
-                .PropioMsg = GetVar(PathName, "HECHIZO" & J, "PropioMsg")
+                .PropioMsg = GetVar(PathName, "HECHIZO" & j, "PropioMsg")
              
-                .TargetMsg = GetVar(PathName, "HECHIZO" & J, "TargetMsg")
+                .TargetMsg = GetVar(PathName, "HECHIZO" & j, "TargetMsg")
 
             End If
 
         End With
 
-    Next J
+    Next j
  
     Exit Sub
  
 errorH:
     Call MsgBox("Error critico", vbCritical + vbOKOnly, "Nexus AO")
+
+End Sub
+
+Public Sub Client_Screenshot(ByVal hDC As Long, ByVal Width As Long, ByVal Height As Long)
+'*******************************
+'Autor: ???
+'Fecha: ???
+'*******************************
+
+On Error GoTo ErrorHandler
+
+    Dim i As Long
+    Dim Index As Long
+    i = 1
+    
+    Set m_Jpeg = New clsJpeg
+    
+    '80 Quality
+    m_Jpeg.Quality = 100
+    
+    'Sample the cImage by hDC
+    m_Jpeg.SampleHDC hDC, Width, Height
+    
+    m_FileName = App.path & "\Fotos\NexusAO_Foto"
+    
+    If Dir(App.path & "\Fotos", vbDirectory) = vbNullString Then
+        MkDir (App.path & "\Fotos")
+    End If
+    
+    Do While Dir(m_FileName & Trim(str(i)) & ".jpg") <> vbNullString
+        i = i + 1
+        DoEvents
+    Loop
+    
+    Index = i
+    
+    m_Jpeg.Comment = "Character: " & UserName & " - " & Format(Date, "dd/mm/yyyy") & " - " & Format(Time, "hh:mm AM/PM")
+    
+    'Save the JPG file
+    m_Jpeg.SaveFile m_FileName & Trim(str(Index)) & ".jpg"
+    
+    Call AddtoRichTextBox(frmMain.RecTxt, "¡Captura realizada con exito! Se guardo en " & m_FileName & Trim(str(Index)) & ".jpg", 204, 193, 155, 0, 1)
+    
+    Set m_Jpeg = Nothing
+    
+    Exit Sub
+
+ErrorHandler:
+    Call AddtoRichTextBox(frmMain.RecTxt, "¡Error en la captura!", 204, 193, 155, 0, 1)
 
 End Sub

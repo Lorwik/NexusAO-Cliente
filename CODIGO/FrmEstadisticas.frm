@@ -1077,7 +1077,7 @@ Private Sub Form_Load()
     Set clsFormulario = New clsFormMovementManager
     clsFormulario.Initialize Me
     
-    Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaEstadisticas.jpg")
+    Me.Picture = LoadPicture(DirInterfaces & "VentanaEstadisticas.jpg")
     
     Call LoadButtons
 
@@ -1117,7 +1117,7 @@ Private Sub imgCerrar_MouseMove(Button As Integer, _
                                 Y As Single)
 
     If imgCerrar.Tag = 1 Then
-        imgCerrar.Picture = LoadPicture(App.path & "\Interfaces\BotonCerrarApretadoEstadisticas.jpg")
+        imgCerrar.Picture = LoadPicture(DirInterfaces & "BotonCerrarApretadoEstadisticas.jpg")
         imgCerrar.Tag = 0
 
     End If

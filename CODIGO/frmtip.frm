@@ -118,15 +118,16 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub Command1_Click()
+   If frmtip.Check1.Value = vbChecked Then
+      ClientSetup.MostrarTips = True
+      
+   Else
+      ClientSetup.MostrarTips = False
+      
+   End If
 
-    If frmtip.Check1.Value = vbChecked Then
-        tipf = "1"
-    Else
-        tipf = "0"
-
-    End If
-
-    Unload Me
+   Call WriteVar(DirIni & "Config.ini", "OTHER", "MOSTRAR_TIPS", IIf(ClientSetup.MostrarTips, "True", "False"))
+   Unload Me
 
 End Sub
 

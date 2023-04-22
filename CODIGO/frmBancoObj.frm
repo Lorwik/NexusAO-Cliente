@@ -343,7 +343,7 @@ Private Sub Form_Load()
     clsFormulario.Initialize Me
 
     'Cargamos la interfase
-    Me.Picture = LoadPicture(App.path & "\Interfaces\Boveda.jpg")
+    Me.Picture = LoadPicture(DirInterfaces & "Boveda.jpg")
     
     Call LoadButtons
     
@@ -354,8 +354,8 @@ Private Sub LoadButtons()
     Dim GrhPath As String
     
     GrhPath = DirInterfaces
-    'CmdMoverBov(1).Picture = LoadPicture(App.path & "\Interfaces\FlechaSubirObjeto.jpg")
-    'CmdMoverBov(0).Picture = LoadPicture(App.path & "\Interfaces\FlechaBajarObjeto.jpg")
+    'CmdMoverBov(1).Picture = LoadPicture(DirInterfaces & "FlechaSubirObjeto.jpg")
+    'CmdMoverBov(0).Picture = LoadPicture(DirInterfaces & "FlechaBajarObjeto.jpg")
     
     Set cBotonRetirarOro = New clsGraphicalButton
     Set cBotonDepositarOro = New clsGraphicalButton

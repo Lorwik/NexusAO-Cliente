@@ -104,7 +104,7 @@ Private Sub Form_Load()
     Set clsFormulario = New clsFormMovementManager
     clsFormulario.Initialize Me
     
-    Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaTirarOro.jpg")
+    Me.Picture = LoadPicture(DirInterfaces & "VentanaTirarOro.jpg")
     
     Call LoadButtons
 

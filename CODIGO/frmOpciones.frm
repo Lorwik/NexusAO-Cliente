@@ -27,49 +27,6 @@ Begin VB.Form frmOpciones
    ScaleWidth      =   322
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
-   Begin VB.TextBox txtCantMensajes 
-      Alignment       =   2  'Center
-      BackColor       =   &H00000000&
-      BorderStyle     =   0  'None
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Left            =   2340
-      MaxLength       =   1
-      TabIndex        =   3
-      Text            =   "5"
-      Top             =   2415
-      Width           =   255
-   End
-   Begin VB.TextBox txtLevel 
-      BackColor       =   &H00000000&
-      BorderStyle     =   0  'None
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Left            =   3480
-      MaxLength       =   2
-      TabIndex        =   2
-      Text            =   "40"
-      Top             =   4110
-      Width           =   255
-   End
    Begin MSComctlLib.Slider Slider1 
       Height          =   255
       Index           =   0
@@ -99,24 +56,6 @@ Begin VB.Form frmOpciones
       Max             =   100
       TickStyle       =   3
    End
-   Begin VB.Image imgChkDesactivarFragShooter 
-      Height          =   225
-      Left            =   435
-      Top             =   4740
-      Width           =   210
-   End
-   Begin VB.Image imgChkAlMorir 
-      Height          =   225
-      Left            =   435
-      Top             =   4425
-      Width           =   210
-   End
-   Begin VB.Image imgChkRequiredLvl 
-      Height          =   225
-      Left            =   435
-      Top             =   4110
-      Width           =   210
-   End
    Begin VB.Image imgChkNoMostrarNews 
       Height          =   225
       Left            =   2475
@@ -127,18 +66,6 @@ Begin VB.Form frmOpciones
       Height          =   225
       Left            =   435
       Top             =   3315
-      Width           =   210
-   End
-   Begin VB.Image imgChkPantalla 
-      Height          =   225
-      Left            =   1950
-      Top             =   2430
-      Width           =   210
-   End
-   Begin VB.Image imgChkConsola 
-      Height          =   225
-      Left            =   435
-      Top             =   2430
       Width           =   210
    End
    Begin VB.Image imgChkEfectosSonido 
@@ -181,12 +108,6 @@ Begin VB.Form frmOpciones
       Height          =   285
       Left            =   360
       Top             =   5880
-      Width           =   2010
-   End
-   Begin VB.Image imgCambiarPasswd 
-      Height          =   285
-      Left            =   2520
-      Top             =   5520
       Width           =   2010
    End
    Begin VB.Image imgMapa 
@@ -261,11 +182,7 @@ Private cBotonMsgPersonalizado As clsGraphicalButton
 
 Private cBotonMapa             As clsGraphicalButton
 
-Private cBotonCambiarPasswd    As clsGraphicalButton
-
 Private cBotonManual           As clsGraphicalButton
-
-Private cBotonRadio            As clsGraphicalButton
 
 Private cBotonSoporte          As clsGraphicalButton
 
@@ -287,75 +204,6 @@ Private loading                As Boolean
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     LastButtonPressed.ToggleToNormal
-
-End Sub
-
-Private Sub imgCambiarPasswd_Click()
-    Call frmNewPassword.Show(vbModal, Me)
-
-End Sub
-
-Private Sub imgChkAlMorir_Click()
-    ClientSetup.bDie = Not ClientSetup.bDie
-    
-    If ClientSetup.bDie Then
-        imgChkAlMorir.Picture = picCheckBox
-    Else
-        Set imgChkAlMorir.Picture = Nothing
-
-    End If
-
-End Sub
-
-Private Sub imgChkDesactivarFragShooter_Click()
-    ClientSetup.bActive = Not ClientSetup.bActive
-    
-    If ClientSetup.bActive Then
-        Set imgChkDesactivarFragShooter.Picture = Nothing
-    Else
-        imgChkDesactivarFragShooter.Picture = picCheckBox
-
-    End If
-
-End Sub
-
-Private Sub imgChkRequiredLvl_Click()
-    ClientSetup.bKill = Not ClientSetup.bKill
-    
-    If ClientSetup.bKill Then
-        imgChkRequiredLvl.Picture = picCheckBox
-    Else
-        Set imgChkRequiredLvl.Picture = Nothing
-
-    End If
-
-End Sub
-
-Private Sub txtCantMensajes_Change()
-    txtCantMensajes.Text = Val(txtCantMensajes.Text)
-    
-    If txtCantMensajes.Text > 0 Then
-        DialogosClanes.CantidadDialogos = txtCantMensajes.Text
-    Else
-        txtCantMensajes.Text = 5
-
-    End If
-
-End Sub
-
-Private Sub txtLevel_Change()
-
-    If Not IsNumeric(txtLevel) Then txtLevel = 0
-    txtLevel = Trim$(txtLevel)
-    ClientSetup.byMurderedLevel = CByte(txtLevel)
-
-End Sub
-
-Private Sub imgChkConsola_Click()
-    DialogosClanes.Activo = False
-    
-    imgChkConsola.Picture = picCheckBox
-    Set imgChkPantalla.Picture = Nothing
 
 End Sub
 
@@ -403,7 +251,7 @@ Private Sub imgChkMusica_Click()
         If Not Audio.MusicActivated Then  'Prevent the music from reloading
             Audio.MusicActivated = True
             Slider1(0).Enabled = True
-            Slider1(0).Value = Audio.MusicVolume
+            Slider1(0).value = Audio.MusicVolume
 
         End If
         
@@ -418,14 +266,6 @@ Private Sub imgChkNoMostrarNews_Click()
     
     imgChkNoMostrarNews.Picture = picCheckBox
     Set imgChkMostrarNews.Picture = Nothing
-
-End Sub
-
-Private Sub imgChkPantalla_Click()
-    DialogosClanes.Activo = True
-    
-    imgChkPantalla.Picture = picCheckBox
-    Set imgChkConsola.Picture = Nothing
 
 End Sub
 
@@ -447,7 +287,7 @@ Private Sub imgChkSonidos_Click()
     Else
         Audio.SoundActivated = True
         Slider1(1).Enabled = True
-        Slider1(1).Value = Audio.SoundVolume
+        Slider1(1).value = Audio.SoundVolume
         
         imgChkSonidos.Picture = picCheckBox
 
@@ -511,7 +351,7 @@ Private Sub Form_Load()
     Set clsFormulario = New clsFormMovementManager
     clsFormulario.Initialize Me
     
-    Me.Picture = LoadPicture(App.path & "\Interfaces\VentanaOpciones.jpg")
+    Me.Picture = LoadPicture(DirInterfaces & "VentanaOpciones.jpg")
     LoadButtons
     
     loading = True      'Prevent sounds when setting check's values
@@ -529,9 +369,7 @@ Private Sub LoadButtons()
     Set cBotonConfigTeclas = New clsGraphicalButton
     Set cBotonMsgPersonalizado = New clsGraphicalButton
     Set cBotonMapa = New clsGraphicalButton
-    Set cBotonCambiarPasswd = New clsGraphicalButton
     Set cBotonManual = New clsGraphicalButton
-    Set cBotonRadio = New clsGraphicalButton
     Set cBotonSoporte = New clsGraphicalButton
     Set cBotonTutorial = New clsGraphicalButton
     Set cBotonSalir = New clsGraphicalButton
@@ -544,11 +382,7 @@ Private Sub LoadButtons()
                                     
     Call cBotonMapa.Initialize(imgMapa, GrhPath & "BotonMapaAo.jpg", GrhPath & "BotonMapaAoRollover.jpg", GrhPath & "BotonMapaAoClick.jpg", Me)
                                     
-    Call cBotonCambiarPasswd.Initialize(imgCambiarPasswd, GrhPath & "BotonCambiarContrasenia.jpg", GrhPath & "BotonCambiarContraseniaRollover.jpg", GrhPath & "BotonCambiarContraseniaClick.jpg", Me)
-                                    
     Call cBotonManual.Initialize(imgManual, GrhPath & "BotonManualAo.jpg", GrhPath & "BotonManualAoRollover.jpg", GrhPath & "BotonManualAoClick.jpg", Me)
-                                    
-    Call cBotonRadio.Initialize(imgRadio, GrhPath & "BotonEscucharRadioAo.jpg", GrhPath & "BotonEscucharRadioAoRollover.jpg", GrhPath & "BotonEscucharRadioAoClick.jpg", Me)
                                     
     Call cBotonSoporte.Initialize(imgSoporte, GrhPath & "BotonSoporte.jpg", GrhPath & "BotonSoporteRollover.jpg", GrhPath & "BotonSoporteClick.jpg", Me)
                                     
@@ -569,7 +403,7 @@ Private Sub LoadUserConfig()
     If bMusicActivated Then
         imgChkMusica.Picture = picCheckBox
         
-        Slider1(0).Value = Audio.MusicVolume
+        Slider1(0).value = Audio.MusicVolume
 
     End If
     
@@ -580,7 +414,7 @@ Private Sub LoadUserConfig()
     If bSoundActivated Then
         imgChkSonidos.Picture = picCheckBox
         
-        Slider1(1).Value = Audio.SoundVolume
+        Slider1(1).value = Audio.SoundVolume
 
     End If
     
@@ -589,27 +423,12 @@ Private Sub LoadUserConfig()
 
     If bSoundEffectsActivated Then imgChkEfectosSonido.Picture = picCheckBox
     
-    txtCantMensajes.Text = CStr(DialogosClanes.CantidadDialogos)
-    
-    If DialogosClanes.Activo Then
-        imgChkPantalla.Picture = picCheckBox
-    Else
-        imgChkConsola.Picture = picCheckBox
-
-    End If
-    
     If ClientSetup.bGuildNews Then
         imgChkMostrarNews.Picture = picCheckBox
     Else
         imgChkNoMostrarNews.Picture = picCheckBox
 
     End If
-        
-    If ClientSetup.bKill Then imgChkRequiredLvl.Picture = picCheckBox
-    If ClientSetup.bDie Then imgChkAlMorir.Picture = picCheckBox
-    If Not ClientSetup.bActive Then imgChkDesactivarFragShooter.Picture = picCheckBox
-    
-    txtLevel = ClientSetup.byMurderedLevel
 
 End Sub
 
@@ -618,10 +437,10 @@ Private Sub Slider1_Change(Index As Integer)
     Select Case Index
 
         Case 0
-            Audio.MusicVolume = Slider1(0).Value
+            Audio.MusicVolume = Slider1(0).value
 
         Case 1
-            Audio.SoundVolume = Slider1(1).Value
+            Audio.SoundVolume = Slider1(1).value
 
     End Select
 
@@ -632,10 +451,10 @@ Private Sub Slider1_Scroll(Index As Integer)
     Select Case Index
 
         Case 0
-            Audio.MusicVolume = Slider1(0).Value
+            Audio.MusicVolume = Slider1(0).value
 
         Case 1
-            Audio.SoundVolume = Slider1(1).Value
+            Audio.SoundVolume = Slider1(1).value
 
     End Select
 

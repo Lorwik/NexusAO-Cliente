@@ -1,27 +1,43 @@
 Attribute VB_Name = "mDx8_Engine"
+Option Explicit
 
-'DX8 Objects
-Public DirectX            As New DirectX8
+' No matter what you do with DirectX8, you will need to start with
+' the DirectX8 object. You will need to create a new instance of
+' the object, using the New keyword, rather than just getting a
+' pointer to it, since there's nowhere to get a pointer from yet (duh!).
+Public DirectX              As New DirectX8
 
-Public DirectD3D8         As D3DX8
+' The D3DX8 object contains lots of helper functions, mostly math
+' to make Direct3D alot easier to use. Notice we create a new
+' instance of the object using the New keyword.
+Public DirectD3D8           As D3DX8
 
-Public DirectD3D          As Direct3D8
+Public DirectD3D            As Direct3D8
 
-Public DirectDevice       As Direct3DDevice8
+' The Direct3DDevice8 represents our rendering device, which could
+' be a hardware or a software device. The great thing is we still
+' use the same object no matter what it is
+Public DirectDevice         As Direct3DDevice8
 
-Public SurfaceDB          As New clsSurfaceManager
+' The D3DDISPLAYMODE type structure that holds
+' the information about your current display adapter.
+Public DispMode             As D3DDISPLAYMODE
 
-Public Engine_BaseSpeed   As Single
+' The D3DPRESENT_PARAMETERS type holds a description of the way
+' in which DirectX will display it's rendering.
+Public D3DWindow As D3DPRESENT_PARAMETERS
 
-Public TileBufferSize     As Integer
+Public SurfaceDB            As New clsSurfaceManager
 
-Public Const ScreenWidth  As Long = 536
+Public Engine_BaseSpeed     As Single
 
-Public Const ScreenHeight As Long = 412
+Public TileBufferSize       As Integer
 
-Public MainScreenRect     As RECT
+Public ScreenWidth          As Long
 
-Public ConnectScreenRect  As RECT
+Public ScreenHeight         As Long
+
+Public MainScreenRect       As RECT
 
 '
 Public Type TLVERTEX
@@ -39,45 +55,53 @@ End Type
 
 Private EndTime As Long
 
-Public Function Engine_DirectX8_Init() As Boolean
+Public Sub Engine_DirectX8_Init()
 
-    Dim DispMode  As D3DDISPLAYMODE
+    On Error GoTo EngineHandler:
 
-    Dim D3DWindow As D3DPRESENT_PARAMETERS
-    
     Set DirectX = New DirectX8
     Set DirectD3D = DirectX.Direct3DCreate
     Set DirectD3D8 = New D3DX8
 
-    DirectD3D.GetAdapterDisplayMode D3DADAPTER_DEFAULT, DispMode
-    
-    With D3DWindow
-        .Windowed = True
-        .SwapEffect = IIf((ClientSetup.vSync) = True, D3DSWAPEFFECT_COPY_VSYNC, D3DSWAPEFFECT_COPY)  'Settings
-        .BackBufferFormat = DispMode.Format
-        .BackBufferWidth = frmMain.MainViewPic.ScaleWidth
-        .BackBufferHeight = frmMain.MainViewPic.ScaleHeight
-        .EnableAutoDepthStencil = 1
-        .AutoDepthStencilFormat = D3DFMT_D16
-        .hDeviceWindow = frmMain.MainViewPic.hwnd
+    If ClientSetup.OverrideVertexProcess > 0 Then
+        
+        Select Case ClientSetup.OverrideVertexProcess
+            
+            Case 1:
 
-    End With
+                If Not Engine_Init_DirectDevice(D3DCREATE_HARDWARE_VERTEXPROCESSING) Then _
+                    Call MsgBox("No se pudo inicializar el motor grafico. Por favor, verifique si tiene sus librerias y sus controladores actualizados.")
+            
+            Case 2:
 
-    Select Case ClientSetup.Aceleracion
+                If Not Engine_Init_DirectDevice(D3DCREATE_MIXED_VERTEXPROCESSING) Then _
+                    Call MsgBox("No se pudo inicializar el motor grafico. Por favor, verifique si tiene sus librerias y sus controladores actualizados.")
+            
+            Case 3:
 
-        Case 0 '   Software
-            Set DirectDevice = DirectD3D.CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, frmMain.MainViewPic.hwnd, D3DCREATE_SOFTWARE_VERTEXPROCESSING, D3DWindow)
+                If Not Engine_Init_DirectDevice(D3DCREATE_SOFTWARE_VERTEXPROCESSING) Then _
+                    Call MsgBox("No se pudo inicializar el motor grafico. Por favor, verifique si tiene sus librerias y sus controladores actualizados.")
 
-        Case 1 '   Hardware
-            Set DirectDevice = DirectD3D.CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, frmMain.MainViewPic.hwnd, D3DCREATE_HARDWARE_VERTEXPROCESSING, D3DWindow)
+        End Select
+        
+    Else
 
-        Case 2 '   Mixed
-            Set DirectDevice = DirectD3D.CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, frmMain.MainViewPic.hwnd, D3DCREATE_MIXED_VERTEXPROCESSING, D3DWindow)
+        'Detectamos el modo de renderizado mas compatible con tu PC.
+        If Not Engine_Init_DirectDevice(D3DCREATE_HARDWARE_VERTEXPROCESSING) Then
+            If Not Engine_Init_DirectDevice(D3DCREATE_MIXED_VERTEXPROCESSING) Then
+                If Not Engine_Init_DirectDevice(D3DCREATE_SOFTWARE_VERTEXPROCESSING) Then
+            
+                    Call MsgBox("No se pudo inicializar el motor grafico. Por favor, verifique si tiene sus librerias y sus controladores actualizados.")
+                
+                    End
+                
+                End If
 
-        Case Else '   Si no hay opcion entramos en Software para asegurarnos que funcione el cliente
-            Set DirectDevice = DirectD3D.CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, frmMain.MainViewPic.hwnd, D3DCREATE_SOFTWARE_VERTEXPROCESSING, D3DWindow)
+            End If
 
-    End Select
+        End If
+
+    End If
 
     Engine_Init_FontTextures
     Engine_Init_FontSettings
@@ -87,29 +111,82 @@ Public Function Engine_DirectX8_Init() As Boolean
     
     EndTime = GetTickCount
     
-    If Err Then
-        MsgBox "No se puede iniciar DirectX. Por favor asegurese de tener la última versión correctamente instalada. Puede descargarla desde: " & Client_Web & "support/directx.zip"
-        Engine_DirectX8_Init = False
-        Exit Function
+    Exit Sub
+EngineHandler:
+    
+    Call LogError(Err.number, Err.Description, "mDx8_Engine.Engine_DirectX8")
+    
+    Call CloseClient
 
+End Sub
+
+Private Function Engine_Init_DirectDevice(D3DCREATEFLAGS As CONST_D3DCREATEFLAGS) As Boolean
+On Error GoTo ErrorDevice:
+
+    'Establecemos cual va a ser el tamano del render.
+    ScreenWidth = frmMain.MainViewPic.ScaleWidth
+    ScreenHeight = frmMain.MainViewPic.ScaleHeight
+
+    ' Retrieve the information about your current display adapter.
+    Call DirectD3D.GetAdapterDisplayMode(D3DADAPTER_DEFAULT, DispMode)
+    
+    ' Fill the D3DPRESENT_PARAMETERS type, describing how DirectX should
+    ' display it's renders.
+    With D3DWindow
+        .Windowed = True
+        
+        ' The swap effect determines how the graphics get from the backbuffer to the screen.
+        ' D3DSWAPEFFECT_DISCARD:
+        '   Means that every time the render is presented, the backbuffer
+        '   image is destroyed, so everything must be rendered again.
+        .SwapEffect = D3DSWAPEFFECT_DISCARD
+        
+        .BackBufferFormat = DispMode.Format
+        .BackBufferWidth = ScreenWidth
+        .BackBufferHeight = ScreenHeight
+        .hDeviceWindow = frmMain.MainViewPic.hwnd
+
+    End With
+    
+    If Not DirectDevice Is Nothing Then
+        Set DirectDevice = Nothing
     End If
     
-    If Err Then
-        MsgBox "No se puede iniciar DirectD3D. Por favor asegurese de tener la última versión correctamente instalada. Puede descargarla desde: " & Client_Web & "support/directx.zip"
-        Engine_DirectX8_Init = False
-        Exit Function
-
-    End If
+    ' Create the rendering device.
+    ' Here we request a Hardware or Mixed rasterization.
+    ' If your computer does not have this, the request may fail, so use
+    ' D3DDEVTYPE_REF instead of D3DDEVTYPE_HAL if this happens. A real
+    ' program would be able to detect an error and automatically switch device.
+    ' We also request software vertex processing, which means the CPU has to
+    Set DirectDevice = DirectD3D.CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, D3DWindow.hDeviceWindow, D3DCREATEFLAGS, D3DWindow)
     
-    If DirectDevice Is Nothing Then
-        MsgBox "No se puede inicializar DirectDevice. Por favor asegurese de tener la última versión correctamente instalada. Puede descargarla desde: " & Client_Web & "support/directx.zip"
-        Engine_DirectX8_Init = False
-        Exit Function
-
-    End If
+    'Lo pongo xq es bueno saberlo...
+    Select Case D3DCREATEFLAGS
     
-    Engine_DirectX8_Init = True
+        Case D3DCREATE_MIXED_VERTEXPROCESSING
+            Debug.Print "Modo de Renderizado: MIXED"
+        
+        Case D3DCREATE_HARDWARE_VERTEXPROCESSING
+            Debug.Print "Modo de Renderizado: HARDWARE"
+            
+        Case D3DCREATE_SOFTWARE_VERTEXPROCESSING
+            Debug.Print "Modo de Renderizado: SOFTWARE"
+            
+    End Select
+    
+    'Everything was successful
+    Engine_Init_DirectDevice = True
+    
+    Exit Function
+    
+ErrorDevice:
+    
+    'Destroy the D3DDevice so it can be remade
+    Set DirectDevice = Nothing
 
+    'Return a failure
+    Engine_Init_DirectDevice = False
+    
 End Function
 
 Private Sub Engine_Init_RenderStates()
@@ -118,11 +195,10 @@ Private Sub Engine_Init_RenderStates()
     With DirectDevice
     
         .SetVertexShader D3DFVF_XYZRHW Or D3DFVF_TEX1 Or D3DFVF_DIFFUSE Or D3DFVF_SPECULAR
-        .SetRenderState D3DRS_LIGHTING, False
-        .SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA
-        .SetRenderState D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA
-        .SetRenderState D3DRS_ALPHABLENDENABLE, True
-        .SetRenderState D3DRS_POINTSIZE, Engine_FToDW(2)
+        Call .SetRenderState(D3DRS_LIGHTING, False)
+        Call .SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA)
+        Call .SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA)
+        Call .SetRenderState(D3DRS_ALPHABLENDENABLE, True)
         .SetTextureStageState 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE
         .SetRenderState D3DRS_POINTSPRITE_ENABLE, 1
         .SetRenderState D3DRS_POINTSCALE_ENABLE, 0
@@ -142,22 +218,18 @@ Public Sub Engine_DirectX8_End()
 
     Dim i As Byte
     
-    '   DeInit Lights
+    ' DeInit Lights
     Call DeInit_LightEngine
     
-    '   DeInit Auras
-    Call DeInit_Auras
-    
-    '   Clean Particles
+    ' Clean Particles
     For i = 1 To UBound(ParticleTexture)
-
         If Not ParticleTexture(i) Is Nothing Then Set ParticleTexture(i) = Nothing
     Next i
     
-    '   Clean Texture
+    ' Clean Texture
     DirectDevice.SetTexture 0, Nothing
 
-    '   Erase Data
+    ' Erase Data
     Erase MapData()
     Erase charlist()
     
@@ -177,7 +249,7 @@ Public Sub Engine_DirectX8_Aditional_Init()
     FPS = 101
     FramesPerSecCounter = 101
 
-    Engine_Set_TileBuffer 9
+    Call Engine_Set_TileBuffer(9)
     
     Engine_Set_BaseSpeed 0.018
     
@@ -189,7 +261,6 @@ Public Sub Engine_DirectX8_Aditional_Init()
 
     Call Engine_Long_To_RGB_List(Normal_RGBList(), -1)
 
-    Load_Auras
     Init_MeteoEngine
     Engine_Init_ParticleEngine
     
@@ -298,21 +369,6 @@ Public Function Engine_TPtoSPY(ByVal Y As Byte) As Long
     
 End Function
 
-Private Function Engine_FToDW(f As Single) As Long
-
-    '*****************************************************************
-    'Converts a float to a D-Word, or in Visual Basic terms, a Single to a Long
-    'More info: http://www.vbgore.com/CommonCode.Particles.Effect_FToDW
-    '*****************************************************************
-    Dim buf As D3DXBuffer
-
-    'Converts a single into a long (Float to DWORD)
-    Set buf = DirectD3D8.CreateBuffer(4)
-    DirectD3D8.BufferSetData buf, 0, 4, 1, f
-    DirectD3D8.BufferGetData buf, 0, 4, 1, Effect_FToDW
-
-End Function
-
 Public Sub Engine_Draw_Box(ByVal X As Integer, _
                            ByVal Y As Integer, _
                            ByVal Width As Integer, _
@@ -320,7 +376,7 @@ Public Sub Engine_Draw_Box(ByVal X As Integer, _
                            Color As Long)
 
     '***************************************************
-    'Author: Ezequiel Juárez (Standelf)
+    'Author: Ezequiel JuÃ¡rez (Standelf)
     'Last Modification: 29/12/10
     'Blisse-AO | Render Box
     '***************************************************
@@ -349,7 +405,7 @@ End Sub
 
 Public Sub Engine_D3DColor_To_RGB_List(RGB_List() As Long, Color As D3DCOLORVALUE)
     '***************************************************
-    'Author: Ezequiel Juárez (Standelf)
+    'Author: Ezequiel JuÃ¡rez (Standelf)
     'Last Modification: 14/05/10
     'Blisse-AO | Set a D3DColorValue to a RGB List
     '***************************************************
@@ -362,7 +418,7 @@ End Sub
 
 Public Sub Engine_Long_To_RGB_List(RGB_List() As Long, long_color As Long)
     '***************************************************
-    'Author: Ezequiel Juárez (Standelf)
+    'Author: Ezequiel JuÃ¡rez (Standelf)
     'Last Modification: 16/05/10
     'Blisse-AO | Set a Long Color to a RGB List
     '***************************************************
@@ -536,7 +592,7 @@ End Function
 
 Public Sub Engine_BeginScene(Optional ByVal Color As Long = 0)
     '***************************************************
-    'Author: Ezequiel Juárez (Standelf)
+    'Author: Ezequiel JuÃ¡rez (Standelf)
     'Last Modification: 29/12/10
     'Blisse-AO | DD Clear & BeginScene
     '***************************************************
@@ -548,7 +604,7 @@ End Sub
 
 Public Sub Engine_EndScene(ByRef destRect As RECT, Optional ByVal hWndDest As Long = 0)
     '***************************************************
-    'Author: Ezequiel Juárez (Standelf)
+    'Author: Ezequiel JuÃ¡rez (Standelf)
     'Last Modification: 29/12/10
     'Blisse-AO | DD EndScene & Present
     '***************************************************
@@ -573,7 +629,7 @@ Public Sub Geometry_Create_Box(ByRef Verts() As TLVERTEX, _
                                Optional ByVal Angle As Single)
     '**************************************************************
     'Author: Aaron Perkins
-    'Modified by Juan Martín Sotuyo Dodero
+    'Modified by Juan MartÃ­n Sotuyo Dodero
     'Last Modify Date: 11/17/2002
     '**************************************************************
 
@@ -591,7 +647,7 @@ Public Sub Geometry_Create_Box(ByRef Verts() As TLVERTEX, _
 
     Dim right_point As Single
 
-    Dim Temp        As Single
+    Dim temp        As Single
     
     If Angle > 0 Then
         x_center = dest.Left + (dest.Right - dest.Left) / 2
@@ -599,8 +655,8 @@ Public Sub Geometry_Create_Box(ByRef Verts() As TLVERTEX, _
         
         radius = Sqr((dest.Right - x_center) ^ 2 + (dest.Bottom - y_center) ^ 2)
         
-        Temp = (dest.Right - x_center) / radius
-        right_point = Atn(Temp / Sqr(-Temp * Temp + 1))
+        temp = (dest.Right - x_center) / radius
+        right_point = Atn(temp / Sqr(-temp * temp + 1))
         left_point = 3.1459 - right_point
 
     End If
@@ -830,9 +886,7 @@ Public Sub Engine_Update_FPS()
 
     End If
 
-    'If Settings.MostrarFPS = True Then
-    'Fonts_Render_String FPS, 2, 2, -1, Settings.Engine_Font
-    'DrawText 2, 2, FPS, -1
-    ' End If
+    If FPSFLAG Then DrawText 685, 2, FPS, -1
+
 End Sub
 
