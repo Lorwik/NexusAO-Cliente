@@ -1,7 +1,6 @@
 # Client Files.
-/INIT/sinfo.dat
 Errores.log
-Screenshots/*
+Fotos/*
 Codigo/*.log
 *.vbw
 *.oca
@@ -13,8 +12,8 @@ INIT/sinfo.dat
 INIT/Config.ini
 INIT/AO.dat
 INIT/messages.txt
-Argentum.exe
-MSVBVM60.dll
+ImperiumClasico.exe
+ImperiumClasico.exe.manifest
 
 # System Files.
 .DS_Store

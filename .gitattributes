@@ -1,45 +1,48 @@
 # Auto-CRLF setting.
 * text eol=crlf
-/INIT/sinfo.dat eol=lf
-/GRAFICOS/Fonts/font1.dat eol=lf
-/GRAFICOS/Fonts/font2.dat eol=lf
-/GRAFICOS/Fonts/font3.dat eol=lf
-
 # Declare file types.
 # The - is a negation symbol, so  -text it means"not" text
-*.msv binary
-*.frx binary
-*.ico binary
-*.png binary
-*.gif binary
-*.jpg binary
-*.gif binary
-*.bmp binary
-*.mcl binary
-*.dll binary
-*.ind binary
-*.con binary
-*.bin binary
-*.mid binary
-*.mp3 binary
-*.wav binary
-*.ao binary
-*.ocx binary
-*.OCX binary
-*.map binary
-*.exe binary
-*.ani binary
-*.inf binary
-/GRAFICOS/Fonts/font1.dat binary
-/GRAFICOS/Fonts/font2.dat binary
-/GRAFICOS/Fonts/font3.dat binary
+*.msv -text
+*.frx -text
+*.ico -text
+*.png -text
+*.psd -text
+*.cur -text
+*.gif -text
+*.jpg -text
+*.gif -text
+*.bmp -text
+*.mcl -text
+*.dll -text
+*.ind -text
+*.con -text
+*.bin -text
+*.mid -text
+*.mp3 -text
+*.wav -text
+*.IAC -text
+*.ocx -text
+*.OCX -text
+*.csm -text
+*.cur binary
+*.exe -text
 
-# Declare encoding and file type
-.manifest text
-.rc text
-*.bas text working-tree-encoding=windows-1252
-*.cls text working-tree-encoding=windows-1252
-*.vbp text working-tree-encoding=windows-1252
-*.frm text working-tree-encoding=windows-1252
-*.json text working-tree-encoding=windows-1252
-*.dat text working-tree-encoding=windows-1252
+Recursos/*.NAO -text
+Recursos/Skins/Principal.IAC -text
+Recursos/Lenguajes/CharInfo_english.dat -text
+Recursos/Lenguajes/CharInfo_spanish.dat -text
+Recursos/Lenguajes/english.json -text
+Recursos/Lenguajes/spanish.json -text
+Recursos/Lenguajes/tips_english.json -text
+Recursos/Lenguajes/tips_spanish.json -text
+Recursos/Lenguajes/Tutorial_english.dat -text
+Recursos/Lenguajes/Tutorial_spanish.dat -text
+Recursos/Lenguajes/*.json -text
+Recursos/Lenguajes/*.dat -text
+
+# Declare encoding of all files for code.
+*.bas encoding=ansi
+*.cls encoding=ansi
+*.vbp encoding=ansi
+*.frm encoding=ansi
+*.json encoding=ansi
