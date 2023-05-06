@@ -12,8 +12,8 @@ INIT/sinfo.dat
 INIT/Config.ini
 INIT/AO.dat
 INIT/messages.txt
-ImperiumClasico.exe
-ImperiumClasico.exe.manifest
+NexusAO.exe
+NexusAO.exe.manifest
 
 # System Files.
 .DS_Store

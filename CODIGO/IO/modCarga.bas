@@ -466,7 +466,7 @@ On Error GoTo errhandler:
     Dim LaCabecera  As tCabecera
     Dim fileBuff  As clsByteBuffer
     
-    InfoHead = File_Find(Carga.Path(ePath.recursos) & "\Scripts" & Formato, LCase$("Head.ind"))
+    InfoHead = File_Find(Carga.Path(ePath.recursos) & "\Scripts" & Formato, LCase$("cabezas.ind"))
     
     If InfoHead.lngFileSize <> 0 Then
     
@@ -534,7 +534,7 @@ On Error GoTo errhandler:
     Dim LaCabecera  As tCabecera
     Dim fileBuff  As clsByteBuffer
     
-    InfoHead = File_Find(Carga.Path(ePath.recursos) & "\Scripts" & Formato, LCase$("Helmet.ind"))
+    InfoHead = File_Find(Carga.Path(ePath.recursos) & "\Scripts" & Formato, LCase$("cascos.ind"))
     
     If InfoHead.lngFileSize <> 0 Then
     
