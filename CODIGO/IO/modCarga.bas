@@ -470,7 +470,7 @@ On Error GoTo errhandler:
     
     If InfoHead.lngFileSize <> 0 Then
     
-        Extract_File_Memory Scripts, LCase$("Head.ind"), buffer()
+        Extract_File_Memory Scripts, LCase$("cabezas.ind"), buffer()
         
         Set fileBuff = New clsByteBuffer
         
@@ -538,7 +538,7 @@ On Error GoTo errhandler:
     
     If InfoHead.lngFileSize <> 0 Then
     
-        Extract_File_Memory Scripts, LCase$("Helmet.ind"), buffer()
+        Extract_File_Memory Scripts, LCase$("cascos.ind"), buffer()
         
         Set fileBuff = New clsByteBuffer
         

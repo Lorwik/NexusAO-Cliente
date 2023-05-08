@@ -131,7 +131,7 @@ VersionFileDescription="NexusAO Client"
 VersionLegalCopyright="Nexus AO mod de Argentum idea Pablo Ignacio Marquez - Copyright 2003  -  Code pieces are copyright of their respective authors."
 VersionLegalTrademarks="NexusAO"
 VersionProductName="Nexus AO"
-CondComp="Desarrollo = 1 : ConMenuseConextuales = 0 : LightEngine = 0"
+CondComp="Desarrollo = 1 : ConMenuseConextuales = 0 : LightEngine = 0 : Comprimido = 1"
 CompilationType=0
 OptimizationType=0
 FavorPentiumPro(tm)=0
