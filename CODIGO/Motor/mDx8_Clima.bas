@@ -99,7 +99,7 @@ Public Sub Actualizar_Estado(ByVal Estado As Byte)
     'Call ActualizarImgClima
 
     '¿El mapa tiene su propia luz?
-    If mapInfo.LuzBase <> -1 Then
+    If mapInfo.LuzBase <> 0 Then
         
         For X = XMinMapSize To XMaxMapSize
             For Y = YMinMapSize To YMaxMapSize
@@ -113,7 +113,7 @@ Public Sub Actualizar_Estado(ByVal Estado As Byte)
     End If
 
     '¿Es un estado invalido?
-     Estado = e_estados.noche
+    Estado = e_estados.noche
         
     Estado_Actual = Estados(Estado)
     Estado_Actual_Date = Estado

@@ -111,6 +111,7 @@ Form=CODIGO\Formularios\frmSastre.frm
 Form=CODIGO\Formularios\frmDruida.frm
 Form=CODIGO\Formularios\frmGoliath.frm
 Reference=*\G{6B263850-900B-11D0-9484-00A0C91110ED}#1.0#0#C:\Windows\SysWow64\MSSTDFMT.DLL#Microsoft Data Formatting Object Library
+Form=CODIGO\Formularios\frmFamiliar.frm
 IconForm="frmMain"
 Startup="Sub Main"
 HelpFile=""
