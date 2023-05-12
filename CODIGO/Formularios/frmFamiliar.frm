@@ -61,7 +61,6 @@ Begin VB.Form frmFamiliar
       MaxLength       =   20
       TabIndex        =   1
       Top             =   150
-      Visible         =   0   'False
       Width           =   1950
    End
    Begin VB.ComboBox lstFamiliar 
@@ -83,12 +82,10 @@ Begin VB.Form frmFamiliar
       Style           =   2  'Dropdown List
       TabIndex        =   0
       Top             =   1020
-      Visible         =   0   'False
       Width           =   1725
    End
    Begin VB.Label lblFamiInfo 
       Alignment       =   2  'Center
-      AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "Descropcion del familiar"
       BeginProperty Font 
@@ -115,7 +112,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Private Mostrado As Boolean
+
 Private Sub cmdAceptar_Click()
+    
+    UserPet.tipo = lstFamiliar.ListIndex + 1
+    UserPet.Nombre = txtFamiliar.Text
     
     If UserPet.tipo = 0 Then
         Call MostrarMensaje("Seleccione su familiar o mascota.")
@@ -131,10 +133,9 @@ Private Sub cmdAceptar_Click()
             
     End If
     
-    UserPet.tipo = lstFamiliar.ListIndex + 1
-    UserPet.Nombre = txtFamiliar.Text
-    
     Call WriteAdoptarFamiliar
+    
+    Unload Me
 
 End Sub
 
@@ -219,7 +220,9 @@ Private Sub CambioFamiliar(ByVal NumFamiliares As Integer)
 End Sub
 
 Private Sub txtfamiliar_GotFocus()
-    Call MostrarMensaje("Mucho cuidado al colocarle nombre a su familiar, no puede ponerle el mismo o parecido nombre de su personaje, recuerde que es su companía. En caso de que el familiar o mascota tenga nombre inapropiado, podrá ser retirado.")
+    If Not Mostrado Then _
+        Call MostrarMensaje("Mucho cuidado al colocarle nombre a su familiar, no puede ponerle el mismo o parecido nombre de su personaje, recuerde que es su companía. En caso de que el familiar o mascota tenga nombre inapropiado, podrá ser retirado.")
     
+    Mostrado = True
 End Sub
 

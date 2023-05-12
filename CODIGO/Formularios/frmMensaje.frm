@@ -2,12 +2,13 @@ VERSION 5.00
 Begin VB.Form frmMensaje 
    BackColor       =   &H00C0C0C0&
    BorderStyle     =   0  'None
-   ClientHeight    =   2670
+   ClientHeight    =   3600
    ClientLeft      =   0
    ClientTop       =   -75
-   ClientWidth     =   3915
+   ClientWidth     =   5715
    ClipControls    =   0   'False
    ControlBox      =   0   'False
+   FillColor       =   &H80000001&
    BeginProperty Font 
       Name            =   "Tahoma"
       Size            =   8.25
@@ -18,26 +19,35 @@ Begin VB.Form frmMensaje
       Strikethrough   =   0   'False
    EndProperty
    LinkTopic       =   "Form1"
-   ScaleHeight     =   178
+   ScaleHeight     =   240
    ScaleMode       =   3  'Pixel
-   ScaleWidth      =   261
+   ScaleWidth      =   381
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
    Begin VB.Image imgCerrar 
-      Height          =   465
-      Left            =   1365
+      Height          =   540
+      Left            =   1290
       Tag             =   "1"
-      Top             =   2070
-      Width           =   1200
+      Top             =   2760
+      Width           =   3255
    End
    Begin VB.Label msg 
       BackStyle       =   0  'Transparent
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   1215
-      Left            =   300
+      Height          =   1905
+      Left            =   450
       TabIndex        =   0
-      Top             =   480
-      Width           =   3315
+      Top             =   540
+      Width           =   4875
       WordWrap        =   -1  'True
    End
    Begin VB.Menu mnuMensaje 
@@ -133,18 +143,9 @@ Private Sub LoadButtons()
     
     Set LastButtonPressed = New clsGraphicalButton
     
-    If Language = "spanish" Then
-
-        Call cBotonCerrar.Initialize(imgCerrar, "3.bmp", _
-                                          "213.bmp", _
-                                          "214.bmp", Me)
-    Else
-    
-        Call cBotonCerrar.Initialize(imgCerrar, "5.bmp", _
-                                          "211.bmp", _
-                                          "212.bmp", Me)
-        
-    End If
+    Call cBotonCerrar.Initialize(imgCerrar, "infoaceptarover.bmp", _
+                                          "infoaceptardeshab.bmp", _
+                                          "infoaceptardown.bmp", Me)
     
 End Sub
 
