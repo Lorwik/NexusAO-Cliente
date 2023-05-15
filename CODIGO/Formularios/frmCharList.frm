@@ -23,7 +23,6 @@ Begin VB.Form frmCharList
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   Picture         =   "frmCharList.frx":000C
    ScaleHeight     =   768
    ScaleMode       =   3  'Pixel
    ScaleWidth      =   1024
@@ -330,20 +329,20 @@ Begin VB.Form frmCharList
       Width           =   3705
    End
    Begin VB.Image imgConectar 
-      Height          =   495
-      Left            =   11340
+      Height          =   525
+      Left            =   11250
       MousePointer    =   99  'Custom
       Tag             =   "0"
-      Top             =   10080
-      Width           =   1725
+      Top             =   10050
+      Width           =   1800
    End
    Begin VB.Image imgBorrarPj 
-      Height          =   495
-      Left            =   4260
+      Height          =   525
+      Left            =   4230
       MousePointer    =   99  'Custom
       Tag             =   "0"
-      Top             =   10080
-      Width           =   1755
+      Top             =   10020
+      Width           =   1800
    End
    Begin VB.Image imgSalir 
       Height          =   525
@@ -351,23 +350,23 @@ Begin VB.Form frmCharList
       MousePointer    =   99  'Custom
       Tag             =   "0"
       Top             =   10050
-      Width           =   1755
+      Width           =   1800
    End
    Begin VB.Image imgCrearPJ 
-      Height          =   435
+      Height          =   525
       Left            =   9330
       MousePointer    =   99  'Custom
       Tag             =   "0"
-      Top             =   10080
-      Width           =   1755
+      Top             =   10050
+      Width           =   1800
    End
    Begin VB.Image imgCambiarPass 
-      Height          =   615
-      Left            =   6180
+      Height          =   525
+      Left            =   6810
       MousePointer    =   99  'Custom
       Tag             =   "0"
-      Top             =   2085
-      Width           =   1755
+      Top             =   10050
+      Width           =   1800
    End
    Begin VB.Image imgAcc 
       Height          =   2070
@@ -560,25 +559,25 @@ Private Sub LoadButtons()
     Set cBotonBorrar = New clsGraphicalButton
     Set cBotonCambiarPass = New clsGraphicalButton
     
-    Call cBotonCambiarPass.Initialize(imgCambiarPass, "", _
-                                 "acccambiarover.bmp", _
-                                 "acccambiardown.bmp", Me)
+    Call cBotonCambiarPass.Initialize(imgCambiarPass, "22.gif", _
+                                 "26.gif", _
+                                 "23.gif", Me)
                                  
-    Call cBotonCrearPJ.Initialize(imgCrearPJ, "", _
-                                 "acccreover.bmp", _
-                                 "acccredown.bmp", Me)
+    Call cBotonCrearPJ.Initialize(imgCrearPJ, "10.gif", _
+                                 "12.gif", _
+                                 "11.gif", Me)
                                  
-    Call cBotonSalir.Initialize(imgSalir, "", _
-                                 "accsaover.bmp", _
-                                 "accsaldown.bmp", Me)
+    Call cBotonSalir.Initialize(imgSalir, "13.gif", _
+                                 "15.gif", _
+                                 "14.gif", Me)
                                  
-    Call cBotonBorrar.Initialize(imgBorrarPj, "", _
-                                 "accborrarover.bmp", _
-                                 "accborrardown.bmp", Me)
+    Call cBotonBorrar.Initialize(imgBorrarPj, "16.gif", _
+                                 "18.gif", _
+                                 "17.gif", Me)
                                  
-    Call cBotonConectar.Initialize(imgConectar, "", _
-                                 "accconover.bmp", _
-                                 "acccondown.bmp", Me)
+    Call cBotonConectar.Initialize(imgConectar, "19.gif", _
+                                 "21.gif", _
+                                 "20.gif", Me)
                                  
                                  
 End Sub

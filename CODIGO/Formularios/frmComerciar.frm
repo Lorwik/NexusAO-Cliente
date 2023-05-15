@@ -4,7 +4,7 @@ Begin VB.Form frmComerciar
    ClientHeight    =   7650
    ClientLeft      =   0
    ClientTop       =   0
-   ClientWidth     =   6930
+   ClientWidth     =   7500
    ClipControls    =   0   'False
    ControlBox      =   0   'False
    LinkTopic       =   "Form1"
@@ -13,20 +13,29 @@ Begin VB.Form frmComerciar
    MousePointer    =   99  'Custom
    ScaleHeight     =   510
    ScaleMode       =   3  'Pixel
-   ScaleWidth      =   462
+   ScaleWidth      =   500
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
    Begin VB.TextBox Cantidad 
       Alignment       =   2  'Center
-      BackColor       =   &H00C0C0C0&
+      BackColor       =   &H80000001&
       BorderStyle     =   0  'None
-      ForeColor       =   &H00000000&
-      Height          =   255
-      Left            =   3240
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000005&
+      Height          =   270
+      Left            =   3495
       TabIndex        =   5
       Text            =   "1"
-      Top             =   6960
-      Width           =   510
+      Top             =   6900
+      Width           =   525
    End
    Begin VB.PictureBox picInvUser 
       Appearance      =   0  'Flat
@@ -46,12 +55,12 @@ Begin VB.Form frmComerciar
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   3960
-      Left            =   3480
+      Left            =   3930
       ScaleHeight     =   264
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   209
       TabIndex        =   4
-      Top             =   2490
+      Top             =   2430
       Width           =   3135
    End
    Begin VB.PictureBox picInvNpc 
@@ -72,49 +81,47 @@ Begin VB.Form frmComerciar
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   3960
-      Left            =   180
+      Left            =   390
       ScaleHeight     =   264
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   209
       TabIndex        =   3
-      Top             =   2490
+      Top             =   2400
       Width           =   3135
    End
-   Begin VB.Image cmdMasMenos 
+   Begin VB.Image cmdMas 
       Height          =   420
-      Index           =   1
-      Left            =   3840
+      Left            =   4020
       Tag             =   "1"
-      Top             =   6870
-      Width           =   195
+      Top             =   6810
+      Width           =   315
    End
-   Begin VB.Image cmdMasMenos 
+   Begin VB.Image cmdMenos 
       Height          =   420
-      Index           =   0
-      Left            =   2940
+      Left            =   3180
       Tag             =   "1"
-      Top             =   6870
-      Width           =   195
+      Top             =   6810
+      Width           =   315
    End
    Begin VB.Image imgVender 
-      Height          =   450
-      Left            =   4230
-      Top             =   6855
+      Height          =   525
+      Left            =   4620
+      Top             =   6780
       Width           =   2175
    End
    Begin VB.Image imgComprar 
-      Height          =   450
-      Left            =   585
-      Top             =   6855
+      Height          =   525
+      Left            =   750
+      Top             =   6750
       Width           =   2175
    End
    Begin VB.Image imgCross 
-      Height          =   405
-      Left            =   6480
+      Height          =   540
+      Left            =   6870
       MousePointer    =   99  'Custom
       Tag             =   "1"
-      Top             =   120
-      Width           =   345
+      Top             =   60
+      Width           =   540
    End
    Begin VB.Label Label1 
       BackStyle       =   0  'Transparent
@@ -128,13 +135,13 @@ Begin VB.Form frmComerciar
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   345
+      Height          =   225
       Index           =   2
-      Left            =   1560
+      Left            =   900
       TabIndex        =   2
-      Top             =   1800
+      Top             =   1590
       Visible         =   0   'False
-      Width           =   3015
+      Width           =   4275
    End
    Begin VB.Label Label1 
       Alignment       =   1  'Right Justify
@@ -151,9 +158,9 @@ Begin VB.Form frmComerciar
       ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   1
-      Left            =   5100
+      Left            =   5520
       TabIndex        =   1
-      Top             =   1890
+      Top             =   1620
       Width           =   1035
    End
    Begin VB.Label Label1 
@@ -170,10 +177,10 @@ Begin VB.Form frmComerciar
       ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   0
-      Left            =   1560
+      Left            =   930
       TabIndex        =   0
-      Top             =   1530
-      Width           =   2985
+      Top             =   1260
+      Width           =   5535
    End
 End
 Attribute VB_Name = "frmComerciar"
@@ -223,6 +230,10 @@ Public LasActionBuy As Boolean
 Private ClickNpcInv As Boolean
 
 Private cBotonCruz As clsGraphicalButton
+Private cBotonMas As clsGraphicalButton
+Private cBotonMenos As clsGraphicalButton
+Private cBotonComprar As clsGraphicalButton
+Private cBotonVender As clsGraphicalButton
 
 Public LastButtonPressed As clsGraphicalButton
 
@@ -255,17 +266,16 @@ Private Sub cantidad_KeyPress(KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub cmdMasMenos_Click(Index As Integer)
+Private Sub cmdMas_Click()
+    Call Sound.Sound_Play(SND_CLICK)
+    
+    cantidad.Text = str((Val(cantidad.Text) + 1))
+End Sub
 
+Private Sub cmdMenos_Click()
     Call Sound.Sound_Play(SND_CLICK)
 
-    Select Case Index
-        Case 0
-            cantidad.Text = str((Val(cantidad.Text) - 1))
-        
-        Case 1
-            cantidad.Text = str((Val(cantidad.Text) + 1))
-    End Select
+    cantidad.Text = str((Val(cantidad.Text) - 1))
 End Sub
 
 Private Sub Form_Load()
@@ -296,17 +306,34 @@ On Error Resume Next
 End Sub
 
 Private Sub LoadButtons()
-    Dim GrhPath As String
-    GrhPath = Carga.Path(Interfaces)
-    
     'Lo dejamos solo para que no explote, habria que sacar estos LastButtonPressed
     Set LastButtonPressed = New clsGraphicalButton
 
     Set cBotonCruz = New clsGraphicalButton
+    Set cBotonMenos = New clsGraphicalButton
+    Set cBotonMas = New clsGraphicalButton
+    Set cBotonComprar = New clsGraphicalButton
+    Set cBotonVender = New clsGraphicalButton
     
-    'Call cBotonCruz.Initialize(imgCross, "", _
-                                    "171.bmp", _
-                                    "171.bmp", Me)
+    Call cBotonCruz.Initialize(imgCross, "27.gif", _
+                                    "28.gif", _
+                                    "29.gif", Me)
+                                    
+    Call cBotonMenos.Initialize(cmdMenos, "7.gif", _
+                                    "9.gif", _
+                                    "8.gif", Me)
+                                    
+    Call cBotonMas.Initialize(cmdMas, "4.gif", _
+                                    "6.gif", _
+                                    "5.gif", Me)
+                                    
+    Call cBotonComprar.Initialize(imgComprar, "33.gif", _
+                                    "34.gif", _
+                                    "35.gif", Me)
+                                    
+    Call cBotonVender.Initialize(imgVender, "btnvender_n.gif", _
+                                    "btnvender_h.gif", _
+                                    "btnvender_p.gif", Me)
 
 End Sub
 

@@ -5,7 +5,7 @@ Begin VB.Form frmBancoObj
    ClientHeight    =   7650
    ClientLeft      =   0
    ClientTop       =   0
-   ClientWidth     =   6975
+   ClientWidth     =   7485
    ClipControls    =   0   'False
    ControlBox      =   0   'False
    ForeColor       =   &H8000000F&
@@ -13,77 +13,80 @@ Begin VB.Form frmBancoObj
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
+   Picture         =   "frmBancoObj.frx":0000
    ScaleHeight     =   510
    ScaleMode       =   0  'User
-   ScaleWidth      =   465
+   ScaleWidth      =   499
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
    Begin VB.TextBox cantidad 
       Alignment       =   2  'Center
-      BackColor       =   &H00C0C0C0&
+      BackColor       =   &H80000001&
       BorderStyle     =   0  'None
       BeginProperty Font 
          Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
-         Weight          =   400
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00000000&
+      ForeColor       =   &H80000005&
       Height          =   255
-      Left            =   3240
+      Left            =   3510
       MaxLength       =   5
       TabIndex        =   4
       Text            =   "1"
-      Top             =   6960
+      Top             =   6900
       Width           =   510
    End
    Begin VB.PictureBox PicBancoInv 
       Appearance      =   0  'Flat
       BackColor       =   &H00000000&
+      BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   3960
-      Left            =   270
-      ScaleHeight     =   3930
-      ScaleWidth      =   3105
+      Left            =   450
+      ScaleHeight     =   3960
+      ScaleWidth      =   3135
       TabIndex        =   3
-      Top             =   2580
+      Top             =   2400
       Width           =   3135
    End
    Begin VB.PictureBox PicInv 
       Appearance      =   0  'Flat
       BackColor       =   &H00000000&
+      BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   3960
-      Left            =   3600
-      ScaleHeight     =   17.346
+      Left            =   3930
+      ScaleHeight     =   17.478
       ScaleMode       =   0  'User
-      ScaleWidth      =   1068.386
+      ScaleWidth      =   1078.708
       TabIndex        =   2
-      Top             =   2580
+      Top             =   2400
       Width           =   3135
    End
    Begin VB.Image imgCerrar 
-      Height          =   345
-      Left            =   6480
+      Height          =   540
+      Left            =   6870
       Tag             =   "0"
-      Top             =   180
-      Width           =   345
+      Top             =   60
+      Width           =   540
    End
    Begin VB.Image imgDepositar 
-      Height          =   450
-      Left            =   4230
+      Height          =   525
+      Left            =   4530
       MousePointer    =   99  'Custom
-      Top             =   6855
+      Top             =   6750
       Width           =   2175
    End
    Begin VB.Image imgRetirar 
-      Height          =   450
-      Left            =   600
+      Height          =   525
+      Left            =   780
       MousePointer    =   99  'Custom
-      Top             =   6855
+      Top             =   6750
       Width           =   2175
    End
    Begin VB.Label Label1 
@@ -100,11 +103,11 @@ Begin VB.Form frmBancoObj
       ForeColor       =   &H00FFFFFF&
       Height          =   345
       Index           =   1
-      Left            =   1560
+      Left            =   960
       TabIndex        =   1
-      Top             =   1800
+      Top             =   1560
       Visible         =   0   'False
-      Width           =   3015
+      Width           =   5475
    End
    Begin VB.Label Label1 
       BackStyle       =   0  'Transparent
@@ -120,10 +123,10 @@ Begin VB.Form frmBancoObj
       ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   0
-      Left            =   1560
+      Left            =   960
       TabIndex        =   0
-      Top             =   1530
-      Width           =   2985
+      Top             =   1290
+      Width           =   5475
    End
 End
 Attribute VB_Name = "frmBancoObj"
@@ -267,16 +270,26 @@ Private Sub LoadButtons()
     
     Set LastButtonPressed = New clsGraphicalButton
 
-    Call cBotonCerrar.Initialize(imgCerrar, "", "salir-over.bmp", "salir-down.bmp", Me)
-    Call cBotonRetirar.Initialize(imgRetirar, "", "retirar-over.bmp", "retirar-down.bmp", Me)
-    Call cBotonDepositar.Initialize(imgDepositar, "", "depositar-over.bmp", "depositar-down.bmp", Me)
+    Call cBotonCerrar.Initialize(imgCerrar, "27.gif", _
+                                "28.gif", _
+                                "29.gif", Me)
+                                
+    Call cBotonRetirar.Initialize(imgRetirar, "btnretirar_n.gif", _
+                                    "btnretirar_h.gif", _
+                                    "btnretirar_p.gif", Me)
+                                    
+    Call cBotonDepositar.Initialize(imgDepositar, "30.gif", _
+                                    "31.gif", _
+                                    "32.gif", Me)
     
     imgRetirar.MouseIcon = picMouseIcon
     imgDepositar.MouseIcon = picMouseIcon
+    
 End Sub
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     Call LastButtonPressed.ToggleToNormal
+    
 End Sub
 
 Private Sub imgDepositar_Click()
@@ -289,6 +302,7 @@ Private Sub imgDepositar_Click()
     LastIndex2 = InvBanco(1).SelectedItem
     LasActionBuy = False
     Call WriteBankDeposit(InvBanco(1).SelectedItem, cantidad.Text)
+    
 End Sub
 
 Private Sub imgRetirar_Click()
@@ -342,6 +356,7 @@ End Sub
 
 Private Sub PicBancoInv_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     Call LastButtonPressed.ToggleToNormal
+    
 End Sub
 
 Private Sub PicInv_Click()
@@ -376,13 +391,16 @@ Private Sub PicInv_Click()
         Label1(0).Caption = vbNullString
         Label1(1).Visible = False
     End If
+    
 End Sub
 
 Private Sub PicInv_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     Call LastButtonPressed.ToggleToNormal
+    
 End Sub
 
 Private Sub imgCerrar_Click()
     Call WriteBankEnd
     NoPuedeMover = False
+    
 End Sub
