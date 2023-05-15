@@ -46,13 +46,13 @@ Begin VB.Form frmComerciar
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   3960
-      Left            =   3720
+      Left            =   3480
       ScaleHeight     =   264
       ScaleMode       =   3  'Pixel
-      ScaleWidth      =   166
+      ScaleWidth      =   209
       TabIndex        =   4
-      Top             =   2580
-      Width           =   2490
+      Top             =   2490
+      Width           =   3135
    End
    Begin VB.PictureBox picInvNpc 
       Appearance      =   0  'Flat
@@ -72,13 +72,13 @@ Begin VB.Form frmComerciar
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   3960
-      Left            =   780
+      Left            =   180
       ScaleHeight     =   264
       ScaleMode       =   3  'Pixel
-      ScaleWidth      =   164
+      ScaleWidth      =   209
       TabIndex        =   3
-      Top             =   2580
-      Width           =   2460
+      Top             =   2490
+      Width           =   3135
    End
    Begin VB.Image cmdMasMenos 
       Height          =   420
@@ -410,7 +410,7 @@ Private Sub picInvNpc_Click()
     
         Select Case NPCInventory(ItemSlot).OBJType
             Case eObjType.otWeapon
-                Label1(2).Caption = JsonLanguage.item("GOLPE").item("TEXTO") & ":" & NPCInventory(ItemSlot).MaxHit & "/" & JsonLanguage.item("GOLPE").item("TEXTO") & ":" & NPCInventory(ItemSlot).MinHit
+                Label1(2).Caption = JsonLanguage.item("GOLPE").item("TEXTO") & ":" & NPCInventory(ItemSlot).MaxHIT & "/" & JsonLanguage.item("GOLPE").item("TEXTO") & ":" & NPCInventory(ItemSlot).MinHIT
                 Label1(2).Visible = True
             Case eObjType.otArmadura, eObjType.otcasco, eObjType.otescudo
                 Label1(2).Caption = JsonLanguage.item("DEFENSA").item("TEXTO") & ":" & NPCInventory(ItemSlot).MaxDef & "/" & JsonLanguage.item("DEFENSA").item("TEXTO") & ":" & NPCInventory(ItemSlot).MinDef
@@ -440,7 +440,7 @@ Private Sub picInvUser_Click()
     
         Select Case Inventario.OBJType(ItemSlot)
             Case eObjType.otWeapon, eObjType.otFlechas
-                Label1(2).Caption = JsonLanguage.item("GOLPE").item("TEXTO") & ":" & Inventario.MaxHit(ItemSlot) & "/" & JsonLanguage.item("GOLPE").item("TEXTO") & ":" & Inventario.MinHit(ItemSlot)
+                Label1(2).Caption = JsonLanguage.item("GOLPE").item("TEXTO") & ":" & Inventario.MaxHIT(ItemSlot) & "/" & JsonLanguage.item("GOLPE").item("TEXTO") & ":" & Inventario.MinHIT(ItemSlot)
                 Label1(2).Visible = True
             Case eObjType.otArmadura, eObjType.otcasco, eObjType.otescudo
                 Label1(2).Caption = JsonLanguage.item("DEFENSA").item("TEXTO") & ":" & Inventario.MaxDef(ItemSlot) & "/" & JsonLanguage.item("DEFENSA").item("TEXTO") & ":" & Inventario.MinDef(ItemSlot)

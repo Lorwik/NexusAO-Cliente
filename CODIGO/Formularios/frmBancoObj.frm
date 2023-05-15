@@ -45,25 +45,25 @@ Begin VB.Form frmBancoObj
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
       Height          =   3960
-      Left            =   780
+      Left            =   270
       ScaleHeight     =   3930
-      ScaleWidth      =   2430
+      ScaleWidth      =   3105
       TabIndex        =   3
       Top             =   2580
-      Width           =   2460
+      Width           =   3135
    End
    Begin VB.PictureBox PicInv 
       Appearance      =   0  'Flat
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
       Height          =   3960
-      Left            =   3720
+      Left            =   3600
       ScaleHeight     =   17.346
       ScaleMode       =   0  'User
-      ScaleWidth      =   846.451
+      ScaleWidth      =   1068.386
       TabIndex        =   2
       Top             =   2580
-      Width           =   2490
+      Width           =   3135
    End
    Begin VB.Image imgCerrar 
       Height          =   345
@@ -319,7 +319,7 @@ Private Sub PicBancoInv_Click()
             
             Select Case .OBJType
                 Case 2, 32
-                    Label1(1).Caption = "Golpe: " & .MinHit & "/" & .MaxHit
+                    Label1(1).Caption = "Golpe: " & .MinHIT & "/" & .MaxHIT
                     Label1(1).Visible = True
                     
                 Case 3, 16, 17
@@ -359,7 +359,7 @@ Private Sub PicInv_Click()
             
             Select Case .OBJType(InvBanco(1).SelectedItem)
                 Case eObjType.otWeapon, eObjType.otFlechas
-                    Label1(1).Caption = "Golpe: " & .MaxHit(InvBanco(1).SelectedItem) & "/" & .MinHit(InvBanco(1).SelectedItem)
+                    Label1(1).Caption = "Golpe: " & .MaxHIT(InvBanco(1).SelectedItem) & "/" & .MinHIT(InvBanco(1).SelectedItem)
                     Label1(1).Visible = True
                     
                 Case eObjType.otcasco, eObjType.otArmadura, eObjType.otescudo ' 3, 16, 17

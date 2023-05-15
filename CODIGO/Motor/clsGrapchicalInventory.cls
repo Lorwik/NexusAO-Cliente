@@ -442,9 +442,9 @@ Public Sub DrawInventory()
     Call Engine_BeginScene
 
     For LoopC = InventoryOffset * (InventoryWindow.ScaleWidth \ ownTilePixelWidth) + 1 To UBound(Inventory)
-            
-        startdX = ((LoopC - 1) Mod (frmMain.PicInv.Width / 32)) * 32 - 32
-        startdY = ((LoopC - 1) \ (frmMain.PicInv.Width / 32)) * 32
+    
+        startdX = ((LoopC - 1) Mod ((frmMain.PicInv.Width - 32) / 32)) * 32 + 8
+        startdY = ((LoopC - 1) \ ((frmMain.PicInv.Width - 32) / 32)) * 32 + 8
 
         'Si el usuario no puede usar este item por su raza, sexo o clase, dibujamos una "X"
         If Inventory(LoopC).NoUsa Then

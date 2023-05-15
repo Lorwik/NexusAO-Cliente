@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "Richtx32.ocx"
+Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHTX32.OCX"
 Begin VB.Form frmComerciarUsu 
    BorderStyle     =   0  'None
    ClientHeight    =   8850
@@ -77,13 +77,13 @@ Begin VB.Form frmComerciarUsu
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   2880
-      Left            =   6975
+      Left            =   6720
       ScaleHeight     =   192
       ScaleMode       =   3  'Pixel
-      ScaleWidth      =   160
+      ScaleWidth      =   209
       TabIndex        =   4
       Top             =   5040
-      Width           =   2400
+      Width           =   3135
    End
    Begin VB.PictureBox picInvOfertaProp 
       Appearance      =   0  'Flat
@@ -103,13 +103,13 @@ Begin VB.Form frmComerciarUsu
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   2880
-      Left            =   6960
+      Left            =   6750
       ScaleHeight     =   192
       ScaleMode       =   3  'Pixel
-      ScaleWidth      =   160
+      ScaleWidth      =   209
       TabIndex        =   3
-      Top             =   930
-      Width           =   2400
+      Top             =   900
+      Width           =   3135
    End
    Begin VB.TextBox SendTxt 
       BackColor       =   &H00000000&
@@ -152,13 +152,13 @@ Begin VB.Form frmComerciarUsu
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   2880
-      Left            =   630
+      Left            =   210
       ScaleHeight     =   192
       ScaleMode       =   3  'Pixel
-      ScaleWidth      =   160
+      ScaleWidth      =   209
       TabIndex        =   1
-      Top             =   945
-      Width           =   2400
+      Top             =   930
+      Width           =   3135
    End
    Begin VB.PictureBox picInvOroOfertaProp 
       BackColor       =   &H00000000&
@@ -184,7 +184,6 @@ Begin VB.Form frmComerciarUsu
       _ExtentY        =   2858
       _Version        =   393217
       BackColor       =   0
-      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       DisableNoScroll =   -1  'True

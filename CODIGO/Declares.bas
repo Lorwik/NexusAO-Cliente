@@ -270,7 +270,7 @@ End Enum
 
 'Objetos
 ' Cantidad de "slots" en el inventario
-Public Const MAX_INVENTORY_SLOTS As Byte = 25
+Public Const MAX_INVENTORY_SLOTS As Byte = 30
 
 Public Const MAX_INVENTORY_OBJS As Integer = 10000
 Public Const MAX_NPC_INVENTORY_SLOTS As Byte = 50
@@ -1004,7 +1004,7 @@ Public GuildMembers() As String
 Public Const OFFSET_HEAD As Integer = 0
 
 Public Enum eSMType
-    sCombatMode = 0
+    sCombatmode = 0
     sSafemode
 End Enum
 
