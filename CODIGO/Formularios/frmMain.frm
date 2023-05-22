@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "Richtx32.ocx"
+Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHTX32.ocx"
 Begin VB.Form frmMain 
    BorderStyle     =   0  'None
    ClientHeight    =   11520
@@ -263,12 +263,6 @@ Begin VB.Form frmMain
             EndProperty
          End
       End
-      Begin VB.Timer Second 
-         Enabled         =   0   'False
-         Interval        =   1050
-         Left            =   10140
-         Top             =   150
-      End
    End
    Begin VB.TextBox SendTxt 
       Appearance      =   0  'Flat
@@ -306,7 +300,7 @@ Begin VB.Form frmMain
       ScaleWidth      =   97
       TabIndex        =   4
       TabStop         =   0   'False
-      Top             =   300
+      Top             =   180
       Width           =   1455
       Begin VB.Shape UserM 
          BackColor       =   &H000000FF&
@@ -337,13 +331,13 @@ Begin VB.Form frmMain
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   3600
-      Left            =   11640
+      Left            =   11670
       ScaleHeight     =   240
       ScaleMode       =   3  'Pixel
-      ScaleWidth      =   209
+      ScaleWidth      =   200
       TabIndex        =   1
-      Top             =   2520
-      Width           =   3135
+      Top             =   2535
+      Width           =   3000
    End
    Begin VB.ListBox hlst 
       Appearance      =   0  'Flat
@@ -429,19 +423,21 @@ Begin VB.Form frmMain
       ForeColor       =   &H00FFFFFF&
       Height          =   135
       Index           =   1
-      Left            =   12450
+      Left            =   11970
       TabIndex        =   18
-      Top             =   720
-      Width           =   1815
+      Top             =   960
+      Width           =   2805
    End
    Begin VB.Shape ExpShp 
+      BackColor       =   &H00FFFFFF&
+      BorderColor     =   &H00FFFFFF&
       BorderStyle     =   0  'Transparent
-      FillColor       =   &H00FFFFFF&
+      FillColor       =   &H0000C000&
       FillStyle       =   0  'Solid
       Height          =   105
-      Left            =   11970
+      Left            =   11940
       Top             =   990
-      Width           =   2805
+      Width           =   2835
    End
    Begin VB.Label MapExp 
       Alignment       =   2  'Center
@@ -449,21 +445,21 @@ Begin VB.Form frmMain
       BackStyle       =   0  'Transparent
       Caption         =   "Mapa desconocido"
       BeginProperty Font 
-         Name            =   "Tahoma"
+         Name            =   "Arial"
          Size            =   6.75
          Charset         =   0
-         Weight          =   700
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   255
+      Height          =   165
       Index           =   0
-      Left            =   9240
+      Left            =   9210
       TabIndex        =   17
       Top             =   1890
-      Width           =   1665
+      Width           =   1725
    End
    Begin VB.Label lblFU 
       AutoSize        =   -1  'True
@@ -523,7 +519,7 @@ Begin VB.Form frmMain
       Height          =   135
       Left            =   12630
       TabIndex        =   14
-      Top             =   8145
+      Top             =   8115
       Width           =   1095
    End
    Begin VB.Label lblMP 
@@ -542,10 +538,10 @@ Begin VB.Form frmMain
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   135
-      Left            =   12630
+      Left            =   11880
       TabIndex        =   13
-      Top             =   8670
-      Width           =   1095
+      Top             =   8640
+      Width           =   2505
    End
    Begin VB.Label lblST 
       Alignment       =   2  'Center
@@ -651,7 +647,7 @@ Begin VB.Form frmMain
       BackColor       =   &H00C0C000&
       BackStyle       =   1  'Opaque
       BorderStyle     =   0  'Transparent
-      Height          =   180
+      Height          =   135
       Left            =   11910
       Top             =   8655
       Width           =   2535
@@ -662,9 +658,9 @@ Begin VB.Form frmMain
       BorderStyle     =   0  'Transparent
       FillColor       =   &H000000C0&
       FillStyle       =   0  'Solid
-      Height          =   180
-      Left            =   11940
-      Top             =   8160
+      Height          =   135
+      Left            =   11910
+      Top             =   8145
       Width           =   2535
    End
    Begin VB.Label lblLvl 
@@ -746,25 +742,23 @@ Begin VB.Form frmMain
       Top             =   0
       Width           =   255
    End
-   Begin VB.Image cmdMoverHechi 
+   Begin VB.Image cmdMoverHechiDown 
       Height          =   420
-      Index           =   0
-      Left            =   14670
+      Left            =   14580
       MouseIcon       =   "frmMain.frx":241BA5
       MousePointer    =   99  'Custom
       Top             =   4470
       Visible         =   0   'False
-      Width           =   300
+      Width           =   375
    End
-   Begin VB.Image cmdMoverHechi 
+   Begin VB.Image cmdMoverHechiTop 
       Height          =   420
-      Index           =   1
-      Left            =   14670
+      Left            =   14580
       MouseIcon       =   "frmMain.frx":241CF7
       MousePointer    =   99  'Custom
       Top             =   4050
       Visible         =   0   'False
-      Width           =   300
+      Width           =   375
    End
    Begin VB.Label GldLbl 
       BackStyle       =   0  'Transparent
@@ -882,6 +876,8 @@ Private cBotonLanzar            As clsGraphicalButton
 Private cBotonInfo              As clsGraphicalButton
 Private cBotonBubble            As clsGraphicalButton
 Private cBotonMenu              As clsGraphicalButton
+Private cBotonMoverHechiTop     As clsGraphicalButton
+Private cBotonMoverHechiDown    As clsGraphicalButton
 
 Public LastButtonPressed   As clsGraphicalButton
 
@@ -924,6 +920,46 @@ Private Sub cmdCerrar_Click()
     Call WriteQuit
 End Sub
 
+Private Sub cmdMoverHechiDown_Click()
+
+    If hlst.Visible = True Then
+        If hlst.ListIndex = -1 Then Exit Sub
+
+        Dim sTemp As String
+
+        If hlst.ListIndex = hlst.ListCount - 1 Then Exit Sub
+
+        Call WriteMoveSpell(False, hlst.ListIndex + 1)
+
+        sTemp = hlst.List(hlst.ListIndex + 1)
+        hlst.List(hlst.ListIndex + 1) = hlst.List(hlst.ListIndex)
+        hlst.List(hlst.ListIndex) = sTemp
+        hlst.ListIndex = hlst.ListIndex + 1
+
+    End If
+
+End Sub
+
+Private Sub cmdMoverHechiTop_Click()
+
+    If hlst.Visible = True Then
+        If hlst.ListIndex = -1 Then Exit Sub
+
+        Dim sTemp As String
+
+        If hlst.ListIndex = 0 Then Exit Sub
+    
+        Call WriteMoveSpell(True, hlst.ListIndex + 1)
+        
+        sTemp = hlst.List(hlst.ListIndex - 1)
+        hlst.List(hlst.ListIndex - 1) = hlst.List(hlst.ListIndex)
+        hlst.List(hlst.ListIndex) = sTemp
+        hlst.ListIndex = hlst.ListIndex - 1
+
+    End If
+
+End Sub
+
 Private Sub imgSolapaInv_Click()
     Call Sound.Sound_Play(SND_CLICK)
     
@@ -931,14 +967,16 @@ Private Sub imgSolapaInv_Click()
             
     ' Activo controles de inventario
     PicInv.Visible = True
+    cmdDropGold.Visible = True
+    GldLbl.Visible = True
         
     ' Desactivo controles de hechizo
     hlst.Visible = False
     btnInfo.Visible = False
     btnLanzar.Visible = False
             
-    cmdMoverHechi(0).Visible = False
-    cmdMoverHechi(1).Visible = False
+    cmdMoverHechiTop.Visible = False
+    cmdMoverHechiDown.Visible = False
             
     DoEvents
     Call Inventario.DrawInventory
@@ -954,11 +992,13 @@ Private Sub imgSolapaHech_Click()
     btnInfo.Visible = True
     btnLanzar.Visible = True
             
-    cmdMoverHechi(0).Visible = True
-    cmdMoverHechi(1).Visible = True
+    cmdMoverHechiTop.Visible = True
+    cmdMoverHechiDown.Visible = True
             
     ' Desactivo controles de inventario
     PicInv.Visible = False
+    cmdDropGold.Visible = False
+    GldLbl.Visible = False
             
 End Sub
 
@@ -992,9 +1032,6 @@ Private Sub Form_Load()
     
     Me.Picture = General_Load_Picture_From_Resource("1.bmp", True)
     InvEqu.Picture = General_Load_Picture_From_Resource("18.bmp", True)
-    
-    cmdMoverHechi(1).Picture = General_Load_Picture_From_Resource("[hechizos]flechaarriba-down.bmp", True)
-    cmdMoverHechi(0).Picture = General_Load_Picture_From_Resource("[hechizos]flechaabajo-down.bmp", True)
     
     If Not ResolucionCambiada Then
         ' Handles Form movement (drag and drop).
@@ -1045,6 +1082,8 @@ Private Sub LoadButtons()
     Set cBotonInfo = New clsGraphicalButton
     Set cBotonBubble = New clsGraphicalButton
     Set cBotonMenu = New clsGraphicalButton
+    Set cBotonMoverHechiTop = New clsGraphicalButton
+    Set cBotonMoverHechiDown = New clsGraphicalButton
     
                                  
     Call cBotonLanzar.Initialize(imgSolapaInv, "2.bmp", _
@@ -1070,47 +1109,19 @@ Private Sub LoadButtons()
     Call cBotonMenu.Initialize(cmdMenu, "14.bmp", _
                                "15.bmp", _
                                "16.bmp", Me, , , , , True)
+                               
+    Call cBotonMoverHechiTop.Initialize(cmdMoverHechiTop, "flechatop_n.gif", _
+                                        "flechatop_h.gif", _
+                                        "flechatop_p.gif", Me, , , , , True)
+                                        
+    Call cBotonMoverHechiDown.Initialize(cmdMoverHechiDown, "flechadown_n.gif", _
+                                        "flechadown_h.gif", _
+                                        "flechadown_p.gif", Me, , , , , True)
                                 
     For i = 0 To 1
         imgSafe(i).MouseIcon = picMouseIcon
     Next i
 
-End Sub
-
-Private Sub cmdMoverHechi_Click(Index As Integer)
-
-    If hlst.Visible = True Then
-        If hlst.ListIndex = -1 Then Exit Sub
-        Dim sTemp As String
-    
-        Select Case Index
-
-            Case 1 'subir
-
-                If hlst.ListIndex = 0 Then Exit Sub
-
-            Case 0 'bajar
-
-                If hlst.ListIndex = hlst.ListCount - 1 Then Exit Sub
-        End Select
-    
-        Call WriteMoveSpell(Index = 1, hlst.ListIndex + 1)
-        
-        Select Case Index
-
-            Case 1 'subir
-                sTemp = hlst.List(hlst.ListIndex - 1)
-                hlst.List(hlst.ListIndex - 1) = hlst.List(hlst.ListIndex)
-                hlst.List(hlst.ListIndex) = sTemp
-                hlst.ListIndex = hlst.ListIndex - 1
-
-            Case 0 'bajar
-                sTemp = hlst.List(hlst.ListIndex + 1)
-                hlst.List(hlst.ListIndex + 1) = hlst.List(hlst.ListIndex)
-                hlst.List(hlst.ListIndex) = sTemp
-                hlst.ListIndex = hlst.ListIndex + 1
-        End Select
-    End If
 End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
@@ -1348,10 +1359,6 @@ Private Sub InvEqu_MouseMove(Button As Integer, _
     LastButtonPressed.ToggleToNormal
 End Sub
 
-Private Sub lblScroll_Click(Index As Integer)
-    Inventario.ScrollInventory (Index = 0)
-End Sub
-
 Private Sub LbLChat_Click()
     frmMensaje.PopupMenuMensaje
 End Sub
@@ -1367,6 +1374,10 @@ End Sub
 
 Private Sub lblMinimizar_Click()
     Me.WindowState = vbMinimized
+End Sub
+
+Private Sub lblMP_Click()
+    Call ParseUserCommand("/MEDITAR")
 End Sub
 
 Private Sub mnuEquipar_Click()
@@ -1590,10 +1601,6 @@ Private Sub btnInfo_Click()
         Call WriteSpellInfo(hlst.ListIndex + 1)
     End If
     
-End Sub
-
-Private Sub DespInv_Click(Index As Integer)
-    Inventario.ScrollInventory (Index = 0)
 End Sub
 
 Private Sub MainViewPic_MouseDown(Button As Integer, _
@@ -2090,8 +2097,6 @@ Private Sub Client_Connect()
     Call incomingData.ReadASCIIStringFixed(incomingData.Length)
     Call outgoingData.ReadASCIIStringFixed(outgoingData.Length)
     
-    Second.Enabled = True
-    
     Select Case EstadoLogin
 
         Case E_MODO.CrearNuevoPJ, E_MODO.Normal
@@ -2140,8 +2145,6 @@ Private Sub Client_Error(ByVal number As Integer, _
     Call MsgBox(Description, vbApplicationModal + vbInformation + vbOKOnly + vbDefaultButton1, "Error")
     
     frmConnect.MousePointer = 1
-    
-    Second.Enabled = False
  
     If Client.State <> sckClosed Then Client.CloseSck
     

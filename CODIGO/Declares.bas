@@ -187,10 +187,6 @@ Public Enum eCabezas
     GNOMO_H_ULTIMA_CABEZA = 410
     GNOMO_H_CUERPO_DESNUDO = 222
     
-    ORCO_H_PRIMER_CABEZA = 501
-    ORCO_H_ULTIMA_CABEZA = 514
-    ORCO_H_CUERPO_DESNUDO = 631
-    
     '<--MUJER-->
     
     HUMANO_M_PRIMER_CABEZA = 70
@@ -212,10 +208,7 @@ Public Enum eCabezas
     GNOMO_M_PRIMER_CABEZA = 471
     GNOMO_M_ULTIMA_CABEZA = 481
     GNOMO_M_CUERPO_DESNUDO = 260
-    
-    ORCO_M_PRIMER_CABEZA = 570
-    ORCO_M_ULTIMA_CABEZA = 573
-    ORCO_M_CUERPO_DESNUDO = 632
+
 End Enum
 
 'Colores
@@ -297,24 +290,15 @@ Public Enum eClass
     Bandit = 8       'Bandido
     Paladin = 9      'Paladin
     Hunter = 10      'Cazador
-    Nigromante = 11       'Nigromante
+    Nigromante = 11  'Nigromante
     Mercenario = 12  'Mercenario
     Gladiador
-    Pescador
-    Herrero
-    Lenador
-    Minero
-    Carpintero
-    Sastre
+    Trabajador
 End Enum
 
 Public Enum eCiudad
     cUllathorpe = 1
     cNix = 2
-    cBanderbill
-    cLindos
-    cRinkel
-    cArghal
 End Enum
 
 Enum eRaza
@@ -323,7 +307,6 @@ Enum eRaza
     ElfoOscuro = 3
     Gnomo = 4
     Enano = 5
-    Orco = 6
 End Enum
 
 Public Enum eSkill
@@ -807,11 +790,11 @@ Public UserClase As eClass
 Public UserSexo As eGenero
 Public UserRaza As eRaza
 
-Public Const NUMCIUDADES As Byte = 6
+Public Const NUMCIUDADES As Byte = 2
 Public Const NUMSKILLS As Byte = 27
 Public Const NUMATRIBUTOS As Byte = 5
-Public Const NUMCLASES As Byte = 19
-Public Const NUMRAZAS As Byte = 6
+Public Const NUMCLASES As Byte = 14
+Public Const NUMRAZAS As Byte = 5
 
 Public UserSkills(1 To NUMSKILLS) As Byte
 Public PorcentajeSkills(1 To NUMSKILLS) As Byte

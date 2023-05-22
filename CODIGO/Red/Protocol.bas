@@ -1901,7 +1901,7 @@ Private Sub HandleUpdateExp()
     UserExp = incomingData.ReadLong()
     
     If Round(CDbl(UserExp) * CDbl(100) / CDbl(UserPasarNivel)) <> 0 Then
-        frmMain.ExpShp.Width = (((UserExp / 100) / (UserPasarNivel / 100)) * 187)
+        frmMain.ExpShp.Width = (((UserExp / 100) / (UserPasarNivel / 100)) * 189)
     Else
         frmMain.ExpShp.Width = 0
     End If
@@ -3129,7 +3129,7 @@ Private Sub HandleUpdateUserStats()
     End If
     
     If Round(CDbl(UserExp) * CDbl(100) / CDbl(UserPasarNivel)) <> 0 Then
-        frmMain.ExpShp.Width = (((UserExp / 100) / (UserPasarNivel / 100)) * 187)
+        frmMain.ExpShp.Width = (((UserExp / 100) / (UserPasarNivel / 100)) * 189)
     Else
         frmMain.ExpShp.Width = 0
     End If

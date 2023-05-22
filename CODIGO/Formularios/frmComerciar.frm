@@ -11,6 +11,7 @@ Begin VB.Form frmComerciar
    MaxButton       =   0   'False
    MinButton       =   0   'False
    MousePointer    =   99  'Custom
+   Picture         =   "frmComerciar.frx":0000
    ScaleHeight     =   510
    ScaleMode       =   3  'Pixel
    ScaleWidth      =   500
@@ -54,19 +55,19 @@ Begin VB.Form frmComerciar
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H80000008&
-      Height          =   3960
+      Height          =   3630
       Left            =   3930
-      ScaleHeight     =   264
+      ScaleHeight     =   242
       ScaleMode       =   3  'Pixel
-      ScaleWidth      =   209
+      ScaleWidth      =   202
       TabIndex        =   4
       Top             =   2430
-      Width           =   3135
+      Width           =   3030
    End
    Begin VB.PictureBox picInvNpc 
       Appearance      =   0  'Flat
       AutoRedraw      =   -1  'True
-      BackColor       =   &H00000000&
+      BackColor       =   &H80000001&
       BorderStyle     =   0  'None
       CausesValidation=   0   'False
       ClipControls    =   0   'False
@@ -80,14 +81,14 @@ Begin VB.Form frmComerciar
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H80000008&
-      Height          =   3960
-      Left            =   390
-      ScaleHeight     =   264
+      Height          =   3630
+      Left            =   450
+      ScaleHeight     =   242
       ScaleMode       =   3  'Pixel
-      ScaleWidth      =   209
+      ScaleWidth      =   202
       TabIndex        =   3
       Top             =   2400
-      Width           =   3135
+      Width           =   3030
    End
    Begin VB.Image cmdMas 
       Height          =   420

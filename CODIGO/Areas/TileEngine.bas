@@ -657,7 +657,7 @@ Sub RenderScreen(ByVal tilex As Integer, _
     End If
     
     If colorRender <> 240 Then
-        Call DrawText(280, 50, renderText, render_msg(0), True, 2)
+        Call DrawText(380, 50, renderText, render_msg(0), True, 2)
         
     End If
     
@@ -867,7 +867,7 @@ On Error GoTo ErrorHandler:
 
         ' Calculamos los FPS y los mostramos
         Call Engine_Update_FPS
-        If ClientSetup.FPSShow = True Then Call DrawText(510, 5, "FPS: " & Mod_TileEngine.FPS, -1, True)
+        If ClientSetup.FPSShow = True Then Call DrawText(680, 5, "FPS: " & Mod_TileEngine.FPS, -1, True)
     
         'Get timing info
         timerElapsedTime = GetElapsedTime()
@@ -1283,7 +1283,7 @@ Sub Draw_Grh(ByRef Grh As Grh, ByVal X As Integer, ByVal Y As Integer, ByVal Cen
     
     If Grh.GrhIndex = 0 Then Exit Sub
     
-On Error GoTo error
+On Error GoTo Error
     
     If Animate Then
         If Grh.Started = 1 Then
@@ -1324,7 +1324,7 @@ On Error GoTo error
     
 Exit Sub
 
-error:
+Error:
     If Err.number = 9 And Grh.FrameCounter < 1 Then
         Grh.FrameCounter = 1
         Resume

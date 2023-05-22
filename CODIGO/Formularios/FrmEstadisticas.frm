@@ -1900,7 +1900,7 @@ Public Sub Iniciar_Labels()
         PetExpPerc = CLng((UserPet.EXP * 100) / UserPet.ELU)
         
         If PetExpPerc <> 0 Then
-            fExpShp.Width = (((UserPet.EXP / 100) / (UserPet.ELU / 100)) * 187)
+            fExpShp.Width = (((UserPet.EXP / 100) / (UserPet.ELU / 100)) * 189)
         Else
             fExpShp.Width = 0
         End If

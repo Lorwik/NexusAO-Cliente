@@ -732,7 +732,7 @@ Private Sub LoadInitialConfig()
     Call frmCargando.ActualizarCarga(JsonLanguage.item("HECHO").item("TEXTO"), 95)
     
     'Inicializamos el inventario grafico
-    Call Inventario.Initialize(DirectD3D8, frmMain.PicInv, MAX_INVENTORY_SLOTS, , , , , , , , True)
+    Call Inventario.Initialize(DirectD3D8, frmMain.picInv, MAX_INVENTORY_SLOTS, , , , , , , , True)
     
     'Set cKeys = New Collection
     Call frmCargando.ActualizarCarga(JsonLanguage.item("BIENVENIDO").item("TEXTO"), 100)
@@ -912,17 +912,12 @@ Private Sub InicializarNombres()
     
     Ciudades(eCiudad.cUllathorpe) = "Ullathorpe"
     Ciudades(eCiudad.cNix) = "Nix"
-    Ciudades(eCiudad.cBanderbill) = "Banderbill"
-    Ciudades(eCiudad.cLindos) = "Lindos"
-    Ciudades(eCiudad.cRinkel) = "Rinkel"
-    Ciudades(eCiudad.cArghal) = "Arghal"
     
     ListaRazas(eRaza.Humano) = JsonLanguage.item("RAZAS").item("HUMANO")
     ListaRazas(eRaza.Elfo) = JsonLanguage.item("RAZAS").item("ELFO")
     ListaRazas(eRaza.ElfoOscuro) = JsonLanguage.item("RAZAS").item("ELFO_OSCURO")
     ListaRazas(eRaza.Gnomo) = JsonLanguage.item("RAZAS").item("GNOMO")
     ListaRazas(eRaza.Enano) = JsonLanguage.item("RAZAS").item("ENANO")
-    ListaRazas(eRaza.Orco) = JsonLanguage.item("RAZAS").item("ORCO")
 
     ListaClases(eClass.Mage) = JsonLanguage.item("CLASES").item("MAGO")
     ListaClases(eClass.Cleric) = JsonLanguage.item("CLASES").item("CLERIGO")
@@ -937,12 +932,7 @@ Private Sub InicializarNombres()
     ListaClases(eClass.Nigromante) = JsonLanguage.item("CLASES").item("NIGROMANTE")
     ListaClases(eClass.Mercenario) = JsonLanguage.item("CLASES").item("MERCENARIO")
     ListaClases(eClass.Gladiador) = JsonLanguage.item("CLASES").item("GLADIADOR")
-    ListaClases(eClass.Pescador) = JsonLanguage.item("CLASES").item("PESCADOR")
-    ListaClases(eClass.Herrero) = JsonLanguage.item("CLASES").item("HERRERO")
-    ListaClases(eClass.Lenador) = JsonLanguage.item("CLASES").item("LENADOR")
-    ListaClases(eClass.Minero) = JsonLanguage.item("CLASES").item("MINERO")
-    ListaClases(eClass.Carpintero) = JsonLanguage.item("CLASES").item("CARPINTERO")
-    ListaClases(eClass.Sastre) = JsonLanguage.item("CLASES").item("SASTRE")
+    ListaClases(eClass.Trabajador) = JsonLanguage.item("CLASES").item("TRABAJADOR")
    
     SkillsNames(eSkill.Magia) = JsonLanguage.item("HABILIDADES").item("MAGIA").item("TEXTO")
     SkillsNames(eSkill.Robar) = JsonLanguage.item("HABILIDADES").item("ROBAR").item("TEXTO")
@@ -1141,7 +1131,6 @@ End Function
 Public Sub ResetAllInfo(Optional ByVal UnloadForms As Boolean = True)
 
     ' Disable timers
-    frmMain.Second.Enabled = False
     Connected = False
     Call frmMain.hlst.Clear ' Ponemos esto aca para limpiar la lista de hechizos al desconectarse.
     

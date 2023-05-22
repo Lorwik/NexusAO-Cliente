@@ -799,12 +799,7 @@
         "NIGROMANTE": "Necromancer",
         "MERCENARIO": "Mercenary",
 		"GLADIADOR": "Gladiator",
-		"PESCADOR": "Fisherman",
-		"HERRERO": "Blacksmith",
-		"LENADOR": "Woodcutter",
-		"MINERO": "Miner",
-		"CARPINTERO": "Carpenter",
-		"SASTRE": "Tailor"
+		"TRABAJADOR": "Worker"
     },
     "ATRIBUTOS": {
         "FUERZA": "Strength",

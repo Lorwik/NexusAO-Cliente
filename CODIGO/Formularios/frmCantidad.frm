@@ -5,7 +5,7 @@ Begin VB.Form frmCantidad
    ClientHeight    =   1335
    ClientLeft      =   1635
    ClientTop       =   4410
-   ClientWidth     =   2220
+   ClientWidth     =   3660
    ClipControls    =   0   'False
    ControlBox      =   0   'False
    KeyPreview      =   -1  'True
@@ -15,10 +15,11 @@ Begin VB.Form frmCantidad
    Picture         =   "frmCantidad.frx":0000
    ScaleHeight     =   89
    ScaleMode       =   3  'Pixel
-   ScaleWidth      =   148
+   ScaleWidth      =   244
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
    Begin VB.TextBox txtCantidad 
+      Alignment       =   2  'Center
       BackColor       =   &H00000000&
       BorderStyle     =   0  'None
       BeginProperty Font 
@@ -31,42 +32,30 @@ Begin VB.Form frmCantidad
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   210
+      Height          =   240
       Left            =   300
       TabIndex        =   0
-      Top             =   540
-      Width           =   1470
-   End
-   Begin VB.Image imgMas 
-      Height          =   135
-      Left            =   1800
-      Top             =   510
-      Width           =   195
-   End
-   Begin VB.Image imgMenos 
-      Height          =   135
-      Left            =   1800
-      Top             =   630
-      Width           =   195
+      Top             =   420
+      Width           =   3030
    End
    Begin VB.Image imgCerrar 
-      Height          =   330
-      Left            =   1890
+      Height          =   375
+      Left            =   3330
       Tag             =   "0"
       Top             =   0
-      Width           =   315
+      Width           =   375
    End
    Begin VB.Image imgTirarTodo 
-      Height          =   405
-      Left            =   1125
-      Top             =   840
-      Width           =   945
+      Height          =   420
+      Left            =   1920
+      Top             =   780
+      Width           =   1530
    End
    Begin VB.Image imgTirar 
-      Height          =   405
-      Left            =   150
-      Top             =   840
-      Width           =   975
+      Height          =   420
+      Left            =   240
+      Top             =   780
+      Width           =   1530
    End
 End
 Attribute VB_Name = "frmCantidad"
@@ -125,13 +114,8 @@ Private Sub Form_Load()
     Call LoadButtons
 End Sub
 
-Private Sub imgMas_Click()
-    txtCantidad.Text = Val(txtCantidad.Text) + 1
-End Sub
-
-Private Sub imgMenos_Click()
-    If Val(txtCantidad.Text) > 0 Then _
-        txtCantidad.Text = Val(txtCantidad.Text) - 1
+Private Sub imgCerrar_Click()
+    Unload Me
 End Sub
 
 Private Sub imgTirar_Click()
@@ -203,17 +187,17 @@ Private Sub LoadButtons()
     Set cBotonCerrar = New clsGraphicalButton
     
     
-    Call cBotonTirar.Initialize(imgTirar, "", _
-                                 "cerrarcantover.bmp", _
-                                 "cerrarcantdown.bmp", Me, , , , , True)
+    Call cBotonTirar.Initialize(imgTirar, "39.gif", _
+                                 "40.gif", _
+                                 "41.gif", Me)
                                      
-    Call cBotonTirarTodo.Initialize(imgTirarTodo, "", _
-                               "dejartodoover.bmp", _
-                               "dejartododown.bmp", Me, , , , , True)
+    Call cBotonTirarTodo.Initialize(imgTirarTodo, "btntirartodo_n.gif", _
+                               "btntirartodo_h.gif", _
+                               "btntirartodo_p.gif", Me)
                                      
-    Call cBotonCerrar.Initialize(imgCerrar, "", _
-                                "salir-over.bmp", _
-                                "salir-down.bmp", Me, , , , , True)
+    Call cBotonCerrar.Initialize(imgCerrar, "36.gif", _
+                                "37.gif", _
+                                "38.gif", Me)
 
 
 End Sub

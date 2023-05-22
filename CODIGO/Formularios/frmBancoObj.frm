@@ -13,7 +13,6 @@ Begin VB.Form frmBancoObj
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   Picture         =   "frmBancoObj.frx":0000
    ScaleHeight     =   510
    ScaleMode       =   0  'User
    ScaleWidth      =   499
@@ -46,27 +45,27 @@ Begin VB.Form frmBancoObj
       BackColor       =   &H00000000&
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
-      Height          =   3960
+      Height          =   3630
       Left            =   450
-      ScaleHeight     =   3960
-      ScaleWidth      =   3135
+      ScaleHeight     =   3630
+      ScaleWidth      =   3030
       TabIndex        =   3
       Top             =   2400
-      Width           =   3135
+      Width           =   3030
    End
    Begin VB.PictureBox PicInv 
       Appearance      =   0  'Flat
       BackColor       =   &H00000000&
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
-      Height          =   3960
+      Height          =   3630
       Left            =   3930
-      ScaleHeight     =   17.478
+      ScaleHeight     =   16.021
       ScaleMode       =   0  'User
-      ScaleWidth      =   1078.708
+      ScaleWidth      =   1042.579
       TabIndex        =   2
       Top             =   2400
-      Width           =   3135
+      Width           =   3030
    End
    Begin VB.Image imgCerrar 
       Height          =   540

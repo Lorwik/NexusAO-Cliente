@@ -67,6 +67,9 @@ Private Inventory() As Inventory    'User's inventory
 Private WithEvents InventoryWindow As PictureBox    'Placeholder where to render the inventory
 Attribute InventoryWindow.VB_VarHelpID = -1
 
+'CONSTANTES
+Private Const GRH_SLOT_INVENTARIO As Integer = 24060
+
 #If ConMenuesConextuales = 1 Then
     Dim ItemMenu As Menu    'Menu to be shown as pop up
 #End If
@@ -88,6 +91,44 @@ Private Sub Class_Terminate()
 'Last Modify Date: 27/07/04
 '
 '***************************************************
+End Sub
+
+Public Sub Initialize(ByRef DirectD3D As D3DX8, ByRef InvPic As PictureBox, ByVal MaxObjs As Byte, Optional ByVal FontSize As Integer = 7, Optional ByVal TileWidth As Integer = 40, Optional ByVal TileHeight As Integer = 40, Optional ByVal startX As Integer = 0, Optional ByVal startY As Integer = 0, Optional ByVal bImgContainer As Boolean = True, Optional ByVal bShowText As Boolean = True, Optional thisInventory As Boolean = False)
+    '***************************************************
+    'Author: Juan Martin Sotuyo Dodero (Maraxus)
+    'Last Modify Date: 03/12/09
+    'Sets the reference to the picture box on which to render the inventory
+    '03/12/09: I added the optionals args FontSize, TileWidth, TileHeight, startX and startY. (Budi)
+    '***************************************************
+    
+    Set InventoryWindow = InvPic
+    isInventory = thisInventory
+    
+    'Make sure auto-redraw is set to true
+    InventoryWindow.AutoRedraw = True
+    
+    'Set apropiate scale (pixel)
+    InventoryWindow.ScaleMode = 3
+    
+    ' Inicializar buffer
+    Set DrawBuffer = New cDIBSection
+    Call DrawBuffer.Create(InvPic.Width, InvPic.Height)
+    
+    ReDim Inventory(1 To MaxObjs) As Inventory
+    
+    'Make sure DirectD3D was correctly initialized
+    If DirectD3D Is Nothing Then Exit Sub
+    
+    ownTilePixelHeight = TileHeight
+    ownTilePixelWidth = TileWidth
+    startdX = startX
+    startdY = startY
+    
+    ImgContainer = bImgContainer
+    ShowValue = bShowText
+    
+    If ImgContainer Then InvSelectedItem = ClickItem(1, 1)   'If there is anything there we select the top left item
+
 End Sub
 
 Public Sub ScrollInventory(ByVal Up As Boolean)
@@ -443,8 +484,14 @@ Public Sub DrawInventory()
 
     For LoopC = InventoryOffset * (InventoryWindow.ScaleWidth \ ownTilePixelWidth) + 1 To UBound(Inventory)
     
-        startdX = ((LoopC - 1) Mod ((frmMain.PicInv.Width - 32) / 32)) * 32 + 8
-        startdY = ((LoopC - 1) \ ((frmMain.PicInv.Width - 32) / 32)) * 32 + 8
+        startdX = ((LoopC - 1) Mod (frmMain.PicInv.Width / ownTilePixelWidth)) * ownTilePixelWidth
+        startdY = ((LoopC - 1) \ (frmMain.PicInv.Width / ownTilePixelHeight)) * ownTilePixelHeight
+
+        'If isInventory Then
+        
+            Call Draw_GrhIndex(GRH_SLOT_INVENTARIO, startdX, startdY, 0, Normal_RGBList(), 0, False) 'Dibuja el fondo
+            
+        'End If
 
         'Si el usuario no puede usar este item por su raza, sexo o clase, dibujamos una "X"
         If Inventory(LoopC).NoUsa Then
@@ -463,18 +510,18 @@ Public Sub DrawInventory()
             If LoopC <> DragItem Then
                     
                 If LoopC = SelectedItem Then
-                    Call Draw_GrhIndex(2, startdX, startdY, 0, Normal_RGBList(), 0, False) 'Dibuja el fondo cuando lo seleccionamos
+                    Call Draw_GrhIndex(2, startdX + 8, startdY + 8, 0, Normal_RGBList(), 0, False) 'Dibuja el fondo cuando lo seleccionamos
 
                 End If
 
                 'Dibujamos el item
-                Call Draw_GrhIndex(Inventory(LoopC).GrhIndex, startdX, startdY, 0, ColorFinal())
+                Call Draw_GrhIndex(Inventory(LoopC).GrhIndex, startdX + 5, startdY + 5, 0, ColorFinal())
 
                 'If equipped we render "E"
                 If Inventory(LoopC).Equipped Then _
-                    Call DrawText(startdX + 20, startdY + 20, "E", -1)
+                    Call DrawText(startdX + 27, startdY + 27, "E", -1)
                     
-                Call DrawText(startdX, startdY, Inventory(LoopC).Amount, -1)
+                Call DrawText(startdX + 5, startdY + 5, Inventory(LoopC).Amount, -1)
 
             End If
 
@@ -543,7 +590,7 @@ Private Sub InventoryWindow_MouseMove(Button As Integer, Shift As Integer, X As 
     temp_x = X \ ownTilePixelWidth
     temp_y = Y \ ownTilePixelHeight
     
-    TempItem = temp_x + (temp_y + InventoryOffset) * (InventoryWindow.ScaleWidth \ 32) + 1
+    TempItem = temp_x + (temp_y + InventoryOffset) * (InventoryWindow.ScaleWidth \ ownTilePixelWidth) + 1
     TempSlot = TempItem
         
     'Incorporado por ReyarB, arreglado por Recox
@@ -579,11 +626,11 @@ Private Sub InventoryWindow_MouseDown(Button As Integer, Shift As Integer, X As 
         Dim temp_x As Integer
         Dim temp_y As Integer
 
-        temp_x = X \ 32
-        temp_y = Y \ 32
+        temp_x = X \ ownTilePixelWidth
+        temp_y = Y \ ownTilePixelHeight
 
         'Get the currently clickced item
-        DragItem = temp_x + (temp_y + InventoryOffset) * (InventoryWindow.ScaleWidth \ 32) + 1
+        DragItem = temp_x + (temp_y + InventoryOffset) * (InventoryWindow.ScaleWidth \ ownTilePixelWidth) + 1
 
         If Not (DragItem <= 25 And DragItem >= 1) Then
             DragItem = 0
@@ -604,44 +651,6 @@ Private Sub InventoryWindow_MouseDown(Button As Integer, Shift As Integer, X As 
         End If
 
     End If
-
-End Sub
-
-Public Sub Initialize(ByRef DirectD3D As D3DX8, ByRef InvPic As PictureBox, ByVal MaxObjs As Byte, Optional ByVal FontSize As Integer = 7, Optional ByVal TileWidth As Integer = 32, Optional ByVal TileHeight As Integer = 32, Optional ByVal startX As Integer = 0, Optional ByVal startY As Integer = 0, Optional ByVal bImgContainer As Boolean = True, Optional ByVal bShowText As Boolean = True, Optional thisInventory As Boolean = False)
-    '***************************************************
-    'Author: Juan Martin Sotuyo Dodero (Maraxus)
-    'Last Modify Date: 03/12/09
-    'Sets the reference to the picture box on which to render the inventory
-    '03/12/09: I added the optionals args FontSize, TileWidth, TileHeight, startX and startY. (Budi)
-    '***************************************************
-    
-    Set InventoryWindow = InvPic
-    isInventory = thisInventory
-    
-    'Make sure auto-redraw is set to true
-    InventoryWindow.AutoRedraw = True
-    
-    'Set apropiate scale (pixel)
-    InventoryWindow.ScaleMode = 3
-    
-    ' Inicializar buffer
-    Set DrawBuffer = New cDIBSection
-    Call DrawBuffer.Create(InvPic.Width, InvPic.Height)
-    
-    ReDim Inventory(1 To MaxObjs) As Inventory
-    
-    'Make sure DirectD3D was correctly initialized
-    If DirectD3D Is Nothing Then Exit Sub
-    
-    ownTilePixelHeight = TileHeight
-    ownTilePixelWidth = TileWidth
-    startdX = startX
-    startdY = startY
-    
-    ImgContainer = bImgContainer
-    ShowValue = bShowText
-    
-    If ImgContainer Then InvSelectedItem = ClickItem(1, 1)   'If there is anything there we select the top left item
 
 End Sub
 
@@ -683,9 +692,9 @@ Public Function GetPos(ByVal X As Integer, ByVal Y As Integer) As Byte
     Dim temp_x As Integer
     Dim temp_y As Integer
     
-    temp_x = X \ 32
-    temp_y = Y \ 32
+    temp_x = X \ ownTilePixelWidth
+    temp_y = Y \ ownTilePixelHeight
     
-    GetPos = temp_x + (temp_y + InventoryOffset) * (InventoryWindow.ScaleWidth \ 32) + 1
+    GetPos = temp_x + (temp_y + InventoryOffset) * (InventoryWindow.ScaleWidth \ ownTilePixelWidth) + 1
 
 End Function

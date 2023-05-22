@@ -799,12 +799,7 @@
         "NIGROMANTE": "Nigromante",
         "MERCENARIO": "Mercenario",
 		"GLADIADOR": "Gladiador",
-		"PESCADOR": "Pescador",
-		"HERRERO": "Herrero",
-		"LENADOR": "Leñador",
-		"MINERO": "Minero",
-		"CARPINTERO": "Carpintero",
-		"SASTRE": "Sastre"
+		"TRABAJADOR": "Trabajador"
     },
     "ATRIBUTOS": {
         "FUERZA": "Fuerza",

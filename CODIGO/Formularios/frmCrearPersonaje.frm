@@ -1538,7 +1538,7 @@ Private Sub LoadButtons()
     
     'Numero de command1
     For i = 0 To 53
-        command1(i).MouseIcon = picMouseIcon
+        Command1(i).MouseIcon = picMouseIcon
     Next i
     
     Headmas.MouseIcon = picMouseIcon
@@ -1635,10 +1635,6 @@ Sub DameCabezas()
                     UserHead = eCabezas.GNOMO_H_PRIMER_CABEZA
                     UserBody = eCabezas.GNOMO_H_CUERPO_DESNUDO
                     
-                Case eRaza.Orco
-                    UserHead = eCabezas.ORCO_H_PRIMER_CABEZA
-                    UserBody = eCabezas.ORCO_H_CUERPO_DESNUDO
-                    
                 Case Else
                     UserHead = 0
                     UserBody = 0
@@ -1668,10 +1664,6 @@ Sub DameCabezas()
                 Case eRaza.Gnomo
                     UserHead = eCabezas.GNOMO_M_PRIMER_CABEZA
                     UserBody = eCabezas.GNOMO_M_CUERPO_DESNUDO
-                    
-                Case eRaza.Orco
-                    UserHead = eCabezas.ORCO_M_PRIMER_CABEZA
-                    UserBody = eCabezas.ORCO_M_CUERPO_DESNUDO
                     
                 Case Else
                     UserHead = 0
@@ -1753,17 +1745,6 @@ Private Function CheckCabeza(ByVal Head As Integer) As Integer
                         CheckCabeza = Head
 
                     End If
-                    
-                Case eRaza.Orco
-
-                    If Head > eCabezas.ORCO_H_ULTIMA_CABEZA Then
-                        CheckCabeza = eCabezas.ORCO_H_PRIMER_CABEZA + (Head - eCabezas.ORCO_H_ULTIMA_CABEZA) - 1
-                    ElseIf Head < eCabezas.ORCO_H_PRIMER_CABEZA Then
-                        CheckCabeza = eCabezas.ORCO_H_ULTIMA_CABEZA - (eCabezas.ORCO_H_PRIMER_CABEZA - Head) + 1
-                    Else
-                        CheckCabeza = Head
-
-                    End If
                 
                 Case Else
                     CheckCabeza = CheckCabeza(Head)
@@ -1824,17 +1805,6 @@ Private Function CheckCabeza(ByVal Head As Integer) As Integer
                         CheckCabeza = eCabezas.GNOMO_M_PRIMER_CABEZA + (Head - eCabezas.GNOMO_M_ULTIMA_CABEZA) - 1
                     ElseIf Head < eCabezas.GNOMO_M_PRIMER_CABEZA Then
                         CheckCabeza = eCabezas.GNOMO_M_ULTIMA_CABEZA - (eCabezas.GNOMO_M_PRIMER_CABEZA - Head) + 1
-                    Else
-                        CheckCabeza = Head
-
-                    End If
-                
-                Case eRaza.Orco
-
-                    If Head > eCabezas.ORCO_M_ULTIMA_CABEZA Then
-                        CheckCabeza = eCabezas.ORCO_M_PRIMER_CABEZA + (Head - eCabezas.ORCO_M_ULTIMA_CABEZA) - 1
-                    ElseIf Head < eCabezas.ORCO_M_PRIMER_CABEZA Then
-                        CheckCabeza = eCabezas.ORCO_M_ULTIMA_CABEZA - (eCabezas.ORCO_M_PRIMER_CABEZA - Head) + 1
                     Else
                         CheckCabeza = Head
 
