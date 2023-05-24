@@ -1025,3 +1025,20 @@ Public IntervaloInvisible As Integer
 Public Security As New clsSecurity
 
 Public Const SPEED_NORMAL As Double = 0.018
+
+Public Type t_packetCounters
+    TS_CastSpell As Long
+    TS_WorkLeftClick As Long
+    TS_LeftClick As Long
+    TS_UseItem As Long
+    TS_Walk As Long
+    TS_Talk As Long
+    TS_Attack As Long
+    TS_Drop As Long
+    TS_Work As Long
+    TS_EquipItem As Long
+    TS_GuildMessage As Long
+    TS_ChangeHeading As Long
+End Type
+
+Public packetCounters As t_packetCounters

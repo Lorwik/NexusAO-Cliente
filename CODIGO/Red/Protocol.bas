@@ -1601,7 +1601,7 @@ Private Sub HandleBankInit()
     Set InvBanco(1) = New clsGraphicalInventory
     
     Call InvBanco(0).Initialize(DirectD3D8, frmBancoObj.PicBancoInv, MAX_BANCOINVENTORY_SLOTS)
-    Call InvBanco(1).Initialize(DirectD3D8, frmBancoObj.PicInv, MAX_INVENTORY_SLOTS, , , , , , , , True)
+    Call InvBanco(1).Initialize(DirectD3D8, frmBancoObj.picInv, MAX_INVENTORY_SLOTS, , , , , , , , True)
     
     For i = 1 To MAX_INVENTORY_SLOTS
         With Inventario
@@ -5526,6 +5526,9 @@ Public Sub WriteTalk(ByVal chat As String)
         Call .WriteByte(ClientPacketID.Talk)
         
         Call .WriteASCIIString(chat)
+        
+        packetCounters.TS_Talk = packetCounters.TS_Talk + 1
+        Call .WriteInteger(packetCounters.TS_Talk)
     End With
 End Sub
 
@@ -5587,6 +5590,9 @@ Public Sub WriteWalk(ByVal Heading As E_Heading)
         Call .WriteByte(ClientPacketID.Walk)
         
         Call .WriteByte(Heading)
+        
+        packetCounters.TS_Walk = packetCounters.TS_Walk + 1
+        Call .WriteInteger(packetCounters.TS_Walk)
     End With
 End Sub
 
@@ -5617,6 +5623,8 @@ Public Sub WriteAttack()
 '***************************************************
     Call outgoingData.WriteByte(ClientPacketID.Attack)
     
+    packetCounters.TS_Attack = packetCounters.TS_Attack + 1
+    Call outgoingData.WriteInteger(packetCounters.TS_Attack)
 End Sub
 
 ''
@@ -5859,6 +5867,9 @@ Public Sub WriteDrop(ByVal slot As Byte, ByVal Amount As Integer)
         
         Call .WriteByte(slot)
         Call .WriteInteger(Amount)
+        
+        packetCounters.TS_Drop = packetCounters.TS_Drop + 1
+        Call .WriteInteger(packetCounters.TS_Drop)
     End With
 End Sub
 
@@ -5878,6 +5889,9 @@ Public Sub WriteCastSpell(ByVal slot As Byte)
         Call .WriteByte(ClientPacketID.CastSpell)
         
         Call .WriteByte(slot)
+        
+        packetCounters.TS_CastSpell = packetCounters.TS_CastSpell + 1
+        Call .WriteInteger(packetCounters.TS_CastSpell)
     End With
 End Sub
 
@@ -5899,6 +5913,10 @@ Public Sub WriteLeftClick(ByVal X As Byte, ByVal Y As Byte)
         
         Call .WriteByte(X)
         Call .WriteByte(Y)
+        
+        packetCounters.TS_LeftClick = packetCounters.TS_LeftClick + 1
+        Call .WriteInteger(packetCounters.TS_LeftClick)
+        
     End With
 End Sub
 
@@ -5939,6 +5957,11 @@ Public Sub WriteWork(ByVal Skill As eSkill)
         Call .WriteByte(ClientPacketID.Work)
         
         Call .WriteByte(Skill)
+        
+        packetCounters.TS_Work = packetCounters.TS_Work + 1
+        Call .WriteInteger(packetCounters.TS_Work)
+        
+        Debug.Print packetCounters.TS_Work
     End With
 End Sub
 
@@ -5972,6 +5995,9 @@ Public Sub WriteUseItem(ByVal slot As Byte)
         Call .WriteByte(ClientPacketID.UseItem)
         
         Call .WriteByte(slot)
+        
+        packetCounters.TS_UseItem = packetCounters.TS_UseItem + 1
+        Call .WriteInteger(packetCounters.TS_UseItem)
     End With
 End Sub
 
@@ -6041,6 +6067,9 @@ Public Sub WriteWorkLeftClick(ByVal X As Byte, ByVal Y As Byte, ByVal Skill As e
         Call .WriteByte(Y)
         
         Call .WriteByte(Skill)
+        
+        packetCounters.TS_WorkLeftClick = packetCounters.TS_WorkLeftClick + 1
+        Call .WriteInteger(packetCounters.TS_WorkLeftClick)
     End With
 End Sub
 
@@ -6141,6 +6170,9 @@ Public Sub WriteEquipItem(ByVal slot As Byte)
         Call .WriteByte(ClientPacketID.EquipItem)
         
         Call .WriteByte(slot)
+        
+        packetCounters.TS_EquipItem = packetCounters.TS_EquipItem + 1
+        Call .WriteInteger(packetCounters.TS_EquipItem)
     End With
 End Sub
 
@@ -6160,6 +6192,9 @@ Public Sub WriteChangeHeading(ByVal Heading As E_Heading)
         Call .WriteByte(ClientPacketID.ChangeHeading)
         
         Call .WriteByte(Heading)
+        
+        packetCounters.TS_ChangeHeading = packetCounters.TS_ChangeHeading + 1
+        Call .WriteInteger(packetCounters.TS_ChangeHeading)
     End With
     
 End Sub
@@ -7186,6 +7221,9 @@ Public Sub WriteGuildMessage(ByVal Message As String)
         Call .WriteByte(ClientPacketID.GuildMessage)
         
         Call .WriteASCIIString(Message)
+        
+        packetCounters.TS_GuildMessage = packetCounters.TS_GuildMessage + 1
+        Call .WriteInteger(packetCounters.TS_GuildMessage)
     End With
 End Sub
 

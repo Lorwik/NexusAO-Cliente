@@ -256,6 +256,8 @@ Sub SetConnected()
 
     frmMain.lblName.Caption = UserName
     
+    Call ResetContadores
+    
     'Load main form
     frmMain.Visible = True
     
@@ -732,7 +734,7 @@ Private Sub LoadInitialConfig()
     Call frmCargando.ActualizarCarga(JsonLanguage.item("HECHO").item("TEXTO"), 95)
     
     'Inicializamos el inventario grafico
-    Call Inventario.Initialize(DirectD3D8, frmMain.picInv, MAX_INVENTORY_SLOTS, , , , , , , , True)
+    Call Inventario.Initialize(DirectD3D8, frmMain.PicInv, MAX_INVENTORY_SLOTS, , , , , , , , True)
     
     'Set cKeys = New Collection
     Call frmCargando.ActualizarCarga(JsonLanguage.item("BIENVENIDO").item("TEXTO"), 100)
@@ -1454,3 +1456,18 @@ Public Sub DibujarMinimapa()
     frmMain.MiniMapa.Refresh
 End Sub
 
+Sub ResetContadores()
+    packetCounters.TS_CastSpell = 0
+    packetCounters.TS_WorkLeftClick = 0
+    packetCounters.TS_LeftClick = 0
+    packetCounters.TS_UseItem = 0
+    packetCounters.TS_Walk = 0
+    packetCounters.TS_Talk = 0
+    packetCounters.TS_Attack = 0
+    packetCounters.TS_Drop = 0
+    packetCounters.TS_Work = 0
+    packetCounters.TS_EquipItem = 0
+    packetCounters.TS_GuildMessage = 0
+    packetCounters.TS_ChangeHeading = 0
+   
+End Sub
