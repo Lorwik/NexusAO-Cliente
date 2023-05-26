@@ -1607,7 +1607,7 @@ Private Sub HandleBankInit()
     Set InvBanco(1) = New clsGraphicalInventory
     
     Call InvBanco(0).Initialize(DirectD3D8, frmBancoObj.PicBancoInv, MAX_BANCOINVENTORY_SLOTS)
-    Call InvBanco(1).Initialize(DirectD3D8, frmBancoObj.PicInv, MAX_INVENTORY_SLOTS, , , , , , , , True)
+    Call InvBanco(1).Initialize(DirectD3D8, frmBancoObj.picInv, MAX_INVENTORY_SLOTS, , , , , , , , True)
     
     For i = 1 To MAX_INVENTORY_SLOTS
         With Inventario
@@ -3134,18 +3134,18 @@ Private Sub HandleUpdateUserStats()
         UserEstado = 0
     End If
     
-    If Round(CDbl(UserExp) * CDbl(100) / CDbl(UserPasarNivel)) <> 0 Then
-        frmMain.ExpShp.Width = (((UserExp / 100) / (UserPasarNivel / 100)) * 189)
-    Else
-        frmMain.ExpShp.Width = 0
-    End If
-                
-    frmMain.MapExp(1).Caption = IIf(frmMain.UltPos = 1, UserExp & "/" & UserPasarNivel, Round(CDbl(UserExp) * CDbl(100) / CDbl(UserPasarNivel)) & "%")
-    
     If UserPasarNivel = 0 Then
         frmMain.MapExp(1).Caption = "¡Nivel máximo!"
+    Else
+        If Round(CDbl(UserExp) * CDbl(100) / CDbl(UserPasarNivel)) <> 0 Then
+            frmMain.ExpShp.Width = (((UserExp / 100) / (UserPasarNivel / 100)) * 189)
+        Else
+            frmMain.ExpShp.Width = 0
+        End If
+        
+        frmMain.MapExp(1).Caption = IIf(frmMain.UltPos = 1, UserExp & "/" & UserPasarNivel, Round(CDbl(UserExp) * CDbl(100) / CDbl(UserPasarNivel)) & "%")
     End If
-
+                
 End Sub
 
 ''

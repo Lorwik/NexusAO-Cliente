@@ -1402,7 +1402,7 @@ Public Sub ListarServidores()
     
     Set Inet = New clsInet
     
-    responseServer = Inet.OpenRequest("http://192.168.1.12/apicomunidadwinter/server-listiac.txt", "GET")
+    responseServer = Inet.OpenRequest("http://192.168.1.12/apicomunidadwinter/server-list.txt", "GET")
     responseServer = Inet.Execute
     responseServer = Inet.GetResponseAsString
     
