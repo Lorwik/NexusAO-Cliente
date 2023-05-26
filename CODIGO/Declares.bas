@@ -1042,3 +1042,11 @@ Public Type t_packetCounters
 End Type
 
 Public packetCounters As t_packetCounters
+
+Type Rank
+    name As String
+    ELO As Double
+End Type
+
+Public Ranking(5) As Rank
+Public LlegoRank  As Boolean

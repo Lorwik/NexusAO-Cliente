@@ -95,9 +95,6 @@ Public Sub Actualizar_Estado(ByVal Estado As Byte)
 '***************************************************
     Dim X As Byte, Y As Byte
 
-    'Primero actualizamos la imagen del frmmain
-    'Call ActualizarImgClima
-
     '¿El mapa tiene su propia luz?
     If mapInfo.LuzBase <> 0 Then
         
@@ -113,7 +110,7 @@ Public Sub Actualizar_Estado(ByVal Estado As Byte)
     End If
 
     '¿Es un estado invalido?
-    Estado = e_estados.noche
+    Estado = e_estados.MedioDia
         
     Estado_Actual = Estados(Estado)
     Estado_Actual_Date = Estado

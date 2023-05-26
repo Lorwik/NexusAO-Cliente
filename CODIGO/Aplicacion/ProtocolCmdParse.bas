@@ -151,6 +151,9 @@ Public Sub ParseUserCommand(ByVal RawCommand As String)
             Case "/SALIRCLAN"
                 Call WriteGuildLeave
                 
+            Case "/COMENZARRETO"
+                Call WriteBatallaPVP(50)
+                
             Case "/BALANCE"
                 If UserEstado = 1 Then 'Muerto
                     With FontTypes(FontTypeNames.FONTTYPE_INFO)

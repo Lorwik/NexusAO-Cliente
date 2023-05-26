@@ -174,6 +174,7 @@ Private Enum ServerPacketID
     AbriMapa
     AbrirGoliath
     OfrecerFamiliar
+    EnviarRanking
 End Enum
 
 Private Enum ClientPacketID
@@ -320,6 +321,8 @@ Private Enum ClientPacketID
     Divorcio
     TransferenciaOro
     AdoptarFamiliar
+    SolicitarRank
+    BatallaPVP
 End Enum
 
 Public Enum FontTypeNames
@@ -835,6 +838,9 @@ On Error Resume Next
             
         Case ServerPacketID.SearchList              '/BUSCAR
             Call HandleSearchList
+            
+        Case ServerPacketID.EnviarRanking
+            Call HandleEnviarRanking
 
         '*******************
         'GM messages
@@ -1601,7 +1607,7 @@ Private Sub HandleBankInit()
     Set InvBanco(1) = New clsGraphicalInventory
     
     Call InvBanco(0).Initialize(DirectD3D8, frmBancoObj.PicBancoInv, MAX_BANCOINVENTORY_SLOTS)
-    Call InvBanco(1).Initialize(DirectD3D8, frmBancoObj.picInv, MAX_INVENTORY_SLOTS, , , , , , , , True)
+    Call InvBanco(1).Initialize(DirectD3D8, frmBancoObj.PicInv, MAX_INVENTORY_SLOTS, , , , , , , , True)
     
     For i = 1 To MAX_INVENTORY_SLOTS
         With Inventario
@@ -11168,4 +11174,31 @@ Public Sub WriteTransferenciaOro(ByVal NameDest As String, ByVal CantOro As Long
         Call .WriteLong(CantOro)
  
     End With
+End Sub
+
+Public Sub WriteSolicitarRank()
+    With outgoingData
+        Call .WriteByte(ClientPacketID.SolicitarRank)
+    End With
+End Sub
+
+Public Sub HandleEnviarRanking()
+Dim i As Byte
+
+    'Remove packet ID
+    Call incomingData.ReadByte
+    
+    For i = 1 To 5
+        Ranking(i).name = incomingData.ReadASCIIString
+        Ranking(i).ELO = incomingData.ReadDouble
+    Next i
+    
+    UserELO = incomingData.ReadDouble
+    
+    LlegoRank = True
+End Sub
+
+Public Sub WriteBatallaPVP(ByVal TipoDuelo As Byte)
+    Call outgoingData.WriteByte(ClientPacketID.BatallaPVP)
+    Call outgoingData.WriteByte(TipoDuelo)
 End Sub

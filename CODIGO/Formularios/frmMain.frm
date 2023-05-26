@@ -364,7 +364,6 @@ Begin VB.Form frmMain
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
-      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       MousePointer    =   1
@@ -380,6 +379,12 @@ Begin VB.Form frmMain
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VB.Image cmdPVP 
+      Height          =   480
+      Left            =   13200
+      Top             =   10830
+      Width           =   1725
    End
    Begin VB.Image imgSafe 
       Height          =   375
@@ -397,9 +402,9 @@ Begin VB.Form frmMain
    End
    Begin VB.Image cmdMenu 
       Height          =   480
-      Left            =   12090
-      Top             =   10860
-      Width           =   2175
+      Left            =   11400
+      Top             =   10830
+      Width           =   1725
    End
    Begin VB.Image cmdMinimizar 
       Height          =   225
@@ -683,7 +688,6 @@ Begin VB.Form frmMain
    End
    Begin VB.Label lblName 
       Alignment       =   2  'Center
-      AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "Player"
       BeginProperty Font 
@@ -697,10 +701,10 @@ Begin VB.Form frmMain
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   285
-      Left            =   12780
+      Left            =   11910
       TabIndex        =   8
       Top             =   150
-      Width           =   795
+      Width           =   2565
    End
    Begin VB.Image btnInfo 
       Height          =   465
@@ -877,6 +881,7 @@ Private cBotonLanzar            As clsGraphicalButton
 Private cBotonInfo              As clsGraphicalButton
 Private cBotonBubble            As clsGraphicalButton
 Private cBotonMenu              As clsGraphicalButton
+Private cBotonPVP               As clsGraphicalButton
 Private cBotonMoverHechiTop     As clsGraphicalButton
 Private cBotonMoverHechiDown    As clsGraphicalButton
 
@@ -959,6 +964,19 @@ Private Sub cmdMoverHechiTop_Click()
 
     End If
 
+End Sub
+
+Private Sub cmdPVP_Click()
+    LlegoRank = False
+    Call WriteSolicitarRank
+    Call FlushBuffer
+            
+    Do While Not LlegoRank
+        DoEvents 'esperamos a que lleguen y mantenemos la interfaz viva
+    Loop
+    frmBatalla.Iniciar_Labels
+    frmBatalla.Show , frmMain
+    LlegoRank = False
 End Sub
 
 Private Sub imgSolapaInv_Click()
@@ -1083,6 +1101,7 @@ Private Sub LoadButtons()
     Set cBotonInfo = New clsGraphicalButton
     Set cBotonBubble = New clsGraphicalButton
     Set cBotonMenu = New clsGraphicalButton
+    Set cBotonPVP = New clsGraphicalButton
     Set cBotonMoverHechiTop = New clsGraphicalButton
     Set cBotonMoverHechiDown = New clsGraphicalButton
     
@@ -1107,9 +1126,13 @@ Private Sub LoadButtons()
                                "24.bmp", _
                                "25.bmp", Me, , , , , True)
                                
-    Call cBotonMenu.Initialize(cmdMenu, "14.bmp", _
-                               "15.bmp", _
-                               "16.bmp", Me, , , , , True)
+    Call cBotonMenu.Initialize(cmdMenu, "14.gif", _
+                               "15.gif", _
+                               "16.gif", Me, , , , , True)
+                               
+    Call cBotonPVP.Initialize(cmdPVP, "17.gif", _
+                               "18.gif", _
+                               "19.gif", Me, , , , , True)
                                
     Call cBotonMoverHechiTop.Initialize(cmdMoverHechiTop, "flechatop_n.gif", _
                                         "flechatop_h.gif", _
