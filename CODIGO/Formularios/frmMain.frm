@@ -364,7 +364,6 @@ Begin VB.Form frmMain
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
-      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       MousePointer    =   1
@@ -2225,10 +2224,6 @@ Public Sub ActualizarMiniMapa()
     Me.UserM.Left = UserPos.X - 2
     Me.UserM.Top = UserPos.Y - 2
     Me.MiniMapa.Refresh
-End Sub
-
-Private Sub btnRetos_Click()
-    Call FrmRetos.Show(vbModeless, frmMain)
 End Sub
 
 Public Sub ControlSM(ByVal Index As Byte, ByVal Mostrar As Boolean)

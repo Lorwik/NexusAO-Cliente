@@ -7,6 +7,15 @@ Begin VB.Form frmBatalla
    ClientWidth     =   7200
    ClipControls    =   0   'False
    ControlBox      =   0   'False
+   BeginProperty Font 
+      Name            =   "Tahoma"
+      Size            =   8.25
+      Charset         =   0
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -14,8 +23,85 @@ Begin VB.Form frmBatalla
    ScaleWidth      =   7200
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
+   Begin VB.Frame FraDagaRusa 
+      Caption         =   "Duelo de Plantes"
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   1485
+      Left            =   3480
+      TabIndex        =   26
+      Top             =   1890
+      Width           =   3615
+      Begin VB.CommandButton cmdEntrarAl 
+         Caption         =   "Entrar al juego"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   900
+         TabIndex        =   28
+         Top             =   960
+         Width           =   1875
+      End
+      Begin VB.Label lblLabel2 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Enfrenta a tu adversario cara a cara, sin moverte, solo a golpes, y gana recompensas! (No se puede usar hechizos)"
+         Height          =   615
+         Left            =   210
+         TabIndex        =   27
+         Top             =   270
+         Width           =   3165
+      End
+   End
+   Begin VB.Frame FraRetos 
+      Caption         =   "Retos"
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   1515
+      Left            =   3480
+      TabIndex        =   23
+      Top             =   180
+      Width           =   3615
+      Begin VB.CommandButton cmdRetos 
+         Caption         =   "Organizar"
+         Height          =   360
+         Left            =   840
+         TabIndex        =   25
+         Top             =   870
+         Width           =   1875
+      End
+      Begin VB.Label lblDuelosDe 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Pelea solo o con compañeros en duelos de 1v1, 2v2 y 3v3 por oro."
+         Height          =   405
+         Left            =   150
+         TabIndex        =   24
+         Top             =   330
+         Width           =   3240
+      End
+   End
    Begin VB.Frame FraArenaDe 
-      Caption         =   "Arena de Rinkel"
+      Caption         =   "Arena de la Muerte"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -29,20 +115,11 @@ Begin VB.Form frmBatalla
       Left            =   120
       TabIndex        =   20
       Top             =   1800
-      Width           =   6975
+      Width           =   3255
       Begin VB.CommandButton cmdIrA 
          Caption         =   "Ir a la Arena"
-         Height          =   360
-         Left            =   1710
-         TabIndex        =   22
-         Top             =   990
-         Width           =   3195
-      End
-      Begin VB.Label lblYtyhyhr 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Tendrás que sobrevivir a oleadas de criaturas para conseguir el tesoro del desierto."
          BeginProperty Font 
-            Name            =   "Tahoma"
+            Name            =   "MS Sans Serif"
             Size            =   8.25
             Charset         =   0
             Weight          =   400
@@ -50,15 +127,33 @@ Begin VB.Form frmBatalla
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
+         Height          =   360
+         Left            =   570
+         TabIndex        =   22
+         Top             =   1050
+         Width           =   1875
+      End
+      Begin VB.Label lblYtyhyhr 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Tendrás que sobrevivir a oleadas de criaturas para conseguir el tesoro del desierto."
          Height          =   555
          Left            =   120
          TabIndex        =   21
          Top             =   360
-         Width           =   6375
+         Width           =   2985
       End
    End
    Begin VB.CommandButton cmdVolver 
       Caption         =   "Volver"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   360
       Left            =   1920
       TabIndex        =   18
@@ -99,6 +194,15 @@ Begin VB.Form frmBatalla
          Width           =   6495
          Begin VB.Label Label4 
             Caption         =   "< 1900 Diamante"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Left            =   240
             TabIndex        =   17
@@ -107,6 +211,15 @@ Begin VB.Form frmBatalla
          End
          Begin VB.Label Label9 
             Caption         =   "<= 1700 > 1900 Platino"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Left            =   240
             TabIndex        =   16
@@ -115,6 +228,15 @@ Begin VB.Form frmBatalla
          End
          Begin VB.Label Label8 
             Caption         =   "<= 1500 > 1700 Oro"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Left            =   240
             TabIndex        =   15
@@ -123,6 +245,15 @@ Begin VB.Form frmBatalla
          End
          Begin VB.Label Label7 
             Caption         =   "<= 1300 > 1500 Plata"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Left            =   240
             TabIndex        =   14
@@ -131,6 +262,15 @@ Begin VB.Form frmBatalla
          End
          Begin VB.Label Label6 
             Caption         =   "<= 1100 > 1300 Bronce"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Left            =   240
             TabIndex        =   13
@@ -139,6 +279,15 @@ Begin VB.Form frmBatalla
          End
          Begin VB.Label Label5 
             Caption         =   "1100 < Madera"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Left            =   240
             TabIndex        =   12
@@ -164,6 +313,15 @@ Begin VB.Form frmBatalla
          Width           =   6495
          Begin VB.Label TopELO 
             Caption         =   "- Nadie"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Index           =   4
             Left            =   240
@@ -173,6 +331,15 @@ Begin VB.Form frmBatalla
          End
          Begin VB.Label TopELO 
             Caption         =   "- Nadie"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Index           =   3
             Left            =   240
@@ -182,6 +349,15 @@ Begin VB.Form frmBatalla
          End
          Begin VB.Label TopELO 
             Caption         =   "- Nadie"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Index           =   2
             Left            =   240
@@ -191,6 +367,15 @@ Begin VB.Form frmBatalla
          End
          Begin VB.Label TopELO 
             Caption         =   "- Nadie"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Index           =   1
             Left            =   240
@@ -200,6 +385,15 @@ Begin VB.Form frmBatalla
          End
          Begin VB.Label TopELO 
             Caption         =   "- Nadie"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Index           =   0
             Left            =   240
@@ -227,15 +421,6 @@ Begin VB.Form frmBatalla
       End
       Begin VB.Label Label3 
          Caption         =   $"frmBatalla.frx":0000
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
          Height          =   615
          Left            =   240
          TabIndex        =   3
@@ -258,19 +443,11 @@ Begin VB.Form frmBatalla
       Left            =   120
       TabIndex        =   0
       Top             =   120
-      Width           =   7005
+      Width           =   3255
       Begin VB.CommandButton cmdIrDuelo 
          Caption         =   "Ir al Duelo"
-         Height          =   360
-         Left            =   1680
-         TabIndex        =   19
-         Top             =   840
-         Width           =   3255
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Duela contra otro usuario al mejor de 3, mejora tu ELO y gana recompensas!"
          BeginProperty Font 
-            Name            =   "Tahoma"
+            Name            =   "MS Sans Serif"
             Size            =   8.25
             Charset         =   0
             Weight          =   400
@@ -278,11 +455,19 @@ Begin VB.Form frmBatalla
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
+         Height          =   360
+         Left            =   510
+         TabIndex        =   19
+         Top             =   960
+         Width           =   1875
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Duela contra otro usuario al mejor de 3, mejora tu ELO y gana recompensas!"
          Height          =   435
          Left            =   120
          TabIndex        =   1
          Top             =   360
-         Width           =   6705
+         Width           =   2925
       End
    End
 End
@@ -291,17 +476,25 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private Sub cmdEntrarAl_Click()
+    Call WriteBatallaPVP(2)
+    Unload Me
+End Sub
+
 Private Sub cmdIrA_Click()
     If MsgBox("¿Seguro que quieres entrar a la Arena de Rinkel?", vbYesNo, "Atencion!") = vbNo Then Exit Sub
     Call WriteBatallaPVP(1)
+    Unload Me
 End Sub
 
 Private Sub cmdIrDuelo_Click()
     Call WriteBatallaPVP(0)
     Unload Me
-    With FontTypes(FontTypeNames.FONTTYPE_TALK)
-        Call AddtoRichTextBox(frmMain.RecTxt, "Disculpa, esta opción se encuentra deshabilitada en estos momentos.", .Red, .Green, .Blue, .bold, .italic)
-    End With
+End Sub
+
+Private Sub cmdRetos_Click()
+    Unload Me
+    Call FrmRetos.Show(vbModeless, frmMain)
 End Sub
 
 Private Sub cmdVolver_Click()
