@@ -27,7 +27,6 @@ Begin VB.Form frmMain
    MaxButton       =   0   'False
    MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
-   Picture         =   "frmMain.frx":10CA
    ScaleHeight     =   768
    ScaleMode       =   0  'User
    ScaleWidth      =   1024
@@ -66,10 +65,10 @@ Begin VB.Form frmMain
             ENAB            =   -1  'True
             FCOL            =   7314354
             OCOL            =   16777215
-            PICE            =   "frmMain.frx":24110E
-            PICF            =   "frmMain.frx":24112A
-            PICH            =   "frmMain.frx":241146
-            PICV            =   "frmMain.frx":241162
+            PICE            =   "frmMain.frx":10CA
+            PICF            =   "frmMain.frx":10E6
+            PICH            =   "frmMain.frx":1102
+            PICV            =   "frmMain.frx":111E
             BeginProperty FONT {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
                Name            =   "Tahoma"
                Size            =   8.25
@@ -92,10 +91,10 @@ Begin VB.Form frmMain
             ENAB            =   -1  'True
             FCOL            =   7314354
             OCOL            =   16777215
-            PICE            =   "frmMain.frx":24117E
-            PICF            =   "frmMain.frx":24119A
-            PICH            =   "frmMain.frx":2411B6
-            PICV            =   "frmMain.frx":2411D2
+            PICE            =   "frmMain.frx":113A
+            PICF            =   "frmMain.frx":1156
+            PICH            =   "frmMain.frx":1172
+            PICV            =   "frmMain.frx":118E
             BeginProperty FONT {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
                Name            =   "Tahoma"
                Size            =   8.25
@@ -118,10 +117,10 @@ Begin VB.Form frmMain
             ENAB            =   -1  'True
             FCOL            =   7314354
             OCOL            =   16777215
-            PICE            =   "frmMain.frx":2411EE
-            PICF            =   "frmMain.frx":24120A
-            PICH            =   "frmMain.frx":241226
-            PICV            =   "frmMain.frx":241242
+            PICE            =   "frmMain.frx":11AA
+            PICF            =   "frmMain.frx":11C6
+            PICH            =   "frmMain.frx":11E2
+            PICV            =   "frmMain.frx":11FE
             BeginProperty FONT {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
                Name            =   "Tahoma"
                Size            =   8.25
@@ -144,10 +143,10 @@ Begin VB.Form frmMain
             ENAB            =   -1  'True
             FCOL            =   7314354
             OCOL            =   16777215
-            PICE            =   "frmMain.frx":24125E
-            PICF            =   "frmMain.frx":24127A
-            PICH            =   "frmMain.frx":241296
-            PICV            =   "frmMain.frx":2412B2
+            PICE            =   "frmMain.frx":121A
+            PICF            =   "frmMain.frx":1236
+            PICH            =   "frmMain.frx":1252
+            PICV            =   "frmMain.frx":126E
             BeginProperty FONT {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
                Name            =   "Tahoma"
                Size            =   8.25
@@ -170,10 +169,10 @@ Begin VB.Form frmMain
             ENAB            =   -1  'True
             FCOL            =   7314354
             OCOL            =   16777215
-            PICE            =   "frmMain.frx":2412CE
-            PICF            =   "frmMain.frx":2412EA
-            PICH            =   "frmMain.frx":241306
-            PICV            =   "frmMain.frx":241322
+            PICE            =   "frmMain.frx":128A
+            PICF            =   "frmMain.frx":12A6
+            PICH            =   "frmMain.frx":12C2
+            PICV            =   "frmMain.frx":12DE
             BeginProperty FONT {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
                Name            =   "Tahoma"
                Size            =   8.25
@@ -196,10 +195,10 @@ Begin VB.Form frmMain
             ENAB            =   -1  'True
             FCOL            =   7314354
             OCOL            =   16777215
-            PICE            =   "frmMain.frx":24133E
-            PICF            =   "frmMain.frx":24135A
-            PICH            =   "frmMain.frx":241376
-            PICV            =   "frmMain.frx":241392
+            PICE            =   "frmMain.frx":12FA
+            PICF            =   "frmMain.frx":1316
+            PICH            =   "frmMain.frx":1332
+            PICV            =   "frmMain.frx":134E
             BeginProperty FONT {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
                Name            =   "Tahoma"
                Size            =   8.25
@@ -222,10 +221,10 @@ Begin VB.Form frmMain
             ENAB            =   -1  'True
             FCOL            =   7314354
             OCOL            =   16777215
-            PICE            =   "frmMain.frx":2413AE
-            PICF            =   "frmMain.frx":2413CA
-            PICH            =   "frmMain.frx":2413E6
-            PICV            =   "frmMain.frx":241402
+            PICE            =   "frmMain.frx":136A
+            PICF            =   "frmMain.frx":1386
+            PICH            =   "frmMain.frx":13A2
+            PICV            =   "frmMain.frx":13BE
             BeginProperty FONT {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
                Name            =   "Tahoma"
                Size            =   8.25
@@ -248,10 +247,10 @@ Begin VB.Form frmMain
             ENAB            =   -1  'True
             FCOL            =   7314354
             OCOL            =   16777215
-            PICE            =   "frmMain.frx":24141E
-            PICF            =   "frmMain.frx":24143A
-            PICH            =   "frmMain.frx":241456
-            PICV            =   "frmMain.frx":241472
+            PICE            =   "frmMain.frx":13DA
+            PICF            =   "frmMain.frx":13F6
+            PICH            =   "frmMain.frx":1412
+            PICV            =   "frmMain.frx":142E
             BeginProperty FONT {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
                Name            =   "Tahoma"
                Size            =   8.25
@@ -294,7 +293,7 @@ Begin VB.Form frmMain
       BorderStyle     =   0  'None
       Height          =   1500
       Left            =   9360
-      MouseIcon       =   "frmMain.frx":24148E
+      MouseIcon       =   "frmMain.frx":144A
       ScaleHeight     =   97
       ScaleMode       =   0  'User
       ScaleWidth      =   97
@@ -364,12 +363,13 @@ Begin VB.Form frmMain
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
+      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       MousePointer    =   1
       Appearance      =   0
       OLEDropMode     =   0
-      TextRTF         =   $"frmMain.frx":2415E0
+      TextRTF         =   $"frmMain.frx":159C
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Tahoma"
          Size            =   8.25
@@ -405,12 +405,6 @@ Begin VB.Form frmMain
       Left            =   11400
       Top             =   10830
       Width           =   1725
-   End
-   Begin VB.Image cmdMinimizar 
-      Height          =   225
-      Left            =   11340
-      Top             =   150
-      Width           =   225
    End
    Begin VB.Label MapExp 
       Alignment       =   2  'Center
@@ -645,7 +639,7 @@ Begin VB.Form frmMain
       BorderStyle     =   0  'Transparent
       FillColor       =   &H0000FFFF&
       Height          =   135
-      Left            =   11940
+      Left            =   11910
       Top             =   9180
       Width           =   2535
    End
@@ -709,7 +703,7 @@ Begin VB.Form frmMain
    Begin VB.Image btnInfo 
       Height          =   465
       Left            =   13620
-      MouseIcon       =   "frmMain.frx":24165D
+      MouseIcon       =   "frmMain.frx":1619
       MousePointer    =   99  'Custom
       Top             =   6480
       Visible         =   0   'False
@@ -718,7 +712,7 @@ Begin VB.Form frmMain
    Begin VB.Image btnLanzar 
       Height          =   465
       Left            =   11730
-      MouseIcon       =   "frmMain.frx":2417AF
+      MouseIcon       =   "frmMain.frx":176B
       MousePointer    =   99  'Custom
       Top             =   6480
       Visible         =   0   'False
@@ -727,14 +721,14 @@ Begin VB.Form frmMain
    Begin VB.Image imgSolapaHech 
       Height          =   420
       Left            =   13290
-      MouseIcon       =   "frmMain.frx":241901
+      MouseIcon       =   "frmMain.frx":18BD
       Top             =   1860
       Width           =   1545
    End
    Begin VB.Image imgSolapaInv 
       Height          =   420
       Left            =   11550
-      MouseIcon       =   "frmMain.frx":241A53
+      MouseIcon       =   "frmMain.frx":1A0F
       Top             =   1860
       Width           =   1545
    End
@@ -750,7 +744,7 @@ Begin VB.Form frmMain
    Begin VB.Image cmdMoverHechiDown 
       Height          =   420
       Left            =   14580
-      MouseIcon       =   "frmMain.frx":241BA5
+      MouseIcon       =   "frmMain.frx":1B61
       MousePointer    =   99  'Custom
       Top             =   4470
       Visible         =   0   'False
@@ -759,7 +753,7 @@ Begin VB.Form frmMain
    Begin VB.Image cmdMoverHechiTop 
       Height          =   420
       Left            =   14580
-      MouseIcon       =   "frmMain.frx":241CF7
+      MouseIcon       =   "frmMain.frx":1CB3
       MousePointer    =   99  'Custom
       Top             =   4050
       Visible         =   0   'False
@@ -787,7 +781,6 @@ Begin VB.Form frmMain
    Begin VB.Image InvEqu 
       Height          =   4770
       Left            =   11520
-      Picture         =   "frmMain.frx":241E49
       Top             =   2400
       Width           =   3360
    End
@@ -926,6 +919,11 @@ Private Sub cmdCerrar_Click()
     Call WriteQuit
 End Sub
 
+Private Sub cmdClanes_Click()
+    If frmGuildLeader.Visible Then Unload frmGuildLeader
+    Call WriteRequestGuildLeaderInfo
+End Sub
+
 Private Sub cmdMoverHechiDown_Click()
 
     If hlst.Visible = True Then
@@ -1034,10 +1032,6 @@ End Sub
 
 Private Sub cmdMenu_Click()
     FrameMenu.Visible = Not FrameMenu.Visible
-End Sub
-
-Private Sub cmdMinimizar_Click()
-    Me.WindowState = vbMinimized
 End Sub
 
 Private Sub Form_Activate()

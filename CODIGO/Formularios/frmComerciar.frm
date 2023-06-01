@@ -11,7 +11,6 @@ Begin VB.Form frmComerciar
    MaxButton       =   0   'False
    MinButton       =   0   'False
    MousePointer    =   99  'Custom
-   Picture         =   "frmComerciar.frx":0000
    ScaleHeight     =   510
    ScaleMode       =   3  'Pixel
    ScaleWidth      =   500

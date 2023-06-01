@@ -28,7 +28,6 @@ Begin VB.Form frmGuildAdm
    Begin VB.TextBox txtBuscar 
       Appearance      =   0  'Flat
       BackColor       =   &H00000000&
-      BorderStyle     =   0  'None
       BeginProperty Font 
          Name            =   "Tahoma"
          Size            =   8.25
@@ -40,9 +39,9 @@ Begin VB.Form frmGuildAdm
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   240
-      Left            =   495
+      Left            =   480
       TabIndex        =   1
-      Top             =   4650
+      Top             =   4530
       Width           =   3105
    End
    Begin VB.ListBox GuildsList 
@@ -58,27 +57,27 @@ Begin VB.Form frmGuildAdm
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   3540
+      Height          =   3150
       ItemData        =   "frmGuildAdm.frx":0000
-      Left            =   495
+      Left            =   510
       List            =   "frmGuildAdm.frx":0002
       TabIndex        =   0
-      Top             =   570
+      Top             =   960
       Width           =   3075
    End
    Begin VB.Image imgDetalles 
-      Height          =   375
-      Left            =   2280
+      Height          =   390
+      Left            =   1290
       Tag             =   "1"
-      Top             =   5025
-      Width           =   1335
+      Top             =   4950
+      Width           =   1470
    End
    Begin VB.Image imgCerrar 
       Height          =   375
-      Left            =   480
+      Left            =   3600
       Tag             =   "1"
-      Top             =   5025
-      Width           =   855
+      Top             =   90
+      Width           =   375
    End
 End
 Attribute VB_Name = "frmGuildAdm"
@@ -132,14 +131,7 @@ Private Sub Form_Load()
     Set clsFormulario = New clsFormMovementManager
     clsFormulario.Initialize Me
 
-    ' TODO: Traducir los textos de las imagenes via labels en visual basic, para que en el futuro si se quiere se pueda traducir a mas idiomas
-    ' No ando con mas ganas/tiempo para hacer eso asi que se traducen las imagenes asi tenemos el juego en ingles.
-    ' Tambien usar los controles uAObuttons para los botones, usar de ejemplo frmCambiaMotd.frm
-    If Language = "spanish" Then
-      Me.Picture = General_Load_Picture_From_Resource("109.bmp", False)
-    Else
-      Me.Picture = General_Load_Picture_From_Resource("110.bmp", False)
-    End If
+    Me.Picture = General_Load_Picture_From_Resource("clanes.bmp", False)
     
     Call LoadButtons
     
@@ -153,13 +145,13 @@ Private Sub LoadButtons()
     Set LastButtonPressed = New clsGraphicalButton
     
     
-    Call cBotonCerrar.Initialize(imgCerrar, "105.bmp", _
-                                    "104.bmp", _
-                                    "103.bmp", Me)
+    Call cBotonCerrar.Initialize(imgCerrar, "36.gif", _
+                                    "37.gif", _
+                                    "38.gif", Me)
 
-    Call cBotonDetalles.Initialize(imgDetalles, "106.bmp", _
-                                    "107.bmp", _
-                                    "108.bmp", Me)
+    Call cBotonDetalles.Initialize(imgDetalles, "51.gif", _
+                                    "52.gif", _
+                                    "53.gif", Me)
 
 End Sub
 
