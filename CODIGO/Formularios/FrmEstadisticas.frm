@@ -3,10 +3,10 @@ Begin VB.Form frmEstadisticas
    BackColor       =   &H00C0C0C0&
    BorderStyle     =   0  'None
    Caption         =   "Estadisticas"
-   ClientHeight    =   6795
+   ClientHeight    =   9795
    ClientLeft      =   0
    ClientTop       =   -75
-   ClientWidth     =   6510
+   ClientWidth     =   9510
    ClipControls    =   0   'False
    BeginProperty Font 
       Name            =   "Tahoma"
@@ -21,12 +21,17 @@ Begin VB.Form frmEstadisticas
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   Picture         =   "FrmEstadisticas.frx":000C
-   ScaleHeight     =   453
+   ScaleHeight     =   653
    ScaleMode       =   3  'Pixel
-   ScaleWidth      =   434
+   ScaleWidth      =   634
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
+   Begin VB.Image imgStatus 
+      Height          =   450
+      Left            =   870
+      Top             =   8520
+      Width           =   1950
+   End
    Begin VB.Label Fami 
       Alignment       =   2  'Center
       AutoSize        =   -1  'True
@@ -44,9 +49,9 @@ Begin VB.Form frmEstadisticas
       ForeColor       =   &H00000000&
       Height          =   135
       Index           =   3
-      Left            =   5610
+      Left            =   8010
       TabIndex        =   51
-      Top             =   5880
+      Top             =   7590
       Width           =   645
    End
    Begin VB.Label Fami 
@@ -65,9 +70,9 @@ Begin VB.Form frmEstadisticas
       ForeColor       =   &H00000000&
       Height          =   165
       Index           =   2
-      Left            =   4335
+      Left            =   7020
       TabIndex        =   50
-      Top             =   5430
+      Top             =   6630
       Width           =   1260
    End
    Begin VB.Label Fami 
@@ -87,9 +92,9 @@ Begin VB.Form frmEstadisticas
       ForeColor       =   &H00FFFFFF&
       Height          =   210
       Index           =   1
-      Left            =   5910
+      Left            =   6600
       TabIndex        =   49
-      Top             =   5370
+      Top             =   6510
       Width           =   225
    End
    Begin VB.Label Fami 
@@ -99,9 +104,9 @@ Begin VB.Form frmEstadisticas
       ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   0
-      Left            =   4170
+      Left            =   6750
       TabIndex        =   48
-      Top             =   4950
+      Top             =   6660
       Width           =   2220
    End
    Begin VB.Label Fami 
@@ -109,22 +114,13 @@ Begin VB.Form frmEstadisticas
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "0/0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   165
+      Height          =   195
       Index           =   4
-      Left            =   4830
+      Left            =   6780
       TabIndex        =   47
-      Top             =   5790
-      Width           =   435
+      Top             =   7530
+      Width           =   255
    End
    Begin VB.Label Fami 
       Alignment       =   2  'Center
@@ -140,26 +136,26 @@ Begin VB.Form frmEstadisticas
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   345
+      Height          =   645
       Index           =   5
-      Left            =   4155
+      Left            =   6600
       TabIndex        =   46
-      Top             =   6240
+      Top             =   8310
       Width           =   2160
    End
    Begin VB.Image imgFami 
-      Height          =   1680
-      Left            =   4155
-      Top             =   4980
-      Width           =   2265
+      Height          =   3990
+      Left            =   6180
+      Top             =   5280
+      Width           =   2895
    End
    Begin VB.Shape fExpShp 
       BorderStyle     =   0  'Transparent
       FillColor       =   &H00FFFFFF&
       FillStyle       =   0  'Solid
       Height          =   90
-      Left            =   4335
-      Top             =   5460
+      Left            =   7005
+      Top             =   6660
       Width           =   1275
    End
    Begin VB.Shape fHPShp 
@@ -167,8 +163,8 @@ Begin VB.Form frmEstadisticas
       FillColor       =   &H00FFFFFF&
       FillStyle       =   0  'Solid
       Height          =   90
-      Left            =   5610
-      Top             =   5910
+      Left            =   8010
+      Top             =   7620
       Width           =   645
    End
    Begin VB.Label est 
@@ -176,88 +172,52 @@ Begin VB.Form frmEstadisticas
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "Criaturas matadas"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   1
-      Left            =   2250
+      Left            =   4245
       TabIndex        =   45
-      Top             =   5640
-      Width           =   1665
+      Top             =   7170
+      Width           =   1335
    End
    Begin VB.Label est 
       Alignment       =   2  'Center
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "Ciudadanos"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   2
-      Left            =   2250
+      Left            =   4455
       TabIndex        =   44
-      Top             =   6030
-      Width           =   1665
+      Top             =   7710
+      Width           =   855
    End
    Begin VB.Label est 
       Alignment       =   2  'Center
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "Criminales"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   3
-      Left            =   2250
+      Left            =   4515
       TabIndex        =   43
-      Top             =   6420
-      Width           =   1665
+      Top             =   8280
+      Width           =   735
    End
    Begin VB.Label est 
       Alignment       =   2  'Center
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "Veces muerto"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   4
-      Left            =   2250
+      Left            =   4350
       TabIndex        =   42
-      Top             =   5280
-      Width           =   1665
+      Top             =   6660
+      Width           =   1005
    End
    Begin VB.Label Label4 
       Alignment       =   1  'Right Justify
@@ -276,9 +236,9 @@ Begin VB.Form frmEstadisticas
       ForeColor       =   &H00FFFFFF&
       Height          =   165
       Index           =   6
-      Left            =   765
+      Left            =   1755
       TabIndex        =   41
-      Top             =   5760
+      Top             =   7875
       Width           =   1020
    End
    Begin VB.Label Label4 
@@ -298,9 +258,9 @@ Begin VB.Form frmEstadisticas
       ForeColor       =   &H00FFFFFF&
       Height          =   165
       Index           =   5
-      Left            =   765
+      Left            =   1755
       TabIndex        =   40
-      Top             =   5310
+      Top             =   7320
       Width           =   1020
    End
    Begin VB.Label Label4 
@@ -320,9 +280,9 @@ Begin VB.Form frmEstadisticas
       ForeColor       =   &H00FFFFFF&
       Height          =   165
       Index           =   4
-      Left            =   765
+      Left            =   1755
       TabIndex        =   39
-      Top             =   4830
+      Top             =   6720
       Width           =   1020
    End
    Begin VB.Label Label4 
@@ -342,9 +302,9 @@ Begin VB.Form frmEstadisticas
       ForeColor       =   &H00FFFFFF&
       Height          =   165
       Index           =   3
-      Left            =   765
+      Left            =   1755
       TabIndex        =   38
-      Top             =   5535
+      Top             =   7620
       Width           =   1020
    End
    Begin VB.Label Label4 
@@ -364,9 +324,9 @@ Begin VB.Form frmEstadisticas
       ForeColor       =   &H00FFFFFF&
       Height          =   165
       Index           =   2
-      Left            =   765
+      Left            =   1755
       TabIndex        =   37
-      Top             =   4605
+      Top             =   6450
       Width           =   1020
    End
    Begin VB.Label Label4 
@@ -386,9 +346,9 @@ Begin VB.Form frmEstadisticas
       ForeColor       =   &H00FFFFFF&
       Height          =   165
       Index           =   1
-      Left            =   765
+      Left            =   1755
       TabIndex        =   36
-      Top             =   4380
+      Top             =   6180
       Width           =   1020
    End
    Begin VB.Label est 
@@ -408,9 +368,9 @@ Begin VB.Form frmEstadisticas
       ForeColor       =   &H00FFFFFF&
       Height          =   135
       Index           =   0
-      Left            =   930
+      Left            =   1650
       TabIndex        =   35
-      Top             =   2850
+      Top             =   3840
       Width           =   975
    End
    Begin VB.Label est 
@@ -430,9 +390,9 @@ Begin VB.Form frmEstadisticas
       ForeColor       =   &H00FFFFFF&
       Height          =   135
       Index           =   5
-      Left            =   930
+      Left            =   1650
       TabIndex        =   34
-      Top             =   3090
+      Top             =   4170
       Width           =   975
    End
    Begin VB.Label est 
@@ -452,997 +412,754 @@ Begin VB.Form frmEstadisticas
       ForeColor       =   &H00FFFFFF&
       Height          =   135
       Index           =   6
-      Left            =   930
+      Left            =   1650
       TabIndex        =   33
-      Top             =   3300
+      Top             =   4440
       Width           =   975
    End
    Begin VB.Image cmdGuardar 
-      Height          =   480
-      Left            =   3780
+      Height          =   390
+      Left            =   3720
       Tag             =   "1"
-      Top             =   3900
-      Width           =   1050
+      Top             =   4500
+      Width           =   1470
    End
    Begin VB.Label Skill 
       Alignment       =   2  'Center
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   27
-      Left            =   5700
+      Left            =   8385
       TabIndex        =   32
-      Top             =   3390
-      Width           =   255
+      Top             =   4110
+      Width           =   105
    End
    Begin VB.Label Skill 
       Alignment       =   2  'Center
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   26
-      Left            =   5700
+      Left            =   8385
       TabIndex        =   31
-      Top             =   3150
-      Width           =   255
+      Top             =   3870
+      Width           =   105
    End
    Begin VB.Label Skill 
       Alignment       =   2  'Center
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   25
-      Left            =   5700
+      Left            =   8385
       TabIndex        =   30
-      Top             =   2940
-      Width           =   255
+      Top             =   3630
+      Width           =   105
    End
    Begin VB.Label Skill 
       Alignment       =   2  'Center
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   24
-      Left            =   5700
+      Left            =   8385
       TabIndex        =   29
-      Top             =   2700
-      Width           =   255
+      Top             =   3375
+      Width           =   105
    End
    Begin VB.Label Skill 
       Alignment       =   2  'Center
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   23
-      Left            =   5700
+      Left            =   8385
       TabIndex        =   28
-      Top             =   2490
-      Width           =   255
+      Top             =   3090
+      Width           =   105
    End
    Begin VB.Label Skill 
       Alignment       =   2  'Center
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   22
-      Left            =   5700
+      Left            =   8385
       TabIndex        =   27
-      Top             =   2250
-      Width           =   255
+      Top             =   2820
+      Width           =   105
    End
    Begin VB.Label Skill 
       Alignment       =   2  'Center
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   19
-      Left            =   5700
+      Left            =   8385
       TabIndex        =   26
-      Top             =   1590
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   20
-      Left            =   5700
-      TabIndex        =   25
-      Top             =   1800
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   21
-      Left            =   5700
-      TabIndex        =   24
-      Top             =   2040
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   18
-      Left            =   5700
-      TabIndex        =   23
-      Top             =   1350
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   17
-      Left            =   5700
-      TabIndex        =   22
-      Top             =   1140
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   16
-      Left            =   5700
-      TabIndex        =   21
-      Top             =   930
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   15
-      Left            =   5700
-      TabIndex        =   20
-      Top             =   690
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   14
-      Left            =   4050
-      TabIndex        =   19
-      Top             =   3600
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   13
-      Left            =   4050
-      TabIndex        =   18
-      Top             =   3390
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   12
-      Left            =   4050
-      TabIndex        =   17
-      Top             =   3150
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   11
-      Left            =   4050
-      TabIndex        =   16
-      Top             =   2940
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   10
-      Left            =   4050
-      TabIndex        =   15
-      Top             =   2700
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   9
-      Left            =   4050
-      TabIndex        =   14
-      Top             =   2490
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   8
-      Left            =   4050
-      TabIndex        =   13
-      Top             =   2250
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   7
-      Left            =   4050
-      TabIndex        =   12
-      Top             =   2040
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   6
-      Left            =   4050
-      TabIndex        =   11
-      Top             =   1800
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   5
-      Left            =   4050
-      TabIndex        =   10
-      Top             =   1560
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   4
-      Left            =   4050
-      TabIndex        =   9
-      Top             =   1350
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   3
-      Left            =   4050
-      TabIndex        =   8
-      Top             =   1110
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   1
-      Left            =   4050
-      TabIndex        =   7
-      Top             =   690
-      Width           =   255
-   End
-   Begin VB.Label Skill 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   195
-      Index           =   2
-      Left            =   4050
-      TabIndex        =   6
-      Top             =   900
-      Width           =   255
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   21
-      Left            =   5970
       Top             =   2100
-      Width           =   195
+      Width           =   105
    End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   21
-      Left            =   5970
-      Top             =   2010
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
       Index           =   20
-      Left            =   5970
-      Top             =   1890
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   20
-      Left            =   5970
-      Top             =   1770
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   19
-      Left            =   5970
-      Top             =   1650
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   19
-      Left            =   5970
-      Top             =   1560
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   18
-      Left            =   5970
-      Top             =   1440
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   18
-      Left            =   5970
-      Top             =   1350
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   17
-      Left            =   5970
-      Top             =   1200
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   17
-      Left            =   5970
-      Top             =   1110
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   16
-      Left            =   5970
-      Top             =   990
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   16
-      Left            =   5970
-      Top             =   900
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   15
-      Left            =   5970
-      Top             =   750
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   15
-      Left            =   5970
-      Top             =   660
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   22
-      Left            =   5970
-      Top             =   2250
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   22
-      Left            =   5970
-      Top             =   2370
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   23
-      Left            =   5970
-      Top             =   2460
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   23
-      Left            =   5970
-      Top             =   2580
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   24
-      Left            =   5970
-      Top             =   2700
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   24
-      Left            =   5970
-      Top             =   2790
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   25
-      Left            =   5970
-      Top             =   2910
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   25
-      Left            =   5970
-      Top             =   3000
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   26
-      Left            =   5970
-      Top             =   3150
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   26
-      Left            =   5970
-      Top             =   3240
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   27
-      Left            =   5970
-      Top             =   3360
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   27
-      Left            =   5970
-      Top             =   3450
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   14
-      Left            =   4320
-      Top             =   3600
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   13
-      Left            =   4320
-      Top             =   3360
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   12
-      Left            =   4320
-      Top             =   3120
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   11
-      Left            =   4320
-      Top             =   2910
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   10
-      Left            =   4320
-      Top             =   2700
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   9
-      Left            =   4320
-      Top             =   2460
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   8
-      Left            =   4320
-      Top             =   2250
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   7
-      Left            =   4320
-      Top             =   2010
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   6
-      Left            =   4320
-      Top             =   1800
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   5
-      Left            =   4320
-      Top             =   1560
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   4
-      Left            =   4320
-      Top             =   1320
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   3
-      Left            =   4320
-      Top             =   1110
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   2
-      Left            =   4320
-      Top             =   870
-      Width           =   195
-   End
-   Begin VB.Image masskill 
-      Height          =   105
-      Index           =   1
-      Left            =   4320
-      Top             =   660
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   1
-      Left            =   4320
-      Top             =   750
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   14
-      Left            =   4320
-      Top             =   3690
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   13
-      Left            =   4320
-      Top             =   3450
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   12
-      Left            =   4320
-      Top             =   3210
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   11
-      Left            =   4320
-      Top             =   3000
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   10
-      Left            =   4320
-      Top             =   2790
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   9
-      Left            =   4320
-      Top             =   2550
-      Width           =   195
-   End
-   Begin VB.Image menoskill 
-      Height          =   105
-      Index           =   8
-      Left            =   4320
+      Left            =   8385
+      TabIndex        =   25
       Top             =   2340
-      Width           =   195
+      Width           =   105
    End
-   Begin VB.Image menoskill 
-      Height          =   105
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
+      Index           =   21
+      Left            =   8385
+      TabIndex        =   24
+      Top             =   2580
+      Width           =   105
+   End
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
+      Index           =   18
+      Left            =   8385
+      TabIndex        =   23
+      Top             =   1845
+      Width           =   105
+   End
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
+      Index           =   17
+      Left            =   8385
+      TabIndex        =   22
+      Top             =   1605
+      Width           =   105
+   End
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
+      Index           =   16
+      Left            =   8385
+      TabIndex        =   21
+      Top             =   1350
+      Width           =   105
+   End
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
+      Index           =   15
+      Left            =   8385
+      TabIndex        =   20
+      Top             =   1110
+      Width           =   105
+   End
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
+      Index           =   14
+      Left            =   6150
+      TabIndex        =   19
+      Top             =   4350
+      Width           =   105
+   End
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
+      Index           =   13
+      Left            =   6150
+      TabIndex        =   18
+      Top             =   4125
+      Width           =   105
+   End
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
+      Index           =   12
+      Left            =   6150
+      TabIndex        =   17
+      Top             =   3870
+      Width           =   105
+   End
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
+      Index           =   11
+      Left            =   6150
+      TabIndex        =   16
+      Top             =   3600
+      Width           =   105
+   End
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
+      Index           =   10
+      Left            =   6150
+      TabIndex        =   15
+      Top             =   3360
+      Width           =   105
+   End
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
+      Index           =   9
+      Left            =   6150
+      TabIndex        =   14
+      Top             =   3135
+      Width           =   105
+   End
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
+      Index           =   8
+      Left            =   6150
+      TabIndex        =   13
+      Top             =   2880
+      Width           =   105
+   End
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
       Index           =   7
-      Left            =   4320
-      Top             =   2130
-      Width           =   195
+      Left            =   6150
+      TabIndex        =   12
+      Top             =   2625
+      Width           =   105
    End
-   Begin VB.Image menoskill 
-      Height          =   105
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
       Index           =   6
-      Left            =   4320
-      Top             =   1890
-      Width           =   195
+      Left            =   6150
+      TabIndex        =   11
+      Top             =   2355
+      Width           =   105
    End
-   Begin VB.Image menoskill 
-      Height          =   105
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
       Index           =   5
-      Left            =   4320
-      Top             =   1680
-      Width           =   195
+      Left            =   6150
+      TabIndex        =   10
+      Top             =   2100
+      Width           =   105
    End
-   Begin VB.Image menoskill 
-      Height          =   105
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
       Index           =   4
-      Left            =   4320
-      Top             =   1440
-      Width           =   195
+      Left            =   6150
+      TabIndex        =   9
+      Top             =   1860
+      Width           =   105
    End
-   Begin VB.Image menoskill 
-      Height          =   105
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
       Index           =   3
-      Left            =   4320
-      Top             =   1200
-      Width           =   195
+      Left            =   6150
+      TabIndex        =   8
+      Top             =   1620
+      Width           =   105
+   End
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
+      Index           =   1
+      Left            =   6150
+      TabIndex        =   7
+      Top             =   1140
+      Width           =   105
+   End
+   Begin VB.Label Skill 
+      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
+      Index           =   2
+      Left            =   6150
+      TabIndex        =   6
+      Top             =   1410
+      Width           =   105
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   21
+      Left            =   8550
+      Top             =   2550
+      Width           =   225
    End
    Begin VB.Image menoskill 
-      Height          =   135
+      Height          =   300
+      Index           =   21
+      Left            =   8070
+      Top             =   2550
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   20
+      Left            =   8550
+      Top             =   2295
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   20
+      Left            =   8070
+      Top             =   2310
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   19
+      Left            =   8550
+      Top             =   2025
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   19
+      Left            =   8070
+      Top             =   2040
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   18
+      Left            =   8550
+      Top             =   1770
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   18
+      Left            =   8070
+      Top             =   1800
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   17
+      Left            =   8550
+      Top             =   1530
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   17
+      Left            =   8070
+      Top             =   1515
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   16
+      Left            =   8550
+      Top             =   1290
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   330
+      Index           =   16
+      Left            =   8070
+      Top             =   1290
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   15
+      Left            =   8520
+      Top             =   1050
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   15
+      Left            =   8070
+      Top             =   1050
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   22
+      Left            =   8070
+      Top             =   2790
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   22
+      Left            =   8550
+      Top             =   2790
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   23
+      Left            =   8070
+      Top             =   3060
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   23
+      Left            =   8550
+      Top             =   3030
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   24
+      Left            =   8070
+      Top             =   3330
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   24
+      Left            =   8550
+      Top             =   3300
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   25
+      Left            =   8070
+      Top             =   3540
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   25
+      Left            =   8550
+      Top             =   3540
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   26
+      Left            =   8070
+      Top             =   3810
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   26
+      Left            =   8550
+      Top             =   3780
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   27
+      Left            =   8070
+      Top             =   4050
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   27
+      Left            =   8550
+      Top             =   4050
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   14
+      Left            =   5850
+      Top             =   4320
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   13
+      Left            =   5850
+      Top             =   4080
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   12
+      Left            =   5850
+      Top             =   3825
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   11
+      Left            =   5850
+      Top             =   3570
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   10
+      Left            =   5850
+      Top             =   3300
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   9
+      Left            =   5850
+      Top             =   3090
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   8
+      Left            =   5850
+      Top             =   2835
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   7
+      Left            =   5850
+      Top             =   2580
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   6
+      Left            =   5850
+      Top             =   2310
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   5
+      Left            =   5850
+      Top             =   2055
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   4
+      Left            =   5850
+      Top             =   1830
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   3
+      Left            =   5850
+      Top             =   1590
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
       Index           =   2
-      Left            =   4320
-      Top             =   960
-      Width           =   195
+      Left            =   5850
+      Top             =   1350
+      Width           =   225
+   End
+   Begin VB.Image menoskill 
+      Height          =   300
+      Index           =   1
+      Left            =   5850
+      Top             =   1080
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   1
+      Left            =   6300
+      Top             =   1080
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   14
+      Left            =   6300
+      Top             =   4320
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   13
+      Left            =   6300
+      Top             =   4080
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   12
+      Left            =   6300
+      Top             =   3825
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   11
+      Left            =   6300
+      Top             =   3570
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   10
+      Left            =   6300
+      Top             =   3300
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   9
+      Left            =   6300
+      Top             =   3090
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   8
+      Left            =   6300
+      Top             =   2835
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   7
+      Left            =   6300
+      Top             =   2580
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   6
+      Left            =   6300
+      Top             =   2310
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   5
+      Left            =   6300
+      Top             =   2055
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   4
+      Left            =   6300
+      Top             =   1830
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   3
+      Left            =   6300
+      Top             =   1590
+      Width           =   225
+   End
+   Begin VB.Image masskill 
+      Height          =   300
+      Index           =   2
+      Left            =   6300
+      Top             =   1350
+      Width           =   225
    End
    Begin VB.Shape shpSkillsBar 
       BorderStyle     =   0  'Transparent
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   23
-      Left            =   9000
-      Top             =   4350
+      Left            =   10440
+      Top             =   4980
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1450,8 +1167,8 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   22
-      Left            =   9000
-      Top             =   3960
+      Left            =   10440
+      Top             =   4590
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1459,37 +1176,79 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   24
-      Left            =   9000
-      Top             =   4155
+      Left            =   10440
+      Top             =   4785
       Width           =   1095
    End
    Begin VB.Label lblLibres 
-      Alignment       =   2  'Center
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   195
-      Left            =   5850
+      Left            =   8100
       TabIndex        =   5
-      Top             =   3750
-      Width           =   255
+      Top             =   4560
+      Width           =   675
    End
    Begin VB.Shape shpSkillsBar 
       BorderStyle     =   0  'Transparent
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   16
-      Left            =   8400
+      Left            =   10500
+      Top             =   6390
+      Width           =   1095
+   End
+   Begin VB.Shape shpSkillsBar 
+      BorderStyle     =   0  'Transparent
+      FillStyle       =   0  'Solid
+      Height          =   120
+      Index           =   15
+      Left            =   10500
+      Top             =   6195
+      Width           =   1095
+   End
+   Begin VB.Image imgCerrar 
+      Height          =   540
+      Left            =   8940
+      Tag             =   "1"
+      Top             =   0
+      Width           =   540
+   End
+   Begin VB.Shape shpSkillsBar 
+      BorderStyle     =   0  'Transparent
+      FillStyle       =   0  'Solid
+      Height          =   120
+      Index           =   11
+      Left            =   10710
+      Top             =   3660
+      Width           =   1095
+   End
+   Begin VB.Shape shpSkillsBar 
+      BorderStyle     =   0  'Transparent
+      FillStyle       =   0  'Solid
+      Height          =   120
+      Index           =   10
+      Left            =   10470
+      Top             =   3390
+      Width           =   1095
+   End
+   Begin VB.Shape shpSkillsBar 
+      BorderStyle     =   0  'Transparent
+      FillStyle       =   0  'Solid
+      Height          =   120
+      Index           =   13
+      Left            =   10590
+      Top             =   4110
+      Width           =   1095
+   End
+   Begin VB.Shape shpSkillsBar 
+      BorderStyle     =   0  'Transparent
+      FillStyle       =   0  'Solid
+      Height          =   120
+      Index           =   14
+      Left            =   10500
       Top             =   6000
       Width           =   1095
    End
@@ -1497,61 +1256,9 @@ Begin VB.Form frmEstadisticas
       BorderStyle     =   0  'Transparent
       FillStyle       =   0  'Solid
       Height          =   120
-      Index           =   15
-      Left            =   8400
-      Top             =   5805
-      Width           =   1095
-   End
-   Begin VB.Image imgCerrar 
-      Height          =   450
-      Left            =   6120
-      Tag             =   "1"
-      Top             =   0
-      Width           =   390
-   End
-   Begin VB.Shape shpSkillsBar 
-      BorderStyle     =   0  'Transparent
-      FillStyle       =   0  'Solid
-      Height          =   120
-      Index           =   11
-      Left            =   6840
-      Top             =   3510
-      Width           =   1095
-   End
-   Begin VB.Shape shpSkillsBar 
-      BorderStyle     =   0  'Transparent
-      FillStyle       =   0  'Solid
-      Height          =   120
-      Index           =   10
-      Left            =   6600
-      Top             =   3240
-      Width           =   1095
-   End
-   Begin VB.Shape shpSkillsBar 
-      BorderStyle     =   0  'Transparent
-      FillStyle       =   0  'Solid
-      Height          =   120
-      Index           =   13
-      Left            =   6720
-      Top             =   3960
-      Width           =   1095
-   End
-   Begin VB.Shape shpSkillsBar 
-      BorderStyle     =   0  'Transparent
-      FillStyle       =   0  'Solid
-      Height          =   120
-      Index           =   14
-      Left            =   8400
-      Top             =   5610
-      Width           =   1095
-   End
-   Begin VB.Shape shpSkillsBar 
-      BorderStyle     =   0  'Transparent
-      FillStyle       =   0  'Solid
-      Height          =   120
       Index           =   21
-      Left            =   8400
-      Top             =   5415
+      Left            =   10500
+      Top             =   5805
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1559,8 +1266,8 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   18
-      Left            =   8400
-      Top             =   6195
+      Left            =   10500
+      Top             =   6585
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1568,8 +1275,8 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   19
-      Left            =   8400
-      Top             =   5025
+      Left            =   10500
+      Top             =   5415
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1577,8 +1284,8 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   20
-      Left            =   8400
-      Top             =   5220
+      Left            =   10500
+      Top             =   5610
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1586,8 +1293,8 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   9
-      Left            =   6960
-      Top             =   3120
+      Left            =   10830
+      Top             =   3270
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1595,8 +1302,8 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   12
-      Left            =   6720
-      Top             =   3720
+      Left            =   10590
+      Top             =   3870
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1604,8 +1311,8 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   17
-      Left            =   8400
-      Top             =   4830
+      Left            =   10500
+      Top             =   5220
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1613,8 +1320,8 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   8
-      Left            =   6960
-      Top             =   3240
+      Left            =   10830
+      Top             =   3390
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1622,8 +1329,8 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   7
-      Left            =   6600
-      Top             =   2280
+      Left            =   10470
+      Top             =   2430
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1631,8 +1338,8 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   6
-      Left            =   6840
-      Top             =   3360
+      Left            =   10710
+      Top             =   3510
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1640,8 +1347,8 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   5
-      Left            =   6840
-      Top             =   1320
+      Left            =   10710
+      Top             =   1470
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1649,8 +1356,8 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   4
-      Left            =   6840
-      Top             =   1320
+      Left            =   10710
+      Top             =   1470
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1658,8 +1365,8 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   3
-      Left            =   6600
-      Top             =   2040
+      Left            =   10470
+      Top             =   2190
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1667,8 +1374,8 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   2
-      Left            =   6960
-      Top             =   1920
+      Left            =   10830
+      Top             =   2070
       Width           =   1095
    End
    Begin VB.Shape shpSkillsBar 
@@ -1677,114 +1384,69 @@ Begin VB.Form frmEstadisticas
       FillStyle       =   0  'Solid
       Height          =   120
       Index           =   1
-      Left            =   6720
-      Top             =   1800
+      Left            =   10590
+      Top             =   1950
       Width           =   1095
    End
    Begin VB.Label Atri 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   165
+      Height          =   195
       Index           =   5
-      Left            =   1590
+      Left            =   2340
       TabIndex        =   4
-      Top             =   1800
-      Width           =   75
+      Top             =   2295
+      Width           =   90
    End
    Begin VB.Label Atri 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   165
+      Height          =   195
       Index           =   4
-      Left            =   1590
+      Left            =   2340
       TabIndex        =   3
-      Top             =   1530
-      Width           =   75
+      Top             =   2010
+      Width           =   90
    End
    Begin VB.Label Atri 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   165
+      Height          =   195
       Index           =   3
-      Left            =   1590
+      Left            =   2340
       TabIndex        =   2
-      Top             =   1260
-      Width           =   75
+      Top             =   1710
+      Width           =   90
    End
    Begin VB.Label Atri 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   165
+      Height          =   195
       Index           =   2
-      Left            =   1590
+      Left            =   2340
       TabIndex        =   1
-      Top             =   975
-      Width           =   75
+      Top             =   1425
+      Width           =   90
    End
    Begin VB.Label Atri 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
       Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   6.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   165
+      Height          =   195
       Index           =   1
-      Left            =   1590
+      Left            =   2340
       TabIndex        =   0
-      Top             =   720
-      Width           =   75
+      Top             =   1140
+      Width           =   90
    End
 End
 Attribute VB_Name = "frmEstadisticas"
@@ -1829,6 +1491,7 @@ Option Explicit
 Private clsFormulario As clsFormMovementManager
 
 Private cBotonCerrar As clsGraphicalButton
+Private cBotonGuardar As clsGraphicalButton
 Public LastButtonPressed As clsGraphicalButton
 
 Private Const ANCHO_BARRA As Byte = 73 'pixeles
@@ -1922,7 +1585,7 @@ Public Sub Iniciar_Labels()
         Fami(5).Caption = IIf(UserPet.Habilidad = "", "Ninguna", UserPet.Habilidad)
         
     Else
-        imgFami.Picture = General_Load_Picture_From_Resource("fmnodisp")
+        imgFami.Picture = General_Load_Picture_From_Resource("nofami.bmp", False)
         Fami(0).Visible = False
         Fami(1).Visible = False
         Fami(2).Visible = False
@@ -1969,16 +1632,27 @@ End Sub
 
 Private Sub LoadButtons()
     
+    Dim i As Byte
     Dim GrhPath As String
     
     GrhPath = Carga.Path(Interfaces)
     
     Set cBotonCerrar = New clsGraphicalButton
+    Set cBotonGuardar = New clsGraphicalButton
     Set LastButtonPressed = New clsGraphicalButton
     
-    Call cBotonCerrar.Initialize(imgCerrar, "", _
-                                    "cerrar-est-over.bmp", _
-                                    "cerrar-est-down.bmp", Me)
+    For i = 1 To 27
+        menoskill(i).MouseIcon = picMouseIcon
+        masskill(i).MouseIcon = picMouseIcon
+    Next i
+    
+    Call cBotonCerrar.Initialize(imgCerrar, "27.gif", _
+                                    "28.gif", _
+                                    "29.gif", Me)
+                                    
+    Call cBotonGuardar.Initialize(cmdGuardar, "42.gif", _
+                                    "43.gif", _
+                                    "44.gif", Me)
 
 End Sub
 
@@ -1992,8 +1666,8 @@ Public Sub MostrarAsignacion()
         Next i
         
         For i = 1 To 27
-            'masskill(i / 2).Picture = General_Load_Picture_From_Resource("195.bmp", False)
-            'menoskill(i).Picture = General_Load_Picture_From_Resource("196.bmp", False)
+            menoskill(i).Picture = General_Load_Picture_From_Resource("miniprev_n.gif", False)
+            masskill(i).Picture = General_Load_Picture_From_Resource("mininext_n.gif", False)
         Next i
         
     Else
