@@ -143,9 +143,9 @@ Private Sub LoadButtons()
     
     Set LastButtonPressed = New clsGraphicalButton
     
-    Call cBotonCerrar.Initialize(imgCerrar, "infoaceptarover.bmp", _
-                                          "infoaceptardeshab.bmp", _
-                                          "infoaceptardown.bmp", Me)
+    Call cBotonCerrar.Initialize(imgCerrar, "btnaceptar_n.gif", _
+                                          "btnaceptar_h.gif", _
+                                          "btnaceptar_d.gif", Me)
     
 End Sub
 

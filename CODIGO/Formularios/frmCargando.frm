@@ -17,7 +17,6 @@ Begin VB.Form frmCargando
    ScaleHeight     =   766
    ScaleMode       =   3  'Pixel
    ScaleWidth      =   1024
-   ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Label lblestado 
       Alignment       =   2  'Center
@@ -179,7 +178,7 @@ Public Sub ActualizarCarga(ByVal Mensaje As String, ByVal Progreso As Byte)
 '***********************************************
 
     'Call LogError(0, Mensaje, "Iniciando")
-    lblestado.Caption = Mensaje
+    lblEstado.Caption = Mensaje
     Call progresoConDelay(Progreso)
 End Sub
 

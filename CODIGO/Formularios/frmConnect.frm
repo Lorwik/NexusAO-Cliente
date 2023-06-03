@@ -43,13 +43,13 @@ Begin VB.Form frmConnect
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   2175
+      Height          =   1395
       ItemData        =   "frmConnect.frx":240050
-      Left            =   14760
+      Left            =   150
       List            =   "frmConnect.frx":240057
       TabIndex        =   2
-      Top             =   11010
-      Width           =   3675
+      Top             =   9120
+      Width           =   3255
    End
    Begin VB.TextBox txtPasswd 
       Alignment       =   2  'Center
@@ -111,8 +111,8 @@ Begin VB.Form frmConnect
    End
    Begin VB.Image imgRecargar 
       Height          =   375
-      Left            =   15000
-      Top             =   10440
+      Left            =   3480
+      Top             =   9150
       Width           =   255
    End
    Begin VB.Image imgCerrar 
@@ -258,17 +258,17 @@ Private Sub LoadButtons()
                                  "botrecuperarover.bmp", _
                                  "botrecuperardown.bmp", Me)
                                  
-    Call cBotonCerrar.Initialize(imgCerrar, "btnSalir.bmp", _
-                                 "btnSalirover.bmp", _
-                                 "btnSalirdown.bmp", Me)
+    Call cBotonCerrar.Initialize(imgCerrar, "btnsalir.bmp", _
+                                 "btnsalirover.bmp", _
+                                 "btnsalirdown.bmp", Me)
                                  
-    Call cBotonOpciones.Initialize(btnOpciones, "btnOpciones.bmp", _
-                                 "btnOpcionesover.bmp", _
-                                 "btnOpcionesdown.bmp", Me)
+    Call cBotonOpciones.Initialize(btnOpciones, "63.gif", _
+                                 "64.gif", _
+                                 "65.gif", Me)
                                  
-    Call cBotonOpciones.Initialize(btnRecordar, "btnRecordar.bmp", _
-                                 "btnRecordarover.bmp", _
-                                 "btnRecordardown.bmp", Me)
+    Call cBotonRecordar.Initialize(btnRecordar, "btnrecordar.bmp", _
+                                 "btnrecordarover.bmp", _
+                                 "btnrecordardown.bmp", Me)
                                  
                                  
 End Sub

@@ -38,16 +38,16 @@ Begin VB.Form frmGuildDetails
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   1500
-      Left            =   405
+      Height          =   1200
+      Left            =   450
       MultiLine       =   -1  'True
       TabIndex        =   0
-      Top             =   420
-      Width           =   6015
+      Top             =   660
+      Width           =   5925
    End
    Begin VB.TextBox txtCodex1 
+      Appearance      =   0  'Flat
       BackColor       =   &H00000000&
-      BorderStyle     =   0  'None
       BeginProperty Font 
          Name            =   "Tahoma"
          Size            =   8.25
@@ -58,16 +58,16 @@ Begin VB.Form frmGuildDetails
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H80000004&
-      Height          =   255
+      Height          =   285
       Index           =   0
       Left            =   480
       TabIndex        =   1
-      Top             =   3255
+      Top             =   3540
       Width           =   5835
    End
    Begin VB.TextBox txtCodex1 
+      Appearance      =   0  'Flat
       BackColor       =   &H00000000&
-      BorderStyle     =   0  'None
       BeginProperty Font 
          Name            =   "Tahoma"
          Size            =   8.25
@@ -78,16 +78,16 @@ Begin VB.Form frmGuildDetails
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H80000004&
-      Height          =   255
+      Height          =   285
       Index           =   1
       Left            =   480
       TabIndex        =   2
-      Top             =   3645
+      Top             =   3855
       Width           =   5835
    End
    Begin VB.TextBox txtCodex1 
+      Appearance      =   0  'Flat
       BackColor       =   &H00000000&
-      BorderStyle     =   0  'None
       BeginProperty Font 
          Name            =   "Tahoma"
          Size            =   8.25
@@ -98,16 +98,16 @@ Begin VB.Form frmGuildDetails
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H80000004&
-      Height          =   255
+      Height          =   285
       Index           =   2
       Left            =   480
       TabIndex        =   3
-      Top             =   4020
+      Top             =   4170
       Width           =   5835
    End
    Begin VB.TextBox txtCodex1 
+      Appearance      =   0  'Flat
       BackColor       =   &H00000000&
-      BorderStyle     =   0  'None
       BeginProperty Font 
          Name            =   "Tahoma"
          Size            =   8.25
@@ -118,16 +118,16 @@ Begin VB.Form frmGuildDetails
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H80000004&
-      Height          =   255
+      Height          =   285
       Index           =   3
       Left            =   480
       TabIndex        =   4
-      Top             =   4380
+      Top             =   4500
       Width           =   5835
    End
    Begin VB.TextBox txtCodex1 
+      Appearance      =   0  'Flat
       BackColor       =   &H00000000&
-      BorderStyle     =   0  'None
       BeginProperty Font 
          Name            =   "Tahoma"
          Size            =   8.25
@@ -138,16 +138,16 @@ Begin VB.Form frmGuildDetails
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H80000004&
-      Height          =   255
+      Height          =   285
       Index           =   4
       Left            =   480
       TabIndex        =   5
-      Top             =   4755
+      Top             =   4800
       Width           =   5835
    End
    Begin VB.TextBox txtCodex1 
+      Appearance      =   0  'Flat
       BackColor       =   &H00000000&
-      BorderStyle     =   0  'None
       BeginProperty Font 
          Name            =   "Tahoma"
          Size            =   8.25
@@ -158,7 +158,7 @@ Begin VB.Form frmGuildDetails
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H80000004&
-      Height          =   255
+      Height          =   285
       Index           =   5
       Left            =   480
       TabIndex        =   6
@@ -166,8 +166,8 @@ Begin VB.Form frmGuildDetails
       Width           =   5835
    End
    Begin VB.TextBox txtCodex1 
+      Appearance      =   0  'Flat
       BackColor       =   &H00000000&
-      BorderStyle     =   0  'None
       BeginProperty Font 
          Name            =   "Tahoma"
          Size            =   8.25
@@ -178,16 +178,16 @@ Begin VB.Form frmGuildDetails
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H80000004&
-      Height          =   255
+      Height          =   285
       Index           =   6
       Left            =   480
       TabIndex        =   7
-      Top             =   5505
+      Top             =   5460
       Width           =   5835
    End
    Begin VB.TextBox txtCodex1 
+      Appearance      =   0  'Flat
       BackColor       =   &H00000000&
-      BorderStyle     =   0  'None
       BeginProperty Font 
          Name            =   "Tahoma"
          Size            =   8.25
@@ -198,26 +198,26 @@ Begin VB.Form frmGuildDetails
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H80000004&
-      Height          =   255
+      Height          =   285
       Index           =   7
       Left            =   480
       TabIndex        =   8
-      Top             =   5865
+      Top             =   5820
       Width           =   5835
    End
    Begin VB.Image imgConfirmar 
-      Height          =   360
-      Left            =   4920
+      Height          =   390
+      Left            =   2550
       Tag             =   "1"
-      Top             =   6360
-      Width           =   1455
+      Top             =   6270
+      Width           =   1470
    End
    Begin VB.Image imgSalir 
-      Height          =   360
-      Left            =   480
+      Height          =   375
+      Left            =   6450
       Tag             =   "1"
-      Top             =   6360
-      Width           =   1455
+      Top             =   0
+      Width           =   375
    End
 End
 Attribute VB_Name = "frmGuildDetails"
@@ -274,7 +274,7 @@ Private Sub Form_Load()
     Set clsFormulario = New clsFormMovementManager
     clsFormulario.Initialize Me
     
-    Me.Picture = General_Load_Picture_From_Resource("173.bmp", False)
+    Me.Picture = General_Load_Picture_From_Resource("ventanacodex.bmp", False)
     
     Call LoadButtons
 End Sub
@@ -287,13 +287,13 @@ Private Sub LoadButtons()
     Set LastButtonPressed = New clsGraphicalButton
     
     
-    Call cBotonConfirmar.Initialize(imgConfirmar, "174.bmp", _
-                                    "175.bmp", _
-                                    "176.bmp", Me)
+    Call cBotonConfirmar.Initialize(imgConfirmar, "42.gif", _
+                                    "43.gif", _
+                                    "44.gif", Me)
 
-    Call cBotonSalir.Initialize(imgSalir, "177.bmp", _
-                                    "178.bmp", _
-                                    "179.bmp", Me)
+    Call cBotonSalir.Initialize(imgSalir, "36.gif", _
+                                    "37.gif", _
+                                    "38.gif", Me)
 End Sub
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)

@@ -38,48 +38,48 @@ Begin VB.Form frmGuildBrief
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   915
-      Left            =   315
+      Height          =   1185
+      Left            =   375
       Locked          =   -1  'True
       MultiLine       =   -1  'True
       TabIndex        =   19
-      Top             =   6090
-      Width           =   6930
+      Top             =   5820
+      Width           =   6840
    End
    Begin VB.Image imgSolicitarIngreso 
-      Height          =   375
-      Left            =   6000
+      Height          =   390
+      Left            =   5430
       Tag             =   "1"
       Top             =   7170
-      Width           =   1335
+      Width           =   1470
    End
    Begin VB.Image imgDeclararGuerra 
-      Height          =   375
-      Left            =   4560
+      Height          =   390
+      Left            =   3810
       Tag             =   "1"
       Top             =   7170
-      Width           =   1335
+      Width           =   1470
    End
    Begin VB.Image imgOfrecerAlianza 
-      Height          =   375
-      Left            =   3120
+      Height          =   390
+      Left            =   2190
       Tag             =   "1"
       Top             =   7170
-      Width           =   1335
+      Width           =   1470
    End
    Begin VB.Image imgOfrecerPaz 
-      Height          =   375
-      Left            =   1680
+      Height          =   390
+      Left            =   570
       Tag             =   "1"
       Top             =   7170
-      Width           =   1335
+      Width           =   1470
    End
    Begin VB.Image imgCerrar 
-      Height          =   360
-      Left            =   120
+      Height          =   375
+      Left            =   7260
       Tag             =   "1"
-      Top             =   7170
-      Width           =   1455
+      Top             =   0
+      Width           =   375
    End
    Begin VB.Label Codex 
       BackStyle       =   0  'Transparent
@@ -95,9 +95,9 @@ Begin VB.Form frmGuildBrief
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   0
-      Left            =   360
+      Left            =   450
       TabIndex        =   18
-      Top             =   3600
+      Top             =   3540
       Width           =   6735
    End
    Begin VB.Label Codex 
@@ -114,9 +114,9 @@ Begin VB.Form frmGuildBrief
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   1
-      Left            =   360
+      Left            =   450
       TabIndex        =   17
-      Top             =   3840
+      Top             =   3780
       Width           =   6735
    End
    Begin VB.Label Codex 
@@ -133,9 +133,9 @@ Begin VB.Form frmGuildBrief
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   2
-      Left            =   360
+      Left            =   450
       TabIndex        =   16
-      Top             =   4080
+      Top             =   4020
       Width           =   6735
    End
    Begin VB.Label Codex 
@@ -152,9 +152,9 @@ Begin VB.Form frmGuildBrief
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   3
-      Left            =   360
+      Left            =   450
       TabIndex        =   15
-      Top             =   4320
+      Top             =   4260
       Width           =   6735
    End
    Begin VB.Label Codex 
@@ -171,9 +171,9 @@ Begin VB.Form frmGuildBrief
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   4
-      Left            =   360
+      Left            =   450
       TabIndex        =   14
-      Top             =   4560
+      Top             =   4500
       Width           =   6735
    End
    Begin VB.Label Codex 
@@ -190,9 +190,9 @@ Begin VB.Form frmGuildBrief
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   5
-      Left            =   360
+      Left            =   450
       TabIndex        =   13
-      Top             =   4800
+      Top             =   4740
       Width           =   6735
    End
    Begin VB.Label Codex 
@@ -209,9 +209,9 @@ Begin VB.Form frmGuildBrief
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   6
-      Left            =   360
+      Left            =   450
       TabIndex        =   12
-      Top             =   5040
+      Top             =   4980
       Width           =   6735
    End
    Begin VB.Label Codex 
@@ -246,10 +246,10 @@ Begin VB.Form frmGuildBrief
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   255
-      Left            =   1320
+      Left            =   3240
       TabIndex        =   10
-      Top             =   540
-      Width           =   4695
+      Top             =   240
+      Width           =   3885
    End
    Begin VB.Label fundador 
       BackStyle       =   0  'Transparent
@@ -264,10 +264,10 @@ Begin VB.Form frmGuildBrief
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   255
-      Left            =   1440
+      Left            =   1740
       TabIndex        =   9
-      Top             =   870
-      Width           =   2775
+      Top             =   810
+      Width           =   2565
    End
    Begin VB.Label creacion 
       BackStyle       =   0  'Transparent
@@ -282,10 +282,10 @@ Begin VB.Form frmGuildBrief
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   255
-      Left            =   5760
+      Left            =   6330
       TabIndex        =   8
-      Top             =   840
-      Width           =   1455
+      Top             =   720
+      Width           =   765
    End
    Begin VB.Label lider 
       BackStyle       =   0  'Transparent
@@ -300,10 +300,10 @@ Begin VB.Form frmGuildBrief
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   255
-      Left            =   1080
+      Left            =   1290
       TabIndex        =   7
-      Top             =   1200
-      Width           =   3135
+      Top             =   1080
+      Width           =   2925
    End
    Begin VB.Label web 
       BackStyle       =   0  'Transparent
@@ -318,9 +318,9 @@ Begin VB.Form frmGuildBrief
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   255
-      Left            =   1440
+      Left            =   1620
       TabIndex        =   6
-      Top             =   1545
+      Top             =   1380
       Width           =   2655
    End
    Begin VB.Label Miembros 
@@ -336,10 +336,10 @@ Begin VB.Form frmGuildBrief
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   255
-      Left            =   5160
+      Left            =   5490
       TabIndex        =   5
-      Top             =   1560
-      Width           =   1935
+      Top             =   1290
+      Width           =   1635
    End
    Begin VB.Label eleccion 
       BackStyle       =   0  'Transparent
@@ -354,10 +354,10 @@ Begin VB.Form frmGuildBrief
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   255
-      Left            =   5280
+      Left            =   5580
       TabIndex        =   4
-      Top             =   1215
-      Width           =   1815
+      Top             =   1020
+      Width           =   1605
    End
    Begin VB.Label lblAlineacion 
       BackStyle       =   0  'Transparent
@@ -372,10 +372,10 @@ Begin VB.Form frmGuildBrief
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   255
-      Left            =   5280
+      Left            =   5550
       TabIndex        =   3
-      Top             =   1920
-      Width           =   1815
+      Top             =   1590
+      Width           =   1635
    End
    Begin VB.Label Enemigos 
       BackStyle       =   0  'Transparent
@@ -390,10 +390,10 @@ Begin VB.Form frmGuildBrief
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   255
-      Left            =   1920
+      Left            =   2490
       TabIndex        =   2
-      Top             =   1905
-      Width           =   2175
+      Top             =   1680
+      Width           =   1845
    End
    Begin VB.Label Aliados 
       BackStyle       =   0  'Transparent
@@ -408,10 +408,10 @@ Begin VB.Form frmGuildBrief
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   255
-      Left            =   1800
+      Left            =   2220
       TabIndex        =   1
-      Top             =   2235
-      Width           =   1575
+      Top             =   1950
+      Width           =   1905
    End
    Begin VB.Label antifaccion 
       BackStyle       =   0  'Transparent
@@ -426,10 +426,10 @@ Begin VB.Form frmGuildBrief
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   255
-      Left            =   2280
+      Left            =   3030
       TabIndex        =   0
-      Top             =   2565
-      Width           =   2415
+      Top             =   2220
+      Width           =   1845
    End
 End
 Attribute VB_Name = "frmGuildBrief"
@@ -492,7 +492,7 @@ Private Sub Form_Load()
     Set clsFormulario = New clsFormMovementManager
     clsFormulario.Initialize Me
     
-    Me.Picture = General_Load_Picture_From_Resource("147.bmp", False)
+    Me.Picture = General_Load_Picture_From_Resource("ventanadetallesclan.bmp", False)
     
     Call LoadButtons
     
@@ -509,25 +509,25 @@ Private Sub LoadButtons()
     Set LastButtonPressed = New clsGraphicalButton
     
     
-    Call cBotonGuerra.Initialize(imgDeclararGuerra, "144.bmp", _
-                                    "145.bmp", _
-                                    "146.bmp", Me)
+    Call cBotonGuerra.Initialize(imgDeclararGuerra, "54.gif", _
+                                    "55.gif", _
+                                    "56.gif", Me)
 
-    Call cBotonAlianza.Initialize(imgOfrecerAlianza, "141.bmp", _
-                                    "142.bmp", _
-                                    "143.bmp", Me)
+    Call cBotonAlianza.Initialize(imgOfrecerAlianza, "57.gif", _
+                                    "58.gif", _
+                                    "59.gif", Me)
 
-    Call cBotonPaz.Initialize(imgOfrecerPaz, "138.bmp", _
-                                    "140.bmp", _
-                                    "139.bmp", Me)
+    Call cBotonPaz.Initialize(imgOfrecerPaz, "60.gif", _
+                                    "61.gif", _
+                                    "62.gif", Me)
 
-    Call cBotonSolicitarIngreso.Initialize(imgSolicitarIngreso, "135.bmp", _
-                                    "136.bmp", _
-                                    "137.bmp", Me)
+    Call cBotonSolicitarIngreso.Initialize(imgSolicitarIngreso, "45.gif", _
+                                    "46.gif", _
+                                    "47.gif", Me)
 
-    Call cBotonCerrar.Initialize(imgCerrar, "132.bmp", _
-                                    "133.bmp", _
-                                    "134.bmp", Me)
+    Call cBotonCerrar.Initialize(imgCerrar, "36.gif", _
+                                    "37.gif", _
+                                    "38.gif", Me)
 
 
     If Not EsLeader Then

@@ -12,7 +12,6 @@ Begin VB.Form frmCantidad
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   Picture         =   "frmCantidad.frx":0000
    ScaleHeight     =   89
    ScaleMode       =   3  'Pixel
    ScaleWidth      =   244

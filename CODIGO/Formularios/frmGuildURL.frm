@@ -2,7 +2,7 @@ VERSION 5.00
 Begin VB.Form frmGuildURL 
    BorderStyle     =   0  'None
    Caption         =   "Oficial Web Site"
-   ClientHeight    =   1425
+   ClientHeight    =   1725
    ClientLeft      =   0
    ClientTop       =   -75
    ClientWidth     =   6225
@@ -20,17 +20,17 @@ Begin VB.Form frmGuildURL
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   95
+   ScaleHeight     =   115
    ScaleMode       =   3  'Pixel
    ScaleWidth      =   415
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
    Begin VB.TextBox txtUrl 
+      Appearance      =   0  'Flat
       BackColor       =   &H00000000&
-      BorderStyle     =   0  'None
       BeginProperty Font 
          Name            =   "Tahoma"
-         Size            =   8.25
+         Size            =   9
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -38,18 +38,18 @@ Begin VB.Form frmGuildURL
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   225
-      Left            =   210
+      Height          =   285
+      Left            =   420
       TabIndex        =   0
       Top             =   600
-      Width           =   5805
+      Width           =   5355
    End
    Begin VB.Image imgAceptar 
-      Height          =   255
-      Left            =   165
+      Height          =   540
+      Left            =   1350
       Tag             =   "1"
-      Top             =   960
-      Width           =   5880
+      Top             =   1020
+      Width           =   3255
    End
 End
 Attribute VB_Name = "frmGuildURL"
@@ -102,14 +102,7 @@ Private Sub Form_Load()
     Set clsFormulario = New clsFormMovementManager
     clsFormulario.Initialize Me
     
-    ' TODO: Traducir los textos de las imagenes via labels en visual basic, para que en el futuro si se quiere se pueda traducir a mas idiomas
-    ' No ando con mas ganas/tiempo para hacer eso asi que se traducen las imagenes asi tenemos el juego en ingles.
-    ' Tambien usar los controles uAObuttons para los botones, usar de ejemplo frmCambiaMotd.frm
-    If Language = "spanish" Then
-      Me.Picture = General_Load_Picture_From_Resource("193.bmp", False)
-    Else
-      Me.Picture = General_Load_Picture_From_Resource("194.bmp", False)
-    End If
+    Me.Picture = General_Load_Picture_From_Resource("ventanaurlclan.bmp", False)
     
     Call LoadButtons
 End Sub
@@ -121,9 +114,9 @@ Private Sub LoadButtons()
     Set LastButtonPressed = New clsGraphicalButton
     
     
-    Call cBotonAceptar.Initialize(imgAceptar, "32.bmp", _
-                                    "31.bmp", _
-                                    "30.bmp", Me)
+    Call cBotonAceptar.Initialize(imgAceptar, "btnaceptar_n.gif", _
+                                    "btnaceptar_h.gif", _
+                                    "btnaceptar_d.gif", Me)
 
 End Sub
 

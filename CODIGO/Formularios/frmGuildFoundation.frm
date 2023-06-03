@@ -20,14 +20,15 @@ Begin VB.Form frmGuildFoundation
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
+   Picture         =   "frmGuildFoundation.frx":0000
    ScaleHeight     =   256
    ScaleMode       =   3  'Pixel
    ScaleWidth      =   270
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
    Begin VB.TextBox txtClanName 
+      Appearance      =   0  'Flat
       BackColor       =   &H00000000&
-      BorderStyle     =   0  'None
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Left            =   360
@@ -36,8 +37,8 @@ Begin VB.Form frmGuildFoundation
       Width           =   3345
    End
    Begin VB.TextBox txtWeb 
+      Appearance      =   0  'Flat
       BackColor       =   &H00000000&
-      BorderStyle     =   0  'None
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Left            =   360
@@ -46,18 +47,18 @@ Begin VB.Form frmGuildFoundation
       Width           =   3345
    End
    Begin VB.Image imgSiguiente 
-      Height          =   375
-      Left            =   2400
+      Height          =   390
+      Left            =   2280
       Tag             =   "1"
       Top             =   3240
-      Width           =   1335
+      Width           =   1470
    End
    Begin VB.Image imgCancelar 
-      Height          =   375
-      Left            =   240
+      Height          =   390
+      Left            =   300
       Tag             =   "1"
       Top             =   3240
-      Width           =   1335
+      Width           =   1470
    End
 End
 Attribute VB_Name = "frmGuildFoundation"
@@ -117,11 +118,7 @@ Private Sub Form_Load()
     ' TODO: Traducir los textos de las imagenes via labels en visual basic, para que en el futuro si se quiere se pueda traducir a mas idiomas
     ' No ando con mas ganas/tiempo para hacer eso asi que se traducen las imagenes asi tenemos el juego en ingles.
     ' Tambien usar los controles uAObuttons para los botones, usar de ejemplo frmCambiaMotd.frm
-    If Language = "spanish" Then
-      Me.Picture = General_Load_Picture_From_Resource("89.bmp", False)
-    Else
-      Me.Picture = General_Load_Picture_From_Resource("90.bmp", False)
-    End If
+    Me.Picture = General_Load_Picture_From_Resource("89.bmp", False)
         
     Call LoadButtons
     
@@ -145,13 +142,13 @@ Private Sub LoadButtons()
     Set LastButtonPressed = New clsGraphicalButton
     
     
-    Call cBotonSiguiente.Initialize(imgSiguiente, "86.bmp", _
-                                    "87.bmp", _
-                                    "88.bmp", Me)
+    Call cBotonSiguiente.Initialize(imgSiguiente, "66.gif", _
+                                    "67.gif", _
+                                    "68.gif", Me)
 
-    Call cBotonCancelar.Initialize(imgCancelar, "85.bmp", _
-                                    "84.bmp", _
-                                    "83.bmp", Me)
+    Call cBotonCancelar.Initialize(imgCancelar, "69.gif", _
+                                    "70.gif", _
+                                    "71.gif", Me)
 
 End Sub
 
