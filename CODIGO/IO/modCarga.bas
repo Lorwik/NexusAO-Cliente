@@ -35,6 +35,7 @@ Public Type tSetupMods
 
     ' VIDEO
     byMemory    As Integer
+    ProyectileEngine As Boolean
     PartyMembers As Boolean
     ParticleEngine As Boolean
     LimiteFPS As Boolean
@@ -246,6 +247,7 @@ Public Sub LeerConfiguracion()
         ' VIDEO
         .byMemory = Lector.GetValue("VIDEO", "DynamicMemory")
         .bNoRes = CBool(Lector.GetValue("VIDEO", "DisableResolutionChange"))
+        .ProyectileEngine = CBool(Lector.GetValue("VIDEO", "ProjectileEngine"))
         .PartyMembers = CBool(Lector.GetValue("VIDEO", "PartyMembers"))
         .ParticleEngine = CBool(Lector.GetValue("VIDEO", "ParticleEngine"))
         .OverrideVertexProcess = CByte(Lector.GetValue("VIDEO", "VertexProcessingOverride"))
@@ -271,6 +273,7 @@ Public Sub LeerConfiguracion()
 
         Debug.Print "byMemory: " & .byMemory
         Debug.Print "bNoRes: " & .bNoRes
+        Debug.Print "ProyectileEngine: " & .ProyectileEngine
         Debug.Print "PartyMembers: " & .PartyMembers
         Debug.Print "ParticleEngine: " & .ParticleEngine
         Debug.Print "LimitarFPS: " & .LimiteFPS
@@ -304,6 +307,7 @@ Public Sub GuardarConfiguracion()
         ' VIDEO
         Call Lector.ChangeValue("VIDEO", "DynamicMemory", .byMemory)
         Call Lector.ChangeValue("VIDEO", "DisableResolutionChange", IIf(.bNoRes, "1", "0"))
+        Call Lector.ChangeValue("VIDEO", "ProjectileEngine", IIf(.ProyectileEngine, "1", "0"))
         Call Lector.ChangeValue("VIDEO", "PartyMembers", IIf(.PartyMembers, "1", "0"))
         Call Lector.ChangeValue("VIDEO", "ParticleEngine", IIf(.ParticleEngine, "1", "0"))
         Call Lector.ChangeValue("VIDEO", "LimitarFPS", IIf(.LimiteFPS, "1", "0"))
@@ -1259,11 +1263,11 @@ Public Sub CargarMinimapa()
     Dim buffer()    As Byte
     Dim i           As Long
     
-    InfoHead = File_Find(Carga.Path(ePath.recursos) & "\Scripts" & Formato, LCase$("minimap.ind"))
+    InfoHead = File_Find(Carga.Path(ePath.recursos) & "\Scripts" & Formato, LCase$("minimap.bin"))
     
     If InfoHead.lngFileSize <> 0 Then
     
-        Extract_File_Memory Scripts, LCase$("minimap.ind"), buffer()
+        Extract_File_Memory Scripts, LCase$("minimap.bin"), buffer()
         
         Set fileBuff = New clsByteBuffer
         

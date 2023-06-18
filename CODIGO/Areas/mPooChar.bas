@@ -140,7 +140,7 @@ Public Function Char_Techo() As Boolean
                 
                 Select Case MapData(.Pos.X, .Pos.Y).Trigger
                     
-                    Case eTrigger.BAJOTECHO, eTrigger.CASA, eTrigger.ZONASEGURA
+                    Case eTrigger.BAJOTECHO, eTrigger.CASA, eTrigger.ZONASEGURA, eTrigger.TRAMPA_1, eTrigger.TRAMPA_2, eTrigger.SALASANGRE
                         Char_Techo = True
                 End Select
 

@@ -363,7 +363,6 @@ Begin VB.Form frmMain
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
-      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       MousePointer    =   1
@@ -379,6 +378,26 @@ Begin VB.Form frmMain
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+   End
+   Begin VB.Label lblGema 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "0"
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   6.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   165
+      Left            =   13620
+      TabIndex        =   28
+      Top             =   6750
+      Width           =   870
    End
    Begin VB.Image cmdPVP 
       Height          =   480
@@ -608,7 +627,7 @@ Begin VB.Form frmMain
    End
    Begin VB.Image cmdDropGold 
       Height          =   300
-      Left            =   12210
+      Left            =   11730
       MousePointer    =   99  'Custom
       Top             =   6690
       Width           =   300
@@ -773,10 +792,10 @@ Begin VB.Form frmMain
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   165
-      Left            =   12840
+      Left            =   12360
       TabIndex        =   0
       Top             =   6750
-      Width           =   1440
+      Width           =   960
    End
    Begin VB.Image InvEqu 
       Height          =   4770
@@ -983,7 +1002,7 @@ Private Sub imgSolapaInv_Click()
     InvEqu.Picture = General_Load_Picture_From_Resource("18.bmp", True)
             
     ' Activo controles de inventario
-    picInv.Visible = True
+    PicInv.Visible = True
     cmdDropGold.Visible = True
     GldLbl.Visible = True
         
@@ -1013,7 +1032,7 @@ Private Sub imgSolapaHech_Click()
     cmdMoverHechiDown.Visible = True
             
     ' Desactivo controles de inventario
-    picInv.Visible = False
+    PicInv.Visible = False
     cmdDropGold.Visible = False
     GldLbl.Visible = False
             
@@ -1509,8 +1528,8 @@ Private Sub SendTxt_KeyUp(KeyCode As Integer, Shift As Integer)
         KeyCode = 0
         SendTxt.Visible = False
         
-        If picInv.Visible Then
-            picInv.SetFocus
+        If PicInv.Visible Then
+            PicInv.SetFocus
         ElseIf hlst.Visible Then
             hlst.SetFocus
         End If
@@ -1909,8 +1928,8 @@ Private Sub RecTxt_Change()
            (Not frmCantidad.Visible) And _
            (Not MirandoParty) Then
 
-        If picInv.Visible Then
-            picInv.SetFocus
+        If PicInv.Visible Then
+            PicInv.SetFocus
                         
         ElseIf hlst.Visible Then
             hlst.SetFocus
@@ -1923,8 +1942,8 @@ End Sub
 
 Private Sub RecTxt_KeyDown(KeyCode As Integer, Shift As Integer)
 
-    If picInv.Visible Then
-        picInv.SetFocus
+    If PicInv.Visible Then
+        PicInv.SetFocus
     Else
         hlst.SetFocus
     End If

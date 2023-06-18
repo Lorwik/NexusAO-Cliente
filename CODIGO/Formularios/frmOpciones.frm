@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin VB.Form frmOpciones 
    BorderStyle     =   3  'Fixed Dialog
-   ClientHeight    =   6600
+   ClientHeight    =   6060
    ClientLeft      =   45
    ClientTop       =   45
    ClientWidth     =   6885
@@ -20,7 +20,7 @@ Begin VB.Form frmOpciones
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   440
+   ScaleHeight     =   404
    ScaleMode       =   3  'Pixel
    ScaleWidth      =   459
    ShowInTaskbar   =   0   'False
@@ -28,9 +28,9 @@ Begin VB.Form frmOpciones
    Begin VB.Frame FraInformación 
       Caption         =   "Información"
       Height          =   1335
-      Left            =   120
+      Left            =   60
       TabIndex        =   23
-      Top             =   4290
+      Top             =   3720
       Width           =   3255
       Begin VB.CommandButton cmdNecesitásAyuda 
          Caption         =   "¿Necesitás &ayuda?"
@@ -54,17 +54,17 @@ Begin VB.Form frmOpciones
    Begin VB.CommandButton imgSalir 
       Caption         =   "&Cerrar"
       Height          =   360
-      Left            =   120
+      Left            =   150
       TabIndex        =   22
-      Top             =   6090
+      Top             =   5520
       Width           =   3255
    End
    Begin VB.CommandButton imgConfigTeclas 
       Caption         =   "Configuración de controles"
       Height          =   360
-      Left            =   120
+      Left            =   150
       TabIndex        =   21
-      Top             =   5700
+      Top             =   5130
       Width           =   3255
    End
    Begin VB.Frame FraVideo 
@@ -86,7 +86,7 @@ Begin VB.Form frmOpciones
    Begin VB.Frame Frame2 
       Caption         =   "Audio"
       ForeColor       =   &H00000000&
-      Height          =   4065
+      Height          =   3525
       Left            =   120
       TabIndex        =   9
       Top             =   120
@@ -99,7 +99,7 @@ Begin VB.Form frmOpciones
          Min             =   -4000
          SmallChange     =   2
          TabIndex        =   16
-         Top             =   3570
+         Top             =   3000
          Width           =   2895
       End
       Begin VB.HScrollBar scrVolume 
@@ -110,7 +110,7 @@ Begin VB.Form frmOpciones
          Min             =   -4000
          SmallChange     =   2
          TabIndex        =   15
-         Top             =   2400
+         Top             =   1830
          Width           =   2895
       End
       Begin VB.CheckBox chkop 
@@ -146,7 +146,7 @@ Begin VB.Form frmOpciones
          Index           =   3
          Left            =   120
          TabIndex        =   11
-         Top             =   1530
+         Top             =   1260
          Width           =   2985
       End
       Begin VB.HScrollBar scrAmbient 
@@ -157,7 +157,7 @@ Begin VB.Form frmOpciones
          Min             =   -4000
          SmallChange     =   2
          TabIndex        =   10
-         Top             =   3000
+         Top             =   2430
          Width           =   2895
       End
       Begin VB.Label Label2 
@@ -168,7 +168,7 @@ Begin VB.Form frmOpciones
          Index           =   2
          Left            =   150
          TabIndex        =   19
-         Top             =   3360
+         Top             =   2790
          Width           =   2865
       End
       Begin VB.Label Label2 
@@ -179,7 +179,7 @@ Begin VB.Form frmOpciones
          Index           =   1
          Left            =   150
          TabIndex        =   18
-         Top             =   2790
+         Top             =   2220
          Width           =   2865
       End
       Begin VB.Label Label2 
@@ -190,13 +190,13 @@ Begin VB.Form frmOpciones
          Index           =   0
          Left            =   120
          TabIndex        =   17
-         Top             =   2190
+         Top             =   1620
          Width           =   2835
       End
    End
    Begin VB.Frame FraSkins 
       Caption         =   "General"
-      Height          =   3375
+      Height          =   2925
       Left            =   3480
       TabIndex        =   0
       Top             =   3090
@@ -208,7 +208,7 @@ Begin VB.Form frmOpciones
          Left            =   240
          Style           =   2  'Dropdown List
          TabIndex        =   7
-         Top             =   2640
+         Top             =   2430
          Width           =   1815
       End
       Begin VB.ComboBox cmdSkinsComboBox 
@@ -230,7 +230,7 @@ Begin VB.Form frmOpciones
          List            =   "frmOpciones.frx":0160
          Style           =   2  'Dropdown List
          TabIndex        =   4
-         Top             =   1920
+         Top             =   1800
          Width           =   1815
       End
       Begin VB.ComboBox ComMouseGeneral 
@@ -240,7 +240,7 @@ Begin VB.Form frmOpciones
          List            =   "frmOpciones.frx":0186
          Style           =   2  'Dropdown List
          TabIndex        =   2
-         Top             =   1200
+         Top             =   1140
          Width           =   1815
       End
       Begin VB.Label lblLenguaje 
@@ -250,7 +250,7 @@ Begin VB.Form frmOpciones
          Height          =   195
          Left            =   240
          TabIndex        =   8
-         Top             =   2400
+         Top             =   2190
          Width           =   660
       End
       Begin VB.Label lblSkinDe 
@@ -270,7 +270,7 @@ Begin VB.Form frmOpciones
          Height          =   195
          Left            =   240
          TabIndex        =   3
-         Top             =   1680
+         Top             =   1560
          Width           =   1920
       End
       Begin VB.Label lblMouseGrafico 
@@ -280,7 +280,7 @@ Begin VB.Form frmOpciones
          Height          =   195
          Left            =   240
          TabIndex        =   1
-         Top             =   960
+         Top             =   930
          Width           =   1620
       End
    End
@@ -459,7 +459,7 @@ Private Sub cmdLenguajesComboBox_Click()
 '10/11/2019: Recox - Seteamos el lenguaje del juego
 '***************************************************
     Call WriteVar(Carga.Path(Init) & CLIENT_FILE, "Parameters", "Language", cmdLenguajesComboBox.Text)
-    MsgBox ("Debe reiniciar el juego aplicar el cambio de idioma. Idioma Seleccionado: " & cmdLenguajesComboBox.Text)
+    'MsgBox ("Debe reiniciar el juego aplicar el cambio de idioma. Idioma Seleccionado: " & cmdLenguajesComboBox.Text)
 End Sub
 
 Private Sub cmdSkinsComboBox_Click()
@@ -469,7 +469,7 @@ Private Sub cmdSkinsComboBox_Click()
 '08/11/2019: Recox - Seteamos el skin
 '***************************************************
     Call WriteVar(Carga.Path(Init) & CLIENT_FILE, "Parameters", "SkinSelected", cmdSkinsComboBox.Text)
-    MsgBox ("Debe reiniciar el juego aplicar el cambio de skin. Skin Seleccionado: " & cmdSkinsComboBox.Text)
+    'MsgBox ("Debe reiniciar el juego aplicar el cambio de skin. Skin Seleccionado: " & cmdSkinsComboBox.Text)
 End Sub
 
 Private Sub ComMouseGeneral_Click()
@@ -479,7 +479,7 @@ Private Sub ComMouseGeneral_Click()
 '26/04/2020: Lorwik - Seteamos el mouse general
 '***************************************************
     Call WriteVar(Carga.Path(Init) & CLIENT_FILE, "Parameters", "MOUSEGENERAL", ComMouseGeneral.ListIndex)
-    MsgBox ("Debe reiniciar el juego aplicar el cambio de mouse. Mouse Seleccionado: " & ComMouseGeneral.Text)
+    'MsgBox ("Debe reiniciar el juego aplicar el cambio de mouse. Mouse Seleccionado: " & ComMouseGeneral.Text)
 End Sub
 
 Private Sub ComMouseHechizos_Click()
@@ -489,7 +489,7 @@ Private Sub ComMouseHechizos_Click()
 '26/04/2020: Lorwik - Seteamos el mouse baston
 '***************************************************
     Call WriteVar(Carga.Path(Init) & CLIENT_FILE, "Parameters", "MOUSEBASTON", ComMouseHechizos.ListIndex)
-    MsgBox ("Debe reiniciar el juego aplicar el cambio de mouse. Mouse Seleccionado: " & ComMouseHechizos.Text)
+    'MsgBox ("Debe reiniciar el juego aplicar el cambio de mouse. Mouse Seleccionado: " & ComMouseHechizos.Text)
 End Sub
 
 Private Sub imgConfigTeclas_Click()
@@ -526,7 +526,7 @@ End Sub
 
 Private Sub LoadSkinsInComboBox()
     Dim sFileName As String
-    sFileName = Dir$(Carga.Path(skins), vbArchive)
+    sFileName = Dir$(Carga.Path(Skins), vbArchive)
     
     Do While sFileName > vbNullString
         Call cmdSkinsComboBox.AddItem(sFileName)
@@ -534,7 +534,7 @@ Private Sub LoadSkinsInComboBox()
     Loop
     
     'Boorramos los 2 primeros items por que son . y ..
-    Call cmdSkinsComboBox.RemoveItem(0)
+'    Call cmdSkinsComboBox.RemoveItem(0)
 '    Call cmdSkinsComboBox.RemoveItem(0)
 End Sub
 
@@ -576,11 +576,20 @@ Private Sub LoadUserConfig()
     
     'Ambiente
     If ClientSetup.bAmbient = 1 Then
-        chkop(3).value = vbChecked
+        chkop(2).value = vbChecked
         scrAmbient.value = ClientSetup.AmbientVol
     Else
-        chkop(3).value = vbUnchecked
+        chkop(2).value = vbUnchecked
         scrAmbient.value = ClientSetup.AmbientVol
+    End If
+    
+    'Sonido invertido
+    If ClientSetup.Invertido Then
+        chkop(3).value = vbChecked
+        Sound.InvertirSonido = True
+    Else
+        chkop(3).value = Unchecked
+        Sound.InvertirSonido = False
     End If
     
     If ClientSetup.LimiteFPS = True Then
@@ -588,5 +597,9 @@ Private Sub LoadUserConfig()
     Else
         'chkop(5).value = vbUnchecked
     End If
-
+    
+    'Mouses
+    ComMouseGeneral.ListIndex = ClientSetup.MouseGeneral
+    ComMouseHechizos.ListIndex = ClientSetup.MouseBaston
+    
 End Sub

@@ -254,7 +254,7 @@ Public Tips() As String * 255
 
 'Direcciones
 Public Enum E_Heading
-    nada = 0
+    Nada = 0
     NORTH = 1
     EAST = 2
     SOUTH = 3
@@ -576,8 +576,8 @@ Public Enum eGMCommands
     SearchNpc               '/BUSCAR
     SearchObj               '/BUSCAR
     LimpiarMundo            '/LIMPIARMUNDO
-    EditCredits             '/EDITCREDITS
-    ConsultarCredits        '/CONSULTARCREDITS
+    EditGems                '/EDITGEMAS
+    ConsultarGems        '/CONSULTARGEMAS
     SilenciarGlobal         '/SILENCIARGLOBAL
     ToggleGlobal            '/TOGGLEGLOBAL
 End Enum
@@ -747,6 +747,7 @@ Public UserMinAGU As Byte
 Public UserMaxHAM As Byte
 Public UserMinHAM As Byte
 Public UserGLD As Long
+Public UserGemas As Long
 Public UserLvl As Integer
 Public UserPort As Integer
 Public UserEstado As Byte '0 = Vivo & 1 = Muerto
@@ -880,13 +881,17 @@ End Enum
 ' @param ZONAPELEA al pelear en este trigger no se caen las cosas y no cambia el estado de ciuda o crimi
 '
 Public Enum eTrigger
-    nada = 0
+    Nada = 0
     BAJOTECHO = 1
     CASA = 2
     POSINVALIDA = 3
     ZONASEGURA = 4
     ANTIPIQUETE = 5
     ZONAPELEA = 6
+    INVOCACIONES = 7
+    TRAMPA_1 = 8
+    TRAMPA_2 = 9
+    SALASANGRE = 10
 End Enum
 
 'Server stuff

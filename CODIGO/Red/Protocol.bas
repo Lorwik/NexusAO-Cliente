@@ -165,6 +165,7 @@ Private Enum ServerPacketID
     renderMsg
     DeletedChar
     EquitandoToggle
+    Proyectil
     SeeInProcess
     ShowProcess
     CharParticle
@@ -908,6 +909,9 @@ On Error Resume Next
         Case ServerPacketID.EquitandoToggle         'Para las monturas
             Call HandleEquitandoToggle
             
+        Case ServerPacketID.Proyectil
+            Call HandleProyectil
+            
         Case ServerPacketID.SeeInProcess
             Call HandleSeeInProcess
             
@@ -1607,7 +1611,7 @@ Private Sub HandleBankInit()
     Set InvBanco(1) = New clsGraphicalInventory
     
     Call InvBanco(0).Initialize(DirectD3D8, frmBancoObj.PicBancoInv, MAX_BANCOINVENTORY_SLOTS)
-    Call InvBanco(1).Initialize(DirectD3D8, frmBancoObj.picInv, MAX_INVENTORY_SLOTS, , , , , , , , True)
+    Call InvBanco(1).Initialize(DirectD3D8, frmBancoObj.PicInv, MAX_INVENTORY_SLOTS, , , , , , , , True)
     
     For i = 1 To MAX_INVENTORY_SLOTS
         With Inventario
@@ -3092,7 +3096,7 @@ Private Sub HandleUpdateUserStats()
 'Last Modification: 05/17/06
 '
 '***************************************************
-    If incomingData.Length < 26 Then
+    If incomingData.Length < 30 Then
         Err.Raise incomingData.NotEnoughDataErrCode
         Exit Sub
     End If
@@ -3107,11 +3111,13 @@ Private Sub HandleUpdateUserStats()
     UserMaxSTA = incomingData.ReadInteger()
     UserMinSTA = incomingData.ReadInteger()
     UserGLD = incomingData.ReadLong()
+    UserGemas = incomingData.ReadLong()
     UserLvl = incomingData.ReadByte()
     UserPasarNivel = incomingData.ReadLong()
     UserExp = incomingData.ReadLong()
     
     frmMain.GldLbl.Caption = UserGLD
+    frmMain.lblGema.Caption = UserGemas
     frmMain.lblLvl.Caption = UserLvl
     
     'Stats
@@ -10753,38 +10759,38 @@ Public Sub WriteLimpiarMundo()
 End Sub
 
 ''
-' Writes the "EditCredits" message to the outgoing data buffer.
+' Writes the "EditGems" message to the outgoing data buffer.
 '
 
-Public Sub WriteEditCredits(ByVal UserName As String, ByVal CantCredits As Long, ByVal Opcion As Byte)
+Public Sub WriteEditGems(ByVal UserName As String, ByVal CantGems As Long, ByVal Opcion As Byte)
 '***************************************************
 'Author: Lorwik
 'Last Modification: 30/04/2020
-'Edita las Creditos del usuario
+'Edita las Gemas del usuario
 '***************************************************
     
     With outgoingData
         Call .WriteByte(ClientPacketID.GMCommands)
-        Call .WriteByte(eGMCommands.EditCredits)
+        Call .WriteByte(eGMCommands.EditGems)
         Call .WriteASCIIString(UserName)
-        Call .WriteLong(CantCredits)
+        Call .WriteLong(CantGems)
         Call .WriteByte(Opcion)
     End With
 End Sub
 
 ''
-' Writes the "ConsultarCredits" message to the outgoing data buffer.
+' Writes the "ConsultarGems" message to the outgoing data buffer.
 '
-Public Sub WriteConsultarCredits(ByVal UserName As String)
+Public Sub WriteConsultarGems(ByVal UserName As String)
 '***************************************************
 'Author: Lorwik
 'Last Modification: 30/04/2020
-'Consulta las Creditos del usuario
+'Consulta las Gemas del usuario
 '***************************************************
     
     With outgoingData
         Call .WriteByte(ClientPacketID.GMCommands)
-        Call .WriteByte(eGMCommands.ConsultarCredits)
+        Call .WriteByte(eGMCommands.ConsultarGems)
         Call .WriteASCIIString(UserName)
     End With
     
@@ -10803,6 +10809,31 @@ Private Sub HandleEquitandoToggle()
     Call incomingData.ReadByte
     
     UserEquitando = Not UserEquitando
+End Sub
+
+Private Sub HandleProyectil()
+'**************************
+'Autor: Lorwik
+'Fecha: 18/05/2020
+'**************************
+
+    If incomingData.Length < 7 Then
+        Err.Raise incomingData.NotEnoughDataErrCode
+        Exit Sub
+    End If
+    
+    'Remove packet id
+    Call incomingData.ReadByte
+        
+    Dim CharSending      As Integer
+    Dim CharRecieved     As Integer
+    Dim GrhIndex         As Long
+        
+    CharSending = incomingData.ReadInteger()
+    CharRecieved = incomingData.ReadInteger()
+    GrhIndex = incomingData.ReadLong()
+    
+    Engine_Projectile_Create CharSending, CharRecieved, GrhIndex, 0
 End Sub
 
 Public Sub WriteGlobalChat(ByVal Message As String)

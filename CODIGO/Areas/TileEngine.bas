@@ -461,25 +461,35 @@ Sub RenderScreen(ByVal tilex As Integer, _
     On Error GoTo RenderScreen_Err
     
     Dim Y                As Long     'Keeps track of where on map we are
+
     Dim X                As Long     'Keeps track of where on map we are
     
     Dim screenminY       As Integer  'Start Y pos on current screen
+
     Dim screenmaxY       As Integer  'End Y pos on current screen
+
     Dim screenminX       As Integer  'Start X pos on current screen
+
     Dim screenmaxX       As Integer  'End X pos on current screen
     
     Dim minY             As Integer  'Start Y pos on current map
+
     Dim maxY             As Integer  'End Y pos on current map
+
     Dim minX             As Integer  'Start X pos on current map
+
     Dim maxX             As Integer  'End X pos on current map
     
     Dim ScreenX          As Integer  'Keeps track of where to place tile on screen
+
     Dim ScreenY          As Integer  'Keeps track of where to place tile on screen
     
     Dim minXOffset       As Integer
+
     Dim minYOffset       As Integer
     
     Dim PixelOffsetXTemp As Integer 'For centering grhs
+
     Dim PixelOffsetYTemp As Integer 'For centering grhs
     
     Dim ElapsedTime      As Single
@@ -501,6 +511,7 @@ Sub RenderScreen(ByVal tilex As Integer, _
     If minY < XMinMapSize Then
         minYOffset = YMinMapSize - minY
         minY = YMinMapSize
+
     End If
     
     If maxY > YMaxMapSize Then maxY = YMaxMapSize
@@ -508,6 +519,7 @@ Sub RenderScreen(ByVal tilex As Integer, _
     If minX < XMinMapSize Then
         minXOffset = XMinMapSize - minX
         minX = XMinMapSize
+
     End If
     
     If maxX > XMaxMapSize Then maxX = XMaxMapSize
@@ -518,6 +530,7 @@ Sub RenderScreen(ByVal tilex As Integer, _
     Else
         screenminY = 1
         ScreenY = 1
+
     End If
     
     If screenmaxY < YMaxMapSize Then screenmaxY = screenmaxY + 1
@@ -527,6 +540,7 @@ Sub RenderScreen(ByVal tilex As Integer, _
     Else
         screenminX = 1
         ScreenX = 1
+
     End If
     
     If screenmaxX < XMaxMapSize Then screenmaxX = screenmaxX + 1
@@ -544,13 +558,17 @@ Sub RenderScreen(ByVal tilex As Integer, _
             'Layer 1 **********************************
             If MapData(X, Y).Graphic(1).GrhIndex <> 0 Then
                 Call Draw_Grh(MapData(X, Y).Graphic(1), PixelOffsetXTemp, PixelOffsetYTemp, 1, MapData(X, Y).Engine_Light(), 1)
+
             End If
+
             '******************************************
 
             'Layer 2 **********************************
             If MapData(X, Y).Graphic(2).GrhIndex <> 0 Then
                 Call Draw_Grh(MapData(X, Y).Graphic(2), PixelOffsetXTemp, PixelOffsetYTemp, 1, MapData(X, Y).Engine_Light(), 1)
+
             End If
+
             '******************************************
             
             ScreenX = ScreenX + 1
@@ -560,14 +578,16 @@ Sub RenderScreen(ByVal tilex As Integer, _
         ScreenX = ScreenX - X + screenminX
         ScreenY = ScreenY + 1
     Next
-   
     
     '<----- Layer Obj, Char, 3 ----->
     ScreenY = minYOffset - TileBufferSize
+
     For Y = minY To maxY
         
         ScreenX = minXOffset - TileBufferSize
+
         For X = minX To maxX
+
             If Map_InBounds(X, Y) Then
             
                 PixelOffsetXTemp = ScreenX * TilePixelWidth + PixelOffsetX
@@ -576,8 +596,7 @@ Sub RenderScreen(ByVal tilex As Integer, _
                 With MapData(X, Y)
                 
                     'Object Layer **********************************
-                    If .ObjGrh.GrhIndex <> 0 Then _
-                        Call Draw_Grh(.ObjGrh, PixelOffsetXTemp, PixelOffsetYTemp, 1, .Engine_Light(), 1)
+                    If .ObjGrh.GrhIndex <> 0 Then Call Draw_Grh(.ObjGrh, PixelOffsetXTemp, PixelOffsetYTemp, 1, .Engine_Light(), 1)
                     '***********************************************
 
                     'Char layer********************************
@@ -585,8 +604,7 @@ Sub RenderScreen(ByVal tilex As Integer, _
                     '*************************************************
 
                     'Layer 3 *****************************************
-                    If .Graphic(3).GrhIndex <> 0 Then _
-                        Call Draw_Grh(.Graphic(3), PixelOffsetXTemp, PixelOffsetYTemp, 1, .Engine_Light(), 1)
+                    If .Graphic(3).GrhIndex <> 0 Then Call Draw_Grh(.Graphic(3), PixelOffsetXTemp, PixelOffsetYTemp, 1, .Engine_Light(), 1)
                     '************************************************
                     
                     'Particulas
@@ -595,15 +613,17 @@ Sub RenderScreen(ByVal tilex As Integer, _
                         'Solo las renderizamos si estan cerca del area de vision.
                         If EstaDentroDelArea(X, Y) Then
                             Call mDx8_Particulas.Particle_Group_Render(.Particle_Group_Index, PixelOffsetXTemp + 16, PixelOffsetYTemp + 16)
+
                         End If
                         
                     End If
 
                     If Not .FxIndex = 0 Then
                         Call Draw_Grh(.fX, PixelOffsetXTemp + FxData(MapData(X, Y).FxIndex).OffsetX, PixelOffsetYTemp + FxData(.FxIndex).OffsetY, 1, .Engine_Light(), 1, True)
+
                         If .fX.Started = 0 Then .FxIndex = 0
+
                     End If
-                    
                     
                 End With
                 
@@ -638,6 +658,7 @@ Sub RenderScreen(ByVal tilex As Integer, _
                         Call Draw_Grh(MapData(X, Y).Graphic(4), PixelOffsetXTemp, PixelOffsetYTemp, 1, MapData(X, Y).Engine_Light(), 1)
                     Else
                         Call Draw_Grh(MapData(X, Y).Graphic(4), PixelOffsetXTemp, PixelOffsetYTemp, 1, temp_rgb(), 1)
+
                     End If
                     
                 End If
@@ -654,6 +675,81 @@ Sub RenderScreen(ByVal tilex As Integer, _
     If ClientSetup.ParticleEngine Then
         'Weather Update & Render - Aca se renderiza la lluvia, nieve, etc.
         Call mDx8_Clima.Engine_Weather_Update
+
+    End If
+    
+    If ClientSetup.ProyectileEngine Then
+                            
+        If LastProjectile > 0 Then
+
+            Dim j As Long ' Long siempre en los bucles es mucho mas rapido
+                                
+            For j = 1 To LastProjectile
+
+                If ProjectileList(j).Grh.GrhIndex Then
+
+                    Dim angle As Single
+                    
+                    'Update the position
+                    angle = DegreeToRadian * Engine_GetAngle(ProjectileList(j).X, ProjectileList(j).Y, ProjectileList(j).tX, ProjectileList(j).tY)
+                    ProjectileList(j).X = ProjectileList(j).X + (Sin(angle) * ElapsedTime * 0.8)
+                    ProjectileList(j).Y = ProjectileList(j).Y - (Cos(angle) * ElapsedTime * 0.8)
+                    
+                    'Update the rotation
+                    If ProjectileList(j).RotateSpeed > 0 Then
+                        ProjectileList(j).Rotate = ProjectileList(j).Rotate + (ProjectileList(j).RotateSpeed * ElapsedTime * 0.01)
+
+                        Do While ProjectileList(j).Rotate > 360
+                            ProjectileList(j).Rotate = ProjectileList(j).Rotate - 360
+                        Loop
+
+                    End If
+    
+                    'Draw if within range
+                    X = ((-minX - 1) * 32) + ProjectileList(j).X + PixelOffsetX + ((10 - TileBufferSize) * 32) - 288 + ProjectileList(j).OffsetX
+                    Y = ((-minY - 1) * 32) + ProjectileList(j).Y + PixelOffsetY + ((10 - TileBufferSize) * 32) - 288 + ProjectileList(j).OffsetY
+
+                    If Y >= -32 Then
+                        If Y <= (ScreenHeight + 32) Then
+                            If X >= -32 Then
+                                If X <= (ScreenWidth + 32) Then
+                                    If ProjectileList(j).Rotate = 0 Then
+                                        Call Draw_Grh(ProjectileList(j).Grh, X, Y, 0, MapData(50, 50).Engine_Light(), 0, True, ProjectileList(j).Rotate + 128)
+                                    Else
+                                        Call Draw_Grh(ProjectileList(j).Grh, X, Y, 0, MapData(50, 50).Engine_Light(), 0, True, ProjectileList(j).Rotate + 128)
+
+                                    End If
+
+                                End If
+
+                            End If
+
+                        End If
+
+                    End If
+                    
+                End If
+
+            Next j
+            
+            'Check if it is close enough to the target to remove
+            For j = 1 To LastProjectile
+
+                If ProjectileList(j).Grh.GrhIndex Then
+                    If Abs(ProjectileList(j).X - ProjectileList(j).tX) < 20 Then
+                        If Abs(ProjectileList(j).Y - ProjectileList(j).tY) < 20 Then
+                            Call Engine_Projectile_Erase(j)
+
+                        End If
+
+                    End If
+
+                End If
+
+            Next j
+            
+        End If
+
     End If
     
     If colorRender <> 240 Then
@@ -672,6 +768,7 @@ RenderScreen_Err:
 
     If Err.number Then
         Call LogError(Err.number, Err.Description, "Mod_TileEngine.RenderScreen")
+
     End If
     
 End Sub

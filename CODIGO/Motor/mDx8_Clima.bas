@@ -128,7 +128,10 @@ Public Sub Actualizar_Estado(ByVal Estado As Byte)
     
         bTecho = (MapData(UserPos.X, UserPos.Y).Trigger = eTrigger.BAJOTECHO Or _
             MapData(UserPos.X, UserPos.Y).Trigger = eTrigger.CASA Or _
-            MapData(UserPos.X, UserPos.Y).Trigger = eTrigger.ZONASEGURA)
+            MapData(UserPos.X, UserPos.Y).Trigger = eTrigger.ZONASEGURA Or _
+            MapData(UserPos.X, UserPos.Y).Trigger = eTrigger.TRAMPA_1 Or _
+            MapData(UserPos.X, UserPos.Y).Trigger = eTrigger.TRAMPA_2 Or _
+            MapData(UserPos.X, UserPos.Y).Trigger = eTrigger.SALASANGRE)
         
     End If
 

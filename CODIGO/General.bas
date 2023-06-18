@@ -370,18 +370,20 @@ Private Sub CheckKeys()
 End Sub
 
 Sub SwitchMap(ByVal Map As Integer)
-'**********************************************************************************
-'Autor: Lorwik
-'Fecha: 11/06/2020
-'Descripción: Intentamos descomprimir el mapa, si existe lo cargamos
-'**********************************************************************************
+    '**********************************************************************************
+    'Autor: Lorwik
+    'Fecha: 11/06/2020
+    'Descripción: Intentamos descomprimir el mapa, si existe lo cargamos
+    '**********************************************************************************
     
-    Dim bytArr()        As Byte
-    Dim InfoHead        As INFOHEADER
-    Dim Musica          As String
+    Dim bytArr() As Byte
+
+    Dim InfoHead As INFOHEADER
+
+    Dim Musica   As String
 
     'Reseteamos el Array antes que nada, o por la velocidad que pueda tardar en comprobar si el mapa existe, se pueden _
-    producir errores.
+     producir errores.
     ReDim MapData(XMinMapSize To XMaxMapSize, YMinMapSize To YMaxMapSize)
     
     InfoHead = File_Find(Carga.Path(ePath.recursos) & "\Mapas" & Formato, LCase$("Mapa" & Map & ".csm"))
@@ -415,23 +417,25 @@ Sub SwitchMap(ByVal Map As Integer)
         Call Init_Ambient(Map)
         Call InfoMapa
         
-        'Si estamos jugando y no en el conectar...
-        If frmMain.Visible Then
-            'Resetear el mensaje en render con el nombre del mapa.
-            renderText = mapInfo.name
-            renderFont = 2
-            colorRender = 240
+        'Resetear el mensaje en render con el nombre del mapa.
+        renderText = mapInfo.name
+        renderFont = 2
+        colorRender = 240
 
-            If Val(Sound.MusicActual) <> Val(mapInfo.Music) Then
-                'Reproducimos la música del mapa
+        If Val(Sound.MusicActual) <> Val(mapInfo.Music) Then
+
+            'Reproducimos la música del mapa
+            If ClientSetup.bMusic <> CONST_DESHABILITADA Then
                 If ClientSetup.bMusic <> CONST_DESHABILITADA Then
-                    If ClientSetup.bMusic <> CONST_DESHABILITADA Then
-                        Sound.NextMusic = Val(mapInfo.Music)
-                        Sound.Fading = 500
-                    End If
+                    Sound.NextMusic = Val(mapInfo.Music)
+                    Sound.Fading = 500
+
                 End If
+
             End If
+
         End If
+
     Else
     
         'no encontramos el mapa en el hd
@@ -632,7 +636,7 @@ Private Sub LoadInitialConfig()
     'Si es 0 cargamos el por defecto
     If ClientSetup.MouseBaston > 0 Then
         ' Mouse Pointer and Mouse Icon (Loaded before opening any form with buttons in it)
-        Set picMouseIcon = LoadPicture(Carga.Path(recursos) & "\MouseIcons\Baston" & ClientSetup.MouseBaston & ".ico")
+        Set picMouseIcon = LoadPicture(Carga.Path(recursos) & "MouseIcons\Baston" & ClientSetup.MouseBaston & ".ico")
     End If
 
     ' Mouse Icon to use in the rest of the game this one is animated
@@ -643,7 +647,7 @@ Private Sub LoadInitialConfig()
     
     'Si es 0 cargamos el por defecto
     If ClientSetup.MouseGeneral > 0 Then
-        CursorAniDir = Carga.Path(recursos) & "\MouseIcons\MAIN.cur"
+        CursorAniDir = Carga.Path(recursos) & "\MouseIcons\MAIN.ico"
         hSwapCursor = SetClassLong(frmMain.hWnd, GLC_HCURSOR, LoadCursorFromFile(CursorAniDir))
         hSwapCursor = SetClassLong(frmMain.MainViewPic.hWnd, GLC_HCURSOR, LoadCursorFromFile(CursorAniDir))
         hSwapCursor = SetClassLong(frmMain.hlst.hWnd, GLC_HCURSOR, LoadCursorFromFile(CursorAniDir))

@@ -113,6 +113,7 @@ Form=CODIGO\Formularios\frmGoliath.frm
 Reference=*\G{6B263850-900B-11D0-9484-00A0C91110ED}#1.0#0#C:\Windows\SysWow64\msstdfmt.dll#Microsoft Data Formatting Object Library
 Form=CODIGO\Formularios\frmFamiliar.frm
 Form=CODIGO\Formularios\frmBatalla.frm
+Module=mDx8_Projectile; CODIGO\Motor\mDx8_Projectile.bas
 IconForm="frmMain"
 Startup="Sub Main"
 HelpFile=""

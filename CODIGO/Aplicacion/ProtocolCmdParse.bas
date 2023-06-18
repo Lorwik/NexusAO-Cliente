@@ -1581,48 +1581,48 @@ Public Sub ParseUserCommand(ByVal RawCommand As String)
             Case "/MIMETIZAR"
                 Call WriteImitate
                 
-            Case "/EDITCREDITS"
+            Case "/EDITGEMAS"
                 If notNullArguments And CantidadArgumentos >= 2 Then
                     If Not IsNumeric(ArgumentosAll(0)) And IsNumeric(ArgumentosAll(1)) Then
-                        Call WriteEditCredits(ArgumentosAll(0), ArgumentosAll(1), 0)
+                        Call WriteEditGems(ArgumentosAll(0), ArgumentosAll(1), 0)
                     Else
-                        Call ShowConsoleMsg(JsonLanguage.item("MENSAJE_VALOR_INCORRECTO").item("TEXTO") & " /EDITCREDITS NICKNAME CANTIDAD.")
+                        Call ShowConsoleMsg(JsonLanguage.item("MENSAJE_VALOR_INCORRECTO").item("TEXTO") & " /EDITGEMAS NICKNAME CANTIDAD.")
                     End If
                 Else
                     'Avisar que falta el parametro
-                    Call ShowConsoleMsg(JsonLanguage.item("MENSAJE_FALTAN_PARAMETROS").item("TEXTO") & " /EDITCREDITS NICKNAME CANTIDAD.")
+                    Call ShowConsoleMsg(JsonLanguage.item("MENSAJE_FALTAN_PARAMETROS").item("TEXTO") & " /EDITGEMAS NICKNAME CANTIDAD.")
                 End If
                 
-            Case "/SUMARCREDITS"
+            Case "/SUMARGEMAS"
                 If notNullArguments And CantidadArgumentos >= 2 Then
                     If Not IsNumeric(ArgumentosAll(0)) And IsNumeric(ArgumentosAll(1)) Then
-                        Call WriteEditCredits(ArgumentosAll(0), ArgumentosAll(1), 1)
+                        Call WriteEditGems(ArgumentosAll(0), ArgumentosAll(1), 1)
                     Else
-                        Call ShowConsoleMsg(JsonLanguage.item("MENSAJE_VALOR_INCORRECTO").item("TEXTO") & " /EDITCREDITS NICKNAME CANTIDAD.")
+                        Call ShowConsoleMsg(JsonLanguage.item("MENSAJE_VALOR_INCORRECTO").item("TEXTO") & " /EDITGEMAS NICKNAME CANTIDAD.")
                     End If
                 Else
                     'Avisar que falta el parametro
-                    Call ShowConsoleMsg(JsonLanguage.item("MENSAJE_FALTAN_PARAMETROS").item("TEXTO") & " /EDITCREDITS NICKNAME CANTIDAD.")
+                    Call ShowConsoleMsg(JsonLanguage.item("MENSAJE_FALTAN_PARAMETROS").item("TEXTO") & " /EDITGEMAS NICKNAME CANTIDAD.")
                 End If
                 
-            Case "/RESTARCREDITS"
+            Case "/RESTARGEMAS"
                 If notNullArguments And CantidadArgumentos >= 2 Then
                     If Not IsNumeric(ArgumentosAll(0)) And IsNumeric(ArgumentosAll(1)) Then
-                        Call WriteEditCredits(ArgumentosAll(0), ArgumentosAll(1), 2)
+                        Call WriteEditGems(ArgumentosAll(0), ArgumentosAll(1), 2)
                     Else
-                        Call ShowConsoleMsg(JsonLanguage.item("MENSAJE_VALOR_INCORRECTO").item("TEXTO") & " /EDITCREDITS NICKNAME CANTIDAD.")
+                        Call ShowConsoleMsg(JsonLanguage.item("MENSAJE_VALOR_INCORRECTO").item("TEXTO") & " /EDITGEMAS NICKNAME CANTIDAD.")
                     End If
                 Else
                     'Avisar que falta el parametro
-                    Call ShowConsoleMsg(JsonLanguage.item("MENSAJE_FALTAN_PARAMETROS").item("TEXTO") & " /EDITCREDITS NICKNAME CANTIDAD.")
+                    Call ShowConsoleMsg(JsonLanguage.item("MENSAJE_FALTAN_PARAMETROS").item("TEXTO") & " /EDITGEMAS NICKNAME CANTIDAD.")
                 End If
                 
-            Case "/CONSULTARCREDITS"
+            Case "/CONSULTARGEMAS"
                 If notNullArguments Then
-                    Call WriteConsultarCredits(ArgumentosRaw)
+                    Call WriteConsultarGems(ArgumentosRaw)
                 Else
                     'Avisar que falta el parametro
-                    Call ShowConsoleMsg(JsonLanguage.item("MENSAJE_FALTAN_PARAMETROS").item("TEXTO") & " /CONSULTARCREDITS NICKNAME.")
+                    Call ShowConsoleMsg(JsonLanguage.item("MENSAJE_FALTAN_PARAMETROS").item("TEXTO") & " /CONSULTARGEMAS NICKNAME.")
                 End If
                 
             Case "/LOOKPROCESS"

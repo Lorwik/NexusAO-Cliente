@@ -63,7 +63,7 @@ Public Sub Map_DestroyObject(ByVal X As Byte, ByVal Y As Byte)
 
             With MapData(X, Y)
                   '.objgrh.GrhIndex = 0
-                  .OBJInfo.objindex = 0
+                  .OBJInfo.OBJIndex = 0
                   .OBJInfo.Amount = 0
 
                   Call GrhUninitialize(.ObjGrh)
@@ -267,7 +267,8 @@ Function Map_LegalPos(ByVal X As Integer, ByVal Y As Integer) As Boolean
       End If
 
       'Esta el usuario Equitando bajo un techo?
-      If UserEquitando And MapData(X, Y).Trigger = eTrigger.BAJOTECHO Or UserEquitando And MapData(X, Y).Trigger = eTrigger.CASA Or UserEquitando And MapData(X, Y).Trigger = eTrigger.ZONASEGURA Then
+      If UserEquitando And MapData(X, Y).Trigger = eTrigger.BAJOTECHO Or UserEquitando And MapData(X, Y).Trigger = eTrigger.CASA Or UserEquitando And MapData(X, Y).Trigger = eTrigger.ZONASEGURA _
+        Or UserEquitando And MapData(X, Y).Trigger = eTrigger.TRAMPA_1 Or UserEquitando And MapData(X, Y).Trigger = eTrigger.TRAMPA_2 Or UserEquitando And MapData(X, Y).Trigger = eTrigger.SALASANGRE Then
             Exit Function
       End If
       
