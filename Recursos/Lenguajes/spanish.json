@@ -798,8 +798,7 @@
         "CAZADOR": "Cazador",
         "NIGROMANTE": "Nigromante",
         "MERCENARIO": "Mercenario",
-		"GLADIADOR": "Gladiador",
-		"TRABAJADOR": "Trabajador"
+		"GLADIADOR": "Gladiador"
     },
     "ATRIBUTOS": {
         "FUERZA": "Fuerza",

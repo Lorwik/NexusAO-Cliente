@@ -12,6 +12,7 @@ Begin VB.Form frmTrabajos
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
+   Picture         =   "frmTrabajos.frx":0000
    ScaleHeight     =   359
    ScaleMode       =   3  'Pixel
    ScaleWidth      =   445
@@ -32,12 +33,12 @@ Begin VB.Form frmTrabajos
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   255
-      Left            =   4800
+      Left            =   5100
       MaxLength       =   5
       TabIndex        =   9
       Text            =   "1"
-      Top             =   4725
-      Width           =   1050
+      Top             =   4710
+      Width           =   990
    End
    Begin VB.PictureBox picItem 
       AutoRedraw      =   -1  'True
@@ -46,7 +47,7 @@ Begin VB.Form frmTrabajos
       FillStyle       =   0  'Solid
       Height          =   480
       Index           =   4
-      Left            =   930
+      Left            =   1140
       ScaleHeight     =   480
       ScaleWidth      =   480
       TabIndex        =   8
@@ -75,7 +76,7 @@ Begin VB.Form frmTrabajos
       FillStyle       =   0  'Solid
       Height          =   480
       Index           =   3
-      Left            =   930
+      Left            =   1140
       ScaleHeight     =   480
       ScaleWidth      =   480
       TabIndex        =   6
@@ -104,7 +105,7 @@ Begin VB.Form frmTrabajos
       FillStyle       =   0  'Solid
       Height          =   480
       Index           =   2
-      Left            =   930
+      Left            =   1140
       ScaleHeight     =   480
       ScaleWidth      =   480
       TabIndex        =   4
@@ -128,11 +129,11 @@ Begin VB.Form frmTrabajos
    End
    Begin VB.VScrollBar Scroll 
       Height          =   3135
-      Left            =   420
+      Left            =   630
       TabIndex        =   0
       Top             =   1410
       Visible         =   0   'False
-      Width           =   255
+      Width           =   225
    End
    Begin VB.PictureBox picMaterial0 
       AutoRedraw      =   -1  'True
@@ -155,7 +156,7 @@ Begin VB.Form frmTrabajos
       FillStyle       =   0  'Solid
       Height          =   480
       Index           =   1
-      Left            =   930
+      Left            =   1140
       ScaleHeight     =   480
       ScaleWidth      =   480
       TabIndex        =   1
@@ -190,7 +191,7 @@ Begin VB.Form frmTrabajos
    Begin VB.Image imgMarcoItem 
       Height          =   780
       Index           =   4
-      Left            =   780
+      Left            =   990
       Top             =   3780
       Visible         =   0   'False
       Width           =   780
@@ -198,7 +199,7 @@ Begin VB.Form frmTrabajos
    Begin VB.Image imgMarcoItem 
       Height          =   780
       Index           =   3
-      Left            =   780
+      Left            =   990
       Top             =   2985
       Visible         =   0   'False
       Width           =   780
@@ -206,40 +207,40 @@ Begin VB.Form frmTrabajos
    Begin VB.Image imgMarcoItem 
       Height          =   780
       Index           =   2
-      Left            =   780
+      Left            =   990
       Top             =   2190
       Visible         =   0   'False
       Width           =   780
    End
    Begin VB.Image imgCerrar 
-      Height          =   360
-      Left            =   780
-      Top             =   4620
-      Width           =   1455
+      Height          =   540
+      Left            =   6030
+      Top             =   90
+      Width           =   540
    End
    Begin VB.Image picConstruir2 
       Height          =   420
-      Left            =   4320
-      Top             =   3180
+      Left            =   4290
+      Top             =   3240
       Width           =   1710
    End
    Begin VB.Image picConstruir1 
       Height          =   420
-      Left            =   4320
-      Top             =   2370
+      Left            =   4290
+      Top             =   2430
       Width           =   1710
    End
    Begin VB.Image picConstruir3 
       Height          =   420
-      Left            =   4320
-      Top             =   3960
+      Left            =   4290
+      Top             =   4020
       Visible         =   0   'False
       Width           =   1710
    End
    Begin VB.Image imgMarcoItem 
       Height          =   780
       Index           =   1
-      Left            =   780
+      Left            =   990
       Top             =   1395
       Visible         =   0   'False
       Width           =   780
@@ -254,8 +255,8 @@ Begin VB.Form frmTrabajos
    End
    Begin VB.Image picConstruir0 
       Height          =   420
-      Left            =   4320
-      Top             =   1560
+      Left            =   4290
+      Top             =   1620
       Width           =   1710
    End
 End
@@ -318,10 +319,10 @@ Private Sub CargarImagenes()
     ' TODO: Traducir los textos de las imagenes via labels en visual basic, para que en el futuro si se quiere se pueda traducir a mas idiomas
     ' No ando con mas ganas/tiempo para hacer eso asi que se traducen las imagenes asi tenemos el juego en ingles.
     ' Tambien usar los controles uAObuttons para los botones, usar de ejemplo frmCambiaMotd.frm
-    Me.Picture = General_Load_Picture_From_Resource("7.gif", False)
+    Me.Picture = General_Load_Picture_From_Resource("ventanatrabajos.bmp", False)
     
-    Set picRecuadroItem = General_Load_Picture_From_Resource("14.gif", False)
-    Set picRecuadroLingotes = General_Load_Picture_From_Resource("15.gif", False)
+    Set picRecuadroItem = General_Load_Picture_From_Resource("72.gif", False)
+    Set picRecuadroLingotes = General_Load_Picture_From_Resource("73.gif", False)
     
     For Index = 1 To MAX_LIST_ITEMS
         imgMarcoItem(Index).Picture = picRecuadroItem
@@ -336,11 +337,11 @@ Private Sub CargarImagenes()
 
     Set LastButtonPressed = New clsGraphicalButton
     
-    Call cPicCerrar.Initialize(imgCerrar, ImgPath & "8.gif", ImgPath & "9.gif", ImgPath & "10.gif", Me)
-    Call cPicConstruir(0).Initialize(picConstruir0, ImgPath & "11.gif", ImgPath & "12.gif", ImgPath & "13.gif", Me)
-    Call cPicConstruir(1).Initialize(picConstruir1, ImgPath & "11.gif", ImgPath & "12.gif", ImgPath & "13.gif", Me)
-    Call cPicConstruir(2).Initialize(picConstruir2, ImgPath & "11.gif", ImgPath & "12.gif", ImgPath & "13.gif", Me)
-    Call cPicConstruir(3).Initialize(picConstruir3, ImgPath & "11.gif", ImgPath & "12.gif", ImgPath & "13.gif", Me)
+    Call cPicCerrar.Initialize(imgCerrar, ImgPath & "27.gif", ImgPath & "28.gif", ImgPath & "29.gif", Me)
+    Call cPicConstruir(0).Initialize(picConstruir0, ImgPath & "74.gif", ImgPath & "75.gif", ImgPath & "76.gif", Me)
+    Call cPicConstruir(1).Initialize(picConstruir1, ImgPath & "74.gif", ImgPath & "75.gif", ImgPath & "76.gif", Me)
+    Call cPicConstruir(2).Initialize(picConstruir2, ImgPath & "74.gif", ImgPath & "75.gif", ImgPath & "76.gif", Me)
+    Call cPicConstruir(3).Initialize(picConstruir3, ImgPath & "74.gif", ImgPath & "75.gif", ImgPath & "76.gif", Me)
     
     Me.MouseIcon = picMouseIcon
     
@@ -352,7 +353,7 @@ Private Sub ConstruirItem(ByVal Index As Integer)
     If Scroll.Visible = True Then ItemIndex = Scroll.value
     ItemIndex = ItemIndex + Index
     
-    Call WriteCraftearItem(ObjetoTrabajo(ItemIndex).OBJIndex, txtCantItems.Text)
+    Call WriteCraftearItem(ObjetoTrabajo(ItemIndex).objindex, txtCantItems.Text)
             
     Unload Me
 
@@ -437,6 +438,20 @@ Public Sub HideExtraControls(ByVal NumItems As Integer, Optional ByVal Upgrading
         Scroll.Visible = False
     End If
     
+End Sub
+
+Private Sub RenderItem(ByRef Pic As PictureBox, ByVal GrhIndex As Long)
+On Error Resume Next
+
+    Dim DR As RECT
+    
+    With DR
+        .Right = 32
+        .Bottom = 32
+    End With
+
+    Call DrawGrhtoHdc(Pic, GrhIndex, DR)
+
 End Sub
 
 Public Sub RenderList(ByVal Inicio As Integer)

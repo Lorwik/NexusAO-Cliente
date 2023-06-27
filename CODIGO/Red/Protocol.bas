@@ -100,11 +100,7 @@ Private Enum ServerPacketID
     ChangeBankSlot               ' SBO
     ChangeSpellSlot              ' SHS
     Atributes                    ' ATR
-    BlacksmithWeapons            ' LAH
-    BlacksmithArmors             ' LAR
-    CarpenterObjects             ' OBR
-    AlquimiaObjects
-    SastreObjects
+    InitTrabajo
     RestOK                       ' DOK
     ErrorMsg                     ' ERR
     Blind                        ' CEGU
@@ -161,6 +157,7 @@ Private Enum ServerPacketID
     FXtoMap
     EnviarPJUserAccount
     SearchList
+    CreateDamage
     UserInEvent
     renderMsg
     DeletedChar
@@ -176,6 +173,7 @@ Private Enum ServerPacketID
     AbrirGoliath
     OfrecerFamiliar
     EnviarRanking
+    ConfirmarInstruccion
 End Enum
 
 Private Enum ClientPacketID
@@ -218,7 +216,6 @@ Private Enum ClientPacketID
     SpellInfo                       'INFS
     EquipItem                       'EQUI
     ChangeHeading                   'CHEA
-    ModifySkills                    'SKSE
     Train                           'ENTR
     CommerceBuy                     'COMP
     BankExtractItem                 'RETI
@@ -324,6 +321,7 @@ Private Enum ClientPacketID
     AdoptarFamiliar
     SolicitarRank
     BatallaPVP
+    RespuestaInstruccion
 End Enum
 
 Public Enum FontTypeNames
@@ -674,10 +672,7 @@ On Error Resume Next
         
         Case ServerPacketID.UserCommerceEnd         ' FINCOMUSUOK
             Call HandleUserCommerceEnd
-            
-        Case ServerPacketID.ShowTrabajoForm
-            Call HandleShowTrabajoForm
-            
+           
         Case ServerPacketID.UserOfferConfirm
             Call HandleUserOfferConfirm
         
@@ -717,20 +712,8 @@ On Error Resume Next
         Case ServerPacketID.Atributes               ' ATR
             Call HandleAtributes
             
-        Case ServerPacketID.BlacksmithWeapons       ' LAH
-            Call HandleBlacksmithWeapons
-        
-        Case ServerPacketID.BlacksmithArmors        ' LAR
-            Call HandleBlacksmithArmors
-        
-        Case ServerPacketID.CarpenterObjects        ' OBR
-            Call HandleCarpenterObjects
-            
-        Case ServerPacketID.SastreObjects
-            Call HandleSastreObjects
-            
-        Case ServerPacketID.AlquimiaObjects
-            Call HandleAlquimiaObjects
+        Case ServerPacketID.InitTrabajo
+            Call HandleInitTrabajo
 
         Case ServerPacketID.RestOK                  ' DOK
             Call HandleRestOK
@@ -842,6 +825,9 @@ On Error Resume Next
             
         Case ServerPacketID.EnviarRanking
             Call HandleEnviarRanking
+            
+        Case ServerPacketID.ConfirmarInstruccion
+            Call HandleConfirmarInstruccion
 
         '*******************
         'GM messages
@@ -896,6 +882,9 @@ On Error Resume Next
             
         Case ServerPacketID.CancelOfferItem
             Call HandleCancelOfferItem
+    
+        Case ServerPacketID.CreateDamage            ' CDMG
+            Call HandleCreateDamage
     
         Case ServerPacketID.UserInEvent
             Call HandleUserInEvent
@@ -1583,7 +1572,7 @@ Private Sub HandleCommerceInit()
                 Call InvComNpc.SetItem(i, .OBJIndex, _
                 .Amount, 0, .GrhIndex, _
                 .OBJType, .MaxHIT, .MinHIT, .MaxDef, .MinDef, _
-                .valor, .name, .NoUsa)
+                .valor, .Name, .NoUsa)
             End With
         End If
     Next i
@@ -1627,7 +1616,7 @@ Private Sub HandleBankInit()
             Call InvBanco(0).SetItem(i, .OBJIndex, _
                 .Amount, .Equipped, .GrhIndex, _
                 .OBJType, .MaxHIT, .MinHIT, .MaxDef, .MinDef, _
-                .valor, .name, .NoUsa)
+                .valor, .Name, .NoUsa)
         End With
     Next i
     
@@ -1714,43 +1703,6 @@ Private Sub HandleUserCommerceEnd()
     'Destroy the form and reset the state
     Unload frmComerciarUsu
     Comerciando = False
-End Sub
-
-''
-' Handles the ShowTrabajoForm message.
-
-Private Sub HandleShowTrabajoForm()
-'***************************************************
-'Autor: Juan Martín Sotuyo Dodero (Maraxus)
-'Last Modification: 05/17/06
-'
-'***************************************************
-    
-    Dim Trabajo As Byte
-
-    'Remove packet ID
-    Call incomingData.ReadByte
-    Trabajo = incomingData.ReadByte
-    
-    Select Case Trabajo
-    
-        Case eSkill.Herreria 'Herrero
-            frmHerrero.Show , frmMain
-            MirandoTrabajo = eSkill.Herreria
-            
-        Case eSkill.Carpinteria 'Carpintero
-            frmCarp.Show , frmMain
-            MirandoTrabajo = eSkill.Carpinteria
-        
-        Case eSkill.Sastreria 'Sastre
-            frmSastre.Show , frmMain
-            MirandoTrabajo = eSkill.Sastreria
-        
-        Case eSkill.Alquimia 'Alquimia
-            frmDruida.Show , frmMain
-            MirandoTrabajo = eSkill.Alquimia
-    
-    End Select
 End Sub
 
 ''
@@ -2108,13 +2060,13 @@ Private Sub WriteChatOverHeadInConsole(ByVal CharIndex As Integer, ByVal ChatTex
             
         If Pos = 0 Then Pos = LenB(.Nombre) + 2
         
-        Dim name As String
-        name = Left$(.Nombre, Pos - 2)
+        Dim Name As String
+        Name = Left$(.Nombre, Pos - 2)
        
         'Si el npc tiene nombre lo escribimos en la consola
         ChatText = Trim$(ChatText)
         If LenB(.Nombre) <> 0 And LenB(ChatText) > 0 Then
-            Call AddtoRichTextBox(frmMain.RecTxt, name & "> ", NameRed, NameGreen, NameBlue, True, False, True, rtfLeft)
+            Call AddtoRichTextBox(frmMain.RecTxt, Name & "> ", NameRed, NameGreen, NameBlue, True, False, True, rtfLeft)
             Call AddtoRichTextBox(frmMain.RecTxt, ChatText, Red, Green, Blue, True, False, False, rtfLeft)
         End If
 
@@ -3178,7 +3130,7 @@ On Error GoTo errhandler
     
     Dim slot As Byte
     Dim OBJIndex As Integer
-    Dim name As String
+    Dim Name As String
     Dim Amount As Integer
     Dim Equipped As Boolean
     Dim GrhIndex As Long
@@ -3192,7 +3144,7 @@ On Error GoTo errhandler
     
     slot = buffer.ReadByte()
     OBJIndex = buffer.ReadInteger()
-    name = buffer.ReadASCIIString()
+    Name = buffer.ReadASCIIString()
     Amount = buffer.ReadInteger()
     Equipped = buffer.ReadBoolean()
     GrhIndex = buffer.ReadLong()
@@ -3228,14 +3180,14 @@ On Error GoTo errhandler
         End Select
     End If
     
-    Call Inventario.SetItem(slot, OBJIndex, Amount, Equipped, GrhIndex, OBJType, MaxHIT, MinHIT, MaxDef, MinDef, value, name, NoUsa)
+    Call Inventario.SetItem(slot, OBJIndex, Amount, Equipped, GrhIndex, OBJType, MaxHIT, MinHIT, MaxDef, MinDef, value, Name, NoUsa)
 
     If frmComerciar.Visible Then
-        Call InvComUsu.SetItem(slot, OBJIndex, Amount, Equipped, GrhIndex, OBJType, MaxHIT, MinHIT, MaxDef, MinDef, value, name, NoUsa)
+        Call InvComUsu.SetItem(slot, OBJIndex, Amount, Equipped, GrhIndex, OBJType, MaxHIT, MinHIT, MaxDef, MinDef, value, Name, NoUsa)
     End If
 
     If frmBancoObj.Visible Then
-        Call InvBanco(1).SetItem(slot, OBJIndex, Amount, Equipped, GrhIndex, OBJType, MaxHIT, MinHIT, MaxDef, MinDef, value, name, NoUsa)
+        Call InvBanco(1).SetItem(slot, OBJIndex, Amount, Equipped, GrhIndex, OBJType, MaxHIT, MinHIT, MaxDef, MinDef, value, Name, NoUsa)
         frmBancoObj.NoPuedeMover = False
     End If
     
@@ -3334,7 +3286,7 @@ On Error GoTo errhandler
     
     With UserBancoInventory(slot)
         .OBJIndex = buffer.ReadInteger()
-        .name = buffer.ReadASCIIString()
+        .Name = buffer.ReadASCIIString()
         .Amount = buffer.ReadInteger()
         .GrhIndex = buffer.ReadLong()
         .OBJType = buffer.ReadByte()
@@ -3346,7 +3298,7 @@ On Error GoTo errhandler
         .NoUsa = buffer.ReadBoolean()
         
         If frmBancoObj.Visible Then
-            Call InvBanco(0).SetItem(slot, .OBJIndex, .Amount, 0, .GrhIndex, .OBJType, .MaxHIT, .MinHIT, .MaxDef, .MinDef, .valor, .name, .NoUsa)
+            Call InvBanco(0).SetItem(slot, .OBJIndex, .Amount, 0, .GrhIndex, .OBJType, .MaxHIT, .MinHIT, .MaxDef, .MinDef, .valor, .Name, .NoUsa)
         End If
     End With
     
@@ -3441,22 +3393,23 @@ Private Sub HandleAtributes()
 End Sub
 
 ''
-' Handles the BlacksmithWeapons message.
+' Handles the InitTrabajo message.
 
-Private Sub HandleBlacksmithWeapons()
+Private Sub HandleInitTrabajo()
 '***************************************************
-'Autor: Juan Martín Sotuyo Dodero (Maraxus)
-'Last Modification: 05/17/06
+'Author: Lorwik
+'Last Modification: 18/06/2023
 '
 '***************************************************
-    If incomingData.Length < 3 Then
+    If incomingData.Length < 5 Then
         Err.Raise incomingData.NotEnoughDataErrCode
         Exit Sub
     End If
     
 On Error GoTo errhandler
+    
     'This packet contains strings, make a copy of the data to prevent losses if it's not complete yet...
-    Dim buffer As New clsByteQueue
+    Dim buffer As clsByteQueue: Set buffer = New clsByteQueue
     Call buffer.CopyBuffer(incomingData)
     
     'Remove packet ID
@@ -3464,257 +3417,51 @@ On Error GoTo errhandler
     
     Dim Count As Integer
     Dim i As Long
-    Dim Tmp As String
+    Dim j As Long
+    Dim k As Long
+    
+    MirandoTrabajo = buffer.ReadByte() 'Me sirve para saber que trabajo estoy mirado y para indicar que estoy trabajando
     
     Count = buffer.ReadInteger()
     
-    For i = 1 To Count
-        Tmp = buffer.ReadASCIIString() & " ("           'Get the object's name
-        Tmp = Tmp & CStr(buffer.ReadInteger()) & ","    'The iron needed
-        Tmp = Tmp & CStr(buffer.ReadInteger()) & ","    'The silver needed
-        Tmp = Tmp & CStr(buffer.ReadInteger()) & ")"    'The gold needed
-        
-        Call frmHerrero.lstArmas.AddItem(Tmp)
-        ArmasHerrero(i) = buffer.ReadInteger()
-    Next i
+    ReDim ObjetoTrabajo(Count) As tItemsConstruibles
     
-    For i = i To UBound(ArmasHerrero())
-        ArmasHerrero(i) = 0
+    For i = 1 To Count
+        With ObjetoTrabajo(i)
+            .Name = buffer.ReadASCIIString()    'Get the object's name
+            .GrhIndex = buffer.ReadLong()
+            Debug.Print .GrhIndex
+            For j = 1 To MAXMATERIALES
+                .Materiales(j) = buffer.ReadLong()
+                .CantMateriales(j) = buffer.ReadInteger()
+                .NameMateriales(j) = buffer.ReadASCIIString()
+            Next j
+            
+            .OBJIndex = buffer.ReadInteger()
+        End With
     Next i
     
     'If we got here then packet is complete, copy data back to original queue
+    'En otras palabras, a partir de ahora podes usar "Exit Sub" sin romper nada.
     Call incomingData.CopyBuffer(buffer)
     
-errhandler:
-    Dim Error As Long
-    Error = Err.number
-On Error GoTo 0
+    Call frmTrabajos.Show(vbModeless, frmMain)
     
-    'Destroy auxiliar buffer
-    Set buffer = Nothing
-
-    If Error <> 0 Then _
-        Err.Raise Error
-End Sub
-
-''
-' Handles the BlacksmithArmors message.
-
-Private Sub HandleBlacksmithArmors()
-'***************************************************
-'Autor: Juan Martín Sotuyo Dodero (Maraxus)
-'Last Modification: 05/17/06
-'
-'***************************************************
-    If incomingData.Length < 3 Then
-        Err.Raise incomingData.NotEnoughDataErrCode
-        Exit Sub
-    End If
+    For i = 1 To MAX_LIST_ITEMS
+        Set InvMaterialTrabajo(i) = New clsGraphicalInventory
+    Next i
     
-On Error GoTo errhandler
-    'This packet contains strings, make a copy of the data to prevent losses if it's not complete yet...
-    Dim buffer As New clsByteQueue
-    Call buffer.CopyBuffer(incomingData)
-    
-    'Remove packet ID
-    Call buffer.ReadByte
-    
-    Dim Count As Integer
-    Dim i As Long
-    Dim Tmp As String
-    
-    Count = buffer.ReadInteger()
-    
-    For i = 1 To Count
-        Tmp = buffer.ReadASCIIString() & " ("           'Get the object's name
-        Tmp = Tmp & CStr(buffer.ReadInteger()) & ","    'The iron needed
-        Tmp = Tmp & CStr(buffer.ReadInteger()) & ","    'The silver needed
-        Tmp = Tmp & CStr(buffer.ReadInteger()) & ")"    'The gold needed
+    With frmTrabajos
+        ' Inicializo los inventarios
+        Call InvMaterialTrabajo(1).Initialize(DirectD3D8, .picMaterial0, 4, , , , , , False)
+        Call InvMaterialTrabajo(2).Initialize(DirectD3D8, .picMaterial1, 4, , , , , , False)
+        Call InvMaterialTrabajo(3).Initialize(DirectD3D8, .picMaterial2, 4, , , , , , False)
+        Call InvMaterialTrabajo(4).Initialize(DirectD3D8, .picMaterial3, 4, , , , , , False)
         
-        Call frmHerrero.lstArmaduras.AddItem(Tmp)
-        ArmadurasHerrero(i) = buffer.ReadInteger()
-    Next i
-    
-    For i = i To UBound(ArmadurasHerrero())
-        ArmadurasHerrero(i) = 0
-    Next i
-    
-    'If we got here then packet is complete, copy data back to original queue
-    Call incomingData.CopyBuffer(buffer)
-    
-errhandler:
-    Dim Error As Long
-    Error = Err.number
-On Error GoTo 0
-    
-    'Destroy auxiliar buffer
-    Set buffer = Nothing
+        Call .HideExtraControls(Count)
+        Call .RenderList(1)
+    End With
 
-    If Error <> 0 Then _
-        Err.Raise Error
-End Sub
-
-''
-' Handles the CarpenterObjects message.
-
-Private Sub HandleCarpenterObjects()
-'***************************************************
-'Autor: Juan Martín Sotuyo Dodero (Maraxus)
-'Last Modification: 05/17/06
-'
-'***************************************************
-    If incomingData.Length < 3 Then
-        Err.Raise incomingData.NotEnoughDataErrCode
-        Exit Sub
-    End If
-    
-On Error GoTo errhandler
-    'This packet contains strings, make a copy of the data to prevent losses if it's not complete yet...
-    Dim buffer As New clsByteQueue
-    Call buffer.CopyBuffer(incomingData)
-    
-    'Remove packet ID
-    Call buffer.ReadByte
-    
-    Dim Count As Integer
-    Dim i As Long
-    Dim Tmp As String
-    
-    Count = buffer.ReadInteger()
-    
-    Call frmCarp.lstArmas.Clear
-    
-    For i = 1 To Count
-        Tmp = buffer.ReadASCIIString() & " ("          'Get the object's name
-        Tmp = Tmp & CStr(buffer.ReadInteger()) & ")"    'The wood needed
-        
-        Call frmCarp.lstArmas.AddItem(Tmp)
-        ObjCarpintero(i) = buffer.ReadInteger()
-    Next i
-    
-    For i = i To UBound(ObjCarpintero())
-        ObjCarpintero(i) = 0
-    Next i
-    
-    'If we got here then packet is complete, copy data back to original queue
-    Call incomingData.CopyBuffer(buffer)
-    
-errhandler:
-    Dim Error As Long
-    Error = Err.number
-On Error GoTo 0
-    
-    'Destroy auxiliar buffer
-    Set buffer = Nothing
-
-    If Error <> 0 Then _
-        Err.Raise Error
-End Sub
-
-''
-' Handles the SastreObjects message.
-
-Private Sub HandleSastreObjects()
-'***************************************************
-'Autor: Lorwik
-'Last Modification: 12/03/2021
-'
-'***************************************************
-    If incomingData.Length < 3 Then
-        Err.Raise incomingData.NotEnoughDataErrCode
-        Exit Sub
-    End If
-    
-On Error GoTo errhandler
-    'This packet contains strings, make a copy of the data to prevent losses if it's not complete yet...
-    Dim buffer As New clsByteQueue
-    Call buffer.CopyBuffer(incomingData)
-    
-    'Remove packet ID
-    Call buffer.ReadByte
-    
-    Dim Count As Integer
-    Dim i As Long
-    Dim Tmp As String
-    
-    Count = buffer.ReadInteger()
-    
-    Call frmSastre.lstRopas.Clear
-    
-    For i = 1 To Count
-        Tmp = buffer.ReadASCIIString() & " ("          'Get the object's name
-        Tmp = Tmp & CStr(buffer.ReadInteger()) & ","   'Piel de lobo
-        Tmp = Tmp & CStr(buffer.ReadInteger()) & ","   'Piel de oso pardo
-        Tmp = Tmp & CStr(buffer.ReadInteger()) & ")"   'Piel de oso polar
-        
-        Call frmSastre.lstRopas.AddItem(Tmp)
-        ObjSastre(i) = buffer.ReadInteger()
-    Next i
-    
-    For i = i To UBound(ObjSastre())
-        ObjSastre(i) = 0
-    Next i
-    
-    'If we got here then packet is complete, copy data back to original queue
-    Call incomingData.CopyBuffer(buffer)
-    
-errhandler:
-    Dim Error As Long
-    Error = Err.number
-On Error GoTo 0
-    
-    'Destroy auxiliar buffer
-    Set buffer = Nothing
-
-    If Error <> 0 Then _
-        Err.Raise Error
-End Sub
-
-''
-' Handles the AlquimiaObjects message.
-
-Private Sub HandleAlquimiaObjects()
-'***************************************************
-'Autor: Lorwik
-'Last Modification: 12/03/2021
-'
-'***************************************************
-    If incomingData.Length < 3 Then
-        Err.Raise incomingData.NotEnoughDataErrCode
-        Exit Sub
-    End If
-    
-On Error GoTo errhandler
-    'This packet contains strings, make a copy of the data to prevent losses if it's not complete yet...
-    Dim buffer As New clsByteQueue
-    Call buffer.CopyBuffer(incomingData)
-    
-    'Remove packet ID
-    Call buffer.ReadByte
-    
-    Dim Count As Integer
-    Dim i As Long
-    Dim Tmp As String
-    
-    Count = buffer.ReadInteger()
-    
-    Call frmDruida.lstPociones.Clear
-    
-    For i = 1 To Count
-        Tmp = buffer.ReadASCIIString() & " ("          'Get the object's name
-        Tmp = Tmp & CStr(buffer.ReadInteger()) & ")"    'The wood needed
-        
-        Call frmDruida.lstPociones.AddItem(Tmp)
-        ObjAlquimia(i) = buffer.ReadInteger()
-    Next i
-    
-    For i = i To UBound(ObjAlquimia())
-        ObjAlquimia(i) = 0
-    Next i
-    
-    'If we got here then packet is complete, copy data back to original queue
-    Call incomingData.CopyBuffer(buffer)
-    
 errhandler:
     Dim Error As Long
     Error = Err.number
@@ -3883,7 +3630,7 @@ On Error GoTo errhandler
     slot = buffer.ReadByte()
     
     With NPCInventory(slot)
-        .name = buffer.ReadASCIIString()
+        .Name = buffer.ReadASCIIString()
         .Amount = buffer.ReadInteger()
         .valor = buffer.ReadSingle()
         .GrhIndex = buffer.ReadLong()
@@ -3896,7 +3643,7 @@ On Error GoTo errhandler
         .NoUsa = buffer.ReadBoolean()
     
         If frmComerciar.Visible Then
-            Call InvComNpc.SetItem(slot, .OBJIndex, .Amount, 0, .GrhIndex, .OBJType, .MaxHIT, .MinHIT, .MaxDef, .MinDef, .valor, .name, .NoUsa)
+            Call InvComNpc.SetItem(slot, .OBJIndex, .Amount, 0, .GrhIndex, .OBJType, .MaxHIT, .MinHIT, .MaxDef, .MinDef, .valor, .Name, .NoUsa)
         End If
     End With
         
@@ -6116,7 +5863,7 @@ End Sub
 ' @param    codex   Array of all rules of the guild.
 ' @remarks  The data is not actually sent until the buffer is properly flushed.
 
-Public Sub WriteCreateNewGuild(ByVal Desc As String, ByVal name As String, ByVal Site As String, ByRef Codex() As String)
+Public Sub WriteCreateNewGuild(ByVal Desc As String, ByVal Name As String, ByVal Site As String, ByRef Codex() As String)
 '***************************************************
 'Author: Juan Martin Sotuyo Dodero (Maraxus)
 'Last Modification: 05/17/06
@@ -6130,7 +5877,7 @@ Public Sub WriteCreateNewGuild(ByVal Desc As String, ByVal name As String, ByVal
         Call .WriteByte(ClientPacketID.CreateNewGuild)
         
         Call .WriteASCIIString(Desc)
-        Call .WriteASCIIString(name)
+        Call .WriteASCIIString(Name)
         Call .WriteASCIIString(Site)
         
         Lower_codex = LBound(Codex())
@@ -6209,29 +5956,6 @@ Public Sub WriteChangeHeading(ByVal Heading As E_Heading)
         Call .WriteInteger(packetCounters.TS_ChangeHeading)
     End With
     
-End Sub
-
-''
-' Writes the "ModifySkills" message to the outgoing data buffer.
-'
-' @param    skillEdt a-based array containing for each skill the number of points to add to it.
-' @remarks  The data is not actually sent until the buffer is properly flushed.
-
-Public Sub WriteModifySkills(ByRef skillEdt() As Byte)
-'***************************************************
-'Author: Juan Martin Sotuyo Dodero (Maraxus)
-'Last Modification: 05/17/06
-'Writes the "ModifySkills" message to the outgoing data buffer
-'***************************************************
-    Dim i As Long
-    
-    With outgoingData
-        Call .WriteByte(ClientPacketID.ModifySkills)
-        
-        For i = 1 To NUMSKILLS
-            Call .WriteByte(skillEdt(i))
-        Next i
-    End With
 End Sub
 
 ''
@@ -10706,6 +10430,21 @@ Public Sub WriteSearchNpc(ByVal BuscoNpc As String)
 
 End Sub
 
+Private Sub HandleCreateDamage()
+ 
+    ' @ Crea dano en pos X e Y.
+ 
+    With incomingData
+        
+        ' Leemos el ID del paquete.
+        .ReadByte
+     
+        Call mDx8_Dibujado.Damage_Create(.ReadByte(), .ReadByte(), 0, .ReadLong(), .ReadByte())
+     
+    End With
+ 
+End Sub
+
 Private Sub HandleUserInEvent()
     Call incomingData.ReadByte
     
@@ -11220,7 +10959,7 @@ Dim i As Byte
     Call incomingData.ReadByte
     
     For i = 1 To 5
-        Ranking(i).name = incomingData.ReadASCIIString
+        Ranking(i).Name = incomingData.ReadASCIIString
         Ranking(i).ELO = incomingData.ReadDouble
     Next i
     
@@ -11232,4 +10971,35 @@ End Sub
 Public Sub WriteBatallaPVP(ByVal TipoDuelo As Byte)
     Call outgoingData.WriteByte(ClientPacketID.BatallaPVP)
     Call outgoingData.WriteByte(TipoDuelo)
+End Sub
+
+Private Sub HandleConfirmarInstruccion()
+'***************************************************
+'Author: Lorwik
+'Last Modification: 19/08/2020
+'***************************************************
+
+    Dim Mensaje As String
+    
+    With incomingData
+        Call .ReadByte
+        
+        Mensaje = .ReadASCIIString
+        
+        Call Sound.Sound_Play(SND_MSG)
+        frmConfirmacion.msg.Caption = Mensaje
+        frmConfirmacion.Show
+    End With
+End Sub
+
+Public Sub WriteRespuestaInstruccion(ByVal Acepto As Boolean)
+'***************************************************
+'Author: Lorwik
+'Last Modification: 19/08/2020
+'***************************************************
+
+    With outgoingData
+        Call .WriteByte(ClientPacketID.RespuestaInstruccion)
+        Call .WriteBoolean(Acepto)
+    End With
 End Sub

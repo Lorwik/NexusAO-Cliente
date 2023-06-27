@@ -236,11 +236,7 @@ Public Enum ePartesCuerpo
     bTorso = 6
 End Enum
 
-Public ArmasHerrero(0 To 100) As Integer
-Public ArmadurasHerrero(0 To 100) As Integer
-Public ObjCarpintero(0 To 100) As Integer
-Public ObjSastre(0 To 100) As Integer
-Public ObjAlquimia(0 To 100) As Integer
+Public ObjetoTrabajo() As tItemsConstruibles
 
 Public UsaMacro As Boolean
 Public CnTd As Byte
@@ -293,7 +289,6 @@ Public Enum eClass
     Nigromante = 11  'Nigromante
     Mercenario = 12  'Mercenario
     Gladiador
-    Trabajador
 End Enum
 
 Public Enum eCiudad
@@ -628,7 +623,7 @@ End Enum
 'Inventario
 Type Inventory
     OBJIndex As Integer
-    name As String
+    Name As String
     GrhIndex As Long
     Amount As Long
     Equipped As Byte
@@ -643,7 +638,7 @@ End Type
 
 Type NpCinV
     OBJIndex As Integer
-    name As String
+    Name As String
     GrhIndex As Long
     Amount As Integer
     valor As Single
@@ -683,8 +678,17 @@ Type tEstadisticasUsu
     Raza As String
 End Type
 
+Type tItemsConstruibles
+    Name As String
+    OBJIndex As Integer
+    GrhIndex As Long
+    Materiales(1 To 4) As Integer
+    CantMateriales(1 To 4) As Integer
+    NameMateriales(1 To 4) As String
+End Type
+
 Type tListaFamiliares
-    name As String
+    Name As String
     Desc As String
     Imagen As String
 End Type
@@ -794,7 +798,7 @@ Public UserRaza As eRaza
 Public Const NUMCIUDADES As Byte = 2
 Public Const NUMSKILLS As Byte = 27
 Public Const NUMATRIBUTOS As Byte = 5
-Public Const NUMCLASES As Byte = 14
+Public Const NUMCLASES As Byte = 13
 Public Const NUMRAZAS As Byte = 5
 
 Public UserSkills(1 To NUMSKILLS) As Byte
@@ -1049,7 +1053,7 @@ End Type
 Public packetCounters As t_packetCounters
 
 Type Rank
-    name As String
+    Name As String
     ELO As Double
 End Type
 

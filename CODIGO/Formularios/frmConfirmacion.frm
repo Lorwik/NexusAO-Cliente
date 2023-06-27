@@ -2,10 +2,10 @@ VERSION 5.00
 Begin VB.Form frmConfirmacion 
    BackColor       =   &H00C0C0C0&
    BorderStyle     =   0  'None
-   ClientHeight    =   3210
+   ClientHeight    =   3600
    ClientLeft      =   0
    ClientTop       =   0
-   ClientWidth     =   4020
+   ClientWidth     =   5730
    ClipControls    =   0   'False
    ControlBox      =   0   'False
    BeginProperty Font 
@@ -19,27 +19,27 @@ Begin VB.Form frmConfirmacion
    EndProperty
    ForeColor       =   &H00000000&
    LinkTopic       =   "Form1"
-   ScaleHeight     =   214
+   ScaleHeight     =   240
    ScaleMode       =   3  'Pixel
-   ScaleWidth      =   268
+   ScaleWidth      =   382
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
    Begin VB.Image imgCancelar 
       Height          =   525
-      Left            =   240
-      Top             =   2595
-      Width           =   1695
+      Left            =   300
+      Top             =   2790
+      Width           =   1800
    End
    Begin VB.Image imgAceptar 
-      Height          =   525
-      Left            =   2040
-      Top             =   2595
-      Width           =   1695
+      Height          =   540
+      Left            =   2130
+      Top             =   2790
+      Width           =   3255
    End
    Begin VB.Label msg 
       BackStyle       =   0  'Transparent
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   700
@@ -49,10 +49,10 @@ Begin VB.Form frmConfirmacion
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   1995
-      Left            =   240
+      Left            =   330
       TabIndex        =   0
-      Top             =   480
-      Width           =   3495
+      Top             =   390
+      Width           =   5085
       WordWrap        =   -1  'True
    End
 End
@@ -78,7 +78,7 @@ Private Sub Form_Load()
     ' TODO: Traducir los textos de las imagenes via labels en visual basic, para que en el futuro si se quiere se pueda traducir a mas idiomas
     ' No ando con mas ganas/tiempo para hacer eso asi que se traducen las imagenes asi tenemos el juego en ingles.
     ' Tambien usar los controles uAObuttons para los botones, usar de ejemplo frmCambiaMotd.frm
-    Me.Picture = General_Load_Picture_From_Resource("124.bmp", False)
+    Me.Picture = General_Load_Picture_From_Resource("info.bmp")
     
     Call LoadButtons
 End Sub
@@ -97,27 +97,12 @@ Private Sub LoadButtons()
     
     Set LastButtonPressed = New clsGraphicalButton
     
-    
-    If Language = "spanish" Then
-        boton = "btnaceptar.bmp"
-    Else
-        boton = "btnaccept.bmp"
-    End If
-    
-    Call cBotonAceptar.Initialize(imgAceptar, Carga.Path(Interfaces) & boton, _
-                                     Carga.Path(Interfaces) & "123.bmp", _
-                                     Carga.Path(Interfaces) & "122.bmp", Me)
+    Call cBotonAceptar.Initialize(imgAceptar, "btnaceptar_n.gif", _
+                                          "btnaceptar_h.gif", _
+                                          "btnaceptar_d.gif", Me)
                                      
                                      
-    If Language = "spanish" Then
-        boton = "btncancelar.bmp"
-    Else
-        boton = "btncancel.bmp"
-    End If
-                                     
-    Call cBotonCancelar.Initialize(imgCancelar, Carga.Path(Interfaces) & boton, _
-                                     Carga.Path(Interfaces) & "125.bmp", _
-                                     Carga.Path(Interfaces) & "126.bmp", Me)
+    Call cBotonCancelar.Initialize(imgCancelar, "13.gif", "14.gif", "15.gif", Me)
 End Sub
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -130,10 +115,12 @@ Private Sub imgCerrar_Click()
 End Sub
 
 Private Sub imgAceptar_Click()
+    Call WriteRespuestaInstruccion(True)
     Unload Me
 End Sub
 
 Private Sub imgCancelar_Click()
+    Call WriteRespuestaInstruccion(False)
     Unload Me
 End Sub
 

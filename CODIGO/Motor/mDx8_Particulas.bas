@@ -13,7 +13,7 @@ Public Type RGB
 End Type
 
 Public Type Stream
-    name As String
+    Name As String
     NumOfParticles As Long
     NumGrhs As Long
     id As Long
@@ -181,7 +181,8 @@ Public Sub CargarParticulas()
         'fill StreamData array with info from Particles.ini
         For LoopC = 1 To TotalStreams
             With StreamData(LoopC)
-
+                
+                '.Name = fileBuff.getString
                 .NumOfParticles = fileBuff.getLong
                 .NumGrhs = fileBuff.getLong
                 .id = fileBuff.getLong

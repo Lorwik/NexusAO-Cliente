@@ -188,6 +188,8 @@ Public Type MapBlock
     CharIndex As Integer
     ObjGrh As Grh
     
+    Damage As DList
+    
     NpcIndex As Integer
     OBJInfo As obj
     TileExit As WorldPos
@@ -205,7 +207,7 @@ End Type
 'Info de cada mapa
 Public Type mapInfo
     Music As String
-    name As String
+    Name As String
     StartPos As WorldPos
     MapVersion As Integer
     ambient As String
@@ -607,14 +609,16 @@ Sub RenderScreen(ByVal tilex As Integer, _
                     If .Graphic(3).GrhIndex <> 0 Then Call Draw_Grh(.Graphic(3), PixelOffsetXTemp, PixelOffsetYTemp, 1, .Engine_Light(), 1)
                     '************************************************
                     
+                    'Dibujamos los danos.
+                    If .Damage.Activated Then _
+                        Call mDx8_Dibujado.Damage_Draw(X, Y, PixelOffsetXTemp, PixelOffsetYTemp - 20)
+                    
                     'Particulas
                     If .Particle_Group_Index Then
                     
                         'Solo las renderizamos si estan cerca del area de vision.
-                        If EstaDentroDelArea(X, Y) Then
+                        If EstaDentroDelArea(X, Y) Then _
                             Call mDx8_Particulas.Particle_Group_Render(.Particle_Group_Index, PixelOffsetXTemp + 16, PixelOffsetYTemp + 16)
-
-                        End If
                         
                     End If
 

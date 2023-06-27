@@ -410,7 +410,7 @@ Sub SwitchMap(ByVal Map As Integer)
         
         Call DibujarMinimapa
         
-        If ClientSetup.VerLugar = 1 Then frmMain.MapExp(0).Caption = mapInfo.name
+        If ClientSetup.VerLugar = 1 Then frmMain.MapExp(0).Caption = mapInfo.Name
         
         CurMap = Map
         
@@ -418,7 +418,7 @@ Sub SwitchMap(ByVal Map As Integer)
         Call InfoMapa
         
         'Resetear el mensaje en render con el nombre del mapa.
-        renderText = mapInfo.name
+        renderText = mapInfo.Name
         renderFont = 2
         colorRender = 240
 
@@ -938,7 +938,6 @@ Private Sub InicializarNombres()
     ListaClases(eClass.Nigromante) = JsonLanguage.item("CLASES").item("NIGROMANTE")
     ListaClases(eClass.Mercenario) = JsonLanguage.item("CLASES").item("MERCENARIO")
     ListaClases(eClass.Gladiador) = JsonLanguage.item("CLASES").item("GLADIADOR")
-    ListaClases(eClass.Trabajador) = JsonLanguage.item("CLASES").item("TRABAJADOR")
    
     SkillsNames(eSkill.Magia) = JsonLanguage.item("HABILIDADES").item("MAGIA").item("TEXTO")
     SkillsNames(eSkill.Robar) = JsonLanguage.item("HABILIDADES").item("ROBAR").item("TEXTO")
@@ -1080,13 +1079,13 @@ Public Function getTagPosition(ByVal Nick As String) As Integer
     
 End Function
 
-Public Function getCharIndexByName(ByVal name As String) As Integer
+Public Function getCharIndexByName(ByVal Name As String) As Integer
     
     Dim i As Long
 
     For i = 1 To LastChar
 
-        If charlist(i).Nombre = name Then
+        If charlist(i).Nombre = Name Then
             getCharIndexByName = i
             Exit Function
         End If
@@ -1144,8 +1143,8 @@ Public Sub ResetAllInfo(Optional ByVal UnloadForms As Boolean = True)
         'Unload all forms except frmMain, frmConnect
         Dim frm As Form
         For Each frm In Forms
-            If frm.name <> frmMain.name And _
-               frm.name <> frmConnect.name Then
+            If frm.Name <> frmMain.Name And _
+               frm.Name <> frmConnect.Name Then
                 
                 Call Unload(frm)
             End If

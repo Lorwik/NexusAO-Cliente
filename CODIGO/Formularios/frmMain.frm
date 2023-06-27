@@ -1358,9 +1358,6 @@ Private Sub cmdEstadisticas_Click()
     Loop
     
     Alocados = SkillPoints
-    frmEstadisticas.lblLibres.Caption = SkillPoints
-    
-    Call frmEstadisticas.MostrarAsignacion
     
     frmEstadisticas.Iniciar_Labels
     frmEstadisticas.Show , frmMain
@@ -1461,7 +1458,7 @@ Private Sub MapExp_MouseMove(Index As Integer, Button As Integer, Shift As Integ
                 Else
                 
                     If ClientSetup.VerLugar = 1 Then
-                        MapExp(Index).Caption = mapInfo.name
+                        MapExp(Index).Caption = mapInfo.Name
                         
                     Else
                         MapExp(Index).Caption = "Posición: " & UserMap & ", " & .Pos.X & "  " & .Pos.Y
@@ -1478,7 +1475,7 @@ Private Sub MapExp_MouseMove(Index As Integer, Button As Integer, Shift As Integ
             Else
 
                 If ClientSetup.VerLugar = 1 Then
-                    MapExp(Index).Caption = mapInfo.name
+                    MapExp(Index).Caption = mapInfo.Name
                         
                 Else
                     MapExp(Index).Caption = "Posición: " & UserMap & ", " & .Pos.X & "  " & .Pos.Y
@@ -1853,7 +1850,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             Else
     
                 If ClientSetup.VerLugar = 1 Then
-                    MapExp(UltPos).Caption = mapInfo.name
+                    MapExp(UltPos).Caption = mapInfo.Name
                     
                 Else
                     MapExp(0).Caption = "Posición: " & UserMap & ", " & charlist(UserCharIndex).Pos.X & "  " & charlist(UserCharIndex).Pos.Y

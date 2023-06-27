@@ -292,6 +292,7 @@ Public Sub Engine_DirectX8_Aditional_Init()
         ' Inicializamos otros sistemas.
         Call mDx8_Text.Engine_Init_FontSettings
         Call mDx8_Clima.Init_MeteoEngine
+        Call mDx8_Dibujado.Damage_Initialize
         
         ' Inicializa DIB surface, un buffer usado para dejar imagenes estaticas en PictureBox
         Call PrepareDrawBuffer
@@ -408,7 +409,7 @@ Public Sub Engine_D3DColor_To_RGB_List(rgb_list() As Long, Color As D3DCOLORVALU
 'Last Modification: 14/05/10
 'Blisse-AO | Set a D3DColorValue to a RGB List
 '***************************************************
-    rgb_list(0) = D3DColorARGB(Color.a, Color.R, Color.G, Color.B)
+    rgb_list(0) = D3DColorARGB(Color.a, Color.r, Color.g, Color.b)
     rgb_list(1) = rgb_list(0)
     rgb_list(2) = rgb_list(0)
     rgb_list(3) = rgb_list(0)
@@ -797,7 +798,7 @@ Public Sub Engine_Get_ARGB(Color As Long, Data As D3DCOLORVALUE)
 'Last Modify Date: 18/10/2012
 '**************************************************************
     
-    Dim a As Long, R As Long, G As Long, B As Long
+    Dim a As Long, r As Long, g As Long, b As Long
         
     If Color < 0 Then
         a = ((Color And (&H7F000000)) / (2 ^ 24)) Or &H80&
@@ -805,15 +806,15 @@ Public Sub Engine_Get_ARGB(Color As Long, Data As D3DCOLORVALUE)
         a = Color / (2 ^ 24)
     End If
     
-    R = (Color And &HFF0000) / (2 ^ 16)
-    G = (Color And &HFF00&) / (2 ^ 8)
-    B = (Color And &HFF&)
+    r = (Color And &HFF0000) / (2 ^ 16)
+    g = (Color And &HFF00&) / (2 ^ 8)
+    b = (Color And &HFF&)
     
     With Data
         .a = a
-        .R = R
-        .G = G
-        .B = B
+        .r = r
+        .g = g
+        .b = b
     End With
         
 End Sub

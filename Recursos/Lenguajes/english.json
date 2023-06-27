@@ -798,8 +798,7 @@
         "CAZADOR": "Hunter",
         "NIGROMANTE": "Necromancer",
         "MERCENARIO": "Mercenary",
-		"GLADIADOR": "Gladiator",
-		"TRABAJADOR": "Worker"
+		"GLADIADOR": "Gladiator"
     },
     "ATRIBUTOS": {
         "FUERZA": "Strength",
